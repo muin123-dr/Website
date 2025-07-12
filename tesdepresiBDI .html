@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes Depresi BDI</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+        }
+        .container {
+            max-width: 650px;
+            width: 100%;
+            margin: auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            animation: fadeIn 0.8s ease-out;
+            position: relative; /* For question text color animation */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .question, .start-screen, .result {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+	h1 {
+            color: #0000FF;
+            margin-bottom: 25px;
+            transition: color 0.5s ease;
+        }
+        h2, h3 {
+            color: #FF0000;
+            margin-bottom: 25px;
+            transition: color 0.5s ease;
+        }
+
+        /* Dynamic text color for questions */
+        .question h3 {
+            transition: color 0.5s ease-in-out;
+        }
+        /* Define color palette for questions */
+        .q-color-0 { color: #2c3e50; } /* Default/Black */
+        .q-color-1 { color: #3498db; } /* Blue */
+        .q-color-2 { color: #2ecc71; } /* Green */
+        .q-color-3 { color: #e74c3c; } /* Red */
+        .q-color-4 { color: #9b59b6; } /* Purple */
+        .q-color-5 { color: #f39c12; } /* Orange */
+        .q-color-6 { color: #1abc9c; } /* Turquoise */
+        .q-color-7 { color: #d35400; } /* Dark Orange */
+        .q-color-8 { color: #34495e; } /* Dark Blue/Grey */
+        .q-color-9 { color: #c0392b; } /* Dark Red */
+
+
+        .option {
+            display: block;
+            margin: 15px auto;
+            padding: 12px 20px;
+            width: 90%;
+            max-width: 400px;
+            background: #e9ecef;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .option:hover {
+            background: #d0d6db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .option:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .result {
+            text-align: left;
+            padding-top: 10px;
+        }
+        #score {
+            font-size: 2.8em; /* Even larger font size */
+            font-weight: bold;
+            color: #e74c3c; /* Prominent color */
+            margin: 20px 0;
+            display: block;
+            text-align: center;
+            animation: scorePop 0.8s ease-out;
+        }
+        @keyframes scorePop {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        #interpretation {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .share-btn {
+            display: inline-block;
+            margin: 10px 10px;
+            padding: 12px 25px;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .whatsapp { background: #25D366; }
+        .whatsapp:hover { background: #1faa58; transform: translateY(-2px); }
+        .telegram { background: #0088cc; }
+        .telegram:hover { background: #007bb5; transform: translateY(-2px); }
+        .note {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 25px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="start" class="start-screen active">
+        <h1>TES DEPRESI BDI?</h1>
+	<h2>Anda Siap?</h2>
+            <button class="option" onclick="startTest()">Ya, Mulai Tes</button>
+        </div>
+
+        <div id="q1" class="question">
+            <h3>1. Bagaimana perasaan Anda tentang kesedihan?</h3>
+            <button class="option" onclick="answer(0, 2)">Saya tidak merasa sedih (0)</button>
+            <button class="option" onclick="answer(1, 2)">Saya merasa sedih (1)</button>
+            <button class="option" onclick="answer(2, 2)">Saya sedih sepanjang waktu dan tidak bisa menghilangkannya (2)</button>
+            <button class="option" onclick="answer(3, 2)">Saya sangat sedih dan tidak bahagia sehingga saya tidak tahan (3)</button>
+        </div>
+        <div id="q2" class="question">
+            <h3>2. Bagaimana pandangan Anda terhadap masa depan?</h3>
+            <button class="option" onclick="answer(0, 3)">Saya tidak pesimis tentang masa depan (0)</button>
+            <button class="option" onclick="answer(1, 3)">Saya merasa pesimis tentang masa depan (1)</button>
+            <button class="option" onclick="answer(2, 3)">Saya merasa tidak ada harapan di masa depan (2)</button>
+            <button class="option" onclick="answer(3, 3)">Saya merasa masa depan tanpa harapan dan tidak akan membaik (3)</button>
+        </div>
+        <div id="q3" class="question">
+            <h3>3. Apakah Anda merasa gagal?</h3>
+            <button class="option" onclick="answer(0, 4)">Saya tidak merasa gagal (0)</button>
+            <button class="option" onclick="answer(1, 4)">Saya merasa telah gagal lebih dari rata-rata orang (1)</button>
+            <button class="option" onclick="answer(2, 4)">Saya merasa telah gagal dalam banyak hal (2)</button>
+            <button class="option" onclick="answer(3, 4)">Saya merasa saya adalah kegagalan total (3)</button>
+        </div>
+        <div id="q4" class="question">
+            <h3>4. Bagaimana Anda menikmati aktivitas sehari-hari?</h3>
+            <button class="option" onclick="answer(0, 5)">Saya menikmati seperti biasa (0)</button>
+            <button class="option" onclick="answer(1, 5)">Saya kurang menikmati dibandingkan dulu (1)</button>
+            <button class="option" onclick="answer(2, 5)">Saya hampir tidak menikmati apa pun (2)</button>
+            <button class="option" onclick="answer(3, 5)">Saya tidak bisa menikmati apa pun (3)</button>
+        </div>
+        <div id="q5" class="question">
+            <h3>5. Apakah Anda merasa bersalah?</h3>
+            <button class="option" onclick="answer(0, 6)">Saya tidak merasa bersalah (0)</button>
+            <button class="option" onclick="answer(1, 6)">Saya merasa bersalah kadang-kadang (1)</button>
+            <button class="option" onclick="answer(2, 6)">Saya merasa bersalah cukup sering (2)</button>
+            <button class="option" onclick="answer(3, 6)">Saya merasa bersalah sepanjang waktu (3)</button>
+        </div>
+        <div id="q6" class="question">
+            <h3>6. Apakah Anda merasa dihukum?</h3>
+            <button class="option" onclick="answer(0, 7)">Saya tidak merasa dihukum (0)</button>
+            <button class="option" onclick="answer(1, 7)">Saya merasa mungkin dihukum (1)</button>
+            <button class="option" onclick="answer(2, 7)">Saya merasa sedang dihukum (2)</button>
+            <button class="option" onclick="answer(3, 7)">Saya merasa pasti dihukum (3)</button>
+        </div>
+        <div id="q7" class="question">
+            <h3>7. Bagaimana perasaan Anda tentang diri sendiri?</h3>
+            <button class="option" onclick="answer(0, 8)">Saya tidak kecewa dengan diri sendiri (0)</button>
+            <button class="option" onclick="answer(1, 8)">Saya kecewa dengan diri sendiri (1)</button>
+            <button class="option" onclick="answer(2, 8)">Saya membenci diri sendiri (2)</button>
+            <button class="option" onclick="answer(3, 8)">Saya sangat membenci diri sendiri (3)</button>
+        </div>
+        <div id="q8" class="question">
+            <h3>8. Apakah Anda sering menyalahkan diri sendiri?</h3>
+            <button class="option" onclick="answer(0, 9)">Saya tidak menyalahkan diri sendiri (0)</button>
+            <button class="option" onclick="answer(1, 9)">Saya menyalahkan diri sendiri kadang-kadang (1)</button>
+            <button class="option" onclick="answer(2, 9)">Saya sering menyalahkan diri sendiri (2)</button>
+            <button class="option" onclick="answer(3, 9)">Saya selalu menyalahkan diri sendiri (3)</button>
+        </div>
+        <div id="q9" class="question">
+            <h3>9. Bagaimana pola tidur Anda?</h3>
+            <button class="option" onclick="answer(0, 10)">Saya tidur seperti biasa (0)</button>
+            <button class="option" onclick="answer(1, 10)">Saya tidur sedikit lebih buruk dari biasanya (1)</button>
+            <button class="option" onclick="answer(2, 10)">Saya tidur jauh lebih buruk dari biasanya (2)</button>
+            <button class="option" onclick="answer(3, 10)">Saya hampir tidak bisa tidur sama sekali (3)</button>
+        </div>
+        <div id="q10" class="question">
+            <h3>10. Bagaimana tingkat energi Anda?</h3>
+            <button class="option" onclick="answer(0, 11)">Saya tidak merasa lebih lelah dari biasanya (0)</button>
+            <button class="option" onclick="answer(1, 11)">Saya merasa lebih lelah dari biasanya (1)</button>
+            <button class="option" onclick="answer(2, 11)">Saya sangat lelah hampir sepanjang waktu (2)</button>
+            <button class="option" onclick="answer(3, 11)">Saya terlalu lelah untuk melakukan apa pun (3)</button>
+        </div>
+
+        <div id="result" class="result">
+            <h2>Hasil Tes Depresi BDI</h2>
+            <p id="score"></p>
+            <p id="interpretation"></p>
+            <p class="note"><strong>Catatan:</strong> Tes ini hanya untuk skrining awal. Untuk diagnosis yang akurat, konsultasikan dengan psikolog atau psikiater.</p>
+            <p>Bagikan hasil Anda:</p>
+            <a id="whatsapp" class="share-btn whatsapp" href="#" target="_blank">Share via WhatsApp</a>
+            <a id="telegram" class="share-btn telegram" href="#" target="_blank">Share via Telegram</a>
+            <p>Terima kasih telah mencoba!</p>
+            <p>Ikuti channel <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" target="_blank">Gen ZEHAT - Dr. Muin</a></p>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        let score = 0;
+        const totalQuestions = 10;
+        const questionColors = [
+            'q-color-0', 'q-color-1', 'q-color-2', 'q-color-3', 'q-color-4',
+            'q-color-5', 'q-color-6', 'q-color-7', 'q-color-8', 'q-color-9'
+        ]; // Define a palette of 10 colors
+
+        function startTest() {
+            document.getElementById('start').classList.remove('active');
+            displayQuestion(1); // Start with the first question
+        }
+
+        function displayQuestion(qNum) {
+            const questionElement = document.getElementById(`q${qNum}`);
+            if (questionElement) {
+                // Apply color class based on question number (modulus to loop colors if more questions than colors)
+                const colorClass = questionColors[(qNum - 1) % questionColors.length];
+                questionElement.querySelector('h3').className = colorClass;
+
+                questionElement.classList.add('active');
+                currentQuestion = qNum;
+            }
+        }
+
+        function answer(points, nextQuestionId) {
+            score += points;
+            const currentQElement = document.getElementById(`q${currentQuestion}`);
+            currentQElement.classList.remove('active');
+
+            if (currentQuestion < totalQuestions) {
+                displayQuestion(currentQuestion + 1);
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('result').classList.add('active');
+            document.getElementById('score').innerText = `Skor Anda: ${score}`;
+            
+            let interpretation = '';
+            if (score <= 9) {
+                interpretation = 'Tidak ada indikasi depresi atau depresi MINIMAL. Anda memiliki suasana hati yang baik!';
+            } else if (score <= 18) {
+                interpretation = 'Depresi RINGAN. Mungkin ada beberapa gejala depresi. Pertimbangkan untuk berkonsultasi dengan profesional jika gejala berlangsung lama atau mengganggu aktivitas Anda.';
+            } else if (score <= 29) {
+                interpretation = 'Depresi SEDANG. Disarankan untuk segera berkonsultasi dengan psikolog atau psikiater untuk evaluasi lebih lanjut dan dukungan yang tepat.';
+            } else {
+                interpretation = 'Depresi BERAT. Sangat penting untuk segera mencari bantuan profesional untuk evaluasi dan penanganan lebih lanjut. Anda tidak sendirian dalam menghadapi ini.';
+            }
+            document.getElementById('interpretation').innerText = `Interpretasi: ${interpretation}`;
+
+            // Share links
+            const pageUrl = window.location.href.split('#')[0]; // Gets the current page URL, removing any hash
+            const shareText = `Hasil Tes BDI Saya: Skor ${score}. ${interpretation} Tes ini dibuat oleh Gen ZEHAT - Dr. Muin. Coba tes ini di ${pageUrl}`;
+            document.getElementById('whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+            document.getElementById('telegram').href = `https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
+        }
+    </script>
+</body>
+</html>
