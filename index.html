@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes Depresi PHQ-9</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.8; /* Increased line height for better readability */
+            margin: 0; /* Remove default body margin */
+            padding: 20px; /* Add padding to body */
+            background-color: #eef2f7; /* Lighter, softer background */
+            color: #333;
+            display: flex; /* Use flexbox for centering */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        .container {
+            width: 100%; /* Maximize width within padding */
+            max-width: 900px; /* Increased max-width for wider layout */
+            margin: auto;
+            background: #ffffff;
+            padding: 40px; /* Increased padding */
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
+            box-sizing: border-box;
+        }
+        h1, h2 {
+            color: #2c3e50; /* Darker, more professional blue-grey */
+            text-align: center;
+            margin-bottom: 30px; /* More space below headings */
+            font-weight: 700; /* Bolder for headings */
+        }
+        p {
+            font-size: 1.05em; /* Slightly larger base font size */
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .question-card {
+            display: none;
+            margin-bottom: 25px; /* More space between cards */
+            border: 1px solid #e0e6ed; /* Lighter border */
+            padding: 25px; /* Increased padding */
+            border-radius: 10px;
+            background-color: #fdfefe; /* Very light background for cards */
+            transition: all 0.4s ease-in-out; /* Smooth transition for display */
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .question-card.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .question-card p {
+            font-weight: 600; /* Semibold for question text */
+            margin-bottom: 20px;
+            font-size: 1.15em; /* Larger question font size */
+            color: #4a6572; /* Darker color for questions */
+            text-align: left; /* Align question text left */
+        }
+        .options label {
+            display: flex; /* Use flexbox for better alignment of radio and text */
+            align-items: center;
+            margin-bottom: 15px; /* More space between options */
+            cursor: pointer;
+            padding: 15px; /* Larger padding for click area */
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            font-size: 1em;
+        }
+        .options label:hover {
+            background-color: #f0f4f7; /* Lighter hover background */
+            border-color: #a7c0d8; /* Distinct border color on hover */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow on hover */
+        }
+        .options input[type="radio"] {
+            margin-right: 15px; /* More space for radio button */
+            transform: scale(1.3); /* Slightly larger radio button */
+            vertical-align: middle;
+            accent-color: #4a90e2; /* Custom accent color for radio button */
+        }
+        
+        #result {
+            margin-top: 40px; /* More space above results */
+            padding: 30px; /* Larger padding */
+            background-color: #e6f7ff; /* Light blue background for results */
+            border: 1px solid #b3e0ff; /* Blue border */
+            border-radius: 12px;
+            text-align: center;
+            display: none;
+            animation: fadeInScale 0.6s ease-out forwards; /* Animation for result display */
+        }
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        #result h3 {
+            color: #28a745; /* Green for "Skor Anda" */
+            margin-bottom: 15px;
+            font-size: 1.6em; /* Larger font for score */
+            font-weight: 700;
+        }
+        #result p {
+            font-size: 1.2em; /* Larger font for explanation */
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        /* Highlighted result text */
+        .highlight-result {
+            font-size: 1.8em; /* Even larger for the actual diagnosis */
+            font-weight: 800; /* Extra bold */
+            color: #d9534f; /* Red for high severity */
+            display: block; /* Ensures it takes its own line */
+            margin-top: 15px;
+            padding: 10px 0;
+            animation: pulseEffect 1.5s infinite alternate; /* Pulsing effect */
+        }
+
+        @keyframes pulseEffect {
+            from {
+                transform: scale(1);
+                color: #d9534f;
+            }
+            to {
+                transform: scale(1.03);
+                color: #c9302c;
+            }
+        }
+
+        /* Specific colors for different result levels */
+        .result-minimal { color: #28a745; animation: none; } /* Green */
+        .result-mild { color: #ffc107; animation: none; } /* Yellow */
+        .result-moderate { color: #fd7e14; animation: none; } /* Orange */
+        .result-mod-severe { color: #dc3545; animation: pulseEffect 1.5s infinite alternate; } /* Red */
+        .result-severe { color: #6f42c1; animation: pulseEffect 1.5s infinite alternate; } /* Purple, very severe */
+
+        .share-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .share-section p {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #4a6572;
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Increased gap */
+            flex-wrap: wrap;
+        }
+        .share-buttons button {
+            padding: 12px 20px; /* Larger buttons */
+            border: none;
+            border-radius: 6px; /* Slightly more rounded */
+            cursor: pointer;
+            font-size: 1em;
+            color: white;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+            min-width: 130px; /* Minimum width for consistency */
+            font-weight: 600;
+        }
+        .share-buttons button:hover {
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+        .share-buttons #copy-btn {
+            background-color: #007bff;
+        }
+        .share-buttons #copy-btn:hover {
+            background-color: #0056b3;
+        }
+        .share-buttons #whatsapp-share-btn {
+            background-color: #25d366;
+        }
+        .share-buttons #whatsapp-share-btn:hover {
+            background-color: #1da851;
+        }
+        .share-buttons #telegram-share-btn {
+            background-color: #0088cc;
+        }
+        .share-buttons #telegram-share-btn:hover {
+            background-color: #006699;
+        }
+
+        .share-text-display {
+            display: none; 
+        }
+
+        .explanation {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.95em;
+            color: #666;
+        }
+        .explanation ul {
+            list-style-type: disc;
+            margin-left: 25px;
+            padding-left: 0;
+        }
+        .explanation strong {
+            color: #333;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .question-card p {
+                font-size: 1.05em;
+            }
+            .options label {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+            .share-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .share-buttons button {
+                width: 100%;
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tes Depresi PHQ-9</h1>
+        <p>Dalam <strong>DUA MINGGU INI</strong>, apakah Anda mengalami:</p>
+
+        <form id="phq9-form">
+            <div class="question-card active" data-question-index="0">
+                <p>1. Sedikit minat atau kesenangan dalam melakukan sesuatu?</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="0" data-question="0" required> Tidak sama sekali</label>
+                    <label><input type="radio" name="q1" value="1" data-question="0"> Beberapa hari</label>
+                    <label><input type="radio" name="q1" value="2" data-question="0"> Lebih dari separuh hari</label>
+                    <label><input type="radio" name="q1" value="3" data-question="0"> Hampir setiap hari</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-question-index="1">
+                <p>2. Merasa sedih, tertekan, atau putus asa?</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="0" data-question="1" required> Tidak sama sekali</label>
+                    <label><input type="radio" name="q2" value="1" data-question="1"> Beberapa hari</label>
+                    <label><input type="radio" name="q2" value="2" data-question="1"> Lebih dari separuh hari</label>
+                    <label><input type="radio" name="q2" value="3" data-question="1"> Hampir setiap hari</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-question-index="2">
+                <p>3. Sulit tidur atau tetap tidur, atau tidur terlalu banyak?</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="0" data-question="2" required> Tidak sama sekali</label>
+                    <label><input type="radio" name="q3" value="1" data-question="2"> Beberapa hari</label>
+                    <label><input type="radio" name="q3" value="2" data-question="2"> Lebih dari separuh hari</label>
+                    <label><input type="radio" name="q3" value="3" data-question="2"> Hampir setiap hari</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-question-index="3">
+                <p>4. Merasa lelah atau kurang energi?</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="0" data-question="3" required> Tidak sama sekali</label>
+                    <label><input type="radio" name="q4" value="1" data-question="3"> Beberapa hari</label>
+                    <label><input type="radio" name="q4" value="2" data-question="3"> Lebih dari separuh hari</label>
+                    <label><input type="radio" name="q4" value="3" data-question="3"> Hampir setiap hari</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-question-index="4">
+                <p>5. Nafsu makan buruk atau makan berlebihan?</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="0" data-question="4" required> Tidak sama sekali</label>
+                    <label><input type="radio" name="q5" value="1" data-question="4"> Beberapa hari</label>
+                    <label><input type="radio" name="q5" value="2" data-question="4"> Lebih dari separuh hari</label>
+                    <label><input type="radio" name="q5" value="3" data-question="4"> Hampir setiap hari</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-question-index="5">
+                <p>6. Merasa tidak enak tentang diri sendiri – atau bahwa Anda adalah seorang yang gagal atau telah mengecewakan diri sendiri atau keluarga Anda?</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="0" data-question="5" required> Tidak sama sekali</label>
+                    <label><input type="radio" name="q6" value="1" data-question="5"> Beberapa hari</label>
+                    <label><input type="radio" name="q6" value="2" data-question="5"> Lebih dari separuh hari</label>
+                    <label><input type="radio" name="q6" value="3" data-question="5"> Hampir setiap hari</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-question-index="6">
+                <p>7. Sulit berkonsentrasi pada sesuatu, seperti membaca koran atau menonton TV?</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="0" data-question="6" required> Tidak sama sekali</label>
+                    <label><input type="radio" name="q7" value="1" data-question="6"> Beberapa hari</label>
+                    <label><input type="radio" name="q7" value="2" data-question="6"> Lebih dari separuh hari</label>
+                    <label><input type="radio" name="q7" value="3" data-question="6"> Hampir setiap hari</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-question-index="7">
+                <p>8. Bergerak atau berbicara begitu lambat sehingga orang lain mungkin memperhatikannya? Atau sebaliknya, sangat gelisah atau resah sehingga Anda bergerak lebih banyak dari biasanya?</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="0" data-question="7" required> Tidak sama sekali</label>
+                    <label><input type="radio" name="q8" value="1" data-question="7"> Beberapa hari</label>
+                    <label><input type="radio" name="q8" value="2" data-question="7"> Lebih dari separuh hari</label>
+                    <label><input type="radio" name="q8" value="3" data-question="7"> Hampir setiap hari</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-question-index="8">
+                <p>9. Pikiran bahwa Anda lebih baik mati atau melukai diri sendiri dengan cara tertentu?</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="0" data-question="8" required> Tidak sama sekali</label>
+                    <label><input type="radio" name="q9" value="1" data-question="8"> Beberapa hari</label>
+                    <label><input type="radio" name="q9" value="2" data-question="8"> Lebih dari separuh hari</label>
+                    <label><input type="radio" name="q9" value="3" data-question="8"> Hampir setiap hari</label>
+                </div>
+            </div>
+            </form>
+
+        <div id="result">
+            <h3>Skor Anda: <span id="total-score"></span></h3>
+            <p id="score-explanation"></p>
+            <div class="share-section">
+                <p>Bagikan hasil Anda:</p>
+                <div class="share-text-display" id="share-text-display"></div> <div class="share-buttons">
+                    <button id="copy-btn">Salin Teks</button>
+                    <button id="whatsapp-share-btn">WhatsApp</button>
+                    <button id="telegram-share-btn">Telegram</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <p><strong>Penting:</strong> Tes ini hanyalah alat skrining awal dan bukan pengganti diagnosis profesional. Jika Anda memiliki kekhawatiran tentang kesehatan mental Anda, sangat disarankan untuk berkonsultasi dengan profesional kesehatan mental (psikiater atau psikolog).</p>
+        </div>
+    </div>
+
+    <script>
+        const questionCards = document.querySelectorAll('.question-card');
+        const resultDiv = document.getElementById('result');
+        const phq9Form = document.getElementById('phq9-form');
+        const shareTextDisplay = document.getElementById('share-text-display');
+        const totalScoreSpan = document.getElementById('total-score');
+        const scoreExplanationP = document.getElementById('score-explanation');
+        const copyBtn = document.getElementById('copy-btn');
+        const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
+        const telegramShareBtn = document.getElementById('telegram-share-btn');
+
+        let currentQuestionIndex = 0;
+        let answers = new Array(questionCards.length).fill(null); // Menyimpan jawaban
+
+        // Fungsi untuk menampilkan pertanyaan berdasarkan indeks
+        function showQuestion(index) {
+            questionCards.forEach((card, i) => {
+                card.classList.remove('active');
+            });
+            if (questionCards[index]) {
+                questionCards[index].classList.add('active');
+            }
+            // Pastikan form terlihat jika sedang menampilkan pertanyaan
+            phq9Form.style.display = 'block';
+            resultDiv.style.display = 'none';
+        }
+
+        // Event listener untuk pilihan radio button
+        questionCards.forEach((card, cardIndex) => {
+            const radios = card.querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    answers[cardIndex] = parseInt(event.target.value);
+                    
+                    // Delay sedikit untuk efek transisi yang lebih baik
+                    setTimeout(() => {
+                        if (currentQuestionIndex < questionCards.length - 1) {
+                            currentQuestionIndex++;
+                            showQuestion(currentQuestionIndex);
+                        } else {
+                            // Jika ini pertanyaan terakhir, hitung skor
+                            calculateScore();
+                        }
+                    }, 200); // 200ms delay
+                });
+            });
+        });
+
+        function calculateScore() {
+            let totalScore = 0;
+            let allAnswered = true;
+
+            for (let i = 0; i < answers.length; i++) {
+                if (answers[i] === null) {
+                    allAnswered = false;
+                    break;
+                }
+                totalScore += answers[i];
+            }
+
+            if (!allAnswered) {
+                alert("Mohon jawab semua pertanyaan sebelum melihat hasil.");
+                // Jika belum semua dijawab, kembali ke pertanyaan pertama yang belum dijawab
+                for (let i = 0; i < answers.length; i++) {
+                    if (answers[i] === null) {
+                        currentQuestionIndex = i;
+                        showQuestion(currentQuestionIndex);
+                        break;
+                    }
+                }
+                return;
+            }
+
+            totalScoreSpan.textContent = totalScore;
+            let explanationText = "";
+            let resultClass = ""; // Class for highlighting the result
+
+            if (totalScore >= 0 && totalScore <= 4) {
+                explanationText = "Depresi minimal atau tidak ada depresi. Anda mungkin tidak memerlukan intervensi. Namun, jika ada gejala yang mengganggu, pertimbangkan untuk berkonsultasi.";
+                resultClass = "result-minimal";
+            } else if (totalScore >= 5 && totalScore <= 9) {
+                explanationText = "Depresi ringan. Disarankan untuk memantau gejala dan mempertimbangkan intervensi minimal, seperti konseling atau gaya hidup sehat.";
+                resultClass = "result-mild";
+            } else if (totalScore >= 10 && totalScore <= 14) {
+                explanationText = "Depresi sedang. Sebaiknya berkonsultasi dengan profesional kesehatan mental (psikiater/psikolog) untuk evaluasi lebih lanjut dan pertimbangan terapi.";
+                resultClass = "result-moderate";
+            } else if (totalScore >= 15 && totalScore <= 19) {
+                explanationText = "Depresi sedang hingga parah. Sangat disarankan untuk segera mencari bantuan profesional dari psikiater atau psikolog untuk penanganan yang tepat.";
+                resultClass = "result-mod-severe";
+            } else if (totalScore >= 20 && totalScore <= 27) {
+                explanationText = "Depresi parah. Anda sangat dianjurkan untuk segera mencari bantuan profesional medis atau psikiater untuk penanganan dan intervensi yang intensif.";
+                resultClass = "result-severe";
+            }
+
+            scoreExplanationP.innerHTML = `<span class="highlight-result ${resultClass}">${explanationText}</span>`;
+            
+            // Sembunyikan form dan tampilkan hasil
+            phq9Form.style.display = 'none';
+            resultDiv.style.display = 'block';
+
+            // Buat teks untuk dibagikan
+            const shareMessage = `*Hasil Tes Depresi PHQ-9 saya:*\nSkor ${totalScore}\n${explanationText}\n\n#PHQ9Test #KesehatanMental`;
+            shareTextDisplay.textContent = shareMessage; // Tampilkan di div (meskipun div ini disembunyikan)
+
+            // Untuk share URL (WhatsApp, Telegram)
+            const encodedShareMessage = encodeURIComponent(shareMessage);
+            const currentUrl = encodeURIComponent(window.location.href);
+
+            whatsappShareBtn.onclick = () => {
+                window.open(`https://api.whatsapp.com/send?text=${encodedShareMessage}`, '_blank');
+            };
+            telegramShareBtn.onclick = () => {
+                window.open(`https://t.me/share/url?url=${currentUrl}&text=${encodedShareMessage}`, '_blank');
+            };
+        }
+
+        // Inisialisasi: Tampilkan pertanyaan pertama
+        showQuestion(currentQuestionIndex);
+
+        // Event listener untuk tombol salin
+        copyBtn.addEventListener('click', () => {
+            const textToCopy = shareTextDisplay.textContent;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Teks hasil telah disalin!');
+            }).catch(err => {
+                console.error('Gagal menyalin teks: ', err);
+                alert('Gagal menyalin teks. Silakan salin secara manual.');
+            });
+        });
+    </script>
+</body>
+</html>
