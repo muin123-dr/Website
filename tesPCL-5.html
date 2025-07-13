@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes PCL-5 untuk Gangguan Stres Pasca-Trauma</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+        }
+        .question, .start-screen, .result {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .option {
+            display: block;
+            margin: 10px auto;
+            padding: 15px;
+            width: 80%;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 18px;
+        }
+        .option:hover {
+            background: #d0d0d0;
+        }
+        .result {
+            text-align: center;
+        }
+        .share-btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .whatsapp { background: #25D366; }
+        .telegram { background: #0088cc; }
+        h1 { color: #FF0000; }
+        h2, h3 { color: #333; transition: color 0.5s ease; }
+        #score {
+            font-size: 24px;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        #final-note {
+            font-weight: bold;
+            text-align: center;
+        }
+        #logo {
+            width: 100px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="start" class="start-screen active">
+            <h1>TES PCL-5</h1>
+            <h2>Anda Siap?</h2>
+            <button class="option" onclick="startTest()">Ya, Mulai Tes</button>
+        </div>
+        
+        <!-- Pertanyaan akan dimasukkan secara dinamis -->
+
+        <div id="result" class="result">
+            <img id="logo" src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo">
+            <h2>Hasil Tes PCL-5</h2>
+            <p id="score"></p>
+            <p id="interpretation"></p>
+            <p><strong>Catatan:</strong> Tes ini hanya untuk skrining awal. Untuk diagnosis yang akurat, konsultasikan dengan psikolog atau psikiater.</p>
+            <p>Bagikan hasil Anda:</p>
+            <a id="whatsapp" class="share-btn whatsapp" href="#" target="_blank">Share via WhatsApp</a>
+            <a id="telegram" class="share-btn telegram" href="#" target="_blank">Share via Telegram</a>
+            <p id="final-note">Terima kasih telah mencoba!<br>Dipersembahkan oleh <br><a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" target="_blank">channel Gen ZEHAT - Dr. Muin</a></p>
+        </div>
+    </div>
+
+    <script>
+        const colors = ["#007BFF", "#FF0000", "#8B4513", "#228B22", "#800080"];
+        const questions = [
+            "Muncul kenangan/memori berulang, mengganggu tentang peristiwa yang membuat trauma?",
+            "Mimpi buruk berulang tentang peristiwa traumatis atau sesuatu yang terkait?",
+            "Merasa seolah-olah peristiwa traumatis terjadi lagi (flashback)?",
+            "Merasa sangat kesal ketika ada sesuatu yang memicu munculnya memori tentang peristiwa traumatis?",
+            "Mengalami reaksi fisik (misalnya berdebar-debar, sulit bernapas) saat diingatkan tentang peristiwa traumatis?",
+            "Menghindari memori, pikiran atau perasaan terkait peristiwa traumatis?",
+            "Menghindari aktivitas atau situasi yang mengingatkan pada peristiwa traumatis?",
+            "Kesulitan mengingat bagian penting dari peristiwa traumatis?",
+            "Kehilangan minat pada aktivitas yang sebelumnya Anda sukai/nikmati?",
+            "Merasa jauh atau terputus/terasing dari orang lain?",
+            "Sulit merasakan emosi positif (misalnya, cinta/kasih sayang atau bahagia)?",
+            "Memiliki keyakinan negatif yang kuat tentang diri sendiri, orang lain, atau dunia?",
+            "Sulit tidur (sulit memulai tidur atau tetap tidur)?",
+            "Merasa mudah tersinggung, marah yang meledak-ledak atau agresif?",
+            "Sulit berkonsentrasi?",
+            "Selalu waspada atau berjaga-jaga secara berlebihan?",
+            "Mudah terkejut atau kaget?",
+            "Merasa bersalah atas peristiwa traumatis?",
+            "Mengambil terlalu banyak risiko atau melakukan hal-hal yang dapat membahayakan diri Anda?",
+            "Merasa malu karena peristiwa traumatis?"
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function startTest() {
+            document.getElementById('start').classList.remove('active');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const container = document.querySelector('.container');
+            container.querySelectorAll('.question').forEach(el => el.remove());
+
+            if (currentQuestion < questions.length) {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'question active';
+                const h3 = document.createElement('h3');
+                h3.innerText = `${currentQuestion + 1}. ${questions[currentQuestion]}`;
+                h3.style.color = colors[currentQuestion % colors.length];
+                qDiv.appendChild(h3);
+                for (let i = 0; i <= 4; i++) {
+                    const btn = document.createElement('button');
+                    btn.className = 'option';
+                    btn.innerText = ["Tidak sama sekali (0)", "Sedikit (1)", "Cukup (2)", "Banyak (3)", "Sangat banyak (4)"][i];
+                    btn.onclick = () => answer(i);
+                    qDiv.appendChild(btn);
+                }
+                container.insertBefore(qDiv, document.getElementById('result'));
+            } else {
+                showResult();
+            }
+        }
+
+        function answer(points) {
+            score += points;
+            currentQuestion++;
+            showQuestion();
+        }
+
+        function showResult() {
+            document.getElementById('result').classList.add('active');
+            document.getElementById('score').innerText = `Skor Anda: ${score}`;
+
+            let interpretation = '';
+            if (score < 31) {
+                interpretation = 'Tidak ada indikasi kuat gejala PTSD. Tetap pantau kesehatan mental Anda.';
+            } else if (score <= 49) {
+                interpretation = 'Gejala PTSD ringan hingga sedang. Pertimbangkan konsultasi dengan profesional kesehatan mental.';
+            } else {
+                interpretation = 'Gejala PTSD berat. Sangat disarankan untuk segera berkonsultasi dengan psikolog atau psikiater.';
+            }
+            document.getElementById('interpretation').innerText = `Interpretasi: ${interpretation}`;
+
+            const shareText = `Hasil Tes PCL-5 Saya: Skor ${score}. ${interpretation} Tes ini dipersembahkan oleh Gen ZEHAT - Dr. Muin. Coba tes ini di [https://]!`;
+            document.getElementById('whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+            document.getElementById('telegram').href = `https://t.me/share/url?url=${encodeURIComponent('[masukkan URL Anda]')}&text=${encodeURIComponent(shareText)}`;
+        }
+    </script>
+</body>
+</html>
