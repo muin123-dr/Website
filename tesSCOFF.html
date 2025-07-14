@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tes SCOFF untuk Gangguan Makan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      background-color: #f6f9fc;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease-in-out;
+    }
+
+    h1 {
+      color: #0a3d62;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    h2, h3 {
+      margin-bottom: 20px;
+    }
+
+    .question, .start-screen, .result {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .option {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      background: #e0e7ff;
+      color: #1e3a8a;
+      border: none;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+    }
+
+    .option:hover {
+      background: #c7d2fe;
+    }
+
+    /* Warna berbeda untuk tiap pertanyaan */
+    #q1 h3 { color: #e74c3c; }      /* merah */
+    #q2 h3 { color: #3498db; }      /* biru */
+    #q3 h3 { color: #8e44ad; }      /* ungu */
+    #q4 h3 { color: #27ae60; }      /* hijau */
+    #q5 h3 { color: #f39c12; }      /* oranye */
+
+    .result {
+      text-align: center;
+    }
+
+    #score {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    #interpretation.green {
+      color: #2ecc71;
+    }
+
+    #interpretation.red {
+      color: #e74c3c;
+    }
+
+    .share-btn {
+      display: inline-block;
+      margin: 10px 10px 20px;
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .whatsapp { background: #25D366; }
+    .telegram { background: #0088cc; }
+
+    img.logo {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #0a3d62;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Halaman Awal -->
+    <div id="start" class="start-screen active">
+      <h1>Tes Gangguan Makan SCOFF</h1>
+      <h2>Anda siap?</h2>
+      <button class="option" onclick="startTest()">Ya, Mulai Tes</button>
+    </div>
+
+    <!-- Pertanyaan -->
+    <div id="q1" class="question">
+      <h3>1. Apakah Anda membuat diri Anda muntah karena merasa terlalu kenyang?</h3>
+      <button class="option" onclick="answer(1, 2)">Ya</button>
+      <button class="option" onclick="answer(0, 2)">Tidak</button>
+    </div>
+    <div id="q2" class="question">
+      <h3>2. Apakah Anda khawatir kehilangan kendali atas jumlah makanan yang Anda makan?</h3>
+      <button class="option" onclick="answer(1, 3)">Ya</button>
+      <button class="option" onclick="answer(0, 3)">Tidak</button>
+    </div>
+    <div id="q3" class="question">
+      <h3>3. Apakah Anda baru-baru ini kehilangan lebih dari 6 kg dalam 3 bulan?</h3>
+      <button class="option" onclick="answer(1, 4)">Ya</button>
+      <button class="option" onclick="answer(0, 4)">Tidak</button>
+    </div>
+    <div id="q4" class="question">
+      <h3>4. Apakah Anda merasa diri Anda gemuk padahal orang lain bilang Anda kurus?</h3>
+      <button class="option" onclick="answer(1, 5)">Ya</button>
+      <button class="option" onclick="answer(0, 5)">Tidak</button>
+    </div>
+    <div id="q5" class="question">
+      <h3>5. Apakah Anda merasa makanan mendominasi hidup Anda?</h3>
+      <button class="option" onclick="answer(1, 6)">Ya</button>
+      <button class="option" onclick="answer(0, 6)">Tidak</button>
+    </div>
+
+    <!-- Hasil -->
+    <div id="result" class="result">
+      <img src="https://muin123-dr.github.io/Website/gen%20zehat.png" class="logo" alt="Logo Hasil Tes" />
+      <h2>Hasil Tes SCOFF</h2>
+      <p id="score"></p>
+      <p id="interpretation"></p>
+      <p>Bagikan hasil Anda:</p>
+      <a id="whatsapp" class="share-btn whatsapp" href="#" target="_blank">Share via WhatsApp</a>
+      <a id="telegram" class="share-btn telegram" href="#" target="_blank">Share via Telegram</a>
+      <p><strong>Catatan:</strong> Tes ini hanya untuk skrining awal. Untuk diagnosis yang akurat, konsultasikan dengan psikolog atau psikiater.</p>
+      <p>Terima kasih telah mencoba!</p>
+      <p>Dipersembahkan oleh <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" target="_blank">channel Gen ZEHAT - Dr. Muin</a></p>
+    </div>
+  </div>
+
+  <script>
+    let currentQuestion = 0;
+    let score = 0;
+
+    function startTest() {
+      document.getElementById('start').classList.remove('active');
+      document.getElementById('q1').classList.add('active');
+      currentQuestion = 1;
+    }
+
+    function answer(points, nextQuestion) {
+      score += points;
+      document.getElementById(`q${currentQuestion}`).classList.remove('active');
+      if (nextQuestion <= 5) {
+        document.getElementById(`q${nextQuestion}`).classList.add('active');
+        currentQuestion = nextQuestion;
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById('result').classList.add('active');
+      const scoreElem = document.getElementById('score');
+      const interpretationElem = document.getElementById('interpretation');
+
+      scoreElem.innerText = `Skor Anda: ${score}`;
+      scoreElem.style.color = score >= 3 ? '#e74c3c' : '#2ecc71';
+
+      let interpretation = '';
+      if (score >= 2) {
+        interpretation = 'Skor ≥2 menunjukkan kemungkinan gangguan makan (misalnya, anoreksia atau bulimia). Disarankan untuk berkonsultasi dengan profesional kesehatan mental.';
+        interpretationElem.className = 'red';
+      } else {
+        interpretation = 'Tidak ada indikasi kuat gangguan makan. Tetap perhatikan pola makan dan kesehatan mental Anda.';
+        interpretationElem.className = 'green';
+      }
+      interpretationElem.innerText = `Interpretasi: ${interpretation}`;
+
+      const shareText = `Hasil Tes SCOFF Saya: Skor ${score}. ${interpretation} Tes ini dipersembahkan oleh Gen ZEHAT - Dr. Muin. Coba tes ini di [masukkan URL Anda]!`;
+      document.getElementById('whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+      document.getElementById('telegram').href = `https://t.me/share/url?url=${encodeURIComponent('[masukkan URL Anda]')}&text=${encodeURIComponent(shareText)}`;
+    }
+  </script>
+</body>
+</html>
