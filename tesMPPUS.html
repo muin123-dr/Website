@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tes MPPUS - Gen ZEHAT</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+      background-color: #e0f2f7; /* Light blue-green for a calming effect */
+      max-width: 600px;
+      margin: auto;
+      color: #333;
+    }
+    .card {
+      background-color: white;
+      padding: 2.5rem;
+      border-radius: 1.5rem; /* More rounded corners */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Softer, more pronounced shadow */
+      transition: all 0.3s ease-in-out;
+    }
+    h1 {
+      text-align: center;
+      color: #00796b; /* Darker teal for headings */
+      margin-bottom: 2rem;
+      font-size: 2.2rem;
+    }
+    h2 {
+      text-align: center;
+      color: #00796b;
+      margin-bottom: 1.5rem;
+    }
+    .question {
+      margin-bottom: 2rem;
+      font-weight: bold;
+      font-size: 1.4rem;
+      text-align: center;
+      line-height: 1.5;
+      color: #263238; /* Darker text for questions */
+      transition: color 0.4s ease-out; /* Smooth color transition for questions */
+    }
+    .answers button {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.8rem; /* Slightly more space between buttons */
+      padding: 1rem 1.2rem;
+      border: none;
+      background-color: #4CAF50; /* Green */
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 0.75rem; /* More rounded buttons */
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .answers button:hover {
+      background-color: #43a047; /* Darker green on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+    .answers button:active {
+      transform: translateY(0);
+    }
+    .result {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+    .result-label {
+      font-size: 1.5rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+    .score {
+      font-size: 3rem;
+      color: #1a237e; /* Deep indigo for score */
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+    .interpretation {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      display: inline-block; /* To allow background color to fit content */
+    }
+    .interpretation.high {
+      background-color: #ffebee;
+      color: #d32f2f; /* Red */
+    }
+    .interpretation.medium {
+      background-color: #fffde7;
+      color: #fbc02d; /* Yellow */
+    }
+    .interpretation.low {
+      background-color: #e8f5e9;
+      color: #388e3c; /* Green */
+    }
+    .share {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .share a {
+      display: inline-block;
+      margin: 0.6rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #25D366; /* WhatsApp green */
+      color: white;
+      text-decoration: none;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .share a:hover {
+      transform: translateY(-2px);
+    }
+    .share a.telegram {
+      background-color: #0088cc; /* Telegram blue */
+    }
+    .note {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: #666;
+      text-align: center;
+      line-height: 1.4;
+      border-top: 1px solid #eee;
+      padding-top: 1rem;
+    }
+    .footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    .footer a {
+      color: #00796b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 id="title">Tes Ketergantungan HP (MPPUS)</h2>
+    <div id="app">
+      <div id="question-container">
+        <div class="question" id="question-text">Apakah Anda siap ikut tes MPPUS?</div>
+        <div class="answers">
+          <button onclick="nextQuestion()">Ya, saya siap</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const questions = [
+      "Saya merasa cemas jika tidak bisa mengakses HP saya.",
+      "Saya sering mengecek HP tanpa alasan yang jelas.",
+      "Saya merasa HP saya mengganggu tugas atau pekerjaan saya.",
+      "Saya pernah mencoba mengurangi penggunaan HP tetapi gagal.",
+      "Saya merasa gelisah atau tidak nyaman jika tidak menggunakan HP.",
+      "Saya merasa lebih tenang setelah membuka HP meski hanya sebentar.",
+      "Saya menggunakan HP lebih lama dari yang saya rencanakan.",
+      "Saya merasa HP saya bagian penting dari hidup saya.",
+      "Orang lain mengatakan saya terlalu sering menggunakan HP.",
+      "Saya merasa kesepian jika tidak menggunakan HP."
+    ];
+
+    const choices = [
+      { label: "Sangat Tidak Setuju", value: 1 },
+      { label: "Tidak Setuju", value: 2 },
+      { label: "Netral", value: 3 },
+      { label: "Setuju", value: 4 },
+      { label: "Sangat Setuju", value: 5 },
+    ];
+
+    // More varied and harmonious color palette for questions
+    const questionColors = ["#42a5f5", "#66bb6a", "#ffa726", "#ef5350", "#ab47bc", "#7e57c2"];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function nextQuestion(choice = 0) {
+      if (currentQuestion > 0) { // Only add score for actual question answers
+        score += choice;
+      }
+
+      const container = document.getElementById("question-container");
+      const title = document.getElementById("title");
+      title.style.display = "none"; // Ensure title is hidden during questions
+
+      if (currentQuestion < questions.length) {
+        // Clear previous content with a fade-out effect
+        container.style.opacity = 0;
+        setTimeout(() => {
+          container.innerHTML = "";
+
+          const q = document.createElement("div");
+          q.className = "question";
+          q.id = "question-text";
+          q.textContent = questions[currentQuestion];
+          q.style.color = questionColors[currentQuestion % questionColors.length];
+
+          const a = document.createElement("div");
+          a.className = "answers";
+
+          choices.forEach(c => {
+            const btn = document.createElement("button");
+            btn.textContent = c.label;
+            btn.onclick = () => {
+              currentQuestion++;
+              nextQuestion(c.value);
+            };
+            a.appendChild(btn);
+          });
+
+          container.appendChild(q);
+          container.appendChild(a);
+          container.style.opacity = 1; // Fade-in new content
+        }, 300); // Duration of fade-out
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const container = document.getElementById("question-container");
+      const title = document.getElementById("title");
+      title.style.display = "block"; // Show title for result
+      title.textContent = "Hasil Tes Ketergantungan HP (MPPUS)"; // Update title for result
+      container.style.opacity = 0; // Fade out current content before showing result
+
+      let interpretation = "";
+      let interpretationClass = "";
+
+      if (score <= 20) {
+        interpretation = "Tingkat ketergantungan sangat rendah.";
+        interpretationClass = "low";
+      } else if (score <= 30) {
+        interpretation = "Tingkat ketergantungan rendah.";
+        interpretationClass = "low";
+      } else if (score <= 40) {
+        interpretation = "Tingkat ketergantungan sedang.";
+        interpretationClass = "medium";
+      } else if (score <= 45) {
+        interpretation = "Tingkat ketergantungan tinggi.";
+        interpretationClass = "high";
+      } else {
+        interpretation = "Tingkat ketergantungan sangat tinggi. Disarankan mengurangi penggunaan HP.";
+        interpretationClass = "high";
+      }
+
+      setTimeout(() => {
+        container.innerHTML = `
+          <div class="result">
+            <div class="result-label">Hasil Anda</div>
+            <div class="score">${score}</div>
+            <p class="interpretation ${interpretationClass}">${interpretation}</p>
+            <div class="share">
+              <a href="https://wa.me/?text=Saya%20baru%20saja%20ikut%20Tes%20MPPUS%20dan%20skor%20saya%20${score}%20-%20${encodeURIComponent(interpretation)}.%20Coba%20juga:%20https://yourdomain.com" target="_blank">Bagikan di WhatsApp</a>
+              <a class="telegram" href="https://t.me/share/url?url=https://yourdomain.com&text=Saya%20ikut%20Tes%20MPPUS%20dan%20skor%20saya%20${score}%20-%20${encodeURIComponent(interpretation)}" target="_blank">Bagikan di Telegram</a>
+            </div>
+            <div class="note">
+              <p><strong>Catatan:</strong> Tes ini hanya untuk skrining awal. Untuk diagnosis yang akurat, konsultasikan dengan psikolog atau psikiater.</p>
+            </div>
+            <div class="footer">
+              <p>Terimakasih telah mencoba</p>
+              <p>Dipersembahkan oleh</p>
+              <p><strong><a href="https://t.me/genzehat" target="_blank">Channel Gen ZEHAT - Dr. Muin</a></strong></p>
+            </div>
+          </div>
+        `;
+        container.style.opacity = 1; // Fade in result content
+      }, 300); // Duration of fade-out for previous content
+    }
+  </script>
+</body>
+</html>
