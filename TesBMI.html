@@ -140,6 +140,30 @@
     .credit a:hover {
         color: var(--primary-color);
     }
+    
+    .share-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .share-buttons a {
+        display: inline-block;
+        padding: 10px 15px;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    
+    .whatsapp-btn {
+        background-color: #25d366;
+    }
+    
+    .telegram-btn {
+        background-color: #0088cc;
+    }
 
     @media (max-width: 480px) {
       h1, h2, h3 {
@@ -221,6 +245,7 @@
     let kategori = "";
     let saran = "";
     let classKategori = "";
+    let shareText = "";
 
     if (bmi < 18.5) {
       kategori = "Kurus";
@@ -231,6 +256,7 @@
           <li><strong>Makan:</strong> Tambah kalori, makan sering.</li>
           <li><strong>Olahraga:</strong> Latihan beban ringan.</li>
         </ul>`;
+      shareText = `Hasil BMI saya adalah ${bmiFix} (${kategori}). Cek BMI Anda juga di sini!`;
     } else if (bmi >= 18.5 && bmi < 25) {
       kategori = "Normal";
       classKategori = "bmi-normal";
@@ -240,6 +266,7 @@
           <li><strong>Makan:</strong> Seimbang, hindari gula/olahan.</li>
           <li><strong>Olahraga:</strong> Rutin jaga kondisi.</li>
         </ul>`;
+      shareText = `Hasil BMI saya adalah ${bmiFix} (${kategori}). Cek BMI Anda juga di sini!`;
     } else if (bmi >= 25 && bmi < 30) {
       kategori = "Gemuk";
       classKategori = "bmi-gemuk";
@@ -249,6 +276,7 @@
           <li><strong>Makan:</strong> Kurangi lemak & gula.</li>
           <li><strong>Aktivitas:</strong> Lebih aktif, hitung kalori.</li>
         </ul>`;
+      shareText = `Hasil BMI saya adalah ${bmiFix} (${kategori}). Cek BMI Anda juga di sini!`;
     } else {
       kategori = "Obesitas";
       classKategori = "bmi-obesitas";
@@ -258,10 +286,15 @@
           <li><strong>Makan:</strong> Diet ketat & sehat.</li>
           <li><strong>Medis:</strong> Rutin cek ke dokter.</li>
         </ul>`;
+      shareText = `Hasil BMI saya adalah ${bmiFix} (${kategori}). Cek BMI Anda juga di sini!`;
     }
 
     document.getElementById('form-section').style.display = "none";
     document.getElementById('result-section').style.display = "block";
+    
+    const pageUrl = window.location.href;
+    const whatsappLink = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + pageUrl)}`;
+    const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
 
     document.getElementById('result').innerHTML = `
       <div class="bmi-value ${classKategori}">BMI: ${bmiFix}</div>
@@ -270,9 +303,15 @@
       ${saran}
       <hr>
       <p><em><strong>Catatan:</strong> Konsultasikan ke dokter atau ahli gizi untuk penanganan khusus.</em></p>
+      
+      <div class="share-buttons">
+          <a href="${whatsappLink}" target="_blank" class="whatsapp-btn">Share WhatsApp</a>
+          <a href="${telegramLink}" target="_blank" class="telegram-btn">Share Telegram</a>
+      </div>
+      
       <div class="credit">
           <p>dipersembahkan oleh:</p>
-          <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" target="_blank">Channel WA Gen Zehat</a>
+          <a href="https://whatsapp.com/channel/0029VaFq4q5KxU1o5z4o2O0x" target="_blank">Channel WA Gen Zehat</a>
       </div>
     `;
   }
