@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('dailyCalories').textContent = dailyCalories.toLocaleString('id-ID');
         document.getElementById('bmr').textContent = bmr.toLocaleString('id-ID');
         document.getElementById('bmi').textContent = bmi;
-        
+        shareText = `Hasil perhitungan kalori harian saya:\n- Kebutuhan Kalori: ${dailyCalories.toLocaleString('id-ID')} kalori\n- BMR: ${bmr.toLocaleString('id-ID')}.`
         // Update kategori BMI
         const bmiInfo = getBMICategory(parseFloat(bmi));
         const bmiCategoryElement = document.getElementById('bmiCategory');
@@ -234,8 +234,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Keyboard navigation untuk radio buttons
-    shareText = `Saya bisa menghitung Kebutuhan Kalori harian di https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u/179`
+    //
+    const pageUrl = window.location.href;
+    const whatsappLink = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + pageUrl)}`;
+    const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
+    
                 }
             }
         });
