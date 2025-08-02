@@ -234,11 +234,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    //
-    const pageUrl = window.location.href;
-    const whatsappLink = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + pageUrl)}`;
-    const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
-    
                 }
             }
         });
