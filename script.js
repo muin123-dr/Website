@@ -233,7 +233,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
+    // Keyboard navigation untuk radio buttons
+    shareText = `Saya bisa menghitung Kebutuhan Kalori harian di https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u/179`
+                }
+            }
+        });
+    });
     // Loading state untuk tombol calculate
     const calculateBtn = document.querySelector('.btn-calculate');
     const originalBtnText = calculateBtn.innerHTML;
