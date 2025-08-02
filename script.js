@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('dailyCalories').textContent = dailyCalories.toLocaleString('id-ID');
         document.getElementById('bmr').textContent = bmr.toLocaleString('id-ID');
         document.getElementById('bmi').textContent = bmi;
-        shareText = `Hasil perhitungan kalori harian saya:\n- Kebutuhan Kalori: ${dailyCalories.toLocaleString('id-ID')} kalori\n- BMR: ${bmr.toLocaleString('id-ID')}.`
+       
         // Update kategori BMI
         const bmiInfo = getBMICategory(parseFloat(bmi));
         const bmiCategoryElement = document.getElementById('bmiCategory');
