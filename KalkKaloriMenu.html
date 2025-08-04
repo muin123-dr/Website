@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Kalori Makanan</title>
+    <style>
+        /* Import Font yang lebih modern */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        :root {
+            --primary-color: #28a745;
+            --primary-hover: #218838;
+            --danger-color: #dc3545;
+            --danger-hover: #c82333;
+            --light-bg: #f8f9fa;
+            --white-bg: #ffffff;
+            --dark-text: #343a40;
+            --light-text: #6c757d;
+            --border-color: #dee2e6;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            max-width: 100%;
+            margin: 0;
+            padding: 10px;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        /* Mobile-first responsive design */
+        @media (min-width: 768px) {
+            body {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 15px;
+                font-size: 15px;
+            }
+        }
+	.logo {
+      	     display: block;
+      	     margin: 0 auto 10px auto;
+      	     max-width: 100px;
+	}
+
+        h1 {
+            text-align: center;
+            color: #0000FF;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        h2 {
+            font-size: 1rem;
+            margin: 15px 0 8px 0;
+            font-weight: 500;
+            color: var(--dark-text);
+        }
+
+	p {
+            text-align: center;
+	    font-size: 1rem;
+            margin: 15px 0 8px 0;
+            font-weight: 500;
+            color: #FF0000;
+        }
+
+        .container {
+            background: var(--white-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+        }
+
+        /* Autocomplete container */
+        .autocomplete-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .autocomplete-input {
+            padding: 8px 12px;
+            margin: 5px 0;
+            width: 100%;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .autocomplete-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+        }
+
+        .autocomplete-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .autocomplete-suggestion {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+
+        .autocomplete-suggestion:hover,
+        .autocomplete-suggestion.selected {
+            background-color: var(--light-bg);
+        }
+
+        .autocomplete-suggestion:last-child {
+            border-bottom: none;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 5px 0;
+            width: 100%;
+            border-radius: 6px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: all var(--transition-speed) ease;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .item-list {
+            margin-top: 10px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background: var(--light-bg);
+            margin-bottom: 5px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary-color);
+            font-size: 0.85rem;
+        }
+        
+        .item span {
+            flex-grow: 1;
+            padding-right: 8px;
+            line-height: 1.3;
+        }
+
+        .item button {
+            background-color: var(--danger-color);
+            width: auto;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        .item button:hover {
+            background-color: var(--danger-hover);
+            transform: none;
+        }
+
+        /* Result page styles */
+        #result-page {
+            display: none;
+            text-align: center;
+        }
+
+        #total-calories-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 15px 0;
+        }
+
+        #result-details ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            margin: 15px 0;
+        }
+
+        #result-details li {
+            background: var(--light-bg);
+            padding: 6px 8px;
+            border-radius: 4px;
+            margin-bottom: 3px;
+            font-size: 0.85rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .share-buttons button {
+            flex: 1;
+            margin: 0;
+            font-size: 0.85rem;
+            padding: 8px 4px;
+        }
+
+        .whatsapp { 
+            background-color: #25D366; 
+        }
+        .whatsapp:hover { 
+            background-color: #1ebe57; 
+        }
+        .telegram { 
+            background-color: #0088cc; 
+        }
+        .telegram:hover { 
+            background-color: #006699; 
+        }
+
+        /* Scroll to top animation */
+        .scroll-to-top {
+            animation: scrollToTop 0.5s ease-out;
+        }
+
+        @keyframes scrollToTop {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+	.credit {
+        text-align: center;
+        margin-top: 15px;
+    	}
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+                font-size: 13px;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            .container {
+                padding: 12px;
+            }
+            
+            #total-calories-value {
+                font-size: 2rem;
+            }
+            
+            .autocomplete-input, button {
+                font-size: 0.85rem;
+            }
+            
+            .item {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Halaman Input -->
+    <div class="logo">
+		<img src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo BMI" class="logo">
+    </div>
+    <div id="input-page" class="container">
+        <h1>Kalkulator Kalori</h1>
+	<p>Hitung jumlah kalori dari menu yang anda konsumsi</p>
+        <p></p>
+
+        <!-- Bagian Makanan -->
+        <div class="section">
+            <label for="food-input" style="font-weight: bold; font-style: italic; color: darkgreen;">Pilih Makanan:</label>
+            <div class="autocomplete-container">
+                <input type="text" id="food-input" class="autocomplete-input" placeholder="Ketik nama makanan...">
+                <div id="food-suggestions" class="autocomplete-suggestions"></div>
+            </div>
+            <button onclick="addItem('food')">Tambahkan</button>
+            <div id="food-list" class="item-list"></div>
+        </div>
+
+        <!-- Bagian Minuman -->
+        <div class="section">
+            <label for="drink-input" style="font-weight: bold; font-style: italic; color: darkgreen;">Pilih Minuman:</label>
+            <div class="autocomplete-container">
+                <input type="text" id="drink-input" class="autocomplete-input" placeholder="Ketik nama minuman...">
+                <div id="drink-suggestions" class="autocomplete-suggestions"></div>
+            </div>
+            <button onclick="addItem('drink')">Tambahkan</button>
+            <div id="drink-list" class="item-list"></div>
+        </div>
+
+        <!-- Bagian Buah -->
+        <div class="section">
+            <label for="fruit-input" style="font-weight: bold; font-style: italic; color: darkgreen;">Pilih Buah:</label>
+            <div class="autocomplete-container">
+                <input type="text" id="fruit-input" class="autocomplete-input" placeholder="Ketik nama buah...">
+                <div id="fruit-suggestions" class="autocomplete-suggestions"></div>
+            </div>
+            <button onclick="addItem('fruit')">Tambahkan</button>
+            <div id="fruit-list" class="item-list"></div>
+        </div>
+        
+        <button onclick="calculateCalories()">Hitung Total Kalori</button>
+    </div>
+
+    <!-- Halaman Hasil -->
+    <div id="result-page" class="container">
+        <h1>Hasil Perhitungan</h1>
+        <p>Total kalori dari menu Anda:</p>
+        <div id="total-calories-value">0</div>
+        <div id="result-details"></div>
+        <div class="share-buttons">
+            <button class="whatsapp" onclick="shareWhatsApp()">WhatsApp</button>
+            <button class="telegram" onclick="shareTelegram()">Telegram</button>
+        </div>
+        <button onclick="backToInput()">Hitung Ulang</button>
+    </div>
+</div>
+	<div class="credit">
+          <p>dipersembahkan oleh:</p>
+          <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" target="_blank">Channel WA Gen Zehat</a>
+     	</div>
+    <script>
+        // Data makanan, minuman, dan buah
+        const foodData = [
+            "Nasi Putih|152.5|Dikukus|100g",
+            "Nasi Goreng|425|Digoreng dengan minyak|1 porsi (150g)",
+            "Nasi Kuning|205|Ditanak dengan kunyit & santan|100g",
+            "Nasi Uduk|300|Ditanak dengan santan|100g",
+            "Nasi Padang|750|Campuran lauk + nasi|1 porsi komplit",
+            "Rendang Daging|395|Santan dikaramelkan (ungkep)|100g",
+            "Sate Ayam|275|Dibakar arang|5-10 tusuk",
+            "Sate Kambing|300|Dibakar arang|5 tusuk",
+            "Gado-Gado|315|Sayuran direbus + bumbu kacang|1 porsi (150g)",
+            "Soto Ayam|210|Direbus kaldu ayam|1 mangkok (tanpa nasi)",
+            "Soto Betawi|475|Direbus kaldu santan/susu|1 mangkok (tanpa nasi)",
+            "Bakso|250|Bola daging direbus|1 porsi (tanpa mi)",
+            "Gudeg|450|Direbus santan kental & gula jawa|1 porsi",
+            "Ayam Goreng Kalasan|375|Digoreng kering|1 potong",
+            "Ayam Bakar Taliwang|350|Dibakar bumbu pedas|½ ekor",
+            "Ayam Betutu|400|Dikukus/dipanggang|1 porsi",
+            "Ikan Bakar|230|Dibakar bumbu|1 ekor kecil",
+            "Ikan Goreng|190|Digoreng|100g",
+            "Pempek|175|Direbus/dikukus|1 biji",
+            "Pempek Kapal Selam|350|Digoreng|1 porsi",
+            "Opor Ayam|340|Santan direbus|1 porsi",
+            "Rawon|150|Direbus|100g",
+            "Coto Makassar|160|Direbus|100g",
+            "Sayur Lodeh|215|Santan encer direbus|1 porsi",
+            "Sayur Asem|80|Direbus|1 porsi",
+            "Telur Balado|170|Direbus + ditumis|100g",
+            "Karedok|125|Sayuran mentah + bumbu kacang|1 porsi",
+            "Lontong|120|Dikukus|100g",
+            "Ketupat|120|Dikukus|100g",
+            "Bubur Ayam|255|Beras direbus kental|1 mangkok",
+            "Asinan Betawi|150|Sayur/buah mentah + kuah asam|1 porsi",
+            "Rujak Buah|150|Buah potong + sambal gula|1 porsi",
+            "Lalapan|20|Sayuran mentah|100g",
+            "Tempe Goreng|175|Fermentasi kedelai + digoreng|2 potong",
+            "Tempe Mendoan|190|Digoreng tepung|100g",
+            "Tahu Goreng|150|Digoreng|100g",
+            "Tahu Gejrot|175|Digoreng + siram kuah|1 porsi",
+            "Tape Singkong|175|Fermentasi singkong|1 porsi",
+            "Martabak Manis|425|Dipanggang + topping manis|1 potong/slice",
+            "Martabak Telur|275|Digoreng minyak banyak|1 potong",
+            "Lumpia Semarang|125|Digoreng|1 buah",
+            "Klepon|125|Kukus + gula merah|3 biji",
+            "Onde-onde|275|Digoreng|1 porsi",
+            "Lemper|200|Kukus|1 porsi",
+            "Pisang Goreng|225|Digoreng tepung|2 potong",
+            "Bakwan Jagung|175|Digoreng tepung|1 buah",
+            "Batagor|325|Digoreng + bumbu kacang|1 porsi",
+            "Siomay|200|Dikukus + bumbu kacang|1 porsi",
+            "Cireng|250|Digoreng|1 porsi",
+            "Kerak Telor|250|Digoreng sedikit minyak|1 porsi",
+            "Lapis Legit|175|Dipanggang|1 potong"
+        ];
+
+        const drinkData = [
+            "Air Putih|0|Tidak diolah|250ml",
+            "Teh Tawar|2|Diseduh (tanpa gula)|250ml",
+            "Teh Manis|100|Diseduh + gula|250ml",
+            "Es Teh Manis|100|Teh + gula + es|250ml",
+            "Kopi Hitam|5|Diseduh (tanpa gula)|100ml",
+            "Kopi Tubruk|7.5|Kopi + air panas (tanpa gula)|100ml",
+            "Kopi Susu|120|Kopi + susu + gula|100ml",
+            "Es Kopi Susu|225|Kopi + susu + gula + es|250ml",
+            "Susu Sapi (full cream)|150|Siap minum|250ml",
+            "Susu Kedelai|110|Siap minum|250ml",
+            "Cendol/Dawet|275|Santan + gula merah|250ml",
+            "Es Cendol/Dawet|275|Santan + gula merah + es|250ml",
+            "Bajigur|240|Santan + gula aren + rempah rebus|200ml",
+            "Wedang Jahe|75|Jahe + gula rebus|1 gelas (200ml)",
+            "Bandrek|135|Rempah + gula merah rebus|1 gelas (200ml)",
+            "Sekoteng|175|Wedang jahe + kacang + roti rebus|1 gelas",
+            "STMJ|320|Susu + telur + madu + jahe|1 gelas",
+            "Jus Jeruk Segar|100|Jeruk diblender (tanpa gula)|250ml",
+            "Jus Jeruk + Gula|140|Jeruk + gula diblender|250ml",
+            "Jus Alpukat|200|Alpukat diblender (tanpa gula)|250ml",
+            "Alpukat Kocok|250|Alpukat + gula/susu + es|1 gelas",
+            "Es Campur|300|Buah/sirup/susu + es|1 mangkok",
+            "Es Kelapa Muda|115|Air & daging kelapa muda|1 buah",
+            "Es Doger|300|Santan + sirup merah + ketan hitam + es|1 mangkok",
+            "Bir Pletok|125|Rempah rebus (khas Betawi)|250ml"
+        ];
+
+        const fruitData = [
+            "Pisang|89|Tidak diolah|100g",
+            "Apel|52|Tidak diolah|100g",
+            "Mangga|60|Tidak diolah|100g",
+            "Mangga Rujak|100|Dipotong + bumbu rujak|100g",
+            "Alpukat|160|Tidak diolah|100g",
+            "Jeruk|47|Tidak diolah|100g",
+            "Semangka|30|Tidak diolah|100g",
+            "Dondong|44|Tidak diolah|100g",
+            "Jambu Biji|68|Tidak diolah|100g",
+            "Nanas|50|Tidak diolah|100g",
+            "Nangka|95|Tidak diolah|100g",
+            "Durian|147|Tidak diolah|100g",
+            "Kelengkeng|60|Tidak diolah|100g",
+            "Jambu Air|25|Tidak diolah|100g",
+            "Anggur|69|Tidak diolah|100g",
+            "Pir|57|Tidak diolah|100g",
+            "Duku|70|Tidak diolah|100g",
+            "Rambutan|82|Tidak diolah|100g",
+            "Salak|77|Tidak diolah|100g",
+            "Pepaya|43|Tidak diolah|100g",
+	    "Belimbing|31|Tidak diolah|100g",
+            "Leci|66|Tidak diolah|100g",
+            "Sawo|83|Tidak diolah|100g",
+            "Srikaya|94|Tidak diolah|100g",
+            "Ceri|50|Tidak diolah|100g"
+        ];
+
+        // State untuk menyimpan data
+        const state = {
+            food: [],
+            drink: [],
+            fruit: [],
+            selectedItems: {
+                food: null,
+                drink: null,
+                fruit: null
+            }
+        };
+
+        // Setup autocomplete untuk setiap kategori
+        function setupAutocomplete(type) {
+            const input = document.getElementById(`${type}-input`);
+            const suggestions = document.getElementById(`${type}-suggestions`);
+            let data;
+            
+            switch(type) {
+                case 'food': data = foodData; break;
+                case 'drink': data = drinkData; break;
+                case 'fruit': data = fruitData; break;
+            }
+
+            let selectedIndex = -1;
+
+            input.addEventListener('input', function() {
+                const value = this.value.toLowerCase();
+                suggestions.innerHTML = '';
+                selectedIndex = -1;
+                
+                if (value.length === 0) {
+                    suggestions.style.display = 'none';
+                    return;
+                }
+
+                const filtered = data.filter(item => {
+                    const name = item.split('|')[0].toLowerCase();
+                    return name.includes(value);
+                }).slice(0, 8); // Limit to 8 suggestions
+
+                if (filtered.length > 0) {
+                    suggestions.style.display = 'block';
+                    filtered.forEach((item, index) => {
+                        const [name, calories, method, portion] = item.split('|');
+                        const div = document.createElement('div');
+                        div.className = 'autocomplete-suggestion';
+                        div.innerHTML = `<strong>${name}</strong> (${calories} kcal)<br><small>${portion}</small>`;
+                        div.addEventListener('click', function() {
+                            state.selectedItems[type] = item;
+                            input.value = name;
+                            suggestions.style.display = 'none';
+                        });
+                        suggestions.appendChild(div);
+                    });
+                } else {
+                    suggestions.style.display = 'none';
+                }
+            });
+
+            input.addEventListener('keydown', function(e) {
+                const items = suggestions.querySelectorAll('.autocomplete-suggestion');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+                    updateSelection(items);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedIndex = Math.max(selectedIndex - 1, -1);
+                    updateSelection(items);
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (selectedIndex >= 0 && items[selectedIndex]) {
+                        items[selectedIndex].click();
+                    }
+                } else if (e.key === 'Escape') {
+                    suggestions.style.display = 'none';
+                    selectedIndex = -1;
+                }
+            });
+
+            function updateSelection(items) {
+                items.forEach((item, index) => {
+                    item.classList.toggle('selected', index === selectedIndex);
+                });
+            }
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!input.contains(e.target) && !suggestions.contains(e.target)) {
+                    suggestions.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize autocomplete for all categories
+        document.addEventListener('DOMContentLoaded', function() {
+            setupAutocomplete('food');
+            setupAutocomplete('drink');
+            setupAutocomplete('fruit');
+        });
+
+        // Fungsi untuk menambah item
+        function addItem(type) {
+            const selectedItem = state.selectedItems[type];
+            if (selectedItem) {
+                state[type].push(selectedItem);
+                updateList(type);
+                
+                // Clear input and selection
+                document.getElementById(`${type}-input`).value = '';
+                document.getElementById(`${type}-suggestions`).style.display = 'none';
+                state.selectedItems[type] = null;
+            } else {
+                alert(`Silakan pilih ${type === 'food' ? 'makanan' : type === 'drink' ? 'minuman' : 'buah'} terlebih dahulu.`);
+            }
+        }
+
+        // Fungsi untuk menghapus item
+        function removeItem(type, index) {
+            state[type].splice(index, 1);
+            updateList(type);
+        }
+
+        // Fungsi untuk memperbarui daftar di UI
+        function updateList(type) {
+            const listElement = document.getElementById(`${type}-list`);
+            listElement.innerHTML = '';
+            state[type].forEach((item, index) => {
+                const [name, calories, method, portion] = item.split('|');
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.innerHTML = `<span><strong>${name}</strong> (${calories} kcal)</span> <button onclick="removeItem('${type}', ${index})">Hapus</button>`;
+                listElement.appendChild(div);
+            });
+        }
+
+        // Fungsi untuk menghitung total kalori
+        function calculateCalories() {
+            let totalCalories = 0;
+            let summaryText = "Rincian Asupan Kalori:\n";
+            let resultDetailsHtml = "<ul>";
+
+            const allItems = [...state.food, ...state.drink, ...state.fruit];
+            
+            if (allItems.length === 0) {
+                alert("Silakan tambahkan minimal satu item untuk dihitung.");
+                return;
+            }
+
+            allItems.forEach(item => {
+                const [name, calories] = item.split('|');
+                totalCalories += parseFloat(calories);
+                summaryText += `- ${name}: ${calories} kcal\n`;
+                resultDetailsHtml += `<li>${name} <strong>(${calories} kcal)</strong></li>`;
+            });
+
+            summaryText += `\n*Total Kalori: ${totalCalories.toFixed(0)} kcal*`;
+            resultDetailsHtml += "</ul>";
+
+            // Scroll to top and show result page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            setTimeout(() => {
+                document.getElementById('input-page').style.display = 'none';
+                const resultPage = document.getElementById('result-page');
+                resultPage.style.display = 'block';
+                resultPage.classList.add('scroll-to-top');
+                
+                // Animate the number counting up
+                const totalCaloriesElement = document.getElementById('total-calories-value');
+                animateValue(totalCaloriesElement, 0, totalCalories, 1000);
+
+                document.getElementById('result-details').innerHTML = resultDetailsHtml;
+
+                // Save result for sharing
+                resultPage.dataset.summary = summaryText;
+            }, 300);
+        }
+
+        // Fungsi untuk kembali ke halaman input
+        function backToInput() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                document.getElementById('result-page').style.display = 'none';
+                document.getElementById('input-page').style.display = 'block';
+            }, 200);
+        }
+
+        // Fungsi untuk animasi angka
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Fungsi berbagi
+        function share(platform) {
+            const summary = document.getElementById('result-page').dataset.summary;
+            const encodedSummary = encodeURIComponent(summary);
+            let url = '';
+
+            if (platform === 'whatsapp') {
+                url = `https://api.whatsapp.com/send?text=${encodedSummary}`;
+            } else if (platform === 'telegram') {
+                url = `https://t.me/share/url?url=KalkulatorKalori&text=${encodedSummary}`;
+            }
+            
+            window.open(url, '_blank');
+        }
+
+        function shareWhatsApp() {
+            share('whatsapp');
+        }
+
+        function shareTelegram() {
+            share('telegram');
+        }
+    </script>
+</body>
+</html>
+
