@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Kalori Terbakar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="..">
+<style>
+/* Reset dan base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 10px auto;
+  max-width: 100px;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Card styles */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Typography */
+h2, h3, p {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.0rem;
+  margin-bottom: 20px;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+select, input {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #e1e8ed;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  background: #fff;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[list] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+select:focus, input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Button styles */
+button {
+  width: 100%;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Result styles */
+.calories-number {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #e74c3c;
+  text-align: center;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.activity-description {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* Share buttons */
+.share-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.share-button {
+  flex: 1;
+  text-align: center;
+  padding: 12px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.whatsapp {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+}
+
+.telegram {
+  background: linear-gradient(135deg, #0088cc, #005577);
+}
+
+.share-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.reset-button {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  margin-top: 10px;
+}
+
+.reset-button:hover {
+  background: linear-gradient(135deg, #7f8c8d, #95a5a6);
+}
+
+.credit {
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* Utility classes */
+.hidden {
+  display: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  
+  .container {
+    padding: 0 10px;
+  }
+  
+  .card {
+    padding: 25px 20px;
+    border-radius: 15px;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.3rem;
+  }
+  
+  .calories-number {
+    font-size: 3rem;
+  }
+  
+  .activity-description {
+    font-size: 1rem;
+  }
+  
+  select, input, button {
+    padding: 12px 15px;
+    font-size: 16px;
+  }
+  
+  .share-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .share-button {
+    padding: 15px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  
+  .card {
+    padding: 20px 15px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .calories-number {
+    font-size: 2.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  button, .share-button {
+    min-height: 48px;
+  }
+  
+  select, input {
+    min-height: 48px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  h2, h3, label, .activity-description {
+    color: #e1e8ed;
+  }
+  
+  select, input {
+    background: #2c3e50;
+    border-color: #34495e;
+    color: #e1e8ed;
+  }
+  
+  select:focus, input:focus {
+    border-color: #667eea;
+  }
+}
+
+/* Smooth animations */
+.card, button, select, input, .share-button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading state */
+.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid transparent;
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <section id="formSection" class="card">
+      <div class="logo">
+        <img src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo BMI" class="logo">
+      </div>
+      <h2>Kalkulator Kalori Terbakar</h2>
+      <p>Perkiraan Pembakaran Kalori karena Aktifitas Anda</p>
+
+      <div class="form-group">
+        <label for="activity">Pilih Aktivitas: (Pilihan ada dibawah secara horisontal)</label>
+        <input type="text" id="activity" list="activityList" autocomplete="off">
+        <datalist id="activityList">
+          <option value="Jalan kaki santai" data-met="3.4"></option>
+          <option value="Jalan cepat" data-met="5.1"></option>
+          <option value="Lari pelan (jogging)" data-met="8.0"></option>
+          <option value="Lari cepat" data-met="11.4"></option>
+          <option value="Bersepeda santai" data-met="4.1"></option>
+          <option value="Bersepeda cepat" data-met="11.4"></option>
+          <option value="Naik tangga" data-met="12.6"></option>
+          <option value="Berenang santai" data-met="7.1"></option>
+          <option value="Menyapu rumah" data-met="2.9"></option>
+          <option value="Mengepel lantai" data-met="4.3"></option>
+          <option value="Memasak" data-met="2.1"></option>
+          <option value="Berkebun ringan" data-met="4.3"></option>
+          <option value="Senam ringan" data-met="5.1"></option>
+          <option value="Yoga" data-met="3.4"></option>
+          <option value="Angkat beban ringan" data-met="3.7"></option>
+          <option value="Angkat beban intensif" data-met="6.3"></option>
+          <option value="Menyetir" data-met="1.7"></option>
+          <option value="Tidur" data-met="0.6"></option>
+          <option value="Tenis (tunggal)" data-met="8.0"></option>
+          <option value="Sepak bola" data-met="7.4"></option>
+          <option value="Bulu tangkis (rekreasi)" data-met="5.4"></option>
+          <option value="Aerobik" data-met="6.3"></option>
+          <option value="Berdiri (kerja ringan)" data-met="1.3"></option>
+          <option value="Duduk (kerja kantor)" data-met="1.1"></option>
+          <option value="Berbelanja (mall)" data-met="2.3"></option>
+          <option value="Bermain dengan anak" data-met="3.0"></option>
+          <option value="Mendaki (hiking)" data-met="6.0"></option>
+          <option value="Menari (salsa)" data-met="4.7"></option>
+          <option value="Menari santai" data-met="5.7"></option>
+          <option value="Menari intensif (Zumba)" data-met="10.0"></option>
+          <option value="Bermain bola basket" data-met="10.3"></option>
+          <option value="Bulu tangkis (intensif)" data-met="7.7"></option>
+          <option value="Bermain futsal" data-met="11.4"></option>
+          <option value="Berjalan sambil membawa beban" data-met="6.3"></option>
+          <option value="Bersepeda statis (gym)" data-met="8.0"></option>
+          <option value="Menari tradisional Jawa" data-met="5.1"></option>
+          <option value="Membelah kayu" data-met="8.6"></option>
+          <option value="Menyusui bayi" data-met="2.9"></option>
+          <option value="Berenang gaya bebas" data-met="10.3"></option>
+          <option value="Lompat tali" data-met="14.3"></option>
+          <option value="Mendaki gunung" data-met="8.0"></option>
+          <option value="Menonton TV" data-met="0.9"></option>
+          <option value="Bermain musik (gitar/piano)" data-met="2.0"></option>
+          <option value="Mencuci mobil" data-met="5.1"></option>
+        </datalist>
+      </div>
+
+      <div class="form-group">
+        <label for="duration">Durasi (menit):</label>
+        <input type="number" id="duration" min="1" value="30">
+      </div>
+
+      <div class="form-group">
+        <label for="weight">Berat Badan (kg):</label>
+        <input type="number" id="weight" min="1" value="70">
+      </div>
+
+      <button id="calculateBtn">Hitung Kalori</button>
+    </section>
+
+    <section id="resultBox" class="card hidden">
+      <div class="logo">
+        <img src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo BMI" class="logo">
+      </div>
+      <h3>Hasil Pembakaran Kalori</h3>
+      <div class="calories-number" id="calorieValue">0 kkal</div>
+      <div class="activity-description" id="activityDetail">Dari aktivitas ...</div>
+
+      <div class="share-buttons">
+        <a href="#" id="shareWA" target="_blank" class="share-button whatsapp">Bagikan ke WhatsApp</a>
+        <a href="#" id="shareTG" target="_blank" class="share-button telegram">Bagikan ke Telegram</a>
+      </div>
+      <button id="resetBtn" class="reset-button">Hitung Ulang</button>
+      <div class="credit">
+        <p>dipersembahkan oleh:</p>
+        <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" target="_blank">Channel WA Gen Zehat</a>
+      </div>
+    </section>
+  </div>
+
+<script>
+// DOM elements
+const formSection = document.getElementById('formSection');
+const resultBox = document.getElementById('resultBox');
+const calculateBtn = document.getElementById('calculateBtn');
+const resetBtn = document.getElementById('resetBtn');
+const activityInput = document.getElementById('activity');
+const durationInput = document.getElementById('duration');
+const weightInput = document.getElementById('weight');
+const calorieValue = document.getElementById('calorieValue');
+const activityDetail = document.getElementById('activityDetail');
+const shareWA = document.getElementById('shareWA');
+const shareTG = document.getElementById('shareTG');
+const activityList = document.getElementById('activityList');
+
+// Event listeners
+calculateBtn.addEventListener('click', calculateCalories);
+resetBtn.addEventListener('click', resetCalculator);
+
+// Input validation
+durationInput.addEventListener('input', validateInput);
+weightInput.addEventListener('input', validateInput);
+activityInput.addEventListener('input', validateActivityInput);
+
+function validateInput(event) {
+  const input = event.target;
+  let value = parseFloat(input.value);
+  
+  if (value < 1) {
+    input.value = 1;
+  }
+  
+  // Remove any non-numeric characters except decimal point
+  input.value = input.value.replace(/[^0-9.]/g, '');
+}
+
+function validateActivityInput() {
+  const value = activityInput.value;
+  const options = Array.from(activityList.options);
+  const match = options.find(option => option.value.toLowerCase() === value.toLowerCase());
+  
+  if (!match && value !== '') {
+    activityInput.classList.add('invalid');
+  } else {
+    activityInput.classList.remove('invalid');
+  }
+}
+
+// Add CSS for invalid input
+const style = document.createElement('style');
+style.textContent = `
+  input.invalid {
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+  }
+`;
+document.head.appendChild(style);
+
+function calculateCalories() {
+  const activityName = activityInput.value;
+  const options = Array.from(activityList.options);
+  const selectedOption = options.find(option => option.value.toLowerCase() === activityName.toLowerCase());
+  
+  if (!selectedOption) {
+    showError("Pilih aktivitas yang valid dari daftar.");
+    return;
+  }
+
+  const MET = parseFloat(selectedOption.getAttribute('data-met'));
+  const duration = parseFloat(durationInput.value);
+  const weight = parseFloat(weightInput.value);
+
+  // Validation
+  if (isNaN(MET) || isNaN(duration) || isNaN(weight) || duration <= 0 || weight <= 0) {
+    showError("Mohon isi semua data dengan benar.");
+    return;
+  }
+
+  // Add loading state
+  calculateBtn.classList.add('loading');
+  calculateBtn.textContent = 'Menghitung...';
+  
+  // Simulate calculation delay for smooth UX
+  setTimeout(() => {
+    const durationHours = duration / 60;
+    const calories = (MET * weight * durationHours).toFixed(1);
+
+    // Update result
+    calorieValue.textContent = `${calories} kkal`;
+    activityDetail.textContent = `Dari aktivitas: ${activityName}, selama ${duration} menit, berat badan ${weight} kg.`;
+
+    // Prepare share message
+    const message = `🔥 Hasil Pembakaran Kalori:\n${calories} kkal\nDari aktivitas: ${activityName}\nDurasi: ${duration} menit\nBerat badan: ${weight} kg\n\n#KalkulatorKalori #KesehatanFitness`;
+
+    const encodedMessage = encodeURIComponent(message);
+    shareWA.href = `https://wa.me/?text=${encodedMessage}`;
+    shareTG.href = `https://t.me/share/url?url=&text=${encodedMessage}`;
+
+    // Show result with animation
+    showResult();
+    
+    // Remove loading state
+    calculateBtn.classList.remove('loading');
+    calculateBtn.textContent = 'Hitung Kalori';
+  }, 800);
+}
+
+function showResult() {
+  // Hide form with fade out
+  formSection.style.opacity = '0';
+  formSection.style.transform = 'translateY(-20px)';
+  
+  setTimeout(() => {
+    formSection.classList.add('hidden');
+    resultBox.classList.remove('hidden');
+    
+    // Show result with fade in
+    resultBox.style.opacity = '0';
+    resultBox.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+      resultBox.style.opacity = '1';
+      resultBox.style.transform = 'translateY(0)';
+    }, 50);
+  }, 300);
+}
+
+function resetCalculator() {
+  // Hide result with fade out
+  resultBox.style.opacity = '0';
+  resultBox.style.transform = 'translateY(20px)';
+  
+  setTimeout(() => {
+    resultBox.classList.add('hidden');
+    formSection.classList.remove('hidden');
+    
+    // Show form with fade in
+    formSection.style.opacity = '0';
+    formSection.style.transform = 'translateY(-20px)';
+    
+    setTimeout(() => {
+      formSection.style.opacity = '1';
+      formSection.style.transform = 'translateY(0)';
+    }, 50);
+    
+    // Reset inputs
+    activityInput.value = '';
+    durationInput.value = '30';
+    weightInput.value = '70';
+    activityInput.classList.remove('invalid');
+  }, 300);
+}
+
+function showError(message) {
+  // Create error notification
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'error-notification';
+  errorDiv.textContent = message;
+  errorDiv.style.cssText = `
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #e74c3c;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    z-index: 1000;
+    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+    animation: slideDown 0.3s ease;
+  `;
+  
+  document.body.appendChild(errorDiv);
+  
+  // Remove error after 3 seconds
+  setTimeout(() => {
+    errorDiv.style.animation = 'slideUp 0.3s ease';
+    setTimeout(() => {
+      document.body.removeChild(errorDiv);
+    }, 300);
+  }, 3000);
+}
+
+// Add CSS animations for error notification
+document.querySelector('style').textContent += `
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px);
+    }
+  }
+`;
+
+// Touch and keyboard accessibility
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    if (!formSection.classList.contains('hidden')) {
+      calculateCalories();
+    }
+  }
+  
+  if (e.key === 'Escape') {
+    if (!resultBox.classList.contains('hidden')) {
+      resetCalculator();
+    }
+  }
+});
+
+// Prevent form submission on Enter
+document.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
+    e.preventDefault();
+  }
+});
+
+// Auto-focus on first input when page loads
+window.addEventListener('load', () => {
+  activityInput.focus();
+});
+
+// Smooth scroll behavior
+document.documentElement.style.scrollBehavior = 'smooth';
+
+// Add haptic feedback for mobile devices
+function addHapticFeedback() {
+  if ('vibrate' in navigator) {
+    navigator.vibrate(50);
+  }
+}
+
+calculateBtn.addEventListener('click', addHapticFeedback);
+resetBtn.addEventListener('click', addHapticFeedback);
+
+// Service Worker registration for PWA capabilities (optional)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log('SW registered: ', registration);
+      })
+      .catch((registrationError) => {
+        console.log('SW registration failed: ', registrationError);
+      });
+  });
+}
+</script>
+</body>
+</html>
