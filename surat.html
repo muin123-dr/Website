@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Ayah kepada Anak Gadisnya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .greeting {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+        }
+
+        .greeting p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .greeting p:last-child {
+            margin-bottom: 0;
+            font-style: italic;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .main-text {
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .main-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .highlight-box strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .highlight-box p {
+            color: #856404;
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box p {
+            color: #721c24;
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .list-section {
+            margin: 25px 0;
+        }
+
+        .list-section p {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .list-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+            border-radius: 6px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .list-item::before {
+            content: "▪ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            color: #999;
+            font-size: 20px;
+        }
+
+        .key-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .closing {
+            margin-top: 40px;
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .closing p {
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .closing p:first-child {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 16px;
+        }
+
+        .closing p:last-child {
+            font-style: italic;
+            color: #999;
+            margin-bottom: 0;
+        }
+
+        .signature {
+            margin-top: 20px;
+            font-weight: 600;
+            color: #764ba2;
+            font-size: 16px;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 20px;
+            background: #f0f0f0;
+            font-size: 13px;
+            color: #999;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 10px;
+                margin: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .main-text p {
+                font-size: 15px;
+            }
+
+            .list-item {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .key-message {
+                font-size: 15px;
+                padding: 20px;
+            }
+
+            .closing {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 25px 15px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .main-text p {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            .greeting {
+                padding: 15px;
+            }
+
+            .list-item {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            .key-message {
+                font-size: 14px;
+                padding: 15px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💌 Surat Ayah kepada Anak Gadisnya</h1>
+            <p>Nasihat saat mengenal Smartphone</p>
+        </div>
+
+        <div class="content">
+            <div class="greeting">
+                <p>Anakku,</p>
+                <p>Semoga Allah selalu memberikan perlindungannya untukmu.</p>
+            </div>
+
+            <div class="main-text">
+                <p>Saat waktu tiba, dimana engkau menempuh kuliah, dan mau tidak mau smartphone dan laptop menjadi satu kemestian, sejatinya hatiku sangat kawatir saat 2 hal itu ada dalam genggamanmu.</p>
+
+                <p>Bukannya aku tidak percaya padamu, tapi karena 2 hal itu merupakan pintu masuk syaiton yang sangat menarik, jarang disadari dan sedikit orang yang Allah selamatkan darinya.</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Pintu masuk yang paling sering terjadi adalah media sosial.</strong>
+                <p>Pintu masuk syaiton dari media sosial itu sangat bervariasi.</p>
+            </div>
+
+            <div class="main-text">
+                <p><strong>Tapi satu hal yang perlu aku sampaikan, syaiton itu masuk bisa berupa:</strong></p>
+            </div>
+
+            <div class="list-section">
+                <div class="list-item">
+                    Seorang ustadz yang tampak alim dan penuh nasehat, bersedia menerima curhatan seorang akhwat, hingga kaupun curhat lewat medsos dengannya
+                </div>
+
+                <div class="list-item">
+                    Atau seorang kaya yang tampak Zuhud, penuh kesederhanaan yang seolah mau menerima mu, mau mendengar curhat mu, memberikan solusi masalahmu, dll
+                </div>
+
+                <div class="list-item">
+                    Atau seorang yang tampak miskin, penuh kesusahan, hingga seolah mendekat kepada Allah, meminta pertolongan Allah. Dia mengungkapkan bahwa dirimu adalah sosok yang mampu membahagiakannya. Dia bilang kau adalah wanita yang tidak materialistis, kau wanita yang Zuhud. Kaulah wanita yang mampu menjadi pelipur lara bagi hati yang malang nasibnya.
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <p>⚠️ Ketahui putriku, semua itu adalah tipu daya syaiton.</p>
+                <p style="margin-top: 10px;">Jangan kau buka celah sedikitpun padanya, siapapun dia.</p>
+            </div>
+
+            <div class="main-text">
+                <p><strong>⏩ Seorang muslim sejati tidak akan berani menghubungi seorang wanita yang tidak halal baginya.</strong></p>
+
+                <p><strong>⏩ Seorang muslim sejati, sangat takut jika melanggar syari'at bahwa berduaan (walau didunia Maya) adalah terlarang. Apalagi curhat kesana kemari.</strong></p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Ketahuilah bahwa mereka itu orang-orang yang terpedaya oleh syaiton atau bahkan dia memang syaitonnya.</strong>
+            </div>
+
+            <div class="key-message">
+                Jangan kau berikan hatimu walau hanya setitik.
+            </div>
+
+            <div class="main-text">
+                <p>Bersihkanlah hatimu dari semua lelaki. Karena hanya dengan itulah <strong>kau akan mudah bahagia</strong>. Kau akan mudah memberikan cintamu pada suamimu yang Allah persiapkan untukmu kelak. Karena hatimu bersih, tak pernah kau tambatkan kepada lelaki lain.</p>
+
+                <p>Inilah nasehat yang bisa kuberikan, itupun jika kau masih percaya ayahmu ini. Namun jika engkau lebih percaya kepada laki-laki lain yang tidak pernah membesarkanmu, ketahui putriku, berarti engkau berada di tepi jurang yang sangat dalam.</p>
+
+                <p>Akhirnya ayah harus menghapus air mata ini, untuk mengakhiri nasehat untukmu, teriring doa semoga Allah selalu melindungimu.</p>
+            </div>
+
+            <div class="divider">✦ ✦ ✦</div>
+
+            <div class="closing">
+                <p>Dari ayahmu yang selalu mengkhawatirkanmu dan sangat menginginkan kebahagiaanmu.</p>
+                <p class="signature">Baarokalloohu fiinaa</p>
+                <p>💌</p>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <p>Surat ini dibuat dengan penuh kasih sayang dan nasehat tulus dari seorang ayah untuk anaknya.</p>
+        </div>
+    </div>
+</body>
+</html>
