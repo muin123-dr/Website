@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Makanan Sehat & Bergizi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --secondary: #2196F3;
+      --accent: #FF9800;
+      --light: #f8fdf8;
+      --dark: #1a3d1a;
+      --gray: #f0f0f0;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+      color: var(--dark);
+      line-height: 1.7;
+      padding: 20px 15px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), #66bb6a);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+    #logo {
+            width: 100px;
+            margin: 20px auto;
+        }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .intro {
+      padding: 25px;
+      background: var(--light);
+      text-align: center;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .accordion {
+      margin: 20px;
+    }
+
+    .accordion-item {
+      margin-bottom: 12px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: var(--transition);
+    }
+
+    .accordion-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .accordion-header {
+      background: var(--primary);
+      color: white;
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: var(--transition);
+    }
+
+    .accordion-header.active {
+      background: var(--secondary);
+    }
+
+    .accordion-header i {
+      transition: transform 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .accordion-header.active i {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      background: #fff;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .accordion-body.active {
+      padding: 20px;
+      max-height: 500px;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .highlight {
+      background: #e8f5e8;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+      font-size: 0.95rem;
+      color: #2e7d32;
+      font-weight: 500;
+    }
+
+    .tips {
+      margin-top: 20px;
+      padding: 20px;
+      background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #5d4037;
+    }
+
+    .tips i {
+      color: var(--accent);
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+      color: #666;
+      background: #f9f9f9;
+    }
+    
+    .btn-whatsapp:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
+    }
+
+    .btn-whatsapp i {
+        font-size: 1.4rem;
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.5rem; }
+      .accordion-header { font-size: 1rem; padding: 14px 16px; }
+      .accordion-body { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+     
+    <!-- Header -->
+    <header>
+      <img id="logo" src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo">
+      <h1><i class="fas fa-heartbeat"></i> Makanan yang Dianjurkan</h1>
+      <p>Makanan Sehat untuk Tubuh Prima & Energi Sepanjang Hari</p>
+    </header>
+
+    <!-- Intro -->
+    <div class="intro">
+      Guna menjaga kondisi tubuh yang prima serta menghindari berbagai permasalahan kesehatan, asupan makanan yang dikonsumsi merupakan investasi penting untuk jangka panjang. Pilihlah makanan yang <strong>segar, kaya nutrisi, dan berwarna cerah</strong>.
+    </div>
+
+    <!-- Accordion -->
+    <div class="accordion">
+      <!-- Item 1 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span><i class="fas fa-apple-alt"></i> Buah & Sayuran</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-body">
+          <div class="content">
+            <p>Kelompok makanan ini berperan sebagai <strong>perawatan kesehatan dari dalam tubuh</strong>. Bayam, brokoli, wortel, apel, jeruk, beri – utamakan yang berpigmen warna cerah.</p>
+            <div class="highlight">
+              <i class="fas fa-check-circle"></i> Konsumsi <strong>minimal 5 porsi sehari</strong> untuk sistem kekebalan optimal.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span><i class="fas fa-drumstick-bite"></i> Protein Berkualitas</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-body">
+          <div class="content">
+            <p>Ayam tanpa kulit, ikan (<strong>salmon, tuna</strong> → kaya omega-3), telur, tahu, tempe, kacang-kacangan, biji-bijian.</p>
+            <div class="highlight">
+              <i class="fas fa-tools"></i> Krusial untuk <strong>perbaikan jaringan tubuh</strong> dan mencegah kelemahan.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span><i class="fas fa-seedling"></i> Karbohidrat Kompleks</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-body">
+          <div class="content">
+            <p>Nasi merah, quinoa, oatmeal, ubi, kentang.</p>
+            <div class="highlight">
+              <i class="fas fa-bolt"></i> Memberikan <strong>energi berkelanjutan</strong> + serat untuk pencernaan lancar.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span><i class="fas fa-heart"></i> Lemak Sehat</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-body">
+          <div class="content">
+            <p>Alpukat, minyak zaitun, almon, biji chia, ikan berlemak.</p>
+            <div class="highlight">
+              <i class="fas fa-brain"></i> Mendukung <strong>jantung & fungsi otak</strong> tetap optimal.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span><i class="fas fa-tint"></i> Air Putih</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-body">
+          <div class="content">
+            <p><strong>Minimal 8 gelas sehari</strong>. Hindari minuman manis & alkohol berlebih.</p>
+            <div class="highlight">
+              <i class="fas fa-shield-alt"></i> Mencegah <strong>dehidrasi</strong> & mendukung semua fungsi tubuh.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span><i class="fas fa-cheese"></i> Susu & Alternatifnya</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="accordion-body">
+          <div class="content">
+            <p>Susu rendah lemak, yoghurt, susu kedelai/almond (diperkaya kalsium + vitamin D).</p>
+            <div class="highlight">
+              <i class="fas fa-bone"></i> Menjaga <strong>kekuatan tulang</strong> sepanjang usia.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips">
+      <i class="fas fa-lightbulb"></i>
+      <p><strong>Tips:</strong> Pilih makanan yang <u>bersih, segar, bebas pengawet & bahan kimia</u>. Kesehatan dimulai dari piring Anda!</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u/199" target="_blank" class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Lebih Detail di WA
+      </a>
+      <p>&copy; 2025 <i class="fas fa-leaf"></i> Gen Zehat</p>
+      <p>Dibuat dengan ❤️ untuk tubuh prima</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleAccordion(element) {
+      const body = element.nextElementSibling;
+      const icon = element.querySelector('i:last-child');
+      const isActive = body.classList.contains('active');
+
+      // Tutup semua
+      document.querySelectorAll('.accordion-body').forEach(b => {
+        b.classList.remove('active');
+      });
+      document.querySelectorAll('.accordion-header').forEach(h => {
+        h.classList.remove('active');
+        h.querySelector('i:last-child').style.transform = 'rotate(0deg)';
+      });
+
+      // Buka yang diklik (jika belum aktif)
+      if (!isActive) {
+        body.classList.add('active');
+        element.classList.add('active');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+  </script>
+
+</body>
+</html>
