@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makanan yang Perlu Diwaspadai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 30px 0;
+            animation: fadeInDown 0.8s ease;
+        }
+	
+	#logo {
+            text-align: center;
+            width: 100px;
+            margin: 20px auto;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        h1 {
+            color: #764ba2;
+            font-size: 28px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .food-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .food-card:hover::before {
+            left: 100%;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .food-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .food-icon {
+            font-size: 35px;
+            margin-right: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        .food-title {
+            color: #764ba2;
+            font-size: 20px;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .expand-icon {
+            font-size: 24px;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .food-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .food-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .food-card.expanded .food-content {
+            max-height: 500px;
+        }
+
+        .example {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .example strong {
+            color: #667eea;
+        }
+
+        .danger {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .danger strong {
+            color: #ff6b6b;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .warning-box h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 5px 20px rgba(102,126,234,0.4);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.6);
+        }
+
+        .cta-container {
+            text-align: center;
+            margin-top: 40px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .food-title {
+                font-size: 18px;
+            }
+
+            .header, .food-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+          <div class="header">
+	    
+            <h1>Makanan Kekinian yang Mengintai Kesehatan Remaja</h1>
+            <div class="intro">
+                <p><strong>⚠️ Pengenalan dan Bahayanya!</strong></p>
+                <p>Pada era modern ini, popularitas makanan di media sosial sering kali menarik minat besar di kalangan remaja. Namun, penting untuk tidak terkecoh oleh tampilan estetisnya! Banyak di antara makanan tersebut yang memiliki kandungan gizi yang kurang baik, seperti kadar gula berlebihan, lemak trans yang berbahaya, Monosodium Glutamat (MSG), pewarna buatan, atau bahan kimia yang dapat merugikan kesehatan tubuh.</p>
+            </div>
+        </div>
+
+        <div class="food-card" onclick="toggleCard(this)">
+            <div class="food-header">
+                <span class="food-icon">🧋</span>
+                <span class="food-title">Minuman Manis dengan Kadar Gula Sangat Tinggi</span>
+                <span class="expand-icon">▼</span>
+            </div>
+            <div class="food-content">
+                <div class="example">
+                    <strong>Contoh:</strong> Minuman boba, es kepal Milo dengan kandungan gula berlebihan, minuman soda dengan tambahan sirup, jus dalam kemasan karton.
+                </div>
+                <div class="danger">
+                    <strong>⚠️ Bahaya:</strong> Kandungan gula yang sangat tinggi (30-50 gram per gelas!) dapat menyebabkan kenaikan berat badan, meningkatkan risiko diabetes tipe 2, dan merusak kesehatan gigi.
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card" onclick="toggleCard(this)">
+            <div class="food-header">
+                <span class="food-icon">🌶️</span>
+                <span class="food-title">Makanan dengan Tingkat Kepedasan Ekstrem</span>
+                <span class="expand-icon">▼</span>
+            </div>
+            <div class="food-content">
+                <div class="example">
+                    <strong>Contoh:</strong> Keripik dengan tingkat kepedasan yang sangat tinggi, mi instan dengan level kepedasan maksimal, makanan ringan berwarna merah menyala.
+                </div>
+                <div class="danger">
+                    <strong>⚠️ Bahaya:</strong> Dapat menyebabkan iritasi pada lambung, peradangan lambung akut (gastritis), dan gangguan pencernaan.
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card" onclick="toggleCard(this)">
+            <div class="food-header">
+                <span class="food-icon">🍗</span>
+                <span class="food-title">Makanan dengan Kandungan Lemak Trans</span>
+                <span class="expand-icon">▼</span>
+            </div>
+            <div class="food-content">
+                <div class="example">
+                    <strong>Contoh:</strong> Ayam goreng tepung dengan lapisan yang sangat renyah, kentang goreng dengan tambahan keju berlebihan, margarin sebagai olesan roti, kue kering dengan rasa manis buatan.
+                </div>
+                <div class="danger">
+                    <strong>⚠️ Bahaya:</strong> Meningkatkan kadar kolesterol jahat (LDL), berpotensi menyumbat pembuluh darah, dan meningkatkan risiko penyakit jantung.
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card" onclick="toggleCard(this)">
+            <div class="food-header">
+                <span class="food-icon">🍿</span>
+                <span class="food-title">Camilan dengan Kandungan MSG & Bahan Pengawet Tinggi</span>
+                <span class="expand-icon">▼</span>
+            </div>
+            <div class="food-content">
+                <div class="example">
+                    <strong>Contoh:</strong> Keripik dengan berbagai varian rasa buatan (seperti merek Chiki), mie instan sebagai pilihan makanan praktis, sosis dan nugget yang memiliki masa simpan yang lama.
+                </div>
+                <div class="danger">
+                    <strong>⚠️ Bahaya:</strong> Dapat menyebabkan sakit kepala, menimbulkan ketergantungan pada rasa buatan, dan diduga memiliki dampak negatif pada sistem saraf.
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card" onclick="toggleCard(this)">
+            <div class="food-header">
+                <span class="food-icon">🍭</span>
+                <span class="food-title">Makanan Viral dengan Kandungan Bahan Kimia</span>
+                <span class="expand-icon">▼</span>
+            </div>
+            <div class="food-content">
+                <div class="example">
+                    <strong>Contoh:</strong> Coklat cair dengan warna-warni mencolok, es krim nitrogen yang menghasilkan asap, jajanan berbentuk slime dengan tambahan glitter.
+                </div>
+                <div class="danger">
+                    <strong>⚠️ Bahaya:</strong> Berpotensi menyebabkan keracunan logam berat (dari pewarna tekstil!) atau bahkan luka bakar di dalam mulut (akibat penggunaan nitrogen cair).
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card" onclick="toggleCard(this)">
+            <div class="food-header">
+                <span class="food-icon">🍔</span>
+                <span class="food-title">Makanan Cepat Saji yang Dimodifikasi</span>
+                <span class="expand-icon">▼</span>
+            </div>
+            <div class="food-content">
+                <div class="example">
+                    <strong>Contoh:</strong> Burger dengan lapisan keju yang sangat tebal dan ukuran porsi yang besar, gorengan yang dimasak dengan minyak yang sudah menghitam.
+                </div>
+                <div class="danger">
+                    <strong>⚠️ Bahaya:</strong> Kandungan kalori dapat mencapai 800-1200 per porsi! Penumpukan lemak jahat yang berlebihan dalam tubuh.
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card" onclick="toggleCard(this)">
+            <div class="food-header">
+                <span class="food-icon">🍜</span>
+                <span class="food-title">Makanan Instan dengan Kandungan Garam Berlebihan</span>
+                <span class="expand-icon">▼</span>
+            </div>
+            <div class="food-content">
+                <div class="example">
+                    <strong>Contoh:</strong> Mi instan dengan berbagai varian rasa yang unik (namun juga memiliki kadar garam yang tinggi), makanan kaleng dengan masa simpan yang sangat lama, ikan asin yang menyebabkan rasa haus berlebihan.
+                </div>
+                <div class="danger">
+                    <strong>⚠️ Bahaya:</strong> Meningkatkan risiko tekanan darah tinggi, membebani fungsi ginjal, dan menyebabkan retensi cairan dalam tubuh.
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h3>🚫 PERINGATAN KHUSUS 🚫</h3>
+            <p><strong>Hindari Rokok dan Alkohol</strong></p>
+            <p>Sangat berbahaya bagi kesehatan remaja dan dapat menyebabkan kerusakan permanen pada tubuh!</p>
+        </div>
+
+        <div class="cta-container">
+            <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" class="cta-button" onclick="alert('Tetap jaga kesehatan! Boleh mencoba makanan kekinian, tapi sesekali saja (sepekan sekali). Pilih makanan bergizi untuk masa depan yang lebih baik. 💪'); return false;">CATAT & INGAT!</a>
+            <p></p>
+            <img id="logo" src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo" text-align: center;>
+        </div>
+    </div>
+
+    <script>
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+
+        // Add staggered animation on load
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.food-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>
