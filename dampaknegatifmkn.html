@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dampak Negatif Makanan Tidak Sehat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 50%, #c44569 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.6s ease-out;
+        }
+	
+	#logo {
+            width: 100px;
+            margin: 20px auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #c44569 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(196, 69, 105, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(196, 69, 105, 0.4);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(196, 69, 105, 0.6);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            color: #c44569;
+            margin: 15px 0 10px;
+            line-height: 1.3;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #ff6b6b 0%, #c44569 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(196, 69, 105, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .section-title:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(196, 69, 105, 0.4);
+        }
+
+        .card {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+            border-left: 5px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.2);
+            border-left-width: 8px;
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #c44569;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-number {
+            background: #ff6b6b;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+
+        .card-content {
+            color: #555;
+            line-height: 1.7;
+            margin-left: 40px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd93d 0%, #fcbf49 100%);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .data-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin: 10px 0;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .data-box:hover {
+            transform: scale(1.02);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 3px solid #fa709a;
+            animation: warningPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(250, 112, 154, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(250, 112, 154, 0.6);
+            }
+        }
+
+        .warning-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #c44569;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .warning-item {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 10px 0;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 3px solid #ffe5e5;
+        }
+
+        .footer-text {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            animation: buttonFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes buttonFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff6b6b, transparent);
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+                font-size: 3.5em;
+            }
+
+            .section-title {
+                font-size: 1.1em;
+                padding: 12px 15px;
+            }
+
+            .card-title {
+                font-size: 1.1em;
+            }
+
+            .card-content {
+                font-size: 0.95em;
+                margin-left: 35px;
+            }
+
+            .cta-button {
+                font-size: 1.1em;
+                padding: 12px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+	<img id="logo" src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo">
+            
+        </div>
+
+        <div class="header">
+            <h1>Dampak Negatif Makanan Nggak Sehat</h1>
+            <div class="subtitle">Jangka Pendek & Jangka Panjang!</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🏥 a. Dampak Negatif pada Kondisi Fisik</div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">1</div>
+                    <span>Obesitas</span>
+                </div>
+                <div class="card-content">
+                    Kebanyakan makan gula & lemak bisa bikin berat badan naik drastis.
+                    <div class="data-box">
+                        📊 Data BPOM 2022: 25% remaja di kota udah masuk kategori obesitas.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">2</div>
+                    <span>Gangguan Pencernaan</span>
+                </div>
+                <div class="card-content">
+                    Makanan super pedas bikin perut protes.
+                    <div class="data-box">
+                        📊 60% remaja ngaku sering sakit perut abis makan pedas ekstrem.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">3</div>
+                    <span>Kerusakan Organ Dalam</span>
+                </div>
+                <div class="card-content">
+                    Pewarna sintetik kayak <span class="highlight">Rhodamin B</span> bisa ganggu fungsi hati & ginjal. Kelihatan keren sih warnanya, tapi bahaya banget buat tubuh.
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+            <div class="section-title">🧠 b. Dampak Negatif pada Otak & Kesehatan Mental</div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">1</div>
+                    <span>Hiperaktivitas + Susah Fokus</span>
+                </div>
+                <div class="card-content">
+                    Kandungan MSG & pewarna buatan bisa bikin otak "overthinking mode on".
+                    <div class="data-box">
+                        📊 Penelitian The Lancet 2023 nunjukkin kaitan bahan-bahan ini dengan gangguan fokus.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">2</div>
+                    <span>Mood Swing + Risiko Cemas</span>
+                </div>
+                <div class="card-content">
+                    Nutrisi nggak seimbang bikin suasana hati naik turun kayak roller coaster. Kalau kebiasaan makan nggak bener diterusin, risiko munculnya kecemasan makin tinggi.
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+            <div class="section-title">💔 c. Risiko Penyakit Kronis Sejak Muda</div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">1</div>
+                    <span>Diabetes Tipe 2</span>
+                </div>
+                <div class="card-content">
+                    Kasus di usia 12–18 tahun naik <span class="highlight">30%</span> dalam 10 tahun terakhir. Banyak dipicu asupan gula berlebih dan gaya hidup yang kurang sehat.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">2</div>
+                    <span>Kolesterol Tinggi</span>
+                </div>
+                <div class="card-content">
+                    <span class="highlight">15% siswa SMA</span> punya kolesterol tinggi. Penyebabnya? Kebiasaan makan lemak trans dari fast food & gorengan.
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+            <div class="section-title">🚬 d. Bahaya Rokok (Data Berbagai Penelitian)</div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">1</div>
+                    <span>Penyakit Jantung & Pembuluh Darah</span>
+                </div>
+                <div class="card-content">
+                    Rokok merusak dinding pembuluh darah, bikin tekanan darah naik, dan risiko stroke makin besar.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">2</div>
+                    <span>Kanker</span>
+                </div>
+                <div class="card-content">
+                    Asap rokok penuh zat karsinogen. Risiko tertinggi: kanker paru, tapi juga bisa kena kanker mulut, tenggorokan, pankreas, ginjal, dan lainnya.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">3</div>
+                    <span>Penyakit Paru-Paru</span>
+                </div>
+                <div class="card-content">
+                    Bisa menyebabkan bronkitis kronis, emfisema, sampai PPOK yang bikin napas berat tiap hari.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">4</div>
+                    <span>Sistem Imun Lemah</span>
+                </div>
+                <div class="card-content">
+                    Studi <span class="highlight">Journal of Physiology and Pharmacology</span>: rokok bikin imun melemah, terutama di saluran napas.
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+            <div class="section-title">🍺 e. Bahaya Alkohol</div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">1</div>
+                    <span>Kerusakan Hati</span>
+                </div>
+                <div class="card-content">
+                    Konsumsi berlebihan bisa bikin radang, kerusakan hati, sampai sirosis dan kanker hati.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">2</div>
+                    <span>Gangguan Saraf Pusat</span>
+                </div>
+                <div class="card-content">
+                    Alkohol ganggu koordinasi, bikin bingung, bahkan merusak sel saraf. Risiko stroke & gangguan kognitif meningkat.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">3</div>
+                    <span>Kerusakan Pankreas</span>
+                </div>
+                <div class="card-content">
+                    Alkohol kronis bisa memicu pankreatitis: radang pankreas yang sakitnya luar biasa.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-number">4</div>
+                    <span>Penyakit Jantung</span>
+                </div>
+                <div class="card-content">
+                    Alkohol bisa melemahkan otot jantung, bikin aritmia, hipertensi, dan gagal jantung.
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <div class="warning-title">⚠️ Data Tambahan Penting ⚠️</div>
+            <div class="warning-item">
+                🌍 <strong>WHO:</strong> Rokok menyebabkan >8 juta kematian per tahun.
+            </div>
+            <div class="warning-item">
+                💀 Rokok + alkohol = risiko hipertensi makin tinggi.
+            </div>
+            <div class="warning-item">
+                📊 <strong>BPOM 2022:</strong> Obesitas remaja 25%, salah satunya terkait konsumsi gula/lemak, makanan nggak sehat, dan gaya hidup yang sering dipengaruhi rokok & alkohol.
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-text">
+                <strong>Dipersembahkan oleh:</strong>
+            </div>
+            <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" class="cta-button" target="_blank">
+                Gen Zehat
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Menambahkan interaksi klik pada card untuk efek visual
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Efek parallax sederhana pada scroll
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const logo = document.querySelector('.logo');
+            if (logo) {
+                logo.style.transform = `rotate(${scrolled * 0.1}deg)`;
+            }
+        });
+    </script>
+</body>
+</html>
