@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pola Makan yang Sehat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            padding: 40px 35px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .logo {
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5em;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(132, 250, 176, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(132, 250, 176, 0.5);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 15px 40px rgba(132, 250, 176, 0.7);
+                transform: scale(1.05);
+            }
+        }
+        
+	#logo {
+            width: 100px;
+            margin: 20px auto;
+	}
+
+        .logo::after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            font-size: 0.4em;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: rotate(180deg) scale(1.2);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+            line-height: 1.3;
+            font-weight: bold;
+        }
+
+        .header .intro {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            animation: slideUp 0.6s ease-out backwards;
+        }
+
+        .section:nth-child(odd) { animation-delay: 0.1s; }
+        .section:nth-child(even) { animation-delay: 0.2s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 18px 25px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(17, 153, 142, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+        }
+
+        .section-number {
+            background: rgba(255, 255, 255, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .section-content {
+            padding: 0 10px;
+        }
+
+        .subsection {
+            background: linear-gradient(135deg, #e0f7fa 0%, #e8f5e9 100%);
+            border-left: 5px solid #11998e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .subsection:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(17, 153, 142, 0.15);
+            border-left-width: 8px;
+        }
+
+        .subsection-title {
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #11998e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subsection-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1em;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd93d 0%, #fcbf49 100%);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #333;
+            display: inline-block;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 25px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-weight: 500;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            line-height: 1.7;
+        }
+
+        .tip-box strong {
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 35px 0;
+            border: 4px solid #fa709a;
+            animation: warningPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% {
+                box-shadow: 0 0 25px rgba(250, 112, 154, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(250, 112, 154, 0.6);
+            }
+        }
+
+        .conclusion-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #c44569;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .conclusion-content {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            color: #333;
+            line-height: 1.9;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+
+        .emphasis {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #11998e, transparent);
+            margin: 35px 0;
+            border-radius: 2px;
+        }
+
+        .shine {
+            text-align: center;
+            font-size: 2em;
+            margin: 30px 0;
+            animation: shine 2s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 45px;
+            padding-top: 35px;
+            border-top: 3px solid #e0f7fa;
+        }
+
+        .footer-text {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(17, 153, 142, 0.4);
+            transition: all 0.3s ease;
+            animation: buttonFloat 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes buttonFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(17, 153, 142, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .icon {
+            display: inline-block;
+            font-size: 1.3em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .logo {
+                width: 110px;
+                height: 110px;
+                font-size: 3.8em;
+            }
+
+            .section-header {
+                font-size: 1.1em;
+                padding: 15px 20px;
+            }
+
+            .subsection-title {
+                font-size: 1.05em;
+            }
+
+            .subsection-content {
+                font-size: 0.95em;
+            }
+
+            .cta-button {
+                font-size: 1.15em;
+                padding: 15px 35px;
+            }
+
+            .conclusion-title {
+                font-size: 1.3em;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+	    <img id="logo" src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo">
+            <div class="logo">🍽️</div>
+        </div>
+
+        <div class="header">
+	
+            <h1>Pola Makan yang SEHAT</h1>
+            <div class="intro">
+                Makan bukan hanya sekadar mengisi perut, tetapi juga cara penting untuk menjaga energi, kesehatan, dan kondisi tubuh yang optimal. Dengan menerapkan pola makan yang tepat, Anda dapat menjalani hari dengan lebih bersemangat. Berikut panduan lengkapnya:
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <span>JADWAL MAKAN TERATUR DAN BERENERGI</span>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">☀️</span>
+                        <span>Sarapan Itu Wajib dan Bergizi</span>
+                    </div>
+                    <div class="subsection-content">
+                        Jangan pernah melewatkan sarapan! Ini seperti "bahan bakar" pertama setelah Anda beristirahat di malam hari. Pilihlah menu yang kaya nutrisi, contohnya <span class="highlight">oatmeal dengan buah dan kacang</span>, telur, atau roti gandum dengan alpukat.
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🕐</span>
+                        <span>Makan Siang dan Malam Jangan Dilewatkan</span>
+                    </div>
+                    <div class="subsection-content">
+                        Usahakan untuk makan siang dan malam pada waktu yang teratur. Ini membantu menjaga metabolisme tubuh tetap stabil dan mencegah Anda makan berlebihan di waktu lain. Idealnya, berikan jeda <span class="highlight">2-3 jam</span> antara makan malam dan waktu tidur.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <span>PORSI YANG SESUAI DAN NUTRISI YANG LENGKAP</span>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🤲</span>
+                        <span>Kenali Ukuran Perut Anda</span>
+                    </div>
+                    <div class="subsection-content">
+                        Makanlah ketika Anda merasa lapar dan berhentilah saat perut terasa cukup kenyang. Hindari memaksakan diri untuk menghabiskan semua makanan.
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🍽️</span>
+                        <span>Prinsip "Piring Sehat"</span>
+                    </div>
+                    <div class="subsection-content">
+                        Bayangkan piring makan Anda dibagi menjadi tiga bagian utama: <span class="highlight">½ bagian untuk sayur dan buah</span> (pilihlah yang berwarna-warni), <span class="highlight">¼ bagian untuk protein</span> tanpa lemak (ayam tanpa kulit, ikan, tahu, tempe), dan <span class="highlight">¼ bagian untuk karbohidrat kompleks</span> (nasi merah, quinoa, ubi).
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🌈</span>
+                        <span>Variasi Menu Itu Penting</span>
+                    </div>
+                    <div class="subsection-content">
+                        Jangan hanya makan menu yang sama setiap hari. Semakin beragam makanan yang Anda konsumsi, semakin lengkap pula nutrisi yang masuk ke tubuh Anda.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <span>MAKAN DENGAN KESADARAN</span>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🍴</span>
+                        <span>Kunyah Perlahan</span>
+                    </div>
+                    <div class="subsection-content">
+                        Kunyahlah makanan hingga halus (sekitar <span class="highlight">10-15 kali setiap suapan</span>). Ini membantu pencernaan dan memberikan waktu bagi otak untuk menerima sinyal kenyang.
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🧘</span>
+                        <span>Fokus Saat Makan</span>
+                    </div>
+                    <div class="subsection-content">
+                        Hindari melakukan aktivitas lain seperti menggunakan gadget, menonton televisi, atau bekerja saat makan. Dengan fokus, Anda akan lebih mudah merasakan rasa makanan dan mengenali rasa kenyang.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <span>MEMASAK SENDIRI LEBIH SEHAT DAN MENGUNTUNGKAN</span>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">👨‍🍳</span>
+                        <span>Kontrol Bahan Makanan</span>
+                    </div>
+                    <div class="subsection-content">
+                        Memasak di rumah memungkinkan Anda memilih bahan-bahan yang lebih segar dan sehat, serta mengontrol jumlah garam, gula, dan minyak yang digunakan.
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🔥</span>
+                        <span>Pilih Cara Memasak yang Tepat</span>
+                    </div>
+                    <div class="subsection-content">
+                        Utamakan cara memasak seperti <span class="highlight">merebus, mengukus, memanggang, atau menumis</span> dengan sedikit minyak daripada menggoreng.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <span>HINDARI KEBIASAAN BURUK SEPUTAR MAKAN</span>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🌙</span>
+                        <span>Jangan Makan Terlalu Banyak Sebelum Tidur</span>
+                    </div>
+                    <div class="subsection-content">
+                        Berikan jeda minimal <span class="highlight">2-3 jam</span> antara makan malam dan waktu tidur untuk mencegah gangguan pencernaan dan tidur yang tidak nyenyak.
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🥜</span>
+                        <span>Pilih Camilan yang Sehat</span>
+                    </div>
+                    <div class="subsection-content">
+                        Hindari mengonsumsi camilan yang tidak sehat saat Anda merasa bosan. Pilihlah camilan sehat seperti buah, kacang-kacangan, atau yoghurt.
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="subsection-title">
+                        <span class="icon">🛋️</span>
+                        <span>Jangan Langsung Tidur Setelah Makan</span>
+                    </div>
+                    <div class="subsection-content">
+                        Berikan waktu minimal satu jam setelah makan sebelum Anda berbaring atau tidur untuk menghindari naiknya asam lambung.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <span>URUTAN MAKAN YANG BAIK UNTUK PENCERNAAN</span>
+            </div>
+            <div class="section-content">
+                <div class="tip-box">
+                    Mulailah makan dengan makanan yang lebih mudah dicerna, seperti <strong>buah-buahan</strong>, diikuti <strong>sayuran dan protein</strong>, dan terakhir <strong>karbohidrat kompleks</strong>. Ini dapat membantu menjaga kadar gula darah lebih stabil dan melancarkan pencernaan.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">7</div>
+                <span>KENALI SINYAL TUBUH ANDA</span>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-content">
+                        • Makanlah ketika Anda benar-benar merasa lapar, bukan karena emosi atau pengaruh lingkungan sekitar.<br><br>
+                        • Berhentilah makan saat Anda merasa cukup kenyang, jangan memaksakan diri untuk menghabiskan semua makanan.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">8</div>
+                <span>POLA PIKIR YANG SEHAT TENTANG MAKAN</span>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-content">
+                        • Jangan hanya makan karena "yang penting kenyang" atau "yang penting rasanya enak". Pikirkan nilai gizi dan dampaknya bagi kesehatan Anda.<br><br>
+                        • Hindari makan berlebihan hanya karena ada kesempatan (misalnya, saat ditraktir).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">9</div>
+                <span>KONSUMSI AIR YANG CUKUP</span>
+            </div>
+            <div class="section-content">
+                <div class="tip-box">
+                    Jangan lupakan pentingnya minum air putih minimal <strong>8 gelas setiap hari</strong>. Batasi konsumsi minuman manis dan bersoda.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">10</div>
+                <span>AKTIVITAS FISIK SETELAH MAKAN</span>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <div class="subsection-content">
+                        Hindari langsung berbaring setelah makan. Cobalah <span class="highlight">berjalan santai selama 10-15 menit</span> untuk membantu proses pencernaan.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="conclusion-box">
+            <div class="conclusion-title">💡 KESIMPULAN 💡</div>
+            <div class="conclusion-content">
+                Pola makan yang sehat bukan berarti makan dengan aturan yang rumit, melainkan tentang makan dengan kesadaran, memilih makanan yang bergizi, dan membangun kebiasaan baik yang berkelanjutan.
+            </div>
+            <div class="conclusion-content">
+                Dengan disiplin, pengetahuan, dan sedikit kreativitas dalam memilih menu, Anda dapat memperoleh energi yang optimal, nutrisi yang lengkap, dan tubuh yang lebih sehat.
+            </div>
+            <div class="emphasis">
+                Ingatlah bahwa konsistensi adalah kunci utama! 🔑
+            </div>
+        </div>
+
+        <div class="shine">🔅🔅🔅</div>
+
+        <div class="footer">
+            <div class="footer-text">
+                <strong>Dipersembahkan oleh:</strong>
+            </div>
+            <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" class="cta-button" target="_blank">
+                Gen Zehat
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Interaksi hover pada subsection
+        const subsections = document.querySelectorAll('.subsection');
+        subsections.forEach(subsection => {
+            subsection.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Interaksi pada section header
+        const sectionHeaders = document.querySelectorAll('.section-header');
+        sectionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        // Efek parallax pada logo saat scroll
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const logo = document.querySelector('.logo');
+            if (logo) {
+                logo.style.transform = `rotate(${scrolled * 0.1}deg)`;
+            }
+        });
+
+        // Animasi smooth pada load
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
