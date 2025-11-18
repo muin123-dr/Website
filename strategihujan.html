@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategi Menghadapi Musim Hujan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-container {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #5f72bd 0%, #9b59b6 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '☔';
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.1;
+            top: -20px;
+            right: -20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #667eea, #764ba2) 1;
+        }
+
+        .section-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #5f72bd;
+            font-weight: bold;
+        }
+
+        .section-content {
+            color: #444;
+            font-size: 1.05em;
+        }
+
+        .risk-item, .disease-item, .tip-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .risk-item:hover, .disease-item:hover, .tip-item:hover {
+            transform: translateX(10px);
+            border-left-color: #764ba2;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .warning-box h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+        }
+
+        .success-box h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .action-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .action-list li {
+            padding: 12px 15px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .action-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 15px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #5f72bd 0%, #9b59b6 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            filter: brightness(0) invert(1);
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin: 0 5px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.3em;
+            }
+
+            .section-icon {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                max-width: 150px;
+            }
+
+            .whatsapp-btn {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+
+            .whatsapp-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        .collapse-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .collapse-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .collapsible-content.active {
+            max-height: 2000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo" class="logo">
+        </div>
+        <div class="header">
+            <h1>☔ TIPS MENGHADAPI MUSIM HUJAN</h1>
+            <p>Biar Tetap Sehat Walau Cuaca Nggak Bersahabat</p>
+        </div>
+
+        <div class="content">
+            <!-- Section 1 -->
+            <div class="section" onclick="toggleSection(1)">
+                <div class="section-header">
+                    <div class="section-icon">⚠️</div>
+                    <div class="section-title">Faktor Risiko Kesehatan di Musim Hujan</div>
+                </div>
+                <button class="collapse-btn" onclick="event.stopPropagation(); toggleSection(1)">Lihat Detail</button>
+                <div id="section1" class="collapsible-content">
+                    <div class="section-content">
+                        <div class="risk-item">
+                            <strong>💧 Kelembapan Tinggi</strong><br>
+                            Lembap = sarangnya jamur & kuman → bikin alergi, gatal, dan infeksi kulit gampang muncul.
+                        </div>
+                        <div class="risk-item">
+                            <strong>❄️ Cuaca Dingin</strong><br>
+                            Cuaca dingin bikin imun drop kalau kurang tidur & makan nggak bener.
+                        </div>
+                        <div class="risk-item">
+                            <strong>🦟 Genangan Air</strong><br>
+                            Genangan air jadi tempat upacara akbar nyamuk DBD & malaria berkembang biak.
+                        </div>
+                        <div class="risk-item">
+                            <strong>☀️ Minim Sinar Matahari</strong><br>
+                            Produksi vitamin D turun, imun makin loyo.
+                        </div>
+                        <div class="risk-item">
+                            <strong>🏠 Ruangan Tertutup</strong><br>
+                            Sering ngumpul di ruangan tertutup → virus flu & batuk makin gampang nyebar.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="section" onclick="toggleSection(2)">
+                <div class="section-header">
+                    <div class="section-icon">❤️‍🩹</div>
+                    <div class="section-title">Penyakit yang Sering Muncul</div>
+                </div>
+                <button class="collapse-btn" onclick="event.stopPropagation(); toggleSection(2)">Lihat Detail</button>
+                <div id="section2" class="collapsible-content">
+                    <div class="section-content">
+                        <div class="disease-item">
+                            <strong>🍃 Gangguan Napas</strong><br>
+                            Flu, batuk pilek, bronkitis—nular lewat droplet & barang yang sering dipegang ramai-ramai.
+                        </div>
+                        <div class="disease-item">
+                            <strong>🍽️ Penyakit dari Makanan & Air Kotor</strong><br>
+                            Diare, tipes, kolera.
+                        </div>
+                        <div class="disease-item">
+                            <strong>🦟 Penyakit dari Nyamuk</strong><br>
+                            DBD, chikungunya, malaria—yang nyamuknya lulusan genangan air.
+                        </div>
+                        <div class="disease-item">
+                            <strong>🩹 Penyakit Kulit</strong><br>
+                            Jamur, gatal, iritasi karena lembap & kena air kotor.
+                        </div>
+                        <div class="disease-item">
+                            <strong>🌊 Leptospirosis</strong><br>
+                            Dari air banjir yang tercemar urine hewan (jangan anggap sepele).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="section" onclick="toggleSection(3)">
+                <div class="section-header">
+                    <div class="section-icon">🛡️</div>
+                    <div class="section-title">Langkah Antisipasi Biar Tetap Aman</div>
+                </div>
+                <button class="collapse-btn" onclick="event.stopPropagation(); toggleSection(3)">Lihat Detail</button>
+                <div id="section3" class="collapsible-content">
+                    <div class="section-content">
+                        <div class="tip-item">
+                            <strong>🧼 Jaga Kebersihan Lingkungan</strong>
+                            <ul class="action-list">
+                                <li>Cuci tangan rajin</li>
+                                <li>Terapkan 3M Plus (menguras, menutup, mengubur barang bekas, plus hindari gigitan nyamuk)</li>
+                                <li>Pastikan air minum matang & makanan higienis</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <strong>💪 Boost Imun</strong>
+                            <ul class="action-list">
+                                <li>Makan makanan tinggi vitamin C, E, zinc</li>
+                                <li>Tidur minimal 7–8 jam</li>
+                                <li>Olahraga ringan rutin</li>
+                                <li>Suplemen kalau perlu</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <strong>🎒 Persiapan Alat Tempur</strong>
+                            <ul class="action-list">
+                                <li>Sedia payung/jas hujan, P3K, oralit, obat demam</li>
+                                <li>Biasakan minum air hangat biar tubuh nyaman</li>
+                            </ul>
+                        </div>
+                        <div class="tip-item">
+                            <strong>📱 Update Info Cuaca</strong>
+                            <ul class="action-list">
+                                <li>Cek BMKG & patuhi protokol kesehatan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="section" onclick="toggleSection(4)">
+                <div class="section-header">
+                    <div class="section-icon">🏢</div>
+                    <div class="section-title">Kalau Udah Terlanjur Sakit</div>
+                </div>
+                <button class="collapse-btn" onclick="event.stopPropagation(); toggleSection(4)">Lihat Detail</button>
+                <div id="section4" class="collapsible-content">
+                    <div class="section-content">
+                        <div class="tip-item">
+                            <strong>😷 Gejala Flu/Batuk</strong><br>
+                            Istirahat total, minum hangat, pakai masker.
+                        </div>
+                        <div class="tip-item">
+                            <strong>🚽 Diare</strong><br>
+                            Minum oralit, hindari makanan pedas, asam, berminyak.
+                        </div>
+                        <div class="tip-item">
+                            <strong>🌡️ Curiga DBD</strong><br>
+                            Demam tinggi mendadak, pegal ekstrem, bintik merah → cek darah secepatnya.
+                        </div>
+                        <div class="tip-item">
+                            <strong>🌊 Kontak Air Banjir</strong><br>
+                            Langsung cuci badan pakai sabun, lindungi luka.
+                        </div>
+                        <div class="tip-item">
+                            <strong>🩹 Masalah Kulit</strong><br>
+                            Jaga area tetap kering, pakai krim antijamur.
+                        </div>
+
+                        <div class="warning-box">
+                            <h3>⚠️ Wajib ke Fasilitas Kesehatan Kalau:</h3>
+                            <ul class="action-list">
+                                <li>Demam > 2–3 hari nggak turun</li>
+                                <li>Sesak napas</li>
+                                <li>Muntah terus-terusan</li>
+                                <li>Nyeri perut hebat</li>
+                                <li>Tanda-tanda perdarahan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="section" onclick="toggleSection(5)">
+                <div class="section-header">
+                    <div class="section-icon">🎯</div>
+                    <div class="section-title">Kesimpulan</div>
+                </div>
+                <button class="collapse-btn" onclick="event.stopPropagation(); toggleSection(5)">Lihat Detail</button>
+                <div id="section5" class="collapsible-content">
+                    <div class="section-content">
+                        <div class="success-box">
+                            <p style="font-size: 1.1em; line-height: 1.8;">
+                                Musim hujan tuh <span class="highlight">bukan musuh</span>, tapi challenge biar kita makin siap, 
+                                makin peduli kesehatan, makin solid satu sama lain dan lebih butuh pertolongan Alloh. Selama kita paham risikonya, 
+                                siap antisipasi, dan tanggap kalau sakit, musim hujan cuma lewat begitu aja tanpa drama! 
+                                <span class="emoji">💪😊</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>💙 Jaga Kesehatan, Nikmati Musim Hujan dengan Aman! ☔</p>
+            <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" target="_blank" class="whatsapp-btn">
+                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Gen Zehat
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionNum) {
+            const content = document.getElementById('section' + sectionNum);
+            content.classList.toggle('active');
+        }
+
+        // Animasi saat scroll
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
