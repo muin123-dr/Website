@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puasa - Investasi Kesehatan Holistik</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .logo-container {
+            text-align: center;
+            padding: 30px 20px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .logo {
+            max-width: 180px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .header .tagline {
+            font-size: 1em;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 1.3em;
+        }
+
+        .section-subtitle {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .section-content {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .section-content ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .section-content li {
+            margin: 10px 0;
+            padding-left: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #764ba2;
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .type-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .type-card:hover {
+            transform: scale(1.02);
+        }
+
+        .warning {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #d63031;
+            margin: 20px 0;
+        }
+
+        .conclusion {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .conclusion h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+        }
+
+        .instagram-btn {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-icon {
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .section-title {
+                font-size: 1.2em;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-btn {
+                width: 80%;
+                justify-content: center;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo" class="logo">
+        </div>
+
+        <div class="header">
+            <h1>🌙 PUASA</h1>
+            <div class="subtitle">Investasi Kesehatan Holistik</div>
+            <div class="tagline">Dari Detoks Sampai Regenerasi Sel<br>Beneran Bikin Tubuh Upgrade Total!</div>
+        </div>
+
+        <div class="content">
+            <div class="intro fade-in">
+                <p><strong>Puasa itu bukan cuma urusan spiritual.</strong> Di dunia medis, puasa udah dianggap sebagai "healing mode" alami yang bisa bantu detoks, regenerasi sel, nurunin risiko penyakit, sampai bikin otak makin tajam. Yuk bahas versi ringkas & gaulnya! 👇</p>
+            </div>
+
+            <div class="section fade-in">
+                <div class="section-title">
+                    <span class="emoji">🍃</span>
+                    <span>Detoksifikasi</span>
+                </div>
+                <div class="section-subtitle">Saat Organ Tubuh "Istirahat" dan Bersih-bersih</div>
+                <div class="section-content">
+                    <p>Waktu puasa, tubuh pindah dari mode makan terus → mode pemulihan. Yang terjadi:</p>
+                    <ul>
+                        <li>Hati & ginjal punya waktu buat bersihin racun dari makanan olahan, polusi, dan metabolisme</li>
+                        <li>Tubuh naikkin produksi glutathione, antioksidan sakti buat netralin radikal bebas</li>
+                        <li>Puasa intermiten (16/8) terbukti bantu buang limbah metabolik & lemak yang nyimpen bahan kimia berbahaya</li>
+                    </ul>
+                    <div class="highlight">
+                        <strong>Intinya:</strong> Tubuh kamu lagi deep cleaning dari dalam.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section fade-in">
+                <div class="section-title">
+                    <span class="emoji">🔄</span>
+                    <span>Autofagi</span>
+                </div>
+                <div class="section-subtitle">Fitur "Recycle Bin" Tubuh Aktif Total</div>
+                <div class="section-content">
+                    <p><strong>Autofagi</strong> = proses tubuh ngerecycle sel-sel yang rusak. Waktu puasa:</p>
+                    <ul>
+                        <li>Insulin turun, glukagon naik → sel dapet sinyal buat buang "sampah sel"</li>
+                        <li>Sel rusak, protein abnormal, organel yang uzur → dibersihin semua</li>
+                        <li>Ini bantu cegah kanker, Alzheimer, dan penuaan dini</li>
+                        <li>Riset hewan: puasa 24–48 jam bisa ningkatin autofagi sampai 300%!</li>
+                    </ul>
+                    <div class="highlight">
+                        <strong>Singkatnya:</strong> Puasa bikin tubuh upgrade hardware dari dalam.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section fade-in">
+                <div class="section-title">
+                    <span class="emoji">🍩</span>
+                    <span>Manfaat Metabolik</span>
+                </div>
+                <div class="section-subtitle">Anti-Diabetes & Anti-Gendut</div>
+                <div class="section-content">
+                    <p><strong>🔥 Kontrol Gula Darah</strong></p>
+                    <p>Puasa bikin tubuh lebih sensitif sama insulin → risiko diabetes tipe 2 turun jauh</p>
+                    
+                    <p><strong>🔥 Manajemen Berat Badan</strong></p>
+                    <p>Pola 16/8 atau 5:2 bantu bakar lemak (terutama lemak visceral yang bahaya banget)</p>
+                    
+                    <p><strong>🔥 Perbaikan Lemak Darah</strong></p>
+                    <ul>
+                        <li>Trigliserida turun</li>
+                        <li>LDL (jahat) turun</li>
+                        <li>HDL (baik) naik</li>
+                    </ul>
+                    <div class="highlight">
+                        <strong>Kesimpulan:</strong> Puasa = metabolisme makin gesit, badan makin ringan.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section fade-in">
+                <div class="section-title">
+                    <span class="emoji">❤️</span>
+                    <span>Kesehatan Jantung & Anti-Inflamasi</span>
+                </div>
+                <div class="section-content">
+                    <p><strong>Puasa bantu:</strong></p>
+                    <ul>
+                        <li>Turunin tekanan darah</li>
+                        <li>Ngurangin peradangan</li>
+                        <li>Nurunin risiko penyakit jantung</li>
+                        <li>Studi 8 minggu: tekanan darah sistolik turun 6%</li>
+                        <li>Inflamasi juga turun karena sitokin toksik (IL-6, TNF-α) ditekan</li>
+                    </ul>
+                    <div class="highlight">
+                        Aman buat jantung, anti-bengkak, anti nyeri kronis.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section fade-in">
+                <div class="section-title">
+                    <span class="emoji">🧠</span>
+                    <span>Boost Otak & Proteksi dari Penyakit Neuro</span>
+                </div>
+                <div class="section-content">
+                    <p><strong>Puasa bikin otak ngeluarin:</strong></p>
+                    <ul>
+                        <li><strong>BDNF</strong> (Brain-Derived Neurotrophic Factor) — bikin neuron (sel saraf) makin kuat & lincah</li>
+                        <li>Produksi BDNF bisa naik sampai 50% (studi hewan)</li>
+                    </ul>
+                    <p><strong>💡 Manfaatnya:</strong></p>
+                    <ul>
+                        <li>Memori makin tajam</li>
+                        <li>Fokus naik</li>
+                        <li>Lindungi dari Alzheimer & depresi</li>
+                        <li>Otak pakai energi "premium": BHB (keton)</li>
+                        <li>Otak jadi lebih jernih & stabil</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section fade-in">
+                <div class="section-title">
+                    <span class="emoji">🦠</span>
+                    <span>Mikrobiota Usus & Sistem Imun Naik Level</span>
+                </div>
+                <div class="section-content">
+                    <p><strong>Puasa bikin:</strong></p>
+                    <ul>
+                        <li>Jumlah bakteri baik (kayak Lactobacillus & Akkermansia) naik</li>
+                        <li>Produksi SCFA (Nutrisi yang dihasilkan dari bakteri baik) meningkat → imun makin kuat</li>
+                    </ul>
+                    <div class="highlight">
+                        <p><strong>Studi di Cell: puasa 3 hari bisa:</strong></p>
+                        <ul>
+                            <li>Buang sel imun tua</li>
+                            <li>Regenerasi sel imun baru</li>
+                        </ul>
+                        <p><strong>Tubuh jadi lebih tahan infeksi + punya potensi bantu terapi kanker.</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section fade-in">
+                <div class="section-title">
+                    <span class="emoji">⏱️</span>
+                    <span>Jenis Puasa yang Paling Populer</span>
+                </div>
+                <div class="section-content">
+                    <div class="types-grid">
+                        <div class="type-card">
+                            <strong>🕐 1. Intermittent Fasting 16/8</strong>
+                            <p>16 jam puasa, 8 jam makan. Cocok buat pemula.</p>
+                        </div>
+                        <div class="type-card">
+                            <strong>🗓️ 2. Metode 5:2</strong>
+                            <p>5 hari makan normal, 2 hari makan 500–600 kalori.</p>
+                        </div>
+                        <div class="type-card">
+                            <strong>🌅 3. Puasa Sunah (fajar → Maghrib)</strong>
+                            <p>Asal buka dan sahur tetap gizi seimbang.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section fade-in">
+                <div class="section-title">
+                    <span class="emoji">⚠️</span>
+                    <span>Siapa yang Nggak Boleh Puasa?</span>
+                </div>
+                <div class="section-content">
+                    <div class="warning">
+                        <ul>
+                            <li>Ibu hamil / menyusui</li>
+                            <li>Anak-anak</li>
+                            <li>Penderita Diabetes tipe 1</li>
+                            <li>Gagal ginjal</li>
+                            <li>Gangguan makan</li>
+                            <li>Riwayat hipoglikemia</li>
+                        </ul>
+                        <div class="highlight" style="margin-top: 15px;">
+                            <strong>⚠️ Punya penyakit kronis? WAJIB konsultasi dokter dulu.</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conclusion fade-in">
+                <h3>🌟 Kesimpulan</h3>
+                <p><strong>✅ Puasa itu bukan cuma tradisi, tapi biohacking alami yang bikin tubuh:</strong></p>
+                <ul style="text-align: left; display: inline-block; margin: 15px auto;">
+                    <li>Lebih bersih</li>
+                    <li>Lebih ringan</li>
+                    <li>Lebih fokus</li>
+                    <li>Lebih kuat</li>
+                    <li>Lebih sehat secara menyeluruh</li>
+                </ul>
+                <div class="highlight" style="margin-top: 20px;">
+                    <strong>✅ Kalau dilakukan dengan benar dan sesuai kondisi,<br>Puasa = investasi kesehatan jangka panjang.</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a href="https://whatsapp.com/channel/0029VbAtZNp47Xe6JFu65N2u" class="social-btn whatsapp-btn" target="_blank">
+                <span class="social-icon">📱</span>
+                <span>WhatsApp Channel</span>
+            </a>
+            <a href="https://www.instagram.com/dr.msmuin?igsh=MTY2NHZmODUydm1ycA==" class="social-btn instagram-btn" target="_blank">
+                <span class="social-icon">📷</span>
+                <span>Instagram</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll animation on load
+        const sections = document.querySelectorAll('.section, .intro, .conclusion');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Add click interaction for sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.addEventListener('click', function() {
+                this.style.background = 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)';
+                setTimeout(() => {
+                    this.style.background = 'white';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
