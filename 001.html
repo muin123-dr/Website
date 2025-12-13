@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Balap Mobil - Level 2 (Tantangan Waktu)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 50%, #90EE90 50%, #90EE90 100%);
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Bagian Atas - Lintasan Balap */
+        .race-section {
+            height: 50vh;
+            background: linear-gradient(to bottom, #87CEEB, #B0E0E6);
+            position: relative;
+            border-bottom: 5px solid #333;
+        }
+        
+        .track {
+            position: absolute;
+            height: 80px;
+            width: 100%;
+            background: #666;
+            border: 3px solid #333;
+            border-radius: 10px;
+        }
+        
+        .track1 {
+            top: 20%;
+        }
+        
+        .track2 {
+            top: 60%;
+        }
+        
+        .track::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: repeating-linear-gradient(
+                to right,
+                white 0px,
+                white 30px,
+                transparent 30px,
+                transparent 60px
+            );
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .car {
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            border-radius: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: left 0.1s linear;
+            font-size: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Start Position di Kanan (95%) */
+        .car-red { left: 95%; }
+        .car-blue { left: 95%; }
+        
+        /* Finish Line di KIRI */
+        .finish-line {
+            position: absolute;
+            left: 20px;
+            top: 10%;
+            width: 10px;
+            height: 80%;
+            background: repeating-linear-gradient(
+                45deg,
+                black,
+                black 20px,
+                white 20px,
+                white 40px
+            );
+            border: 3px solid #333;
+            z-index: 10;
+        }
+        
+        .flag {
+            position: absolute;
+            left: 40px;
+            top: 5%;
+            width: 0;
+            height: 0;
+            border-left: 30px solid #ff0000;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            transform: scaleX(-1);
+        }
+        
+        .flag::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 100px;
+            background: #333;
+            left: -33px;
+            top: -50px;
+        }
+        
+        /* Bagian Bawah - Quiz */
+        .quiz-section {
+            height: 50vh;
+            display: flex;
+            background: #f0f0f0;
+        }
+        
+        .question-panel {
+            width: 50%;
+            padding: 40px;
+            background: white;
+            border-right: 3px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .question-text {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .answer-panel {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .answer-btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border: 4px solid #333;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .answer-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        .answer-btn.correct {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            animation: correctAnim 0.5s;
+        }
+        
+        .answer-btn.wrong {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            animation: wrongAnim 0.5s;
+        }
+        
+        /* Speed indicator toast */
+        .speed-toast {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        @keyframes correctAnim {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes wrongAnim {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 50px 70px;
+            border-radius: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            max-width: 80%;
+        }
+        
+        .start-btn, .retry-btn, .next-btn {
+            padding: 20px 50px;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .start-btn { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .retry-btn { background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%); }
+        
+        .next-btn {
+            background: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);
+            font-size: 40px;
+            animation: pulseBtn 1.5s infinite;
+        }
+        
+        @keyframes pulseBtn {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(66, 230, 149, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(66, 230, 149, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(66, 230, 149, 0); }
+        }
+        
+        .start-btn:hover, .retry-btn:hover, .next-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .result-text {
+            font-size: 64px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .win {
+            color: #27ae60;
+            text-shadow: 3px 3px 0px #fff, 5px 5px 10px rgba(0,0,0,0.2);
+        }
+        
+        .lose { color: #e74c3c; }
+        
+        /* Animations: Fireworks, Balloons, Confetti */
+        .firework {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: fireworkAnim 1s ease-out forwards;
+            z-index: 1100;
+        }
+        
+        @keyframes fireworkAnim {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-500px) scale(0); opacity: 0; }
+        }
+        
+        .balloon {
+            position: fixed;
+            font-size: 60px;
+            animation: balloonAnim 4s ease-in forwards;
+            z-index: 1100;
+        }
+        
+        @keyframes balloonAnim {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            animation: confettiAnim 3s ease-out forwards;
+            z-index: 1100;
+        }
+        
+        @keyframes confettiAnim {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .party-bg {
+            animation: disco 0.5s infinite;
+        }
+
+        @keyframes disco {
+            0% { background: rgba(255, 0, 0, 0.2); }
+            25% { background: rgba(0, 255, 0, 0.2); }
+            50% { background: rgba(0, 0, 255, 0.2); }
+            75% { background: rgba(255, 255, 0, 0.2); }
+            100% { background: rgba(255, 0, 255, 0.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="race-section">
+            <div class="speed-toast" id="speedToast">Lawan Makin Cepat!</div>
+            <div class="track track1">
+                <div class="car car-red">🚗</div>
+            </div>
+            <div class="track track2">
+                <div class="car car-blue">🚙</div>
+            </div>
+            <div class="finish-line"></div>
+            <div class="flag"></div>
+        </div>
+        
+        <div class="quiz-section">
+            <div class="question-panel">
+                <div class="question-text" id="questionText"></div>
+            </div>
+            <div class="answer-panel" id="answerPanel"></div>
+        </div>
+    </div>
+    
+    <div class="modal" id="startModal">
+        <div class="modal-content">
+            <h1>Quiz Balap Matematika</h1>
+            <p>Hati-hati! Jika salah, mobilmu melambat.<br>Musuh makin cepat setiap 15 detik!</p>
+            <button class="start-btn" onclick="startGame()">MULAI!</button>
+        </div>
+    </div>
+    
+    <div class="modal" id="resultModal" style="display: none;">
+        <div class="modal-content" id="resultContent">
+            <div class="result-text" id="resultText"></div>
+        </div>
+    </div>
+
+    <script>
+        // Database Soal
+        const questions = [
+            { q: "5 + 3 = ?", a: 8, options: [8, 7, 9] },
+            { q: "1 + 4 = ?", a: 5, options: [6, 5, 7] },
+            { q: "3 + 6 = ?", a: 9, options: [3, 10, 9] },
+            { q: "4 + 3 = ?", a: 7, options: [7, 6, 8] },
+            { q: "5 + 5 = ?", a: 10, options: [10, 9, 2] },
+            { q: "1 + 5 = ?", a: 6, options: [10, 9, 6] },
+            { q: "2 + 6 = ?", a: 8, options: [10, 9, 8] },
+            { q: "3 + 7 = ?", a: 10, options: [5, 10, 6] },
+            { q: "4 + 2 = ?", a: 6, options: [7, 8, 6] },
+            { q: "6 + 1 = ?", a: 7, options: [5, 4, 7] },
+            { q: "7 + 2 = ?", a: 9, options: [10, 9, 1] },
+            { q: "8 + 1 = ?", a: 9, options: [2, 1, 9] },
+            { q: "9 + 0 = ?", a: 9, options: [2, 9, 8] },
+            { q: "5 + 1 = ?", a: 6, options: [3, 6, 4] },
+            { q: "2 + 3 = ?", a: 5, options: [5, 4, 6] }
+        ];
+        
+        let currentQuestion = 0;
+        let redCarPos = 95;
+        let blueCarPos = 95;
+        
+        // KONFIGURASI KECEPATAN
+        const initialBlueSpeed = 0.010; // Sangat pelan
+        let currentBlueSpeed = initialBlueSpeed;
+        
+        const initialRedSpeed = 0.028; // Sedikit lebih cepat dari blue awal
+        let currentRedSpeed = initialRedSpeed;
+        
+        let gameStarted = false;
+        let redCarInterval;
+        let redAccelInterval; // Interval untuk menambah kecepatan merah
+        let blueCarInterval;
+        let raceFinished = false;
+        
+        const redCar = document.querySelector('.car-red');
+        const blueCar = document.querySelector('.car-blue');
+        const finishLinePos = 5; 
+        
+        function startGame() {
+            document.getElementById('startModal').style.display = 'none';
+            gameStarted = true;
+            showQuestion();
+            startRedCar();
+            startBlueCar();
+        }
+        
+        function startRedCar() {
+            const fps = 60;
+            const intervalTime = 1000 / fps;
+            
+            // Interval Pergerakan Mobil Merah
+            redCarInterval = setInterval(() => {
+                if (raceFinished) { clearInterval(redCarInterval); return; }
+                
+                redCarPos -= currentRedSpeed;
+                redCar.style.left = redCarPos + '%';
+                
+                if (redCarPos <= finishLinePos) {
+                    clearInterval(redCarInterval);
+                    clearInterval(redAccelInterval);
+                    endGame(false);
+                }
+            }, intervalTime);
+
+            // Interval Akselerasi Mobil Merah (Setiap 15 Detik)
+            redAccelInterval = setInterval(() => {
+                if (raceFinished) return;
+                
+                // Bertambah 0.6 (60%) dari kecepatan dasar
+                const speedBoost = initialRedSpeed * 0.6;
+                currentRedSpeed += speedBoost;
+                
+                // Efek visual pemberitahuan
+                const toast = document.getElementById('speedToast');
+                toast.style.opacity = 1;
+                setTimeout(() => toast.style.opacity = 0, 2000);
+                
+                console.log("Red car accelerates! Current speed: " + currentRedSpeed);
+            }, 15000); // 15000 ms = 15 detik
+        }
+        
+        function startBlueCar() {
+            const fps = 60;
+            const intervalTime = 1000 / fps;
+            
+            blueCarInterval = setInterval(() => {
+                if (raceFinished) { clearInterval(blueCarInterval); return; }
+                
+                blueCarPos -= currentBlueSpeed;
+                blueCar.style.left = blueCarPos + '%';
+                
+                if (blueCarPos <= finishLinePos) {
+                    clearInterval(blueCarInterval);
+                    clearInterval(redAccelInterval);
+                    endGame(true);
+                }
+            }, intervalTime);
+        }
+        
+        function showQuestion() {
+            if (currentQuestion >= questions.length) return;
+            
+            const q = questions[currentQuestion];
+            document.getElementById('questionText').textContent = q.q;
+            
+            const answerPanel = document.getElementById('answerPanel');
+            answerPanel.innerHTML = '';
+            
+            const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+            const letters = ['A', 'B', 'C'];
+            
+            shuffled.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.textContent = `${letters[idx]}. ${opt}`;
+                btn.onclick = () => checkAnswer(opt, q.a, btn);
+                answerPanel.appendChild(btn);
+            });
+        }
+        
+        function checkAnswer(selected, correct, btn) {
+            const allBtns = document.querySelectorAll('.answer-btn');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+            
+            if (selected === correct) {
+                btn.classList.add('correct');
+                // BONUS: Jika benar tetap ditambah sedikit agar game bisa dimenangkan
+                currentBlueSpeed += (initialBlueSpeed * 1.5);
+                
+                setTimeout(() => {
+                    currentQuestion++;
+                    if (currentQuestion < questions.length) showQuestion();
+                }, 1000);
+            } else {
+                btn.classList.add('wrong');
+                
+                // LOGIKA PENGURANGAN KECEPATAN (Request User)
+                // Berkurang 0.5 dari kecepatan awal
+                currentBlueSpeed -= (initialBlueSpeed * 0.5);
+                
+                // Mencegah kecepatan negatif (mobil mundur)
+                if (currentBlueSpeed < 0) currentBlueSpeed = 0;
+                
+                setTimeout(() => {
+                    btn.classList.remove('wrong');
+                    allBtns.forEach(b => b.style.pointerEvents = 'auto');
+                }, 500);
+            }
+        }
+        
+        function endGame(win) {
+            raceFinished = true;
+            clearInterval(redCarInterval);
+            clearInterval(blueCarInterval);
+            clearInterval(redAccelInterval);
+            
+            const resultModal = document.getElementById('resultModal');
+            const resultText = document.getElementById('resultText');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultModal.style.display = 'flex';
+            
+            // Bersihkan tombol lama
+            const oldBtns = resultContent.querySelectorAll('button');
+            oldBtns.forEach(btn => btn.remove());
+
+            if (win) {
+                resultText.textContent = 'KAMU MENANG!';
+                resultText.className = 'result-text win';
+                document.getElementById('resultModal').classList.add('party-bg');
+                celebrate();
+                
+                // Tombol LANJUT
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'next-btn';
+                nextBtn.textContent = 'LANJUT >>';
+                nextBtn.onclick = () => window.location.href = 'https://muin123-dr.github.io/kuncisehat/002.html'; 
+                resultContent.appendChild(nextBtn);
+                
+            } else {
+                resultText.textContent = 'KAMU KALAH';
+                resultText.className = 'result-text lose';
+                document.getElementById('resultModal').classList.remove('party-bg');
+                
+                // Tombol ULANGI
+                const retryBtn = document.createElement('button');
+                retryBtn.className = 'retry-btn';
+                retryBtn.textContent = 'ULANGI';
+                retryBtn.onclick = () => location.reload();
+                resultContent.appendChild(retryBtn);
+            }
+        }
+        
+        function celebrate() {
+            // Fireworks
+            for (let i = 0; i < 80; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = Math.random() * window.innerWidth + 'px';
+                    firework.style.top = window.innerHeight + 'px';
+                    firework.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    document.body.appendChild(firework);
+                    setTimeout(() => firework.remove(), 1000);
+                }, i * 50);
+            }
+            
+            // Balloons & Confetti (sama seperti sebelumnya)
+            const balloonEmojis = ['🎈', '🎉', '🎊', '🎁', '⭐', '✨', '🏆'];
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    balloon.textContent = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
+                    balloon.style.left = Math.random() * window.innerWidth + 'px';
+                    balloon.style.top = window.innerHeight + 'px';
+                    document.body.appendChild(balloon);
+                    setTimeout(() => balloon.remove(), 4000);
+                }, i * 100);
+            }
+            
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 20);
+            }
+        }
+    </script>
+</body>
+</html>
