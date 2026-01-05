@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahaya Tersembunyi di Balik Komunitas Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            color: #F0E6D2;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.96);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.6s ease;
+            position: relative;
+            min-height: 80vh;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #D4AF37;
+        }
+
+        h1 {
+            color: #D4AF37;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            color: #E6D4A5;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .intro {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #D4AF37;
+            text-align: left;
+        }
+
+        .intro p {
+            color: #E6D4A5;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .main-menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .menu-card {
+            background: #2c2c2c;
+            padding: 20px 10px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 2px solid #3a3a3a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card:hover, .menu-card.active-tab {
+            border-color: #D4AF37;
+            background: #3a3a3a;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .menu-card.active-tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; 
+            height: 0; 
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #D4AF37;
+        }
+
+        .menu-title {
+            display: block;
+            margin-top: 10px;
+            font-weight: 700;
+            color: #D4AF37;
+            font-size: 0.9em;
+            line-height: 1.2;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-emoji {
+            display: inline-block;
+            font-size: 2.5em;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .content-container {
+            display: none;
+            animation: slideDown 0.5s ease forwards;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: #D4AF37;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #3a3a3a;
+            padding-bottom: 10px;
+        }
+
+        .accordion-item {
+            background: #1a1a1a;
+            border: 1px solid #3a3a3a;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: #D4AF37;
+        }
+
+        .accordion-header {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: #F0E6D2;
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1em;
+            user-select: none;
+        }
+
+        .accordion-icon {
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: #0f0f0f;
+        }
+
+        .accordion-content-inner {
+            padding: 20px;
+            color: #E6D4A5;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 2500px;
+        }
+
+        .highlight {
+            background: rgba(212, 175, 55, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #D4AF37;
+        }
+
+        .example-card {
+            background: #2c2c2c;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #D4AF37;
+        }
+
+        .example-label {
+            font-weight: 700;
+            color: #D4AF37;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .conclusion {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: #F0E6D2;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            border: 1px solid #3a3a3a;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            border-left: 3px solid #D4AF37;
+        }
+
+        .stat-number {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #D4AF37;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #E6D4A5;
+            font-size: 0.85em;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 6px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #D4AF37;
+            font-weight: bold;
+        }
+
+        .danger-list li::before {
+            content: '⚠️';
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 15px; margin: 10px; }
+            h1 { font-size: 1.4em; }
+            .main-menu-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+        }
+
+        footer {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn:hover { transform: scale(1.1); }
+        .whatsapp { background-color: #25D366; }
+        .instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚨 Bahaya Tersembunyi Komunitas Online</h1>
+            <p class="subtitle">Ancaman Serius Ketika Salah Memilih Grup</p>
+        </header>
+
+        <div class="intro">
+            <p>Di era digital, bergabung dengan komunitas online sangatlah mudah—cukup satu klik di smartphone. <br>Namun, bergabung dengan <b>GROUP yang SALAH</b> dapat: <br>▫️ merusak kesehatan mental, <br>▫️ mengubah nilai hidup, <br>▫️ bahkan menjerumuskan ke aktivitas ilegal.</p>
+        </div>
+
+        <div class="main-menu-grid">
+            <div class="menu-card" onclick="showSection('jenis-bahaya', this)">
+                <span class="floating-emoji" style="animation-delay: 0s;">⚠️</span>
+                <span class="menu-title">Jenis Grup Berbahaya</span>
+            </div>
+            <div class="menu-card" onclick="showSection('kerentanan', this)">
+                <span class="floating-emoji" style="animation-delay: 0.5s;">🧠</span>
+                <span class="menu-title">Mengapa Rentan?</span>
+            </div>
+            <div class="menu-card" onclick="showSection('tanda-tanda', this)">
+                <span class="floating-emoji" style="animation-delay: 1s;">🔍</span>
+                <span class="menu-title">Tanda-tanda Bahaya</span>
+            </div>
+            <div class="menu-card" onclick="showSection('solusi-komprehensif', this)">
+                <span class="floating-emoji" style="animation-delay: 1.5s;">🛡️</span>
+                <span class="menu-title">Solusi Komprehensif</span>
+            </div>
+        </div>
+
+        <div id="jenis-bahaya" class="content-container">
+            <div class="section">
+                <h2 class="section-title">Jenis-Jenis Komunitas Online Berbahaya</h2>
+                <div class="example-card">
+                    <p>Komunitas berbahaya sering menyamarkan diri dengan nama-nama yang tidak mencurigakan. <br>Berikut adalah jenis-jenis grup yang patut diwaspadai:</p>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>1. Grup Penyalahgunaan Narkoba dan Zat Terlarang</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p>Grup ini sering bersembunyi di balik nama yang tampak tidak berbahaya, seperti “Komunitas Pencari Ketenangan” atau “Trip Journey Indonesia”. <br>Di dalamnya, anggota saling berbagi:</p>
+                            <ul>
+                                <li>Cara mendapatkan dan menggunakan narkoba.</li>
+                                <li>Normalisasi penggunaan zat terlarang sebagai gaya hidup.</li>
+                                <li>Informasi tentang dealer dan harga.</li>
+                                <li>Konten visual yang mengagungkan penggunaan narkoba.</li>
+                            </ul>
+                            <br>
+                            <p><b>Contoh Kasus:</b> <br>Seorang siswa SMA di Surabaya bergabung dengan grup Telegram “Chill Community”. <br>Dalam tiga bulan, ia terpengaruh untuk mencoba vape berisi liquid narkotika setelah melihat ratusan postingan yang menggambarkan pengalaman “menyenangkan”.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>2. Grup Pencucian Otak dan Radikalisasi</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p>Grup ini menggunakan teknik manipulasi bertahap:</p>
+                            <ul>
+                                <li><b>Fase Perekrutan:</b> <br>Menawarkan solusi atas masalah remaja (identitas, tujuan hidup).</li>
+                                <li><b>Fase Isolasi:</b> <br>Memisahkan anggota dari keluarga dan teman.</li>
+                                <li><b>Fase Indoktrinasi:</b> <br>Menanamkan ideologi ekstrem.</li>
+                                <li><b>Fase Aksi:</b> <br>Mendorong tindakan berbahaya atau ilegal.</li>
+                            </ul>
+                            <br>
+                            <p><b>Contoh Kasus:</b> <br>Seorang mahasiswi di Jakarta bergabung dengan grup WhatsApp “Muslimah Peduli” yang awalnya membahas kajian agama. <br>Perlahan, admin menyebarkan konten anti-pemerintah dan teori konspirasi, kemudian mengajak anggota melakukan aksi radikal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>3. Grup Pro-Bunuh Diri dan Self-Harm</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p>Grup ini menciptakan lingkungan yang:</p>
+                            <ul>
+                                <li>Menormalisasi pikiran untuk mengakhiri hidup.</li>
+                                <li>Memberikan metode untuk menyakiti diri sendiri.</li>
+                                <li>Menggunakan “tantangan” berbahaya seperti Blue Whale Challenge.</li>
+                                <li>Mengisolasi anggota dari bantuan profesional.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>4. Grup Konten Ilegal dan Eksploitasi</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p>Grup ini berbahaya karena:</p>
+                            <ul>
+                                <li>Menyebarkan konten ilegal, termasuk pornografi anak.</li>
+                                <li>Memfasilitasi eksploitasi seksual online (termasuk grooming seksual).</li>
+                                <li>Menjadi pintu masuk perdagangan manusia.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>5. Grup Perjudian Online dan Penipuan Finansial</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p>Menarget remaja yang ingin cepat kaya dengan iming-iming:</p>
+                            <ul>
+                                <li>“Trading Pemula” yang mengarah ke judi online.</li>
+                                <li>“Komunitas Investor Muda” yang menjual skema ponzi.</li>
+                                <li>“Bisnis Milenial” yang sebenarnya MLM beracun.</li>
+                            </ul>
+                            <br>
+                            <p><b>Contoh Kasus:</b> <br>Seorang siswa SMK di Bandung kehilangan tabungan Rp15 juta dan terlilit utang setelah mengikuti saran dari grup “Profit Harian Pasti” di Telegram.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="kerentanan" class="content-container">
+            <div class="section">
+                <h2 class="section-title">Mengapa Generasi Z Rentan Terjerumus?</h2>
+                <div class="example-card">
+                    <p>Kerentanan ini dipengaruhi oleh faktor internal dan eksternal:</p>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>Faktor Utama Kerentanan</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li><b>Pencarian Identitas dan Rasa Memiliki:</b> <br>Masa remaja adalah periode mencari jati diri. Komunitas online menawarkan rasa diterima dan identitas instan yang mungkin tidak didapatkan di dunia nyata.</li>
+                                <li><b>Algoritma yang Manipulatif (Echo Chamber):</b> <br>Platform dirancang agar pengguna terus terlibat. Algoritma akan terus merekomendasikan konten serupa yang semakin ekstrem setelah seorang remaja melihat konten tersebut sekali saja, menciptakan ruang gema (echo chamber) yang memperkuat pandangan ekstrem.</li>
+                                <li><b>Kurangnya Literasi Digital Kritis:</b> <br>Gen Z mahir menggunakan teknologi, tetapi banyak yang kurang memiliki kemampuan menilai kredibilitas sumber, mengenali manipulasi, atau memahami konsekuensi jangka panjang dari aktivitas online.</li>
+                                <li><b>Fear of Missing Out (FOMO):</b> <br>Ketakutan ketinggalan tren membuat mereka merasa harus bergabung dengan grup-grup populer tanpa menyelidiki isinya.</li>
+                                <li><b>Anonimitas dan Ilusi Keamanan:</b> <br>Platform terenkripsi seperti Telegram memberikan ilusi keamanan palsu, membuat mereka lebih berani bergabung dengan grup ekstrem karena merasa aman tidak akan terlacak.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tanda-tanda" class="content-container">
+            <div class="section">
+                <h2 class="section-title">Tanda-Tanda Seseorang Terpengaruh Grup Berbahaya</h2>
+                <div class="example-card">
+                    <p>Perhatikan perubahan perilaku dan emosional yang drastis:</p>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>Perubahan Perilaku</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li>Menjadi tertutup tentang aktivitas online.</li>
+                                <li>Menggunakan bahasa atau istilah baru yang aneh.</li>
+                                <li>Menjauh dari keluarga dan teman lama.</li>
+                                <li>Pola tidur berubah drastis (sering begadang online).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>Perubahan Emosional</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li>Mudah marah atau defensif saat ditanya tentang smartphone.</li>
+                                <li>Menunjukkan tanda depresi atau kecemasan.</li>
+                                <li>Kehilangan minat pada hobi yang dulu disukai.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>Tanda Fisik</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li>Ada luka atau bekas luka mencurigakan (self-harm).</li>
+                                <li>Perubahan berat badan signifikan.</li>
+                                <li>Mata merah atau tanda penggunaan narkoba.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="solusi-komprehensif" class="content-container">
+            <div class="section">
+                <h2 class="section-title">Solusi Komprehensif: Tugas Kita Bersama</h2>
+                <div class="example-card">
+                    <p>Diperlukan pendekatan kolaboratif dari semua pihak untuk mengatasi masalah ini.</p>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>A. Solusi untuk Individu (Generasi Z)</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li><b>Kembangkan Critical Thinking:</b> <br>Selalu pertanyakan tujuan grup, dan verifikasi informasi dari minimal tiga sumber kredibel.</li>
+                                <li><b>Terapkan “Aturan 24 Jam”:</b> <br>Tunggu 24 jam sebelum bergabung dengan grup baru atau mengikuti saran dari komunitas online untuk membuat keputusan yang lebih rasional.</li>
+                                <li><b>Audit Lingkar Digital Anda:</b> <br>Rutin keluar dari grup yang membuat tidak nyaman, menyebarkan konten negatif, atau yang mendorong kerahasiaan ekstrem.</li>
+                                <li><b>Bangun Support System Offline:</b> <br>Jangan jadikan komunitas online sebagai satu-satunya sumber dukungan. Pertahankan hubungan berkualitas dengan keluarga dan teman di dunia nyata.</li>
+                                <li><b>Cari Bantuan:</b> <br>Jika merasa sudah terjerumus terlalu dalam, segera hubungi orang dewasa yang dipercaya, layanan konseling, atau hotline bantuan mental.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>B. Solusi untuk Orang Tua</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li><b>Komunikasi Terbuka, Bukan Interogasi:</b> <br>Tanyakan dengan tulus tentang grup yang diikuti anak tanpa langsung menghakimi atau melarang. Respons pertama harus tenang dan mendengarkan.</li>
+                                <li><b>Edukasi Digital Bersama:</b> <br>Pelajari bersama platform yang anak gunakan. Diskusikan contoh kasus nyata dan ajarkan cara mengenali red flags (tanda bahaya) online.</li>
+                                <li><b>Terapkan Batasan dengan Kesepakatan:</b> <br>Buat "kontrak digital" bersama yang mencakup waktu penggunaan dan jenis konten yang boleh diakses, dengan konsekuensi yang disepakati.</li>
+                                <li><b>Monitor Tanpa Mencuri Privasi:</b> <br>Gunakan parental control sebagai jaring pengaman. Fokus pada perubahan perilaku, bukan membaca semua pesan pribadi anak.</li>
+                                <li><b>Jadi Contoh yang Baik:</b> <br>Anak meniru orang tua. Gunakan media sosial dengan bijak dan kritis.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>C. Solusi Institusional (Sekolah, Pemerintah, Platform)</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <ul>
+                                <li><b>Sekolah:</b> <br>Integrasikan literasi digital dan literasi media ke dalam kurikulum wajib. Sediakan jalur aman (peer counseling atau guru BK) untuk siswa melapor tanpa takut dihukum.</li>
+                                <li><b>Pemerintah:</b> <br>Perkuat Undang-Undang ITE untuk menindak pembuat grup ilegal. Luncurkan kampanye nasional literasi digital dan sediakan hotline 24/7 untuk pelaporan dan konsultasi.</li>
+                                <li><b>Platform Media Sosial:</b> <br>Audit algoritma untuk mencegah rekomendasi konten ekstrem. Wajibkan verifikasi identitas admin grup dan tingkatkan fitur pelaporan yang responsif.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>D. Prosedur Praktis Melaporkan Grup Berbahaya</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p>Jika Anda menemukan grup berbahaya, ikuti langkah ini:</p>
+                            <ol>
+                                <li><b>Amankan Bukti:</b> <br>Screenshot tanggal/jam, nama grup, dan pesan yang mengindikasikan pelanggaran (jika aman untuk dilakukan).</li>
+                                <li><b>Laporkan ke Platform:</b> <br>Gunakan fitur "Laporkan Grup" di aplikasi dan pilih kategori yang sesuai (misalnya, "narkoba", "kekerasan").</li>
+                                <li><b>Keluar dan Blokir:</b> <br>Segera keluar dari grup dan blokir admin atau anggota utama yang mengajak ke arah negatif.</li>
+                                <li><b>Cari Dukungan:</b> <br>Ceritakan masalah ini kepada keluarga, guru, konselor, atau layanan bantuan profesional.</li>
+                                <li><b>Laporkan ke Pihak Berwajib:</b> <br>Jika melibatkan ancaman nyawa, eksploitasi seksual, atau perdagangan narkoba, segera laporkan ke Polisi Siber atau BNPT.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header"><span>E. Komunitas Alternatif yang Direkomendasikan</span><span class="accordion-icon">▼</span></div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p>Agar terhindar dari grup berbahaya, bergabunglah dengan komunitas positif seperti:</p>
+                            <ul>
+                                <li>Grup hobi dan pengembangan skill (programming, desain, menulis).</li>
+                                <li>Komunitas volunteer dan kegiatan sosial.</li>
+                                <li>Forum diskusi akademik dan ilmiah.</li>
+                                <li>Grup dukungan kesehatan mental yang dikelola profesional.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion">
+            <h3 style="margin-bottom: 20px;">💡 Kesimpulan</h3>
+            <p>Bahaya komunitas online negatif adalah ancaman nyata yang dapat merenggut masa depan Generasi Z. <br>Namun, solusinya bukan dengan melarang atau mengisolasi mereka dari dunia digital. <br>Yang diperlukan adalah kolaborasi dari berbagai pihak.</p>
+            <p style="margin-top: 10px;">Smartphone dan internet adalah alat netral—dampaknya tergantung pada bagaimana kita menggunakannya. <br>Dengan literasi digital dan dukungan yang tepat, Gen Z dapat memanfaatkan komunitas online untuk hal positif, bukan menjadi korban sisi gelapnya.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">Aturan 24 Jam</div>
+                    <div class="stat-label">Tunggu sehari sebelum bergabung dengan grup baru</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Audit Digital</div>
+                    <div class="stat-label">Rutin keluar dari grup negatif</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Kritis & Verifikasi</div>
+                    <div class="stat-label">Selalu cek dari 3 sumber kredibel</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Klik icon WA</div>
+                    <div class="stat-label">Untuk artikel versi WA</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <a href="#" class="social-btn whatsapp" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M20.52 3.48a11.9 11.9 0 00-16.84 0 11.89 11.89 0 00-3.5 8.42c0 2.1.55 4.15 1.6 5.95L2 22l4.25-1.4a11.83 11.83 0 005.95 1.6c4.46 0 8.6-2.8 10.02-7.07a11.9 11.9 0 00-1.7-10.65zm-8.2 14.6a9.52 9.52 0 01-4.8-1.3l-.35-.2-3 1 1-3.1-.23-.36a9.5 9.5 0 0115.7-11.2 9.48 9.48 0 01-7.3 14.3zm5.07-6.4c-.28-.14-1.67-.82-1.93-.91-.26-.1-.45-.14-.64.14s-.73.9-.9 1.08c-.16.18-.32.2-.6.07a7.8 7.8 0 01-2.3-1.42 8.8 8.8 0 01-1.63-2c-.18-.3 0-.46.13-.6.14-.14.3-.34.44-.5a1.76 1.76 0 00.26-.44c.09-.15.05-.27-.02-.4-.07-.13-.64-1.54-.88-2.1-.23-.55-.46-.48-.64-.49a1.2 1.2 0 00-.45-.02c-.15 0-.4.06-.6.3-.2.24-.77.75-.77 1.83s.79 2.12.9 2.28c.1.15 1.55 2.37 3.77 3.32a13.4 13.4 0 001.76.74a1.78 1.78 0 002.03-2.57z"/>
+            </svg>
+        </a>
+        <a href="#" class="social-btn instagram" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5a4.25 4.25 0 00-4.25 4.25v8.5a4.25 4.25 0 004.25 4.25h8.5a4.25 4.25 0 004.25-4.25v-8.5a4.25 4.25 0 00-4.25-4.25h-8.5zm8.75 2.25a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/>
+            </svg>
+        </a>
+    </footer>
+
+    <div style="text-align: center; margin-top: 40px; color: #D4AF37; padding-bottom: 100px;">
+        <p>© 2025 Gen Zehat - Dr. Muin</p>
+        <p>Ikhtiar Sehat adalah bentuk rasa Syukur</p>
+        <p>🔅🔅🔅</p>
+    </div>
+
+    <script>
+        function showSection(sectionId, element) {
+            document.querySelectorAll('.content-container').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.menu-card').forEach(card => card.classList.remove('active-tab'));
+            
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.style.display = 'block';
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+            if (element) element.classList.add('active-tab');
+        }
+
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                accordionItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
