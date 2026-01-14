@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menahan Emosi di Bulan Ramadhan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8B0000 0%, #E8F5E9 100%);
+            color: #3E2723;
+            line-height: 1.8;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #FFEB3B;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .mosque-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="40" fill="%238B0000">☪️</text></svg>');
+            background-size: 100px 100px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 253, 235, 0.95);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 25px 70px rgba(139, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(232, 245, 233, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            border-bottom: none;
+            position: relative;
+            background: linear-gradient(135deg, #8B0000 0%, #388E3C 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="40" fill="%23FFEB3B" opacity="0.1">🕊️</text></svg>');
+            background-size: 80px 80px;
+            opacity: 0.3;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 235, 59, 0.3);
+            box-shadow: 0 0 30px rgba(255, 235, 59, 0.5);
+            background: #FFFDE7;
+            padding: 10px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 40px rgba(255, 235, 59, 0.8);
+        }
+
+        .heart-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(255, 235, 59, 0.7);
+            color: #FFEB3B;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        h1 {
+            color: #FFFDE7;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(62, 39, 35, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-subtitle {
+            color: rgba(255, 253, 235, 0.9);
+            font-size: 1.2em;
+            font-style: italic;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .decorative-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '';
+            height: 2px;
+            background: linear-gradient(to right, transparent, #FFA000, transparent);
+            flex: 1;
+        }
+
+        .decorative-line span {
+            margin: 0 15px;
+            font-size: 28px;
+            color: #FFEB3B;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #FFEB3B; }
+            to { text-shadow: 0 0 20px #FFEB3B, 0 0 30px #FFEB3B; }
+        }
+
+        h2 {
+            color: #3E2723;
+            font-size: 1.9em;
+            margin: 30px 0 20px;
+            padding: 15px 20px;
+            border-left: none;
+            background: linear-gradient(to right, rgba(139, 0, 0, 0.1), transparent);
+            border-radius: 10px;
+            border-bottom: 3px solid #8B0000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #8B0000, #388E3C);
+        }
+
+        h3 {
+            color: #3E2723;
+            font-size: 1.5em;
+            margin: 25px 0 15px;
+            padding-left: 15px;
+            border-left: 4px solid #8B0000;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #3E2723;
+            font-size: 1.05em;
+        }
+
+        .hadith-box {
+            background: linear-gradient(135deg, rgba(255, 248, 225, 0.9) 0%, rgba(232, 245, 233, 0.9) 100%);
+            border-left: 5px solid #8B0000;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.2);
+            border-right: 1px solid rgba(139, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hadith-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(139, 0, 0, 0.3);
+        }
+
+        .hadith-box::before {
+            content: "﴾";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2em;
+            color: rgba(139, 0, 0, 0.1);
+            font-family: 'Traditional Arabic', serif;
+        }
+
+        .hadith-box::after {
+            content: "﴿";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 2em;
+            color: rgba(139, 0, 0, 0.1);
+            font-family: 'Traditional Arabic', serif;
+        }
+
+        /* Gaya khusus untuk teks Arab */
+        .arabic-text {
+            text-align: center;
+            color: #388E3C;
+            font-weight: bold;
+            font-size: 2.2em;
+            font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade', serif;
+            margin: 20px 0;
+            line-height: 1.6;
+            direction: rtl;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .hadith-box p {
+            color: #3E2723;
+            font-style: normal;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hadith-box small {
+            color: #5D4037;
+            font-weight: bold;
+            display: block;
+            text-align: right;
+            margin-top: 15px;
+            font-style: normal;
+        }
+
+        .source-link {
+            background: rgba(255, 248, 225, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #388E3C;
+            border-right: 1px solid rgba(56, 142, 60, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .source-link:hover {
+            background: rgba(255, 248, 225, 1);
+            transform: translateX(5px);
+        }
+
+        .source-link a {
+            color: #1B5E20;
+            text-decoration: none;
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        .source-link a:hover {
+            text-decoration: underline;
+            color: #0D3B0D;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #3E2723;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: #8B0000;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            font-size: 1.2em;
+        }
+
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            border-top: none;
+            color: #5D4037;
+            font-style: italic;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.05) 0%, rgba(56, 142, 60, 0.05) 100%);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #8B0000, #FFA000, #8B0000);
+        }
+
+        .decorative-symbols {
+            text-align: center;
+            font-size: 2.5em;
+            margin: 30px 0;
+            opacity: 0.8;
+            animation: float 3s ease-in-out infinite;
+            letter-spacing: 10px;
+            color: #8B0000;
+        }
+
+        .author-signature {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(139, 0, 0, 0.1);
+            border-radius: 15px;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.0em;
+            color: #3E2723;
+            border: 2px dashed #8B0000;
+            position: relative;
+        }
+
+        .author-signature::before {
+            content: "—";
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: #8B0000;
+        }
+
+        .author-signature::after {
+            content: "—";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: #8B0000;
+        }
+
+        .highlight-box {
+            background: rgba(255, 248, 225, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #8B0000;
+            border-right: 1px solid rgba(139, 0, 0, 0.3);
+        }
+
+        .warning-box {
+            background: rgba(255, 243, 224, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #FF8F00;
+            border-right: 1px solid rgba(255, 143, 0, 0.3);
+        }
+
+        .success-box {
+            background: rgba(232, 245, 233, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #388E3C;
+            border-right: 1px solid rgba(56, 142, 60, 0.3);
+        }
+
+        .medical-box {
+            background: rgba(240, 255, 234, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #558B2F;
+            border-right: 1px solid rgba(85, 139, 47, 0.3);
+        }
+
+        blockquote {
+            font-style: italic;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 248, 225, 0.5);
+            border-left: 5px solid #8B0000;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+                padding: 12px 15px;
+            }
+
+            h3 {
+                font-size: 1.3em;
+            }
+
+            .heart-icon {
+                font-size: 50px;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .decorative-symbols {
+                font-size: 1.8em;
+                letter-spacing: 5px;
+            }
+            
+            /* Ukuran font Arab untuk mobile */
+            .arabic-text {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+            
+            /* Ukuran font Arab untuk layar sangat kecil */
+            .arabic-text {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="mosque-pattern"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo Gen Zehat" class="logo">
+            </div>
+            <div class="heart-icon">🕊️</div>
+            <h1>Menahan Emosi di Bulan Ramadhan</h1>
+            <div class="header-subtitle">Kuat Lapar & Jiwa Terkendali</div>
+            <div class="decorative-line">
+                <span>☪️</span>
+            </div>
+        </div>
+
+        <h2>Tarbiah Rasul shallallahu 'alaihi wa sallam</h2>
+
+        <div class="hadith-box">
+            <p>Abu Hurairah radhiyallahu 'anhu meriwayatkan, Rasulullah shallallahu 'alaihi wa sallam bersabda,</p>
+            <p class="arabic-text">الصِّيَامُ جُنَّةٌ، وَإِذَا كَانَ يَوْمُ صَوْمِ أَحَدِكُمْ فَلاَ يَرْفُثْ وَلاَ يَصْخَبْ، فَإِنْ سَابَّهُ أَحَدٌ أَوْ قَاتَلَهُ، فَلْيَقُلْ إِنِّي امْرُؤٌ صَائِمٌ</p>
+            <p>"Puasa adalah membentengi diri, maka bila salah seorang kamu di hari ia berpuasa janganlah berkata kotor dan jangan teriak-teriak, dan jika seseorang memakinya atau mengajaknya bertengkar hendaklah ia mengatakan 'Sesungguhnya aku sedang berpuasa.'"</p>
+            <small>(HR. Bukhari 1904 & Muslim 1151)</small>
+        </div>
+
+        <p>Dalam hadits tersebut terkandung makna untuk mengendalikan emosi kita disaat kita menjalani puasa. Dalam Hadits tersebut munculnya emosi dibedakan 3, yaitu:</p>
+        
+        <ul>
+            <li><span class="emoji">1️⃣</span> Emosi yang datang dari hawa nafsu kita, yang memunculkan perkataan kotor (porno, dll),</li>
+            <li><span class="emoji">2️⃣</span> Emosi yang datang karena masalah yang kita alami yang mana kadang dilampiaskan dengan berteriak-teriak, memukul-mukul, dll</li>
+            <li><span class="emoji">3️⃣</span> Emosi yang datang karena orang lain, seperti orang yang memaki kita, menghina kita, dll</li>
+        </ul>
+
+        <h2>B. Kenapa Emosi Harus Dikendalikan?</h2>
+
+        <div class="warning-box">
+            <p><span class="emoji">🏽</span> Karena bisa mengurangi pahala puasa kita. Bahkan kalau sangat tidak terkendali bisa menyebabkan puasa kita tanpa pahala sama sekali.</p>
+            <p><span class="emoji">🏽</span> Pada saat kita melampiaskan emosi, maka banyak energi yang terbuang. Sehingga badan kita akan mudah lemas, cepat terasa lapar.</p>
+            <p><span class="emoji">🏽</span> Ketika kita dalam keadaan emosi yang tidak terkendali, maka hormon adrenalin kita akan naik. Hal ini mengadakan saraf simpatis akan bekerja, sehingga jantung jadi berdebar. Asam lambung akan meningkat, yang menyebabkan akan mudah terasa lapar atau perih di lambung. Hal ini belum termasuk gangguan metabolisme yang lain.</p>
+        </div>
+
+        <div class="decorative-symbols">🕊️ ☪️ 🌙 ☪️ 🕊️</div>
+
+        <h2>C. MANFAAT SPIRITUAL DAN LAINNYA DALAM MENAHAN EMOSI</h2>
+
+        <div class="success-box">
+            <ul>
+                <li><strong>Meningkatkan Ketakwaan:</strong> Puasa adalah latihan pengendalian diri (tazkiyatun nafs) untuk menyucikan jiwa agar lebih sabar, lembut, dan matang dalam merespons masalah. Menahan emosi adalah bagian inti dari pendidikan jiwa ini.</li>
+                <li><strong>Bentuk Ketaatan Langsung:</strong> Mengucapkan "Inni sha'im" (aku sedang berpuasa) saat diprovokasi adalah bentuk ketaatan pada sunnah Rasulullah ﷺ, sebagai pengingat diri dan benteng dari godaan setan.</li>
+                <li><strong>Mendapat Ridha dan Ampunan:</strong> Menahan diri dan memilih sabar daripada balas dendam dapat menghapus dosa kecil dan mendatangkan pahala ganda di sisi Allah.</li>
+                <li><strong>Mencegah Dosa Berantai:</strong> Emosi tak terkendali dapat membuka pintu dosa lain seperti ghibah, dusta, caci maki, dan kedzaliman, yang justru harus ditutup selama berpuasa.</li>
+                <li><strong>Melatih Husnuzhan dan Empati:</strong> Puasa mengajarkan kita untuk berprasangka baik dan memahami bahwa orang lain mungkin juga sedang diuji, sehingga menumbuhkan sifat pemaaf.</li>
+                <li><strong>Ciri Orang Bertakwa:</strong> Menahan amarah adalah sifat utama orang bertakwa, sebagaimana disebutkan dalam QS. Ali 'Imran: 134, dan puasa adalah ibadah untuk mencapai ketakwaan.</li>
+                <li><strong>Menjaga Keharmonisan Sosial:</strong> Mengendalikan emosi menjaga kedamaian di keluarga, kantor, dan masyarakat, menjadikan Ramadhan sebagai bulan untuk memperbaiki hubungan dan menebar akhlak mulia.</li>
+            </ul>
+        </div>
+
+        <h2>D. DAMPAK FISIK DAN PSIKOLOGIS LANJUTAN</h2>
+
+        <div class="medical-box">
+            <ul>
+                <li><strong>Menjaga Stamina Ibadah:</strong> Emosi tak terkendali memicu pelepasan kortisol yang dapat mengganggu kadar gula darah dan menyebabkan dehidrasi lebih cepat, sehingga melemahkan tubuh untuk ibadah seperti tarawih dan tadarus.</li>
+                <li><strong>Mencegah Efek Jangka Panjang:</strong> Kebiasaan marah dapat membentuk pola stres kronis yang melemahkan imunitas dan memperburuk kesehatan pencernaan. Sebaliknya, pengendalian emosi melatih ketahanan (resilience) otak.</li>
+                <li><strong>Membuat Ibadah Lain Lebih Khusyuk:</strong> Emosi yang terjaga membantu mencapai kekhusyukan dalam shalat, tilawah, dzikir, dan doa. Sementara emosi yang meledak membuat hati gelisah dan sulit tenang.</li>
+            </ul>
+        </div>
+
+        <div class="decorative-symbols">🌙 🕊️ 🕌 🕊️ 🌙</div>
+
+        <h2>E. CARA PRAKTIS MENGENDALIKAN EMOSI</h2>
+
+        <div class="highlight-box">
+            <p><strong>Langkah Instan Saat Diprovokasi:</strong> Segera berwudhu, membaca istighfar, atau berpaling dari situasi sambil berdzikir (seperti "A'udzu billahi minasy syaithanir rajim") di samping mengucapkan "Inni sha'im".</p>
+            <p><strong>Persiapan Sebelumnya:</strong> Awali hari dengan niat kuat, konsumsi sahur bergizi (kaya protein dan serat untuk menstabilkan gula darah), dan hindari pemicu emosi seperti konten di media sosial yang memancing amarah atau iri hati.</p>
+        </div>
+
+        <div class="footer">
+            <h2 style="text-align: center; border: none; padding: 0; color: #3E2723;">KESIMPULAN</h2>
+            
+            <div class="highlight-box">
+                <p>Puasa bukan hanya menahan lapar dan haus, tetapi juga menahan lisan, hati, dan reaksi. <strong>HINDARI PELAMPIASAN EMOSI, JAGA AGAR PAHALA PUASA TETAP TERJAGA, DAN KITA TETAP NYAMAN BERPUASA SEHARI PENUH.</strong> Barangsiapa mampu menahan emosinya karena Allah, maka puasanya bukan hanya sah, tetapi bernilai tinggi di sisi-Nya.</p>
+            </div>
+            
+            <div class="success-box">
+                <p><strong>Semoga kita termasuk hamba-hamba Allah yang:</strong><br><span class="emoji">🔸</span>Menjaga sunnah<br><span class="emoji">🔸</span>Menjaga kesehatan<br><span class="emoji">🔸</span>Dan meraih ridha-Nya</p>
+            </div>
+            
+            <p style="text-align: center; font-weight: bold; color: #8B0000; margin-top: 20px;">Wallāhu a'lam bish-shawāb.</p>
+            
+            <div class="decorative-symbols" style="margin-top: 30px; font-size: 1.8em; color: #388E3C;">🌙 🕊️ ☪️</div>
+            <div class="author-signature">@Gen Zehat 2026 - dr. Muin</div>
+        </div>
+    </div>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 4 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = Math.random() * 2 + 2 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

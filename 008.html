@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gosok Gigi di Bulan Ramadhan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6D4C41 0%, #8BC34A 100%);
+            color: #3E2723;
+            line-height: 1.8;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #FFEB3B;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .mosque-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="40" fill="%233E2723">☪️</text></svg>');
+            background-size: 100px 100px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 253, 235, 0.95);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 25px 70px rgba(62, 39, 35, 0.4);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(139, 195, 74, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            border-bottom: none;
+            position: relative;
+            background: linear-gradient(135deg, #5D4037 0%, #689F38 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(93, 64, 55, 0.3);
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="40" fill="%23FFEB3B" opacity="0.1">🦷</text></svg>');
+            background-size: 80px 80px;
+            opacity: 0.3;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 235, 59, 0.3);
+            box-shadow: 0 0 30px rgba(255, 235, 59, 0.5);
+            background: #FFFDE7;
+            padding: 10px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 40px rgba(255, 235, 59, 0.8);
+        }
+
+        .tooth-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(255, 235, 59, 0.7);
+            color: #FFEB3B;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        h1 {
+            color: #FFFDE7;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(62, 39, 35, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-subtitle {
+            color: rgba(255, 253, 235, 0.9);
+            font-size: 1.2em;
+            font-style: italic;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .decorative-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .decorative-line::before,
+        .decorative-line::after {
+            content: '';
+            height: 2px;
+            background: linear-gradient(to right, transparent, #FFA000, transparent);
+            flex: 1;
+        }
+
+        .decorative-line span {
+            margin: 0 15px;
+            font-size: 28px;
+            color: #FFEB3B;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #FFEB3B; }
+            to { text-shadow: 0 0 20px #FFEB3B, 0 0 30px #FFEB3B; }
+        }
+
+        h2 {
+            color: #3E2723;
+            font-size: 1.9em;
+            margin: 30px 0 20px;
+            padding: 15px 20px;
+            border-left: none;
+            background: linear-gradient(to right, rgba(255, 160, 0, 0.1), transparent);
+            border-radius: 10px;
+            border-bottom: 3px solid #FFA000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #5D4037, #FFA000);
+        }
+
+        h3 {
+            color: #3E2723;
+            font-size: 1.5em;
+            margin: 25px 0 15px;
+            padding-left: 15px;
+            border-left: 4px solid #FFA000;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #3E2723;
+            font-size: 1.05em;
+        }
+
+        .hadith-box {
+            background: linear-gradient(135deg, rgba(255, 248, 225, 0.9) 0%, rgba(232, 245, 233, 0.9) 100%);
+            border-left: 5px solid #FFA000;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 8px 20px rgba(255, 160, 0, 0.3);
+            border-right: 1px solid rgba(255, 160, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hadith-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(255, 160, 0, 0.4);
+        }
+
+        .hadith-box::before {
+            content: "﴾";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2em;
+            color: rgba(93, 64, 55, 0.1);
+            font-family: 'Traditional Arabic', serif;
+        }
+
+        .hadith-box::after {
+            content: "﴿";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 2em;
+            color: rgba(93, 64, 55, 0.1);
+            font-family: 'Traditional Arabic', serif;
+        }
+
+        /* Gaya khusus untuk teks Arab */
+        .arabic-text {
+            text-align: center;
+            color: #689F38;
+            font-weight: bold;
+            font-size: 2.2em;
+            font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade', serif;
+            margin: 20px 0;
+            line-height: 1.6;
+            direction: rtl;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .hadith-box p {
+            color: #3E2723;
+            font-style: normal;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hadith-box small {
+            color: #5D4037;
+            font-weight: bold;
+            display: block;
+            text-align: right;
+            margin-top: 15px;
+            font-style: normal;
+        }
+
+        .source-link {
+            background: rgba(255, 248, 225, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #689F38;
+            border-right: 1px solid rgba(104, 159, 56, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .source-link:hover {
+            background: rgba(255, 248, 225, 1);
+            transform: translateX(5px);
+        }
+
+        .source-link a {
+            color: #33691E;
+            text-decoration: none;
+            word-break: break-all;
+            font-weight: 600;
+        }
+
+        .source-link a:hover {
+            text-decoration: underline;
+            color: #1B5E20;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #3E2723;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            color: #FFA000;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            font-size: 1.2em;
+        }
+
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            border-top: none;
+            color: #5D4037;
+            font-style: italic;
+            background: linear-gradient(135deg, rgba(93, 64, 55, 0.05) 0%, rgba(104, 159, 56, 0.05) 100%);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #5D4037, #FFA000, #5D4037);
+        }
+
+        .decorative-symbols {
+            text-align: center;
+            font-size: 2.5em;
+            margin: 30px 0;
+            opacity: 0.8;
+            animation: float 3s ease-in-out infinite;
+            letter-spacing: 10px;
+            color: #5D4037;
+        }
+
+        .author-signature {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 160, 0, 0.1);
+            border-radius: 15px;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.0em;
+            color: #3E2723;
+            border: 2px dashed #FFA000;
+            position: relative;
+        }
+
+        .author-signature::before {
+            content: "—";
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: #FFA000;
+        }
+
+        .author-signature::after {
+            content: "—";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: #FFA000;
+        }
+
+        .highlight-box {
+            background: rgba(255, 248, 225, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #5D4037;
+            border-right: 1px solid rgba(93, 64, 55, 0.3);
+        }
+
+        .warning-box {
+            background: rgba(255, 243, 224, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #FF8F00;
+            border-right: 1px solid rgba(255, 143, 0, 0.3);
+        }
+
+        .success-box {
+            background: rgba(232, 245, 233, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #689F38;
+            border-right: 1px solid rgba(104, 159, 56, 0.3);
+        }
+
+        .medical-box {
+            background: rgba(240, 255, 234, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #558B2F;
+            border-right: 1px solid rgba(85, 139, 47, 0.3);
+        }
+
+        blockquote {
+            font-style: italic;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 248, 225, 0.5);
+            border-left: 5px solid #5D4037;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+                padding: 12px 15px;
+            }
+
+            h3 {
+                font-size: 1.3em;
+            }
+
+            .tooth-icon {
+                font-size: 50px;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .decorative-symbols {
+                font-size: 1.8em;
+                letter-spacing: 5px;
+            }
+            
+            /* Ukuran font Arab untuk mobile */
+            .arabic-text {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+            
+            /* Ukuran font Arab untuk layar sangat kecil */
+            .arabic-text {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="mosque-pattern"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="https://muin123-dr.github.io/Website/gen%20zehat.png" alt="Logo Gen Zehat" class="logo">
+            </div>
+            <div class="tooth-icon">🦷</div>
+            <h1>Gosok Gigi di Bulan Ramadhan</h1>
+            <div class="header-subtitle">Agar Kuman minggir dan kata² kotor tak terlontar</div>
+            <div class="decorative-line">
+                <span>☪️</span>
+            </div>
+        </div>
+
+        <p>Bulan Ramadhan adalah bulan ibadah, kesucian, dan penyucian diri. <br>Namun, di tengah semangat beribadah, muncul anggapan di sebagian masyarakat bahwa menggosok gigi saat puasa sebaiknya dihindari, dengan alasan menjaga keutamaan bau mulut orang yang berpuasa sebagaimana disebutkan dalam hadits.</p>
+
+        <p><b>Benarkah demikian?</b></p>
+
+        <h2>A. Hadits tentang Bau Mulut Orang Puasa</h2>
+
+        <div class="hadith-box">
+            <p>Dari Abu Hurairah radhiyallahu 'anhu, Rasulullah shallallahu 'alaihi wa sallam bersabda:</p>
+            <p class="arabic-text">لَخُلُوفُ فَمِ الصَّائِمِ أَطْيَبُ عِنْدَ اللَّهِ تَعَالَى مِنْ رِيحِ الْمِسْكِ</p>
+            <p>"Sungguh bau mulut orang yang berpuasa lebih harum di sisi Allah daripada bau minyak misk."</p>
+            <small>(HR. Bukhari no. 1894 dan Muslim no. 1151)</small>
+        </div>
+
+        <p>Hadits ini sering disalahpahami, sehingga sebagian orang memilih tidak menggosok gigi sama sekali selama berpuasa, baik dengan siwak maupun pasta gigi.</p>
+
+        <div class="warning-box">
+            <p><strong>Pemahaman yang Benar:</strong> <br>Yang dimaksud bau mulut (khaluf) dalam hadits ini adalah bau yang berasal dari lambung yang kosong karena puasa, <strong>bukan</strong> bau tidak sedap akibat mulut yang kotor dan tidak terawat.</p>
+        </div>
+
+        <h2>B. Teladan Nabi ﷺ: <br>Bersiwak Saat Puasa</h2>
+
+        <div class="hadith-box">
+            <p>Seorang sahabat berkata:</p>
+            <p class="arabic-text">رَأَيْتُ النَّبِيَّ ﷺ مَا لَا أُحْصِي يَتَسَوَّكُ وَهُوَ صَائِمٌ</p>
+            <p>"Aku melihat Nabi ﷺ bersiwak berkali-kali hingga tak dapat kuhitung, sementara beliau sedang berpuasa."</p>
+            <small>(HR. Tirmidzi no. 725 dan Ahmad 3/445)</small>
+        </div>
+
+        <p>Hadits ini menjadi dalil kuat bahwa bersiwak atau menggosok gigi tidak bertentangan dengan puasa, bahkan merupakan bagian dari sunnah Nabi ﷺ.</p>
+
+        <h2>C. Anjuran Umum Nabi untuk Menjaga Kebersihan Mulut</h2>
+
+        <div class="hadith-box">
+            <p>Rasulullah ﷺ bersabda:</p>
+            <p class="arabic-text">لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ بِالسِّوَاكِ مَعَ كُلِّ صَلَاةٍ</p>
+            <p>"Seandainya tidak memberatkan umatku, niscaya aku perintahkan mereka untuk bersiwak setiap hendak shalat."</p>
+            <small>(HR. Bukhari no. 887)</small>
+        </div>
+
+        <div class="hadith-box">
+            <p>Beliau juga bersabda:</p>
+            <p class="arabic-text">السِّوَاكُ مَطْهَرَةٌ لِلْفَمِ مَرْضَاةٌ لِلرَّبِّ</p>
+            <p>"Siwak itu membersihkan mulut dan mendatangkan ridha Allah."</p>
+            <small>(HR. An-Nasa'i, dishahihkan Al-Albani)</small>
+        </div>
+
+        <div class="success-box">
+            <p><strong>Kesimpulan:</strong> <br>Hadits-hadits ini menunjukkan bahwa kebersihan mulut adalah sunnah yang sangat ditekankan, tanpa pengecualian saat puasa.</p>
+        </div>
+
+        <div class="decorative-symbols">🦷 ☪️ 🌙 ☪️ 🦷</div>
+
+        <h2>D. Tinjauan Medis: <br>Mengapa Gosok Gigi Tetap Penting Saat Puasa</h2>
+
+        <div class="medical-box">
+            <p><strong>Dari sudut pandang medis,</strong> rongga mulut adalah salah satu pintu utama masuknya penyakit. Mulut yang kotor dan gigi berlubang menjadi tempat subur bagi bakteri patogen.</p>
+            
+            <p><strong>Bakteri dari mulut dapat menyebar:</strong></p>
+            <ul>
+                <li>Ke saluran pencernaan</li>
+                <li>Ke saluran pernapasan</li>
+                <li>Ke aliran darah</li>
+            </ul>
+            
+            <p><strong>Akibatnya:</strong></p>
+            <ul>
+                <li>Meningkatkan risiko infeksi</li>
+                <li>Memperburuk penyakit kronis</li>
+                <li>Menimbulkan bau mulut yang mengganggu</li>
+                <li>Bahkan berpotensi menularkan penyakit kepada lawan bicara</li>
+            </ul>
+            
+            <p>Karena itu, menjaga kebersihan gigi dan mulut bukan hanya urusan pribadi, tetapi juga bagian dari tanggung jawab sosial.</p>
+        </div>
+
+        <div class="decorative-symbols">🌙 🦷 🕌 🦷 🌙</div>
+
+        <div class="footer">
+            <h2 style="text-align: center; border: none; padding: 0; color: #3E2723;">Kesimpulan</h2>
+            
+            <div class="highlight-box">
+                <p>Hadits tentang keutamaan bau mulut orang yang berpuasa <strong>bukanlah</strong> dalil larangan bersiwak atau menggosok gigi. Hadits tersebut merupakan sanjungan Allah kepada orang yang tetap berpuasa dengan ikhlas, meskipun muncul bau mulut sebagai konsekuensi alami dari puasa.</p>
+                
+                <p><strong>Adapun,</strong> Bersiwak atau gosok gigi saat puasa tetap dianjurkan dengan alasan:<br>🔸Nabi ﷺ melakukannya<br>🔸Ulama membolehkannya<br>🔸Medis sangat menganjurkannya</p>
+                
+                <p>Puasa tidak bertentangan dengan kebersihan. Justru Islam mengajarkan ibadah yang bersih, sehat, dan bermartabat.</p>
+            </div>
+            
+            <div class="success-box">
+                <p><strong>Semoga kita termasuk hamba-hamba Allah yang:</strong><br>🔸Menjaga sunnah<br>🔸Menjaga kesehatan<br>🔸Dan meraih ridha-Nya</p>
+            </div>
+            
+            <p style="text-align: center; font-weight: bold; color: #FFA000; margin-top: 20px;">Wallāhu a'lam bish-shawāb.</p>
+            
+            <div class="decorative-symbols" style="margin-top: 30px; font-size: 1.8em; color: #689F38;">🌙 🦷 ☪️</div>
+            <div class="author-signature">@Gen Zehat 2026 - dr. Muin</div>
+        </div>
+    </div>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 4 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = Math.random() * 2 + 2 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
