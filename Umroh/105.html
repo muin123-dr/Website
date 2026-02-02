@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Bawaan Umroh</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0d9488;
+      --secondary: #fef3c7;
+      --soft-green: #d1fae5;
+      --soft-gold: #fde68a;
+      --text: #1f2937;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #f0f9ff 0%, #fefce8 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-bottom: 50px;
+      color: var(--text);
+      min-height: 100vh;
+    }
+    
+    .header-section {
+      background: linear-gradient(to right, var(--primary), #0891b2);
+      color: white;
+      padding: 25px 10px 35px;
+      border-radius: 0 0 40px 40px;
+      margin-bottom: 25px;
+      box-shadow: 0 6px 20px rgba(6, 78, 59, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header-section::before {
+      content: "🕋 🌙 ✨";
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 1.8rem;
+      opacity: 0.7;
+    }
+    
+    .bismillah {
+      font-size: 1.6rem;
+      font-family: 'Times New Roman', serif;
+      margin-bottom: 8px;
+      color: var(--soft-gold);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .info-waktu {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 12px;
+      margin-top: 15px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .info-waktu div {
+      font-size: 0.9rem;
+      margin-bottom: 3px;
+    }
+    
+    .card {
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      background-color: white;
+      overflow: hidden;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(to right, var(--primary), #0d9488);
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(to right, #0b8379, #0d9488);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(13, 148, 136, 0.2);
+    }
+    
+    .btn-pemilik {
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: 600;
+      margin: 5px;
+      border: 2px solid #e5e7eb;
+      background-color: white;
+      color: var(--text);
+      transition: all 0.3s;
+      flex: 1;
+    }
+    
+    .btn-pemilik.active {
+      background: linear-gradient(to right, var(--primary), #0d9488);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 8px rgba(13, 148, 136, 0.2);
+    }
+    
+    .btn-pemilik i {
+      margin-right: 8px;
+    }
+    
+    .btn-lokasi {
+      border-radius: 15px;
+      padding: 12px;
+      margin: 8px 0;
+      font-weight: 600;
+      position: relative;
+      border: 2px solid #e5e7eb;
+      background-color: white;
+      color: var(--text);
+      text-align: left;
+      transition: all 0.3s;
+      width: 100%;
+    }
+    
+    .btn-lokasi:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    
+    .btn-lokasi.active {
+      background-color: var(--soft-green);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-lokasi i {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+    
+    .badge-lengkap {
+      color: #10b981;
+      font-size: 0.75rem;
+      display: block;
+      margin-top: 5px;
+      font-weight: 600;
+      min-height: 20px;
+    }
+    
+    .badge-lengkap .loading-spinner {
+      display: none;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 5px;
+      display: inline-block;
+    }
+    
+    .footer {
+      font-style: italic;
+      color: var(--primary);
+      margin-top: 30px;
+      font-weight: 500;
+      padding: 15px;
+      background-color: rgba(209, 250, 229, 0.5);
+      border-radius: 15px;
+    }
+    
+    .tabel-container {
+      border: 2px solid var(--soft-green);
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 20px;
+      background-color: white;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .table {
+      margin-bottom: 0;
+    }
+    
+    .table thead {
+      background-color: var(--soft-green);
+    }
+    
+    .table th {
+      border: none;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .table td {
+      border: none;
+      border-bottom: 1px solid #f3f4f6;
+      vertical-align: middle;
+    }
+    
+    .table tbody tr:hover {
+      background-color: #f9fafb;
+    }
+    
+    .nav-pills .nav-link {
+      border-radius: 12px;
+      padding: 12px;
+      margin: 0 5px;
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .nav-pills .nav-link.active {
+      background: linear-gradient(to right, var(--primary), #0d9488);
+      box-shadow: 0 4px 8px rgba(13, 148, 136, 0.2);
+    }
+    
+    .nav-pills .nav-link i {
+      margin-right: 8px;
+    }
+    
+    .loader {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 15px auto;
+    }
+    
+    .btn-hapus-loading {
+      position: relative;
+    }
+    
+    .btn-hapus-loading .btn-text {
+      visibility: hidden;
+    }
+    
+    .btn-hapus-loading::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .umroh-emoji {
+      font-size: 1.2rem;
+      margin: 0 5px;
+    }
+    
+    .pemilik-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    /* Modal Notifikasi */
+    .modal-notifikasi {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background-color: white;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      animation: modalAppear 0.3s ease;
+    }
+    
+    @keyframes modalAppear {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .modal-header {
+      background: linear-gradient(to right, var(--primary), #0891b2);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .modal-header i {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    .modal-body {
+      padding: 25px;
+      text-align: center;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    
+    .modal-footer {
+      padding: 15px 25px 25px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    
+    .modal-btn {
+      padding: 10px 25px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      min-width: 100px;
+    }
+    
+    .modal-btn-ya {
+      background: linear-gradient(to right, var(--primary), #0d9488);
+      color: white;
+    }
+    
+    .modal-btn-ya:hover {
+      background: linear-gradient(to right, #0b8379, #0d9488);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(13, 148, 136, 0.2);
+    }
+    
+    .modal-btn-tidak {
+      background-color: #f3f4f6;
+      color: var(--text);
+    }
+    
+    .modal-btn-tidak:hover {
+      background-color: #e5e7eb;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Modal Notifikasi Simpan -->
+<div id="modalSimpan" class="modal-notifikasi">
+  <div class="modal-content">
+    <div class="modal-header">
+      <i class="fas fa-check-circle"></i>
+      <h5 class="mb-0">Sukses!</h5>
+    </div>
+    <div class="modal-body">
+      Data telah tersimpan! ✨
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-ya" onclick="tutupModal('modalSimpan')">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Konfirmasi Hapus -->
+<div id="modalHapus" class="modal-notifikasi">
+  <div class="modal-content">
+    <div class="modal-header">
+      <i class="fas fa-exclamation-triangle"></i>
+      <h5 class="mb-0">Konfirmasi</h5>
+    </div>
+    <div class="modal-body">
+      Yakin mau menghapus barang ini? ✨
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-tidak" onclick="tutupModal('modalHapus')">Tidak</button>
+      <button class="modal-btn modal-btn-ya" onclick="konfirmasiHapus()">Ya</button>
+    </div>
+  </div>
+</div>
+
+<div class="header-section text-center">
+  <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+  <h2><span class="umroh-emoji">🕋</span> Barang Bawaan Umroh <span class="umroh-emoji">🌙</span></h2>
+  
+  <div class="info-waktu d-inline-block">
+    <div id="lokasi-info"><i class="fas fa-map-marker-alt"></i> Mendapatkan lokasi...</div>
+    <div id="hari-tanggal">Mendapatkan tanggal...</div>
+    <div id="jam">00:00:00</div>
+  </div>
+</div>
+
+<div class="container" style="max-width: 600px;">
+  <ul class="nav nav-pills nav-fill mb-4 card p-2 flex-row">
+    <li class="nav-item">
+      <a class="nav-link active" id="tab-input" href="#" onclick="showSection('input')"><i class="fas fa-plus-circle"></i> Input Barang</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="tab-output" href="#" onclick="showSection('output')"><i class="fas fa-list-check"></i> Checklist Barang</a>
+    </li>
+  </ul>
+
+  <div id="section-input" class="card p-4">
+    <form id="formBawaan">
+      <div class="mb-4">
+        <label class="form-label fw-bold">Milik:</label>
+        <div class="pemilik-container">
+          <button type="button" class="btn btn-pemilik active" id="btn-muin" onclick="selectPemilik('Muin')">
+            <i class="fas fa-male"></i> Muin
+          </button>
+          <button type="button" class="btn btn-pemilik" id="btn-inneke" onclick="selectPemilik('Inneke')">
+            <i class="fas fa-female"></i> Inneke
+          </button>
+        </div>
+        <input type="hidden" name="milik" id="input-milik" value="Muin" required>
+      </div>
+      
+      <div class="mb-4">
+        <label class="form-label fw-bold">Disimpan di:</label>
+        <select class="form-select" name="lokasi" required style="padding: 12px; border-radius: 12px;">
+          <option value="Koper B"><i class="fas fa-suitcase"></i> Koper B</option>
+          <option value="Koper k"><i class="fas fa-suitcase"></i> Koper k</option>
+          <option value="Tas B"><i class="fas fa-briefcase"></i> Tas B</option>
+          <option value="Tas k"><i class="fas fa-briefcase"></i> Tas k</option>
+        </select>
+      </div>
+      
+      <div class="mb-4">
+        <label class="form-label fw-bold">Nama Barang:</label>
+        <input type="text" class="form-control" name="barang" placeholder="Contoh: Kain Ihram, Paspor, Obat-obatan" required style="padding: 12px; border-radius: 12px;">
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-100 p-3 fw-bold" id="btnSimpan">
+        <i class="fas fa-save"></i> SIMPAN BARANG
+      </button>
+      <div class="loader" id="loader"></div>
+    </form>
+  </div>
+
+  <div id="section-output" class="card p-4 hidden" style="display:none">
+    <label class="form-label fw-bold">Pilih Pemilik:</label>
+    <select class="form-select mb-4" id="pilihPemilik" onchange="renderMenuLokasi()" style="padding: 12px; border-radius: 12px;">
+      <option value="">-- Pilih Nama --</option>
+      <option value="Muin">Muin</option>
+      <option value="Inneke">Inneke</option>
+    </select>
+
+    <div id="areaLokasi" style="display:none">
+      <h5 class="mb-3 text-center">Barang bawaan <span id="namaPakBu" class="text-primary"></span> <span class="umroh-emoji">✨</span></h5>
+      
+      <div class="mb-4">
+        <button class="btn btn-lokasi" id="btnKoperB" onclick="toggleTabel('Koper B')">
+          <i class="fas fa-suitcase"></i> Koper B <span id="stat-KoperB" class="badge-lengkap"></span>
+        </button>
+        <div id="tabel-KoperB" class="tabel-container" style="display:none;"></div>
+        
+        <button class="btn btn-lokasi" id="btnKoperk" onclick="toggleTabel('Koper k')">
+          <i class="fas fa-suitcase"></i> Koper k <span id="stat-Koperk" class="badge-lengkap"></span>
+        </button>
+        <div id="tabel-Koperk" class="tabel-container" style="display:none;"></div>
+        
+        <button class="btn btn-lokasi" id="btnTasB" onclick="toggleTabel('Tas B')">
+          <i class="fas fa-briefcase"></i> Tas B <span id="stat-TasB" class="badge-lengkap"></span>
+        </button>
+        <div id="tabel-TasB" class="tabel-container" style="display:none;"></div>
+        
+        <button class="btn btn-lokasi" id="btnTask" onclick="toggleTabel('Tas k')">
+          <i class="fas fa-briefcase"></i> Tas k <span id="stat-Task" class="badge-lengkap"></span>
+        </button>
+        <div id="tabel-Task" class="tabel-container" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer text-center">
+    <span class="umroh-emoji">🕋</span> Semoga perjalanan dimudahkan dan Umrohnya Mabrur <span class="umroh-emoji">🌙</span>
+  </div>
+</div>
+
+<script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyFe6grGYBS1dfoJ3gij1zFriI-b7BmVvesaOGc1eXLBK3h3j-ZHOliCbrM8Lz8J2hJ/exec";
+  let allData = [];
+  let currentTabel = '';
+  let itemToDelete = null;
+  let deleteButton = null;
+  let previousStatus = {
+    'Koper B': false,
+    'Koper k': false,
+    'Tas B': false,
+    'Tas k': false
+  };
+
+  // Fungsi untuk mendapatkan lokasi real-time
+  async function getLocation() {
+    try {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          
+          // Menggunakan Nominatim API (OpenStreetMap) untuk reverse geocoding
+          try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`);
+            const data = await response.json();
+            
+            if (data.address) {
+              let locationName = '';
+              if (data.address.city) {
+                locationName = data.address.city;
+              } else if (data.address.town) {
+                locationName = data.address.town;
+              } else if (data.address.village) {
+                locationName = data.address.village;
+              } else if (data.address.state) {
+                locationName = data.address.state;
+              }
+              
+              if (data.address.country) {
+                locationName += `, ${data.address.country}`;
+              }
+              
+              document.getElementById('lokasi-info').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${locationName}`;
+            }
+          } catch (error) {
+            console.log("Gagal mendapatkan nama lokasi, menggunakan koordinat");
+            document.getElementById('lokasi-info').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${lat.toFixed(4)}°, ${lon.toFixed(4)}°`;
+          }
+        }, (error) => {
+          // Jika user menolak atau ada error
+          document.getElementById('lokasi-info').innerHTML = `<i class="fas fa-map-marker-alt"></i> Makkah, Arab Saudi (Lokasi Default)`;
+        });
+      } else {
+        document.getElementById('lokasi-info').innerHTML = `<i class="fas fa-map-marker-alt"></i> Makkah, Arab Saudi`;
+      }
+    } catch (error) {
+      document.getElementById('lokasi-info').innerHTML = `<i class="fas fa-map-marker-alt"></i> Makkah, Arab Saudi`;
+    }
+  }
+
+  // Fungsi untuk update waktu dan tanggal
+  function updateWaktu() {
+    const now = new Date();
+    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+                   'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    
+    const hari = days[now.getDay()];
+    const tanggal = now.getDate();
+    const bulan = months[now.getMonth()];
+    const tahun = now.getFullYear();
+    
+    // Format jam
+    const jam = now.getHours().toString().padStart(2, '0');
+    const menit = now.getMinutes().toString().padStart(2, '0');
+    const detik = now.getSeconds().toString().padStart(2, '0');
+    
+    document.getElementById('hari-tanggal').innerText = `${hari}, ${tanggal} ${bulan} ${tahun}`;
+    document.getElementById('jam').innerText = `${jam}:${menit}:${detik}`;
+  }
+  
+  // Inisialisasi waktu dan lokasi
+  getLocation();
+  updateWaktu();
+  
+  // Update waktu setiap detik
+  setInterval(updateWaktu, 1000);
+
+  // Fungsi untuk memilih pemilik di input section
+  function selectPemilik(nama) {
+    document.getElementById('input-milik').value = nama;
+    
+    // Update tampilan tombol
+    const btnMuin = document.getElementById('btn-muin');
+    const btnInneke = document.getElementById('btn-inneke');
+    
+    if (nama === 'Muin') {
+      btnMuin.classList.add('active');
+      btnInneke.classList.remove('active');
+    } else {
+      btnInneke.classList.add('active');
+      btnMuin.classList.remove('active');
+    }
+  }
+
+  // Fungsi untuk menampilkan modal
+  function tampilkanModal(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+
+  // Fungsi untuk menutup modal
+  function tutupModal(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+
+  function showSection(type) {
+    document.getElementById('section-input').style.display = type === 'input' ? 'block' : 'none';
+    document.getElementById('section-output').style.display = type === 'output' ? 'block' : 'none';
+    document.getElementById('tab-input').classList.toggle('active', type === 'input');
+    document.getElementById('tab-output').classList.toggle('active', type === 'output');
+    if(type === 'output') muatData();
+  }
+
+  // SIMPAN DATA
+  document.getElementById('formBawaan').onsubmit = function(e) {
+    e.preventDefault();
+    document.getElementById('btnSimpan').style.display = 'none';
+    document.getElementById('loader').style.display = 'block';
+
+    const formData = new URLSearchParams(new FormData(this));
+    formData.append('action', 'insert');
+
+    fetch(SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' })
+      .then(() => {
+        setTimeout(() => {
+          document.getElementById('formBawaan').reset();
+          document.getElementById('btnSimpan').style.display = 'block';
+          document.getElementById('loader').style.display = 'none';
+          // Reset tombol pemilik
+          selectPemilik('Muin');
+          // Tampilkan modal notifikasi
+          tampilkanModal('modalSimpan');
+        }, 1000);
+      });
+  };
+
+  async function muatData() {
+    const res = await fetch(`${SCRIPT_URL}?action=read`);
+    allData = await res.json();
+    renderMenuLokasi();
+  }
+
+  function renderMenuLokasi() {
+    const pemilik = document.getElementById('pilihPemilik').value;
+    if(!pemilik) { 
+      document.getElementById('areaLokasi').style.display = 'none'; 
+      return; 
+    }
+    
+    document.getElementById('areaLokasi').style.display = 'block';
+    document.getElementById('namaPakBu').innerText = pemilik === 'Muin' ? 'Pak Muin' : 'Bu Inneke';
+    
+    // Reset semua tabel yang terbuka
+    document.querySelectorAll('.tabel-container').forEach(el => {
+      el.style.display = 'none';
+    });
+    
+    // Reset semua tombol aktif
+    document.querySelectorAll('.btn-lokasi').forEach(el => {
+      el.classList.remove('active');
+    });
+    
+    // Cek Status Lengkap
+    const lokasiList = ['Koper B', 'Koper k', 'Tas B', 'Tas k'];
+    lokasiList.forEach(lok => {
+      const items = allData.filter(r => r[1] === pemilik && r[2] === lok);
+      const isLengkap = items.length > 0 && items.every(r => r[4] === true || r[4] === "true");
+      const badgeElement = document.getElementById(`stat-${lok.replace(' ', '')}`);
+      
+      // Jika status berubah menjadi lengkap dan sebelumnya tidak lengkap
+      if (isLengkap && !previousStatus[lok]) {
+        // Tampilkan animasi loading
+        badgeElement.innerHTML = '<span class="loading-spinner"></span> Memproses...';
+        
+        // Simpan status baru
+        previousStatus[lok] = true;
+        
+        // Setelah 1.5 detik, tampilkan "Lengkap"
+        setTimeout(() => {
+          badgeElement.innerHTML = "✅ Lengkap";
+        }, 1500);
+      } 
+      // Jika tetap lengkap
+      else if (isLengkap && previousStatus[lok]) {
+        badgeElement.innerHTML = "✅ Lengkap";
+      }
+      // Jika tidak lengkap
+      else {
+        badgeElement.innerHTML = "";
+        previousStatus[lok] = false;
+      }
+    });
+  }
+
+  function toggleTabel(lokasi) {
+    const pemilik = document.getElementById('pilihPemilik').value;
+    
+    // Sembunyikan semua tabel
+    document.querySelectorAll('.tabel-container').forEach(el => {
+      el.style.display = 'none';
+    });
+    
+    // Reset semua tombol aktif
+    document.querySelectorAll('.btn-lokasi').forEach(el => {
+      el.classList.remove('active');
+    });
+    
+    // Aktifkan tombol yang dipilih
+    document.getElementById(`btn${lokasi.replace(' ', '')}`).classList.add('active');
+    
+    // Tampilkan tabel yang dipilih
+    const tabelContainer = document.getElementById(`tabel-${lokasi.replace(' ', '')}`);
+    tabelContainer.style.display = 'block';
+    
+    // Render isi tabel
+    renderBarang(lokasi, pemilik, tabelContainer);
+  }
+
+  function renderBarang(lokasi, pemilik, container) {
+    const filtered = allData.filter(r => r[1] === pemilik && r[2] === lokasi);
+    
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="text-center p-4 text-muted">
+        <i class="fas fa-box-open fa-2x mb-3"></i>
+        <p>Tidak ada barang di ${lokasi}</p>
+      </div>`;
+      return;
+    }
+    
+    let tableHTML = `
+      <h6 class="fw-bold mb-3"><i class="fas fa-list"></i> Daftar Barang di ${lokasi}</h6>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th width="10%">No</th>
+              <th>Barang</th>
+              <th width="20%">Cek</th>
+              <th width="15%">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>`;
+    
+    filtered.forEach((row, idx) => {
+      const isChecked = row[4] === true || row[4] === "true" ? "checked" : "";
+      tableHTML += `
+        <tr>
+          <td>${idx + 1}</td>
+          <td>${row[3]}</td>
+          <td>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" ${isChecked} onchange="updateCheck('${row[0]}', this.checked)">
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-danger btn-hapus" onclick="hapusBarang('${row[0]}', this)" data-id="${row[0]}">
+              <span class="btn-text"><i class="fas fa-trash"></i></span>
+            </button>
+          </td>
+        </tr>`;
+    });
+    
+    tableHTML += `</tbody></table></div>`;
+    container.innerHTML = tableHTML;
+  }
+
+  function updateCheck(id, status) {
+    const params = new URLSearchParams();
+    params.append('action', 'updateCheck');
+    params.append('id', id);
+    params.append('status', status);
+    fetch(SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' }).then(() => muatData());
+  }
+
+  function hapusBarang(id, button) {
+    itemToDelete = id;
+    deleteButton = button;
+    tampilkanModal('modalHapus');
+  }
+
+  function konfirmasiHapus() {
+    if (itemToDelete && deleteButton) {
+      // Tampilkan loading di tombol hapus
+      deleteButton.classList.add('btn-hapus-loading');
+      
+      // Tutup modal
+      tutupModal('modalHapus');
+      
+      // Kirim request hapus
+      const params = new URLSearchParams();
+      params.append('action', 'delete');
+      params.append('id', itemToDelete);
+      
+      fetch(SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
+        .then(() => {
+          // Tunggu 1 detik untuk simulasi loading
+          setTimeout(() => {
+            // Hapus class loading
+            if (deleteButton) {
+              deleteButton.classList.remove('btn-hapus-loading');
+            }
+            // Muat ulang data
+            muatData();
+            
+            // Reset variabel
+            itemToDelete = null;
+            deleteButton = null;
+          }, 1000);
+        });
+    }
+  }
+</script>
+</body>
+</html>

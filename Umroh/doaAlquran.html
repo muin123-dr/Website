@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumpulan Doa-Doa Dari Al-Qur'an</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c5c3e;
+            --primary-light: #3f7a57;
+            --secondary: #d4af37;
+            --light: #f9f7f2;
+            --dark: #1a2c24;
+            --gray: #eae7dc;
+            --text: #333333;
+            --text-light: #666666;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+            padding: 0;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .theme-toggle, .font-size-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover, .font-size-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .categories {
+            background-color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .category-btn {
+            background: var(--gray);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text);
+        }
+
+        .category-btn:hover {
+            background: #d6d1c4;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .content {
+            padding: 2.5rem 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary);
+            font-weight: 600;
+        }
+
+        .doa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .doa-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .doa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .doa-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+        }
+
+        .doa-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .doa-reference {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .doa-body {
+            padding: 1.5rem;
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            text-align: right;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            direction: rtl;
+        }
+
+        .translation {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.7;
+            padding: 1rem 0;
+            border-top: 1px solid var(--gray);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray);
+        }
+
+        .copy-btn, .bookmark-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .copy-btn:hover, .bookmark-btn:hover {
+            background: var(--gray);
+        }
+
+        .bookmark-btn.active {
+            color: var(--secondary);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 99;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .categories {
+            background-color: #1e1e1e;
+        }
+
+        body.dark-mode .doa-card {
+            background: #1e1e1e;
+            border-color: #333;
+        }
+
+        body.dark-mode .doa-header {
+            background: #1a3c2b;
+        }
+
+        body.dark-mode .arabic-text {
+            color: #f0f0f0;
+        }
+
+        body.dark-mode .translation {
+            color: #d0d0d0;
+        }
+
+        body.dark-mode .category-btn {
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .category-btn:hover {
+            background: #444;
+        }
+
+        body.dark-mode .category-btn.active {
+            background: var(--primary);
+        }
+
+        body.dark-mode .copy-btn, 
+        body.dark-mode .bookmark-btn {
+            color: #4caf7d;
+        }
+
+        body.dark-mode .copy-btn:hover, 
+        body.dark-mode .bookmark-btn:hover {
+            background: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .doa-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .arabic-text {
+                font-size: 1.5rem;
+            }
+            
+            .categories-list {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .theme-toggle, .font-size-toggle {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        /* Font size classes */
+        .font-small .arabic-text {
+            font-size: 1.5rem;
+        }
+        
+        .font-small .translation {
+            font-size: 0.9rem;
+        }
+        
+        .font-large .arabic-text {
+            font-size: 2.2rem;
+        }
+        
+        .font-large .translation {
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-book-quran"></i> Kumpulan Doa-Doa Dari Al-Qur'an</h1>
+            <p class="subtitle">Koleksi doa-doa yang terdapat dalam Al-Qur'an beserta terjemahannya</p>
+            
+            <div class="controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i> Mode Gelap
+                </button>
+                <button class="font-size-toggle" id="fontSizeToggle">
+                    <i class="fas fa-text-height"></i> Ukuran Teks
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="categories">
+        <div class="container">
+            <ul class="categories-list" id="categoriesList">
+                <!-- Categories will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+
+    <main class="content">
+        <div class="container">
+            <div id="doaContainer">
+                <!-- Doa cards will be dynamically added here -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3><i class="fas fa-hands-praying"></i> Doa-Doa Dari Al-Qur'an</h3>
+                <p class="footer-text">Semua doa diambil dari Al-Qur'an dengan terjemahan dari Departemen Agama RI. Semoga bermanfaat untuk meningkatkan keimanan dan ketakwaan kita.</p>
+                <p class="footer-text">© 2023 Kumpulan Doa Al-Qur'an. Dibuat dengan niat ibadah.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Doa data
+        const doaData = [
+            {
+                id: 1,
+                category: "Mohon Ampunan dan Rahmat",
+                title: "Doa mohon ampunan dan rahmat Allah",
+                arabic: "رَبِّ إِنِّي أَعُوذُ بِكَ أَنْ أَسْأَلَكَ مَا لَيْسَ لِي بِهِ عِلْمٌ وَإِلَّا تَغْفِرْ لِي وَتَرْحَمْنِي أَكُنْ مِنَ الْخَاسِرِينَ",
+                translation: "Ya Tuhanku, sesungguhnya aku berlindung kepada Engkau dari memohon kepada Engkau sesuatu yang aku tiada mengetahui (hakekat)nya. Dan sekiranya Engkau tidak memberi ampun kepadaku, dan (tidak) menaruh belas kasihan kepadaku, niscaya aku akan termasuk orang-orang yang merugi",
+                reference: "QS. Huud: 47"
+            },
+            {
+                id: 2,
+                category: "Mohon Ampunan dan Rahmat",
+                title: "Doa mohon ampunan dan rahmat Allah",
+                arabic: "رَبَّنَا آمَنَّا فَاغْفِرْ لَنَا وَارْحَمْنَا وَأَنْتَ خَيْرُ الرَّاحِمِينَ",
+                translation: "Ya Tuhan kami, kami telah beriman, maka ampunilah kami dan berilah kami rahmat dan Engkau adalah Pemberi rahmat Yang Paling Baik",
+                reference: "QS. Al Mu'minun: 109"
+            },
+            {
+                id: 3,
+                category: "Mohon Ampunan dan Rahmat",
+                title: "Doa mohon ampunan dan rahmat Allah",
+                arabic: "رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ",
+                translation: "Ya Tuhanku berilah ampun dan berilah rahmat, dan Engkau adalah Pemberi rahmat Yang Paling baik",
+                reference: "QS. Al Mu'minun: 118"
+            },
+            {
+                id: 4,
+                category: "Mohon Ampunan dan Rahmat",
+                title: "Doa mohon ampunan bagi diri dan orang lain",
+                arabic: "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِي أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ",
+                translation: "Ya Tuhan kami, ampunilah dosa-dosa kami dan tindakan-tindakan kami yang berlebih-lebihan dalam urusan kami dan tetapkanlah pendirian kami, dan tolonglah kami terhadap kaum yang kafir",
+                reference: "QS. Al Imran: 147"
+            },
+            {
+                id: 5,
+                category: "Mohon Ampunan dan Rahmat",
+                title: "Doa mohon ampunan dan perlindungan dari neraka",
+                arabic: "رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ",
+                translation: "Ya Tuhan kami, sesungguhnya kami telah beriman, maka ampunilah segala dosa kami dan peliharalah kami dari siksa neraka",
+                reference: "QS. Al Imran: 16"
+            },
+            {
+                id: 6,
+                category: "Mohon Ampunan dan Rahmat",
+                title: "Doa mohon ampunan dan kebaikan",
+                arabic: "رَبَّنَا إِنَّنَا سَمِعْنَا مُنَادِيًا يُنَادِي لِلْإِيمَانِ أَنْ آمِنُوا بِرَبِّكُمْ فَآمَنَّا رَبَّنَا فَاغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا وَتَوَفَّنَا مَعَ الْأَبْرَارِ رَبَّنَا وَآتِنَا مَا وَعَدْتَنَا عَلَى رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ الْقِيَامَةِ إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ",
+                translation: "Ya Tuhan kami, sesungguhnya kami mendengar (seruan) yang menyeru kepada iman, (yaitu): 'Berimanlah kamu kepada Tuhanmu', maka kamipun beriman. Ya Tuhan kami, ampunilah bagi kami dosa-dosa kami dan hapuskanlah dari kami kesalahan-kesalahan kami, dan wafatkanlah kami beserta orang-orang yang banyak berbakti. Ya Tuhan kami, berilah kami apa yang telah Engkau janjikan kepada kami dengan perantaraan rasul-rasul Engkau. Dan janganlah Engkau hinakan kami di hari kiamat. Sesungguhnya Engkau tidak menyalahi janji'",
+                reference: "QS. Al Imran: 193-194"
+            },
+            {
+                id: 7,
+                category: "Mohon Ampunan dan Rahmat",
+                title: "Doa mohon ampunan atas kezaliman diri",
+                arabic: "رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي فَغَفَرَ لَهُ إِنَّهُ هُوَ الْغَفُورُ الرَّحِيمُ",
+                translation: "Ya Tuhanku, sesungguhnya aku telah menganiaya diriku sendiri karena itu ampunilah aku. Maka Allah mengampuninya, sesungguhnya Allah Dialah Yang Maha Pengampun lagi Maha Penyayang",
+                reference: "QS. Al Qashash: 16"
+            },
+            {
+                id: 8,
+                category: "Mohon Ampunan dan Rahmat",
+                title: "Doa mohon ampunan dan keringanan",
+                arabic: "رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ",
+                translation: "Ya Tuhan kami, janganlah Engkau hukum kami jika kami lupa atau kami tersalah. Ya Tuhan kami, janganlah Engkau bebankan kepada kami beban yang berat sebagaimana Engkau bebankan kepada orang-orang sebelum kami. Ya Tuhan kami, janganlah Engkau pikulkan kepada kami apa yang tak sanggup kami memikulnya. Beri maaflah kami; ampunilah kami; dan rahmatilah kami. Engkaulah Penolong kami, maka tolonglah kami terhadap kaum yang kafir",
+                reference: "QS. Al Baqarah: 286"
+            },
+            {
+                id: 9,
+                category: "Mohon Ampunan dan Rahmat",
+                title: "Doa mohon ampunan dan rahmat",
+                arabic: "رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",
+                translation: "Ya Tuhan kami, kami telah menganiaya diri kami sendiri, dan jika Engkau tidak mengampuni kami dan memberi rahmat kepada kami, niscaya pastilah kami termasuk orang-orang yang merugi",
+                reference: "QS. Al A'raf: 23"
+            },
+            {
+                id: 10,
+                category: "Agar Tergolong Orang Beriman",
+                title: "Doa agar tergolong orang-orang beriman",
+                arabic: "رَبِّ هَبْ لِي حُكْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ وَاجْعَلْ لِي لِسَانَ صِدْقٍ فِي الْآخِرِينَ وَاجْعَلْنِي مِنْ وَرَثَةِ جَنَّةِ النَّعِيمِ",
+                translation: "Ya Tuhanku, berikanlah kepadaku hikmah dan masukkanlah aku ke dalam golongan orang-orang yang saleh. Dan jadikanlah aku buah tutur yang baik bagi orang-orang (yang datang) kemudian. Dan jadikanlah aku termasuk orang-orang yang mempusakai surga yang penuh kenikmatan",
+                reference: "QS. Asy Syu'ara: 83-85"
+            },
+            {
+                id: 11,
+                category: "Agar Tergolong Orang Beriman",
+                title: "Doa agar tergolong orang-orang yang menjadi saksi",
+                arabic: "رَبَّنَا آمَنَّا فَاكْتُبْنَا مَعَ الشَّاهِدِينَ",
+                translation: "Ya Tuhan kami, kami telah beriman, maka catatlah kami bersama orang-orang yang menjadi saksi (atas kebenaran Al Quran dan kenabian Muhammad)",
+                reference: "QS. Al Maidah: 83"
+            },
+            {
+                id: 12,
+                category: "Keturunan yang Shalih",
+                title: "Doa agar diberikan keturunan yang shalih",
+                arabic: "رَبِّ لَا تَذَرْنِي فَرْدًا وَأَنْتَ خَيْرُ الْوَارِثِينَ",
+                translation: "Ya Tuhanku janganlah Engkau membiarkan aku hidup seorang diri dan Engkaulah Waris Yang Paling Baik",
+                reference: "QS. Al Anbiya: 89"
+            },
+            {
+                id: 13,
+                category: "Keturunan yang Shalih",
+                title: "Doa agar diberikan keturunan yang shalih",
+                arabic: "رَبِّ هَبْ لِي مِنَ الصَّالِحِينَ",
+                translation: "Ya Tuhanku, anugrahkanlah kepadaku (seorang anak) yang termasuk orang-orang yang saleh",
+                reference: "QS. Ash Shaffat: 100"
+            },
+            {
+                id: 14,
+                category: "Keturunan yang Shalih",
+                title: "Doa agar diberikan keturunan yang baik",
+                arabic: "رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ",
+                translation: "Ya Tuhanku, berilah aku dari sisi Engkau seorang anak yang baik. Sesungguhnya Engkau Maha Pendengar doa",
+                reference: "QS. Al Imran: 38"
+            },
+            {
+                id: 15,
+                category: "Keturunan yang Shalih",
+                title: "Doa agar diberikan keluarga yang menyenangkan hati",
+                arabic: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+                translation: "Ya Tuhan kami, anugrahkanlah kepada kami isteri-isteri kami dan keturunan kami sebagai penyenang hati (kami), dan jadikanlah kami imam bagi orang-orang yang bertakwa",
+                reference: "QS. Al Furqan: 74"
+            }
+        ];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const doaContainer = document.getElementById('doaContainer');
+            const categoriesList = document.getElementById('categoriesList');
+            const themeToggle = document.getElementById('themeToggle');
+            const fontSizeToggle = document.getElementById('fontSizeToggle');
+            const backToTop = document.getElementById('backToTop');
+            
+            // Get all categories from doaData
+            const categories = [...new Set(doaData.map(doa => doa.category))];
+            
+            // Create category buttons
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'category-btn';
+                button.textContent = category;
+                button.dataset.category = category;
+                categoriesList.appendChild(button);
+                
+                // Add click event to filter doas by category
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.category-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Filter and display doas
+                    displayDoas(category);
+                });
+            });
+            
+            // Display all doas initially
+            displayDoas('all');
+            
+            // Set first category as active
+            if (categories.length > 0) {
+                document.querySelector('.category-btn').classList.add('active');
+            }
+            
+            // Theme toggle functionality
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                
+                // Update button text and icon
+                if (document.body.classList.contains('dark-mode')) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i> Mode Terang';
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i> Mode Gelap';
+                }
+            });
+            
+            // Font size toggle functionality
+            let fontSizeState = 'normal'; // normal, small, large
+            fontSizeToggle.addEventListener('click', () => {
+                // Remove previous font size classes
+                document.body.classList.remove('font-small', 'font-large');
+                
+                // Cycle through font sizes
+                if (fontSizeState === 'normal') {
+                    document.body.classList.add('font-small');
+                    fontSizeState = 'small';
+                    fontSizeToggle.innerHTML = '<i class="fas fa-text-height"></i> Ukuran Normal';
+                } else if (fontSizeState === 'small') {
+                    document.body.classList.add('font-large');
+                    fontSizeState = 'large';
+                    fontSizeToggle.innerHTML = '<i class="fas fa-text-height"></i> Ukuran Kecil';
+                } else {
+                    fontSizeState = 'normal';
+                    fontSizeToggle.innerHTML = '<i class="fas fa-text-height"></i> Ukuran Besar';
+                }
+            });
+            
+            // Back to top functionality
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Function to display doas based on category
+            function displayDoas(category) {
+                // Clear container
+                doaContainer.innerHTML = '';
+                
+                // Filter doas if not 'all'
+                const filteredDoas = category === 'all' 
+                    ? doaData 
+                    : doaData.filter(doa => doa.category === category);
+                
+                // Create section for the category
+                const section = document.createElement('div');
+                const sectionTitle = document.createElement('h2');
+                sectionTitle.className = 'section-title';
+                sectionTitle.textContent = category === 'all' ? 'Semua Doa' : category;
+                section.appendChild(sectionTitle);
+                
+                // Create grid for doa cards
+                const grid = document.createElement('div');
+                grid.className = 'doa-grid';
+                
+                // Create cards for each doa
+                filteredDoas.forEach(doa => {
+                    const card = document.createElement('div');
+                    card.className = 'doa-card';
+                    card.dataset.id = doa.id;
+                    
+                    // Check if this doa is bookmarked
+                    const isBookmarked = localStorage.getItem(`bookmark-${doa.id}`) === 'true';
+                    
+                    card.innerHTML = `
+                        <div class="doa-header">
+                            <div class="doa-title">${doa.title}</div>
+                            <div class="doa-reference">${doa.reference}</div>
+                        </div>
+                        <div class="doa-body">
+                            <div class="arabic-text">${doa.arabic}</div>
+                            <div class="translation">${doa.translation}</div>
+                            <div class="actions">
+                                <button class="copy-btn" data-id="${doa.id}">
+                                    <i class="fas fa-copy"></i> Salin Doa
+                                </button>
+                                <button class="bookmark-btn ${isBookmarked ? 'active' : ''}" data-id="${doa.id}">
+                                    <i class="fas fa-bookmark"></i> ${isBookmarked ? 'Tersimpan' : 'Simpan'}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    grid.appendChild(card);
+                });
+                
+                section.appendChild(grid);
+                doaContainer.appendChild(section);
+                
+                // Add event listeners for copy and bookmark buttons
+                addDoaCardEventListeners();
+            }
+            
+            // Function to add event listeners to doa card buttons
+            function addDoaCardEventListeners() {
+                // Copy button functionality
+                document.querySelectorAll('.copy-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const doaId = this.dataset.id;
+                        const doa = doaData.find(d => d.id == doaId);
+                        
+                        if (doa) {
+                            // Copy doa text to clipboard
+                            const textToCopy = `${doa.arabic}\n\n${doa.translation}\n\n${doa.reference}`;
+                            
+                            navigator.clipboard.writeText(textToCopy).then(() => {
+                                // Show feedback
+                                const originalText = this.innerHTML;
+                                this.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+                                this.style.color = 'green';
+                                
+                                setTimeout(() => {
+                                    this.innerHTML = originalText;
+                                    this.style.color = '';
+                                }, 2000);
+                            });
+                        }
+                    });
+                });
+                
+                // Bookmark button functionality
+                document.querySelectorAll('.bookmark-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const doaId = this.dataset.id;
+                        const isCurrentlyBookmarked = this.classList.contains('active');
+                        
+                        if (isCurrentlyBookmarked) {
+                            // Remove bookmark
+                            this.classList.remove('active');
+                            this.innerHTML = '<i class="fas fa-bookmark"></i> Simpan';
+                            localStorage.setItem(`bookmark-${doaId}`, 'false');
+                        } else {
+                            // Add bookmark
+                            this.classList.add('active');
+                            this.innerHTML = '<i class="fas fa-bookmark"></i> Tersimpan';
+                            localStorage.setItem(`bookmark-${doaId}`, 'true');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
