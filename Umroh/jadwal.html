@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umroh Daily Activity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #064e3b; --secondary: #c5a059; --bg: #fdfaf3; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 15px; color: #333; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        
+        /* Header */
+        .header-section { text-align: center; border-bottom: 2px solid var(--secondary); margin-bottom: 20px; padding-bottom: 10px; }
+        h1 { color: var(--primary); margin: 0; font-size: 1.5rem; }
+        .time-info { color: var(--secondary); font-size: 1rem; font-weight: bold; margin: 5px 0; }
+
+        /* Table */
+        h2 { color: var(--primary); font-size: 1.2rem; border-left: 5px solid var(--secondary); padding-left: 10px; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: var(--primary); color: white; }
+        .highlight-jam { font-weight: bold; color: var(--primary); width: 70px; }
+        .empty-msg { text-align: center; color: #999; padding: 20px; font-style: italic; }
+
+        /* Button */
+        .btn-toggle { width: 100%; padding: 12px; background: var(--secondary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin: 15px 0; }
+        #all-plans-section { display: none; background: #f9f9f9; padding: 10px; border-radius: 10px; border: 1px solid #ddd; }
+
+        /* Form */
+        .input-section { margin-top: 30px; padding: 15px; background: #f0f4f2; border-radius: 15px; border-top: 3px solid var(--primary); }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        input { padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
+        .btn-save { background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        
+        .delete-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-weight: bold; font-size: 1.1rem; }
+        .loader { display:none; margin: 10px auto; width: 25px; height: 25px; border: 3px solid #f3f3f3; border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-section">
+        <h1>🕋 Umroh Daily Activity</h1>
+        <div id="clock" class="time-info">Memuat waktu...</div>
+    </div>
+
+    <h2>📅 Jadwal Hari Ini</h2>
+    <table>
+        <thead>
+            <tr><th>Jam</th><th>Kegiatan</th></tr>
+        </thead>
+        <tbody id="today-table-body">
+            <tr><td colspan="2" class="empty-msg">Menghubungkan ke Spreadsheet...</td></tr>
+        </tbody>
+    </table>
+
+    <button class="btn-toggle" onclick="toggleAllPlans()">📋 Lihat Semua Rencana</button>
+    
+    <div id="all-plans-section">
+        <h3>Semua Jadwal</h3>
+        <table>
+            <thead>
+                <tr><th>Tgl</th><th>Jam</th><th>Kegiatan</th><th>Hapus</th></tr>
+            </thead>
+            <tbody id="all-table-body"></tbody>
+        </table>
+    </div>
+
+    <div class="input-section">
+        <h2>➕ Tambah Kegiatan</h2>
+        <div class="form-group">
+            <label>Tanggal:</label>
+            <input type="date" id="in-date">
+            <label>Jam (Klik ikon jam):</label>
+            <input type="time" id="in-time">
+            <input type="text" id="in-activity" placeholder="Contoh: Manasik Haji">
+            <button class="btn-save" id="btnSimpan" onclick="simpanData()">Simpan ke Jadwal</button>
+            <div class="loader" id="loader"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. PASTIKAN URL INI BENAR DAN SUDAH DI-DEPLOY SEBAGAI 'ANYONE'
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyFe6grGYBS1dfoJ3gij1zFriI-b7BmVvesaOGc1eXLBK3h3j-ZHOliCbrM8Lz8J2hJ/exec";
+    let activities = [];
+
+    // --- JAM REAL-TIME ---
+    function updateClock() {
+        const now = new Date();
+        const options = { weekday: 'long', day: 'numeric', month: 'long' };
+        document.getElementById('clock').innerText = `${now.toLocaleDateString('id-ID', options)} | ${now.toLocaleTimeString('id-ID', {hour12:false})}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // --- LOGIKA DATA ---
+
+    async function muatData() {
+        const todayBody = document.getElementById('today-table-body');
+        try {
+            const res = await fetch(`${SCRIPT_URL}?action=read&module=jadwal`);
+            const rawData = await res.json();
+            
+            // Ambil data mulai dari baris kedua (indeks 1) dan bersihkan tanda petik
+            activities = rawData.slice(1).map(row => {
+                return [
+                    row[0].toString().replace(/'/g, ""), // ID
+                    row[1].toString().replace(/'/g, ""), // Tanggal
+                    row[2].toString().replace(/'/g, ""), // Jam
+                    row[3]                               // Kegiatan
+                ];
+            });
+
+            // Urutkan berdasarkan Tanggal dan Jam
+            activities.sort((a, b) => (a[1] + a[2]).localeCompare(b[1] + b[2]));
+            
+            renderTables();
+        } catch (e) {
+            todayBody.innerHTML = `<tr><td colspan="2" class="empty-msg" style="color:red">Gagal koneksi! Periksa SCRIPT_URL atau Izin Deployment.</td></tr>`;
+            console.error(e);
+        }
+    }
+
+    function renderTables() {
+        const todayBody = document.getElementById('today-table-body');
+        const allBody = document.getElementById('all-table-body');
+        
+        // Ambil tanggal hari ini format YYYY-MM-DD
+        const now = new Date();
+        const tglHariIni = now.getFullYear() + "-" + 
+                           String(now.getMonth() + 1).padStart(2, '0') + "-" + 
+                           String(now.getDate()).padStart(2, '0');
+
+        todayBody.innerHTML = "";
+        allBody.innerHTML = "";
+        let countToday = 0;
+
+        activities.forEach(item => {
+            // item[1] = Tanggal, item[2] = Jam, item[3] = Kegiatan
+            
+            // Isi Tabel Semua
+            allBody.innerHTML += `
+                <tr>
+                    <td>${item[1].split('-').slice(1).join('/')}</td>
+                    <td>${item[2]}</td>
+                    <td>${item[3]}</td>
+                    <td><button class="delete-btn" onclick="hapusData('${item[0]}')">×</button></td>
+                </tr>`;
+
+            // Isi Tabel Hari Ini
+            if (item[1] === tglHariIni) {
+                countToday++;
+                todayBody.innerHTML += `
+                    <tr>
+                        <td class="highlight-jam">${item[2]}</td>
+                        <td>${item[3]}</td>
+                    </tr>`;
+            }
+        });
+
+        if (countToday === 0) {
+            todayBody.innerHTML = `<tr><td colspan="2" class="empty-msg">Tidak ada jadwal untuk hari ini (${tglHariIni}).</td></tr>`;
+        }
+    }
+
+    function simpanData() {
+        const tgl = document.getElementById('in-date').value;
+        const jam = document.getElementById('in-time').value;
+        const keg = document.getElementById('in-activity').value;
+
+        if (!tgl || !jam || !keg) return alert("Lengkapi data!");
+
+        document.getElementById('btnSimpan').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+
+        const params = new URLSearchParams();
+        params.append('action', 'insert');
+        params.append('module', 'jadwal');
+        params.append('tanggal', tgl);
+        params.append('jam', jam);
+        params.append('kegiatan', keg);
+
+        fetch(SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
+            .then(() => {
+                setTimeout(() => {
+                    alert("Data tersimpan di Spreadsheet!");
+                    document.getElementById('btnSimpan').style.display = 'block';
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('in-activity').value = "";
+                    muatData();
+                }, 1000);
+            });
+    }
+
+    function hapusData(id) {
+        if(!confirm("Hapus jadwal?")) return;
+        const params = new URLSearchParams();
+        params.append('action', 'delete');
+        params.append('module', 'jadwal');
+        params.append('id', id);
+
+        fetch(SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
+            .then(() => muatData());
+    }
+
+    function toggleAllPlans() {
+        const sect = document.getElementById('all-plans-section');
+        sect.style.display = (sect.style.display === "block") ? "none" : "block";
+    }
+
+    muatData();
+</script>
+</body>
+</html>

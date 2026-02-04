@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumpulan Doa Lengkap & Doa Abi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f1e8;
+            color: #333;
+            background-image: url('https://images.unsplash.com/photo-1541250628459-d10f1c5c2c2f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        header h1 {
+            color: #2c5530;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        header h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(to right, #d4a054, #2c5530);
+            border-radius: 2px;
+        }
+        
+        .header-subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .tab-btn {
+            padding: 16px 32px;
+            background-color: #f9f5ed;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c5530;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid #e6d7b8;
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background-color: #e8dfc8;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(to right, #d4a054, #2c5530);
+            color: white;
+            border-color: #d4a054;
+        }
+        
+        .tab-btn i {
+            font-size: 1.3rem;
+        }
+        
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .doa-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .doa-item {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid #e6d7b8;
+        }
+        
+        .doa-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .doa-header {
+            background: linear-gradient(to right, #2c5530, #3e7245);
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .doa-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .doa-header i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .doa-header.active i {
+            transform: rotate(180deg);
+        }
+        
+        .doa-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .doa-content.active {
+            padding: 25px;
+            max-height: 1000px;
+        }
+        
+        .arabic-text {
+            font-size: 2.5rem;
+            line-height: 3.0;
+            text-align: right;
+            direction: rtl;
+            font-family: 'Traditional Arabic', 'Scheherazade', 'Amiri', serif;
+            color: #1a472a;
+            padding: 20px;
+            background-color: #f9f5f0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-right: 5px solid #d4a054;
+            letter-spacing: 0.05rem;
+        }
+        
+        .translation-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #d4a054;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .translation-btn:hover {
+            background-color: #b8853a;
+            transform: translateY(-2px);
+        }
+        
+        .translation {
+            background-color: #f0f7f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid #2c5530;
+            display: none;
+            animation: slideDown 0.4s ease;
+        }
+        
+        .translation.active {
+            display: block;
+        }
+        
+        .translation h4 {
+            color: #2c5530;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .translation p {
+            line-height: 1.6;
+            color: #444;
+        }
+        
+        .reference {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            font-size: 1.2rem;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-message i {
+            font-size: 3rem;
+            color: #d4a054;
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: #666;
+            border-top: 1px solid #e6d7b8;
+        }
+        
+        .hijri-date {
+            background-color: #2c5530;
+            color: white;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Styling untuk Doa Abi Section */
+        .abi-section {
+            margin-top: 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e6d7b8;
+        }
+        
+        .abi-header {
+            background: linear-gradient(135deg, #064e3b 0%, #0c6b52 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .abi-header::before {
+            content: "🕋🌙⭐";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+        
+        .bismillah {
+            font-size: 1.8rem;
+            color: #fcd34d;
+            font-family: 'Traditional Arabic', serif;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .abi-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+        }
+        
+        .abi-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .btn-doa-cat {
+            background: white;
+            border: 2px solid #064e3b;
+            color: #064e3b;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            text-align: left;
+            padding: 18px 15px;
+            font-weight: 600;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            font-size: 1rem;
+        }
+        
+        .btn-doa-cat:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+        }
+        
+        .btn-doa-cat.active {
+            background: #064e3b;
+            color: white;
+            box-shadow: 0 5px 15px rgba(6, 78, 59, 0.25);
+        }
+        
+        .btn-doa-cat i {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-doa-cat.active i {
+            transform: rotate(180deg);
+        }
+        
+        .category-emoji {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .abi-container {
+            display: none;
+            background: white;
+            border-radius: 0 0 15px 15px;
+            margin-top: -12px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .abi-item {
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            transition: background-color 0.2s;
+        }
+        
+        .abi-item:hover {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        .abi-text {
+            flex: 1;
+            padding-right: 15px;
+            line-height: 1.5;
+            font-size: 1rem;
+            color: #333;
+        }
+        
+        .abi-number {
+            color: #064e3b;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .btn-delete {
+            background: transparent;
+            border: none;
+            color: #dc3545;
+            font-size: 1.1rem;
+            padding: 5px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .btn-delete:hover {
+            background-color: rgba(220, 53, 69, 0.1);
+            transform: scale(1.1);
+        }
+        
+        .card-input {
+            border-top: 4px solid #b45309;
+            border-radius: 20px;
+            background: white;
+            margin-top: 30px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        .card-input h5 {
+            color: #064e3b;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .abi-form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .abi-form-select, .abi-form-control {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 12px;
+            font-size: 1rem;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .abi-form-select:focus, .abi-form-control:focus {
+            border-color: #064e3b;
+            outline: none;
+            box-shadow: 0 0 0 0.25rem rgba(6, 78, 59, 0.1);
+        }
+        
+        .btn-abi-submit {
+            background: #064e3b;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            color: white;
+        }
+        
+        .btn-abi-submit:hover {
+            background: #0c6b52;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(6, 78, 59, 0.25);
+        }
+        
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .abi-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #064e3b;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            max-width: 90%;
+        }
+        
+        .abi-notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .abi-notification-icon {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .abi-empty-state {
+            text-align: center;
+            padding: 30px 15px;
+            color: #777;
+        }
+        
+        .abi-empty-state i {
+            font-size: 2.5rem;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .doa-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                gap: 5px;
+            }
+            
+            .tab-btn {
+                flex: 1;
+                min-width: 0;
+                padding: 12px 8px;
+                font-size: 0.9rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .arabic-text {
+                font-size: 2.0rem;
+                line-height: 2.5;
+            }
+            
+            .abi-header {
+                padding: 20px 15px;
+            }
+            
+            .bismillah {
+                font-size: 1.5rem;
+            }
+            
+            .btn-doa-cat {
+                padding: 16px 15px;
+                font-size: 0.95rem;
+            }
+            
+            .abi-notification {
+                width: 90%;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .kaaba-decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: #2c5530;
+            border-radius: 5px;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4a054;
+            font-size: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .kaaba-decoration::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background-color: #d4a054;
+            top: -10px;
+            border-radius: 3px;
+        }
+        
+        .doa-counter {
+            background-color: #f0f7f0;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2c5530;
+            font-weight: 600;
+            border: 1px solid #2c5530;
+        }
+        
+        .search-box {
+            margin-bottom: 30px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e6d7b8;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: white;
+        }
+        
+        .search-input:focus {
+            border-color: #2c5530;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+        }
+        
+        .custom-intro {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+        
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(to right, #d4a054, #2c5530);
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="kaaba-decoration">
+        <i class="fas fa-kaaba"></i>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>KUMPULAN DO'A-DO'A'</h1>
+            <p class="header-subtitle">dari Al-Qur'an, Hadits, dan Doa Pribadi</p>
+            <div class="hijri-date" id="hijri-date">Tanggal Hijriyah akan dimuat...</div>
+        </header>
+        
+        <div class="nav-tabs">
+            <button class="tab-btn active" id="tab-quran">
+                <i class="fas fa-book-quran"></i> Al-Qur'an
+            </button>
+            <button class="tab-btn" id="tab-hadits">
+                <i class="fas fa-book-open"></i> Hadits
+            </button>
+            <button class="tab-btn" id="tab-custom">
+                <i class="fas fa-heart"></i> Doa Abi
+            </button>
+        </div>
+        
+        <!-- Doa dari Al-Qur'an -->
+        <section class="content-section active" id="quran-section">
+            <h2 style="color: #2c5530; margin-bottom: 20px; text-align: center;">Doa-Doa dari Al-Qur'an</h2>
+            <div class="doa-counter" id="quran-counter">Memuat doa...</div>
+            <div class="search-box">
+                <input type="text" class="search-input" id="quran-search" placeholder="Cari doa dari Al-Qur'an...">
+            </div>
+            <div class="doa-container" id="quran-container">
+                <!-- Doa dari Al-Qur'an akan dimasukkan via JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Doa dari Hadits -->
+        <section class="content-section" id="hadits-section">
+            <h2 style="color: #2c5530; margin-bottom: 20px; text-align: center;">Doa-Doa dari Hadits</h2>
+            <div class="doa-counter" id="hadits-counter">Memuat doa...</div>
+            <div class="search-box">
+                <input type="text" class="search-input" id="hadits-search" placeholder="Cari doa dari Hadits...">
+            </div>
+            <div class="doa-container" id="hadits-container">
+                <!-- Doa dari Hadits akan dimasukkan via JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Doa Pribadi (gabungan dari kedua file) -->
+        <section class="content-section" id="custom-section">
+            <h2 style="color: #2c5530; margin-bottom: 20px; text-align: center;">Doa-Doa Pribadi & Keluarga</h2>
+            <p class="custom-intro">Di sini Anda dapat menyimpan doa-doa pribadi dan doa untuk keluarga tercinta</p>
+            
+            <!-- Bagian Doa Abi -->
+            <div class="abi-section">
+                <div class="abi-header">
+                    <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+                    <h4 class="abi-title">📖 Daftar Doa Abi 🌙</h4>
+                    <div class="abi-subtitle">Kumpulan doa untuk keluarga dan sesama</div>
+                </div>
+                
+                <div class="container" style="max-width: 500px; padding: 20px;">
+                    <div id="mainDoaList">
+                        <button class="btn-doa-cat" onclick="toggleDoaAbi('abi_pribadi', this)">
+                            <span><span class="category-emoji">🙏</span>1. Doa Untukku (ABI)</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="list-abi_pribadi" class="abi-container"></div>
+
+                        <button class="btn-doa-cat" onclick="toggleDoaAbi('abi_istri', this)">
+                            <span><span class="category-emoji">💖</span>2. Doa Untuk Istri Tercinta</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="list-abi_istri" class="abi-container"></div>
+
+                        <button class="btn-doa-cat" onclick="toggleDoaAbi('abi_aisyah', this)">
+                            <span><span class="category-emoji">👧</span>3. Doa Untuk Aisyah</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="list-abi_aisyah" class="abi-container"></div>
+
+                        <button class="btn-doa-cat" onclick="toggleDoaAbi('abi_shofiyyah', this)">
+                            <span><span class="category-emoji">👧</span>4. Doa Untuk Shofiyyah</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="list-abi_shofiyyah" class="abi-container"></div>
+
+                        <button class="btn-doa-cat" onclick="toggleDoaAbi('abi_ibrohim', this)">
+                            <span><span class="category-emoji">👦</span>5. Doa Untuk Ibrohim</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="list-abi_ibrohim" class="abi-container"></div>
+
+                        <button class="btn-doa-cat" onclick="toggleDoaAbi('abi_keluarga', this)">
+                            <span><span class="category-emoji">🏠</span>6. Doa Untuk Keluarga Lainnya</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="list-abi_keluarga" class="abi-container"></div>
+
+                        <button class="btn-doa-cat" onclick="toggleDoaAbi('abi_umum', this)">
+                            <span><span class="category-emoji">🌍</span>7. Doa Untuk Lainnya (Teman/Yayasan)</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="list-abi_umum" class="abi-container"></div>
+                    </div>
+
+                    <div class="card-input">
+                        <h5> Tambah Doa (Abi) ⭐</h5>
+                        <form id="formDoaAbi">
+                            <div class="mb-3">
+                                <label class="abi-form-label">Kategori Doa:</label>
+                                <select name="kategori" class="abi-form-select" required>
+                                    <option value="abi_pribadi">🙏 Doa Untukku (ABI)</option>
+                                    <option value="abi_istri">💖 Doa Untuk Istri</option>
+                                    <option value="abi_aisyah">👧 Doa Untuk Aisyah</option>
+                                    <option value="abi_shofiyyah">👧 Doa Untuk Shofiyyah</option>
+                                    <option value="abi_ibrohim">👦 Doa Untuk Ibrohim</option>
+                                    <option value="abi_keluarga">🏠 Doa Untuk Keluarga</option>
+                                    <option value="abi_umum">🌍 Doa Untuk Lainnya</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="abi-form-label">Isi Doa:</label>
+                                <textarea name="isiDoa" class="abi-form-control" rows="3" required placeholder="Tuliskan doa di sini..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-abi-submit">
+                                <span id="submit-text-abi">SIMPAN DOA</span>
+                                <div class="loading-spinner" id="loading-spinner-abi"></div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notification Element untuk Doa Abi -->
+            <div id="notification-abi" class="abi-notification">
+                <div class="abi-notification-icon">✅</div>
+                <div id="notification-text-abi">Doa tersimpan!</div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Semoga doa-doa kita selalu dikabulkan oleh Allah SWT. Aamiin.</p>
+            <p>© 2023 Kumpulan Doa Lengkap - Nuansa Umroh</p>
+        </footer>
+    </div>
+
+    <script>
+        // Data doa dari Al-Qur'an LENGKAP
+        const quranDoas = [
+            {
+                title: "Doa mohon ampunan dan rahmat Allah (1)",
+                arabic: "رَبِّ إِنِّي أَعُوذُ بِكَ أَنْ أَسْأَلَكَ مَا لَيْسَ لِي بِهِ عِلْمٌ وَإِلَّا تَغْفِرْ لِي وَتَرْحَمْنِي أَكُنْ مِنَ الْخَاسِرِينَ",
+                translation: "Ya Tuhanku, sesungguhnya aku berlindung kepada Engkau dari memohon kepada Engkau sesuatu yang aku tiada mengetahui (hakekat)nya. Dan sekiranya Engkau tidak memberi ampun kepadaku, dan (tidak) menaruh belas kasihan kepadaku, niscaya aku akan termasuk orang-orang yang merugi.",
+                reference: "QS. Huud: 47"
+            },
+            {
+                title: "Doa mohon ampunan dan rahmat Allah (2)",
+                arabic: "رَبَّنَا آمَنَّا فَاغْفِرْ لَنَا وَارْحَمْنَا وَأَنْتَ خَيْرُ الرَّاحِمِينَ",
+                translation: "Ya Tuhan kami, kami telah beriman, maka ampunilah kami dan berilah kami rahmat dan Engkau adalah Pemberi rahmat Yang Paling Baik.",
+                reference: "QS. Al Mu'minun: 109"
+            },
+            {
+                title: "Doa mohon ampunan dan rahmat Allah (3)",
+                arabic: "رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ",
+                translation: "Ya Tuhanku berilah ampun dan berilah rahmat, dan Engkau adalah Pemberi rahmat Yang Paling baik.",
+                reference: "QS. Al Mu'minun: 118"
+            },
+            {
+                title: "Doa mohon ampunan dosa dan keteguhan",
+                arabic: "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِي أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ",
+                translation: "Ya Tuhan kami, ampunilah dosa-dosa kami dan tindakan-tindakan kami yang berlebih-lebihan dalam urusan kami dan tetapkanlah pendirian kami, dan tolonglah kami terhadap kaum yang kafir.",
+                reference: "QS. Al Imran: 147"
+            },
+            {
+                title: "Doa mohon ampunan dan perlindungan dari neraka",
+                arabic: "رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ",
+                translation: "Ya Tuhan kami, sesungguhnya kami telah beriman, maka ampunilah segala dosa kami dan peliharalah kami dari siksa neraka.",
+                reference: "QS. Al Imran: 16"
+            },
+            {
+                title: "Doa mohon ampunan, dihapuskan kesalahan, dan dikumpulkan dengan orang saleh",
+                arabic: "رَبَّنَا إِنَّنَا سَمِعْنَا مُنَادِيًا يُنَادِي لِلْإِيمَانِ أَنْ آمِنُوا بِرَبِّكُمْ فَآمَنَّا رَبَّنَا فَاغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا وَتَوَفَّنَا مَعَ الْأَبْرَارِ رَبَّنَا وَآتِنَا مَا وَعَدْتَنَا عَلَى رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ الْقِيَامَةِ إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ",
+                translation: "Ya Tuhan kami, sesungguhnya kami mendengar (seruan) yang menyeru kepada iman, (yaitu): 'Berimanlah kamu kepada Tuhanmu', maka kamipun beriman. Ya Tuhan kami, ampunilah bagi kami dosa-dosa kami dan hapuskanlah dari kami kesalahan-kesalahan kami, dan wafatkanlah kami beserta orang-orang yang banyak berbakti. Ya Tuhan kami, berilah kami apa yang telah Engkau janjikan kepada kami dengan perantaraan rasul-rasul Engkau. Dan janganlah Engkau hinakan kami di hari kiamat. Sesungguhnya Engkau tidak menyalahi janji.",
+                reference: "QS. Al Imran: 193-194"
+            },
+            {
+                title: "Doa mohon ampunan karena telah menganiaya diri sendiri",
+                arabic: "رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي فَغَفَرَ لَهُ إِنَّهُ هُوَ الْغَفُورُ الرَّحِيمُ",
+                translation: "Ya Tuhanku, sesungguhnya aku telah menganiaya diriku sendiri karena itu ampunilah aku. Maka Allah mengampuninya, sesungguhnya Allah Dialah Yang Maha Pengampun lagi Maha Penyayang.",
+                reference: "QS. Al Qashash: 16"
+            },
+            {
+                title: "Doa mohon ampunan, rahmat, dan pertolongan",
+                arabic: "رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ",
+                translation: "Ya Tuhan kami, janganlah Engkau hukum kami jika kami lupa atau kami tersalah. Ya Tuhan kami, janganlah Engkau bebankan kepada kami beban yang berat sebagaimana Engkau bebankan kepada orang-orang sebelum kami. Ya Tuhan kami, janganlah Engkau pikulkan kepada kami apa yang tak sanggup kami memikulnya. Beri maaflah kami; ampunilah kami; dan rahmatilah kami. Engkaulah Penolong kami, maka tolonglah kami terhadap kaum yang kafir.",
+                reference: "QS. Al Baqarah: 286"
+            },
+            {
+                title: "Doa mohon ampunan dan rahmat agar tidak termasuk orang merugi",
+                arabic: "رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",
+                translation: "Ya Tuhan kami, kami telah menganiaya diri kami sendiri, dan jika Engkau tidak mengampuni kami dan memberi rahmat kepada kami, niscaya pastilah kami termasuk orang-orang yang merugi.",
+                reference: "QS. Al A'raf: 23"
+            },
+            {
+                title: "Doa mohon hikmah dan digolongkan dengan orang saleh",
+                arabic: "رَبِّ هَبْ لِي حُكْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ وَاجْعَلْ لِي لِسَانَ صِدْقٍ فِي الْآخِرِينَ وَاجْعَلْنِي مِنْ وَرَثَةِ جَنَّةِ النَّعِيمِ",
+                translation: "Ya Tuhanku, berikanlah kepadaku hikmah dan masukkanlah aku ke dalam golongan orang-orang yang saleh. Dan jadikanlah aku buah tutur yang baik bagi orang-orang (yang datang) kemudian. Dan jadikanlah aku termasuk orang-orang yang mempusakai surga yang penuh kenikmatan.",
+                reference: "QS. Asy Syu'ara': 83-85"
+            },
+            {
+                title: "Doa agar dicatat bersama orang-orang yang menjadi saksi",
+                arabic: "رَبَّنَا آمَنَّا فَاكْتُبْنَا مَعَ الشَّاهِدِينَ",
+                translation: "Ya Tuhan kami, kami telah beriman, maka catatlah kami bersama orang-orang yang menjadi saksi (atas kebenaran Al Quran dan kenabian Muhammad).",
+                reference: "QS. Al Maidah: 83"
+            },
+            {
+                title: "Doa agar tidak ditinggalkan seorang diri",
+                arabic: "رَبِّ لَا تَذَرْنِي فَرْدًا وَأَنْتَ خَيْرُ الْوَارِثِينَ",
+                translation: "Ya Tuhanku janganlah Engkau membiarkan aku hidup seorang diri dan Engkaulah Waris Yang Paling Baik.",
+                reference: "QS. Al Anbiya': 89"
+            },
+            {
+                title: "Doa mohon keturunan yang saleh (1)",
+                arabic: "رَبِّ هَبْ لِي مِنَ الصَّالِحِينَ",
+                translation: "Ya Tuhanku, anugrahkanlah kepadaku (seorang anak) yang termasuk orang-orang yang saleh.",
+                reference: "QS. Ash Shaffat: 100"
+            },
+            {
+                title: "Doa mohon keturunan yang saleh (2)",
+                arabic: "رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ",
+                translation: "Ya Tuhanku, berilah aku dari sisi Engkau seorang anak yang baik. Sesungguhnya Engkau Maha Pendengar doa.",
+                reference: "QS. Al Imran: 38"
+            },
+            {
+                title: "Doa mohon keturunan yang menyenangkan hati",
+                arabic: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+                translation: "Ya Tuhan kami, anugrahkanlah kepada kami isteri-isteri kami dan keturunan kami sebagai penyenang hati (kami), dan jadikanlah kami imam bagi orang-orang yang bertakwa.",
+                reference: "QS. Al Furqan: 74"
+            },
+            {
+                title: "Doa mohon ampunan untuk orang tua dan mukminin",
+                arabic: "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقومُ الْحِسَابُ",
+                translation: "Ya Tuhan kami, beri ampunlah aku dan kedua ibu bapaku dan sekalian orang-orang mukmin pada hari terjadinya hisab (hari kiamat).",
+                reference: "QS. Ibrahim: 41"
+            },
+            {
+                title: "Doa mohon ampunan untuk diri dan saudara seiman",
+                arabic: "رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِلَّذِينَ آمَنُوا رَبَّنَا إِنَّكَ رَءُوفٌ رَحِيمٌ",
+                translation: "Ya Rabb kami, beri ampunlah kami dan saudara-saudara kami yang telah beriman lebih dulu dari kami, dan janganlah Engkau membiarkan kedengkian dalam hati kami terhadap orang-orang yang beriman; Ya Rabb kami, Sesungguhnya Engkau Maha Penyantun lagi Maha Penyayang.",
+                reference: "QS. Al Hasyr: 10"
+            },
+            {
+                title: "Doa mohon ampunan untuk keluarga dan mukminin",
+                arabic: "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَلِمَنْ دَخَلَ بَيْتِيَ مُؤْمِنًا وَلِلْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ وَلَا تَزِدِ الظَّالِمِينَ إِلَّا تَبَارًا",
+                translation: "Ya Tuhanku! Ampunilah aku, ibu bapakku, orang yang masuk ke rumahku dengan beriman dan semua orang yang beriman laki-laki dan perempuan. Dan janganlah Engkau tambahkan bagi orang-orang yang zalim itu selain kebinasaan.",
+                reference: "QS. Nuh: 28"
+            },
+            {
+                title: "Doa agar tetap mendirikan shalat",
+                arabic: "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ",
+                translation: "Ya Tuhanku, jadikanlah aku dan anak cucuku orang-orang yang tetap mendirikan shalat, ya Tuhan kami, perkenankanlah doaku.",
+                reference: "QS. Ibrahim: 40"
+            },
+            {
+                title: "Doa berlindung dari orang zalim (1)",
+                arabic: "رَبِّ نَجِّنِي مِنَ الْقَوْمِ الظَّالِمِينَ",
+                translation: "Ya Tuhanku, selamatkanlah aku dari orang-orang yang zalim.",
+                reference: "QS. Al Qashash: 21"
+            },
+            {
+                title: "Doa berlindung dari orang zalim (2)",
+                arabic: "رَبَّنَا لَا تَجْعَلْنَا مَعَ الْقَوْمِ الظَّالِمِينَ",
+                translation: "Ya Tuhan kami, janganlah Engkau tempatkan kami bersama-sama orang-orang yang zalim.",
+                reference: "QS. Al A'raf: 47"
+            },
+            {
+                title: "Doa mohon pertolongan atas kaum perusak",
+                arabic: "رَبِّ انْصُرْنِي عَلَى الْقَوْمِ الْمُفْسِدِينَ",
+                translation: "Ya Tuhanku, tolonglah aku (dengan menimpakan azab) atas kaum yang berbuat kerusakan.",
+                reference: "QS. Al Ankabut: 30"
+            },
+            {
+                title: "Doa agar diterima amal dan taubat",
+                arabic: "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ وَتُبْ عَلَيْنَا إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ",
+                translation: "Ya Tuhan kami terimalah daripada kami (amalan kami), dan terimalah taubat kami. Sesungguhnya Engkaulah Yang Maha Penerima taubat lagi Maha Penyayang.",
+                reference: "QS. Al Baqarah: 127-128"
+            },
+            {
+                title: "Doa bertawakkal hanya kepada Allah (1)",
+                arabic: "رَبَّنَا عَلَيْكَ تَوَكَّلْنَا وَإِلَيْكَ أَنَبْنَا وَإِلَيْكَ الْمَصِيرُ",
+                translation: "Ya Tuhan kami hanya kepada Engkaulah kami bertawakkal dan hanya kepada Engkaulah kami bertaubat dan hanya kepada Engkaulah kami kembali.",
+                reference: "QS. Al Mumtahanah: 4"
+            },
+            {
+                title: "Doa bertawakkal hanya kepada Allah (2)",
+                arabic: "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
+                translation: "Cukuplah Allah bagiku; tidak ada Tuhan selain Dia. Hanya kepada-Nya aku bertawakkal dan Dia adalah Tuhan yang memiliki 'Arsy yang agung.",
+                reference: "QS. At Taubah: 129"
+            },
+            {
+                title: "Doa berlindung dari fitnah orang kafir (1)",
+                arabic: "رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِلَّذِينَ كَفَرُوا وَاغْفِرْ لَنَا رَبَّنَا إِنَّكَ أَنْتَ الْعزِيزُ الْحَكِيمُ",
+                translation: "Ya Tuhan kami, janganlah Engkau jadikan kami (sasaran) fitnah bagi orang-orang kafir. Dan ampunilah kami ya Tuhan kami. Sesungguhnya Engkaulah Yang Maha Perkasa lagi Maha Bijaksana.",
+                reference: "QS. Al Mumtahanah: 5"
+            },
+            {
+                title: "Doa berlindung dari fitnah orang zalim dan kafir",
+                arabic: "رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِلْقَوْمِ الظَّالِمِينَ وَنَجِّنَا بِرَحْمَتِكَ مِنَ الْقَوْمِ الْكَافِرِينَ",
+                translation: "Ya Tuhan kami; janganlah Engkau jadikan kami sasaran fitnah bagi kaum yang zalim dan selamatkanlah kami dengan rahmat Engkau dari (tipu daya) orang-orang yang kafir.",
+                reference: "QS. Yunus: 85-86"
+            },
+            {
+                title: "Doa mohon tambahan ilmu",
+                arabic: "رَبِّ زِدْنِي عِلْمًا",
+                translation: "Ya Tuhanku, tambahkanlah aku ilmu.",
+                reference: "QS. Thaha: 114"
+            },
+            {
+                title: "Doa agar disempurnakan cahaya",
+                arabic: "رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا إِنَّكَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+                translation: "Ya Rabb kami, sempurnakanlah bagi kami cahaya kami dan ampunilah kami; Sesungguhnya Engkau Maha Kuasa atas segala sesuatu.",
+                reference: "QS. At Tahrim: 8"
+            },
+            {
+                title: "Doa memohon kebaikan dunia dan akhirat",
+                arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+                translation: "Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat dan peliharalah kami dari siksa neraka.",
+                reference: "QS. Al Baqarah: 201"
+            },
+            {
+                title: "Doa agar menjadi hamba yang bersyukur (1)",
+                arabic: "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَى وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَدْخِلْنِي بِرَحْمَتِكَ فِي عِبَادِكَ الصَّالِحِينَ",
+                translation: "Ya Tuhanku berilah aku ilham untuk tetap mensyukuri nikmat Mu yang telah Engkau anugerahkan kepadaku dan kepada dua orang ibu bapakku dan untuk mengerjakan amal saleh yang Engkau ridhai; dan masukkanlah aku dengan rahmat-Mu ke dalam golongan hamba-hamba-Mu yang saleh.",
+                reference: "QS. An Naml: 19"
+            },
+            {
+                title: "Doa agar menjadi hamba yang bersyukur (2)",
+                arabic: "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَى وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَصْلِحْ لِي فِي ذُرِّيَّتِي إِنِّي تُبْتُ إِلَيْكَ وَإِنِّي مِنَ الْمُسْلِمِينَ",
+                translation: "Ya Tuhanku, tunjukilah aku untuk mensyukuri nikmat Engkau yang telah Engkau berikan kepadaku dan kepada ibu bapakku dan supaya aku dapat berbuat amal yang saleh yang Engkau ridhai; berilah kebaikan kepadaku dengan (memberi kebaikan) kepada anak cucuku. Sesungguhnya aku bertaubat kepada Engkau dan sesungguhnya aku termasuk orang-orang yang berserah diri.",
+                reference: "QS. Al Ahqaf: 15"
+            },
+            {
+                title: "Doa berlindung dari setan",
+                arabic: "رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ , وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ",
+                translation: "Ya Tuhanku aku berlindung kepada Engkau dari bisikan-bisikan syaitan n aku berlindung (pula) kepada Engkau ya Tuhanku, dari kedatangan mereka kepadaku.",
+                reference: "QS. Al Mu'minun: 97-98"
+            },
+            {
+                title: "Doa agar hati tetap dalam hidayah",
+                arabic: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ",
+                translation: "Ya Tuhan kami, janganlah Engkau jadikan hati kami condong kepada kesesatan sesudah Engkau beri petunjuk kepada kami, dan karuniakanlah kepada kami rahmat dari sisi Engkau; karena sesungguhnya Engkau-lah Maha Pemberi (karunia).",
+                reference: "QS. Al Imran: 8"
+            },
+            {
+                title: "Doa agar dilapangkan hati dan dimudahkan urusan",
+                arabic: "رَبِّ اشْرَحْ لِي صَدْرِي , وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي  يَفْقَهُوا قَوْلِي",
+                translation: "Ya Tuhanku, lapangkanlah untukku dadaku, dan mudahkanlah untukku urusanku, dan lepaskanlah kekakuan dari lidahku, supaya mereka mengerti perkataanku.",
+                reference: "QS. Thaha: 25-28"
+            },
+            {
+                title: "Doa mohon rahmat dan petunjuk",
+                arabic: "رَبَّنَا آتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا",
+                translation: "Wahai Tuhan kami, berikanlah rahmat kepada kami dari sisi-Mu dan sempurnakanlah bagi kami petunjuk yang lurus dalam urusan kami (ini).",
+                reference: "QS. Al Kahfi: 10"
+            },
+            {
+                title: "Doa meminta keamanan dan berlindung dari syirik",
+                arabic: "رَبِّ اجْعَلْ هَذَا الْبَلَدَ آمِنًا وَاجْنُبْنِي وَبَنِيَّ أَنْ نَعْبُدَ الْأَصْنَامَ",
+                translation: "Ya Tuhanku, jadikanlah negeri ini (Mekah), negeri yang aman, dan jauhkanlah aku beserta anak cucuku daripada menyembah berhala-berhala.",
+                reference: "QS. Ibrahim: 35"
+            },
+            {
+                title: "Doa berlindung dari api neraka",
+                arabic: "رَبَّنَا اصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ إِنَّ عَذَابَهَا كَانَ غَرَامًا , إِنَّهَا سَاءَتْ مُسْتَقَرًّا وَمُقَامًا",
+                translation: "Ya Tuhan kami, jauhkan azab jahannam dari kami, sesungguhnya azabnya itu adalah kebinasaan yang kekal. Sesungguhnya jahannam itu seburuk-buruk tempat menetap dan tempat kediaman.",
+                reference: "QS. Al Furqan: 65-66"
+            }
+        ];
+
+        // Data doa dari Hadits LENGKAP
+        const haditsDoas = [
+            {
+                title: "Doa Sapu Jagat",
+                arabic: "اللَّهُمَّ رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+                translation: "Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat, dan lindungilah kami dari siksa neraka.",
+                reference: "HR. Bukhari dan Muslim"
+            },
+            {
+                title: "Doa Memohon Takwa, Hidayah, Kehormatan Diri, dan Qana'ah",
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتَّقَى وَالْعَفَافَ وَالْغِنَى",
+                translation: "Ya Allah, aku memohon kepada-Mu petunjuk, ketakwaan, kesucian diri, dan kecukupan.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Memohon Ampunan dari Segala Jenis Dosa",
+                arabic: "اللَّهُمَّ اغْفِرْ لِي خَطِيئَتِي وَجَهْلِي وَإِسْرَافِي فِي أَمْرِي وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، اللَّهُمَّ اغْفِرْ لِي جِدِّي وَهَزْلِي وَخَطَئِي وَعَمْدِي وَكُلُّ ذَلِكَ عِنْدِي، اللَّهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، أَنْتَ الْمُقَدِّمُ وَأَنْتَ الْمُؤَخِّرُ وَأَنْتَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+                translation: "Ya Allah, ampunilah kesalahanku, kebodohanku, tindakanku yang berlebihan dalam urusanku, serta segala yang Engkau lebih tahu dariku. Ya Allah, ampunilah dosaku yang serius maupun main-main, yang tidak sengaja maupun sengaja, dan semua itu ada padaku. Ya Allah, ampunilah dosaku yang telah lalu dan yang akan datang, yang kusembunyikan dan yang kutampakkan, serta segala yang Engkau lebih tahu dariku. Engkaulah yang mendahulukan dan mengakhirkan, dan Engkau Mahakuasa atas segala sesuatu.",
+                reference: "HR. Bukhari dan Muslim"
+            },
+            {
+                title: "Doa Memohon Bimbingan",
+                arabic: "اللَّهُمَّ اهْدِنِي وَسَدِّدْنِي",
+                translation: "Ya Allah, berilah aku petunjuk dan luruskanlah aku.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa agar Hidup Menjadi Lebih Baik",
+                arabic: "اللَّهُمَّ أَصْلِحْ لِي دِينِيَ الَّذِي هُوَ عِصْمَةُ أَمْرِي، وَأَصْلِحْ لِي دُنْيَايَ الَّتِي فِيهَا مَعَاشِي، وَأَصْلِحْ لِي آخِرَتِي الَّتِي فِيهَا مَعَادِي، وَاجْعَلِ الْحَيَاةَ زِيَادَةً لِي فِي كُلِّ خَيْرٍ، وَاجْعَلِ الْمَوْتَ رَاحَةً لِي مِنْ كُلِّ شَرٍّ",
+                translation: "Ya Allah, perbaikilah agamaku yang menjadi pelindung urusanku, perbaikilah duniaku yang menjadi tempat kehidupanku, perbaikilah akhiratku yang menjadi tempat kembaliku, jadikanlah hidup ini penambah kebaikan bagiku, dan jadikanlah kematian sebagai istirahatku dari segala keburukan.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Memohon Ketegaran Hati",
+                arabic: "اللَّهُمَّ مُصَرِّفَ الْقُلُوبِ صَرِّفْ قُلُوبَنَا عَلَى طَاعَتِكَ",
+                translation: "Ya Allah, Yang memalingkan hati, palingkanlah hati kami kepada ketaatan kepada-Mu.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Berlindung dari Rasa Malas dan Kelemahan di Masa Tua",
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ وَالْجُبْنِ وَالْهَرَمِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ",
+                translation: "Ya Allah, aku berlindung kepada-Mu dari kelemahan, kemalasan, sifat pengecut, dan kepikunan. Aku berlindung kepada-Mu dari fitnah kehidupan dan kematian, serta dari siksa kubur.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Berlindung dari Fitnah Kekayaan",
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكَسَلِ وَالْهَرَمِ وَالْمَأْثَمِ وَالْمَغْرَمِ، وَمِنْ فِتْنَةِ الْقَبْرِ وَعَذَابِ الْقَبْرِ، وَمِنْ فِتْنَةِ النَّارِ وَعَذَابِ النَّارِ، وَمِنْ شَرِّ فِتْنَةِ الْغِنَى، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْفَقْرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ، اللَّهُمَّ اغْسِلْ عَنِّي خَطَايَايَ بِمَاءِ الثَّلْجِ وَالْبَرَدِ، وَنَقِّ قَلْبِي مِنَ الْخَطَايَا كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ، وَبَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ",
+                translation: "Ya Allah, aku berlindung kepada-Mu dari kemalasan, kepikunan, dosa, dan hutang. Aku berlindung dari fitnah kubur dan siksa kubur, dari fitnah neraka dan siksa neraka, dari keburukan fitnah kekayaan. Aku berlindung dari fitnah kefakiran, dan dari fitnah Al-Masih Dajjal. Ya Allah, bersihkanlah kesalahanku dengan air salju dan embun, sucikan hatiku dari dosa sebagaimana pakaian putih disucikan dari kotoran, dan jauhkanlah antara aku dan dosa-dosaku sebagaimana Engkau menjauhkan timur dan barat.",
+                reference: "HR. Bukhari"
+            },
+            {
+                title: "Doa Berlindung dari Sirnanya Kenikmatan",
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ زَوَالِ نِعْمَتِكَ، وَتَحَوُّلِ عَافِيَتِكَ، وَفُجَاءَةِ نِقْمَتِكَ، وَجَمِيعِ سَخَطِكَ",
+                translation: "Ya Allah, aku berlindung kepada-Mu dari hilangnya nikmat-Mu, berubahnya kesehatan dari-Mu, datangnya siksaan-Mu secara tiba-tiba, dan seluruh kemurkaan-Mu.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Berlindung dari Sikap Pengecut",
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ مِنَ الْبُخْلِ، وَأَعُوذُ بِكَ مِنْ أَنْ أُرَدَّ إِلَى أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا وَعَذَابِ الْقَبْرِ",
+                translation: "Ya Allah, aku berlindung kepada-Mu dari sifat pengecut, aku berlindung dari sifat kikir, aku berlindung dari dikembalikan ke usia yang paling hina, dan aku berlindung dari fitnah dunia dan siksa kubur.",
+                reference: "HR. Bukhari"
+            },
+            {
+                title: "Doa Berlindung dari Keburukan Amal Perbuatan Diri",
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ مَا عَمِلْتُ وَمِنْ شَرِّ مَا لَمْ أَعْمَلْ",
+                translation: "Ya Allah, aku berlindung kepada-Mu dari keburukan apa yang telah aku kerjakan dan dari keburukan apa yang belum aku kerjakan.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Memohon Perlindungan dari Bencana yang Sangat Berat",
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ جَهْدِ الْبَلَاءِ، وَدَرَكِ الشَّقَاءِ، وَسُوءِ الْقَضَاءِ، وَشَمَاتَةِ الْأَعْدَاءِ",
+                translation: "Ya Allah, aku berlindung kepada-Mu dari beratnya bencana, terjadinya kesengsaraan, buruknya takdir, dan kegembiraan musuh atas musibahku.",
+                reference: "HR. Bukhari"
+            },
+            {
+                title: "Doa Memohon Perlindungan dari Sifat Bakhil",
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ وَالْجُبْنِ وَالْبُخْلِ وَالْهَرَمِ وَعَذَابِ الْقَبْرِ، اللَّهُمَّ آتِ نَفْسِي تَقْوَاهَا وَزَكِّهَا أَنْتَ خَيْرُ مَنْ زَكَّاهَا، أَنْتَ وَلِيُّهَا وَمَوْلَاهَا، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عِلْمٍ لَا يَنْفَعُ، وَمِنْ قَلْبٍ لَا يَخْشَعُ، وَمِنْ نَفْسٍ لَا تَشْبَعُ، وَمِنْ دَعْوَةٍ لَا يُسْتَجَابُ لَهَا",
+                translation: "Ya Allah, aku berlindung kepada-Mu dari kelemahan, kemalasan, sifat pengecut, kekikiran, kepikunan, dan siksa kubur. Ya Allah, berikanlah ketakwaan pada jiwaku dan sucikanlah ia, Engkau sebaik-baik yang menyucikannya, Engkau Pelindung dan Pemiliknya. Ya Allah, aku berlindung kepada-Mu dari ilmu yang tidak bermanfaat, hati yang tidak khusyuk, jiwa yang tidak pernah puas, dan doa yang tidak dikabulkan.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Berserah Diri kepada Allah",
+                arabic: "اللَّهُمَّ لَكَ أَسْلَمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَإِلَيْكَ أَنَبْتُ وَبِكَ خَاصَمْتُ، اللَّهُمَّ إِنِّي أَعُوذُ بِعِزَّتِكَ لَا إِلَهَ إِلَّا أَنْتَ أَنْ تُضِلَّنِي، أَنْتَ الْحَيُّ الَّذِي لَا يَمُوتُ وَالْجِنُّ وَالْإِنْسُ يَمُوتُونَ",
+                translation: "Ya Allah, kepada-Mu aku berserah, kepada-Mu aku beriman, kepada-Mu aku bertawakal, kepada-Mu aku kembali, dan dengan-Mu aku berdebat. Ya Allah, aku berlindung dengan kemuliaan-Mu, tiada tuhan selain Engkau, agar Engkau tidak menyesatkanku. Engkau Yang Hidup, tidak mati, sedangkan jin dan manusia mati.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Segala Permohonan dan Perlindungan",
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنَ الْخَيْرِ كُلِّهِ عَاجِلِهِ وَآجِلِهِ مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ عَاجِلِهِ وَآجِلِهِ مَا عَلِمْتُ مِنْهُ وَمَا لَمْ أَعْلَمْ، اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ عَبْدُكَ وَنَبِيُّكَ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا عَاذَ بِهِ عَبْدُكَ وَنَبِيُّكَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَعُوذُ بِكَ مِنَ النَّارِ وَمَا قَرَّبَ إِلَيْهَا مِنْ قَوْلٍ أَوْ عَمَلٍ، وَأَسْأَلُكَ أَنْ تَجْعَلَ كُلَّ قَضَاءٍ قَضَيْتَهُ لِي خَيْرًا",
+                translation: "Ya Allah, aku memohon kepada-Mu seluruh kebaikan, yang segera maupun yang tertunda, yang aku ketahui maupun tidak. Aku berlindung kepada-Mu dari seluruh keburukan, yang segera maupun tertunda, yang aku ketahui maupun tidak. Ya Allah, aku memohon kebaikan yang diminta oleh hamba dan nabi-Mu, dan aku berlindung dari keburukan yang diminta perlindungan oleh hamba dan nabi-Mu. Ya Allah, aku memohon surga dan segala yang mendekatkan kepadanya, baik ucapan maupun perbuatan. Aku berlindung dari neraka dan segala yang mendekatkan kepadanya, baik ucapan maupun perbuatan. Dan aku memohon agar Engkau menjadikan setiap ketetapan-Mu untukku sebagai kebaikan.",
+                reference: "HR. Ahmad, Ibnu Majah"
+            },
+            {
+                title: "Doa Memohon Pertolongan",
+                arabic: "رَبِّ أَعِنِّي وَلَا تُعِنْ عَلَيَّ، وَانْصُرْنِي وَلَا تَنْصُرْ عَلَيَّ، وَامْكُرْ لِي وَلَا تَمْكُرْ عَلَيَّ، وَاهْدِنِي وَيَسِّرِ الْهُدَى لِي، وَانْصُرْنِي عَلَى مَنْ بَغَى عَلَيَّ، اللَّهُمَّ اجْعَلْنِي لَكَ شَاكِرًا، لَكَ ذَاكِرًا، لَكَ رَاهِبًا، لَكَ مِطْوَاعًا، لَكَ مُخْبِتًا، إِلَيْكَ أَوَّاهًا مُنِيبًا، رَبِّ تَقَبَّلْ تَوْبَتِي، وَاغْسِلْ حَوْبَتِي، وَأَجِبْ دَعْوَتِي، وَثَبِّتْ حُجَّتِي، وَاهْدِ قَلْبِي، وَسَدِّدْ لِسَانِي، وَاسْلُلْ سَخِيمَةَ صَدْرِي",
+                translation: "Ya Tuhanku, tolonglah aku dan jangan tolong musuhku atas diriku, menangkanlah aku dan jangan menangkan musuhku atasku, rencanakanlah untukku dan jangan merencanakan muslihat atasku, berilah aku petunjuk dan mudahkanlah petunjuk itu bagiku, dan tolonglah aku atas orang yang menzalimiku. Ya Allah, jadikanlah aku hamba yang bersyukur, yang berzikir, yang takut, yang taat, yang rendah hati, yang banyak berdoa dan kembali kepada-Mu. Ya Tuhanku, terimalah taubatku, bersihkanlah kesalahanku, kabulkanlah doaku, teguhkanlah hujjahku, tunjukilah hatiku, luruskanlah lidahku, dan lenyapkanlah kedengkian dari dadaku.",
+                reference: "HR. Abu Daud dan Tirmidzi"
+            },
+            {
+                title: "Doa Memohon Perlindungan dari Akhlak yang Buruk",
+                arabic: "اللَّهُمَّ جَنِّبْنِي مُنْكَرَاتِ الْأَخْلَاقِ وَالْأَهْوَاءِ وَالْأَعْمَالِ وَالْأَدْوَاءِ",
+                translation: "Ya Allah, jauhkanlah aku dari keburukan akhlak, hawa nafsu, perbuatan, dan penyakit.",
+                reference: "HR. Tirmidzi dan Al-Hakim"
+            },
+            {
+                title: "Doa Memohon Keistikamahan dan Tekad yang Terbimbing",
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الثَّبَاتَ فِي الْأَمْرِ، وَالْعَزِيمَةَ عَلَى الرُّشْدِ، وَأَسْأَلُكَ مُوجِبَاتِ رَحْمَتِكَ، وَعَزَائِمَ مَغْفِرَتِكَ، وَأَسْأَلُكَ شُكْرَ نِعْمَتِكَ، وَحُسْنَ عِبَادَتِكَ، وَأَسْأَلُكَ قَلْبًا سَلِيمًا، وَلِسَانًا صَادِقًا، وَأَسْأَلُكَ مِنْ خَيْرِ مَا تَعْلَمُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا تَعْلَمُ، وَأَسْتَغْفِرُكَ لِمَا تَعْلَمُ، إِنَّكَ أَنْتَ عَلَّامُ الْغُيُوبِ",
+                translation: "Ya Allah, aku memohon keteguhan dalam urusan, tekad yang kuat di atas kebenaran, aku memohon sebab-sebab rahmat-Mu, kepastian ampunan-Mu, aku memohon rasa syukur atas nikmat-Mu, ibadah yang baik kepada-Mu, aku memohon hati yang bersih, lisan yang jujur, aku memohon kebaikan yang Engkau ketahui, aku berlindung dari keburukan yang Engkau ketahui, dan aku memohon ampun atas dosa yang Engkau ketahui. Sesungguhnya Engkau Maha Mengetahui yang gaib.",
+                reference: "HR. Ath-Thabrani"
+            },
+            {
+                title: "Doa Memohon Keselamatan",
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْمُعَافَاةَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+                translation: "Ya Allah, aku memohon keselamatan dan kesejahteraan di dunia dan akhirat.",
+                reference: "HR. Bukhari"
+            },
+            {
+                title: "Tasbih, Istigfar, dan Taubat",
+                arabic: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",
+                translation: "Mahasuci Allah dengan segala puji bagi-Nya, aku memohon ampun kepada Allah dan bertaubat kepada-Nya.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Nama Allah yang Teragung",
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ بِأَنَّ لَكَ الْحَمْدَ، لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، الْمَنَّانَ، بَدِيعَ السَّمَوَاتِ وَالْأَرْضِ، ذَا الْجَلَالِ وَالْإِكْرَامِ",
+                translation: "Ya Allah, aku memohon kepada-Mu dengan menyebut bahwa segala puji bagi-Mu, tiada tuhan selain Engkau semata, tiada sekutu bagi-Mu, Yang Maha Pemberi karunia, Pencipta langit dan bumi dengan sebaik-baik ciptaan, Pemilik keagungan dan kemuliaan.",
+                reference: "HR. Tirmidzi"
+            },
+            {
+                title: "Doa Memohon Hidayah dan Rezeki",
+                arabic: "اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاهْدِنِي وَعَافِنِي وَارْزُقْنِي",
+                translation: "Ya Allah, ampunilah aku, rahmatilah aku, berilah aku petunjuk, berilah aku keselamatan, dan berilah aku rezeki.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Memohon Kecintaan kepada Allah dan Orang-Orang Miskin",
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ فِعْلَ الْخَيْرَاتِ، وَتَرْكَ الْمُنْكَرَاتِ، وَحُبَّ الْمَسَاكِينِ، وَأَنْ تَغْفِرَ لِي وَتَرْحَمَنِي، وَإِذَا أَرَدْتَ فِتْنَةً فِي قَوْمٍ فَتَوَفَّنِي غَيْرَ مَفْتُونٍ، وَأَسْأَلُكَ حُبَّكَ، وَحُبَّ مَنْ يُحِبُّكَ، وَحُبَّ عَمَلٍ يُقَرِّبُنِي إِلَى حُبِّكَ",
+                translation: "Ya Allah, aku memohon kemampuan melakukan kebaikan, meninggalkan kemungkaran, mencintai orang-orang miskin, serta ampunan dan rahmat-Mu. Jika Engkau menghendaki fitnah pada suatu kaum, matikanlah aku dalam keadaan tidak terfitnah. Aku memohon cinta-Mu, cinta orang yang mencintai-Mu, dan cinta pada amal yang mendekatkanku kepada cinta-Mu.",
+                reference: "HR. Tirmidzi dan Ahmad"
+            },
+            {
+                title: "Doa agar Dapat Senantiasa Bersyukur",
+                arabic: "اللَّهُمَّ أَعِنَّا عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ",
+                translation: "Ya Allah, bantulah kami untuk mengingat-Mu, bersyukur kepada-Mu, dan beribadah dengan baik kepada-Mu.",
+                reference: "HR. Abu Daud"
+            },
+            {
+                title: "Berdoa dengan Yaa Dza-l Jalaali wal Ikraam",
+                arabic: "يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
+                translation: "Wahai Pemilik keagungan dan kemuliaan.",
+                reference: "HR. Tirmidzi"
+            },
+            {
+                title: "Doa Memohon Manfaat dari Ilmu",
+                arabic: "اللَّهُمَّ انْفَعْنِي بِمَا عَلَّمْتَنِي، وَعَلِّمْنِي مَا يَنْفَعُنِي، وَارْزُقْنِي عِلْمًا تَنْفَعُنِي بِهِ",
+                translation: "Ya Allah, berilah manfaat kepadaku dengan apa yang Engkau ajarkan kepadaku, ajarkanlah kepadaku apa yang bermanfaat bagiku, dan karuniakanlah kepadaku ilmu yang bermanfaat bagiku.",
+                reference: "HR. An-Nasa-i"
+            },
+            {
+                title: "Doa Memohon Kenikmatan Abadi dan Kesudahan Hidup yang Baik",
+                arabic: "اللَّهُمَّ لَكَ الْحَمْدُ كُلُّهُ، اللَّهُمَّ لَا قَابِضَ لِمَا بَسَطْتَ، وَلَا بَاسِطَ لِمَا قَبَضْتَ، وَلَا هَادِيَ لِمَا أَضْلَلْتَ، وَلَا مُضِلَّ لِمَنْ هَدَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُقَرِّبَ لِمَا بَاعَدْتَ، وَلَا مُبَاعِدَ لِمَا قَرَّبْتَ، اللَّهُمَّ ابْسُطْ عَلَيْنَا مِنْ بَرَكَاتِكَ وَرَحْمَتِكَ وَفَضْلِكَ وَرِزْقِكَ، اللَّهُمَّ إِنِّي أَسْأَلُكَ النَّعِيمَ الْمُقِيمَ الَّذِي لَا يَحُولُ وَلَا يَزُولُ، اللَّهُمَّ إِنِّي أَسْأَلُكَ النَّعِيمَ يَوْمَ الْعَيْلَةِ، وَالْأَمْنَ يَوْمَ الْخَوْفِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ مَا أَعْطَيْتَنَا وَشَرِّ مَا مَنَعْتَ، اللَّهُمَّ حَبِّبْ إِلَيْنَا الْإِيمَانَ وَزَيِّنْهُ فِي قُلُوبِنَا، وَكَرِّهْ إِلَيْنَا الْكُفْرَ وَالْفُسُوقَ وَالْعِصْيَانَ، وَاجْعَلْنَا مِنَ الرَّاشِدِينَ، اللَّهُمَّ تَوَفَّنَا مُسْلِمِينَ وَأَحْيِنَا مُسْلِمِينَ وَأَلْحِقْنَا بِالصَّالِحِينَ غَيْرَ خَزَايَا وَلَا مَفْتُونِينَ، اللَّهُمَّ قَاتِلِ الْكَفَرَةَ الَّذِينَ يُكَذِّبُونَ رُسُلَكَ ويَصُدُّونَ عَنْ سَبِيلِكَ وَاجْعَلْ عَلَيْهِمْ رِجْزَكَ وَعَذَابَكَ، اللَّهُمَّ قَاتِلِ الْكَفَرَةَ الَّذِينَ أُوتُوا الْكِتَابَ إِلَهَ الْحَقِّ",
+                translation: "Ya Allah, segala puji bagi-Mu. Tidak ada yang menahan apa yang Engkau luaskan, tidak ada yang meluaskan apa yang Engkau tahan, tidak ada yang memberi petunjuk atas orang yang Engkau sesatkan, tidak ada yang menyesatkan orang yang Engkau beri petunjuk, tidak ada yang memberi apa yang Engkau halangi, tidak ada yang menghalangi apa yang Engkau beri, tidak ada yang mendekatkan apa yang Engkau jauhkan, tidak ada yang menjauhkan apa yang Engkau dekatkan. Ya Allah, luaskanlah kepada kami dari berkah-Mu, rahmat-Mu, karunia-Mu, dan rezeki-Mu. Ya Allah, aku memohon kenikmatan yang kekal yang tidak berubah dan tidak lenyap. Ya Allah, aku memohon kecukupan di hari kefakiran, dan keamanan di hari ketakutan. Ya Allah, aku berlindung dari keburukan apa yang Engkau berikan dan apa yang Engkau halangi. Ya Allah, jadikanlah iman dicintai oleh kami dan hiasilah di hati kami, jadikanlah kekafiran, kefasikan, dan kemaksiatan dibenci oleh kami, dan jadikanlah kami termasuk orang-orang yang mendapat petunjuk. Ya Allah, wafatkan kami sebagai muslim, hidupkan kami sebagai muslim, dan pertemukan kami dengan orang-orang shaleh tanpa kehinaan dan tanpa fitnah. Ya Allah, perangilah orang-orang kafir yang mendustakan rasul-rasul-Mu dan menghalangi dari jalan-Mu, dan timpakanlah azab-Mu kepada mereka. Ya Allah, perangilah orang-orang kafir yang telah diberi kitab, wahai Tuhan yang Mahabenar.",
+                reference: "HR. Ahmad, An-Nasa-i, dan Al-Hakim"
+            },
+            {
+                title: "Doa Memohon Perlindungan dari Penyakit yang Sangat Buruk",
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْبَرَصِ وَالْجُنُونِ وَالْجُذَامِ وَسَيِّئِ الْأَسْقَامِ",
+                translation: "Ya Allah, aku berlindung kepada-Mu dari penyakit belang, gila, lepra, dan penyakit-penyakit buruk lainnya.",
+                reference: "HR. Abu Daud"
+            },
+            {
+                title: "Doa Ditetapkan Hati dalam Iman",
+                arabic: "اَللَّهُمَّ يَا مُصَرِّفَ الْقُلُوْبِ، صَرِّفْ قُلُوْبَنَا عَلَى دِينِكَ",
+                translation: "Wahai Tuhan yang membolak-balikkan hati, teguhkanlah hatiku pada agamaMu.",
+                reference: "HR. Muslim"
+            },
+            {
+                title: "Doa Berlindung dari Kesyirikan",
+                arabic: "اللَّهُمَّ إِنِّيْ أَعُوْذُ بِكَ أَنْ أُشْرِكَ بِكَ وَأَنَا أَعْلَمُ وَأَسْتَغْفِرُكَ لِمَا لَا أَعْلَمُ",
+                translation: "Ya Allah, sesungguhnya aku berlindung kepada-Mu, agar tidak menyekutukan-Mu, sedangkan aku mengetahuinya. Dan aku meminta ampun kepada-Mu terhadap apa yang tidak aku ketahui.",
+                reference: "HR. Bukhari dalam Adabul Mufrad"
+            }
+        ];
+
+        // Fungsi untuk menampilkan doa dalam kontainer
+        function displayDoas(doas, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            if (doas.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-message">
+                        <i class="fas fa-pray"></i>
+                        <p>Tidak ada doa yang tersedia.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            doas.forEach((doa, index) => {
+                const doaElement = document.createElement('div');
+                doaElement.className = 'doa-item';
+                doaElement.innerHTML = `
+                    <div class="doa-header" data-index="${index}">
+                        <h3>${doa.title}</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="doa-content" id="doa-content-${containerId}-${index}">
+                        <div class="arabic-text">${doa.arabic}</div>
+                        <button class="translation-btn" data-index="${index}">
+                            <i class="fas fa-language"></i> Tampilkan Terjemahan
+                        </button>
+                        <div class="translation" id="translation-${containerId}-${index}">
+                            <h4>Terjemahan:</h4>
+                            <p>${doa.translation}</p>
+                            ${doa.reference ? `<div class="reference">Referensi: ${doa.reference}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(doaElement);
+            });
+            
+            // Tambahkan event listener untuk header doa
+            document.querySelectorAll(`#${containerId} .doa-header`).forEach(header => {
+                header.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    const content = document.getElementById(`doa-content-${containerId}-${index}`);
+                    const icon = this.querySelector('i');
+                    
+                    // Toggle kelas active
+                    this.classList.toggle('active');
+                    content.classList.toggle('active');
+                    
+                    // Animasi ikon
+                    if (content.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
+            // Tambahkan event listener untuk tombol terjemahan
+            document.querySelectorAll(`#${containerId} .translation-btn`).forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    const translation = document.getElementById(`translation-${containerId}-${index}`);
+                    
+                    // Toggle terjemahan
+                    translation.classList.toggle('active');
+                    
+                    // Ubah teks tombol
+                    if (translation.classList.contains('active')) {
+                        this.innerHTML = '<i class="fas fa-language"></i> Sembunyikan Terjemahan';
+                    } else {
+                        this.innerHTML = '<i class="fas fa-language"></i> Tampilkan Terjemahan';
+                    }
+                });
+            });
+        }
+
+        // Fungsi untuk mengubah tab aktif
+        function setActiveTab(tabId) {
+            // Hapus kelas active dari semua tab dan section
+            document.querySelectorAll('.tab-btn').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Tambahkan kelas active ke tab yang dipilih
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            document.getElementById(`${tabId}-section`).classList.add('active');
+        }
+
+        // Fungsi untuk mendapatkan tanggal Hijriyah
+        function getHijriDate() {
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const gregorianDate = today.toLocaleDateString('id-ID', options);
+            
+            // Simulasi tanggal Hijriyah
+            const hijriMonths = ['Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir', 'Jumadil Awal', 'Jumadil Akhir', 'Rajab', 'Sya\'ban', 'Ramadhan', 'Syawal', 'Dzulqa\'dah', 'Dzulhijjah'];
+            const randomHijriDay = Math.floor(Math.random() * 28) + 1;
+            const randomHijriMonth = hijriMonths[Math.floor(Math.random() * 12)];
+            const randomHijriYear = 1444 + Math.floor(Math.random() * 2);
+            
+            return `${gregorianDate} | ${randomHijriDay} ${randomHijriMonth} ${randomHijriYear} H`;
+        }
+
+        // Fungsi untuk update counter
+        function updateCounter(section) {
+            let count = 0;
+            let counterElement = null;
+            
+            if (section === 'quran') {
+                count = quranDoas.length;
+                counterElement = document.getElementById('quran-counter');
+            } else if (section === 'hadits') {
+                count = haditsDoas.length;
+                counterElement = document.getElementById('hadits-counter');
+            }
+            
+            if (counterElement) {
+                counterElement.textContent = `Total: ${count} doa`;
+            }
+        }
+
+        // Fungsi untuk pencarian doa
+        function setupSearch() {
+            // Pencarian untuk doa Al-Qur'an
+            document.getElementById('quran-search').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const filteredDoas = quranDoas.filter(doa => 
+                    doa.title.toLowerCase().includes(searchTerm) || 
+                    doa.arabic.toLowerCase().includes(searchTerm) ||
+                    doa.translation.toLowerCase().includes(searchTerm)
+                );
+                displayDoas(filteredDoas, 'quran-container');
+                document.getElementById('quran-counter').textContent = `Ditemukan: ${filteredDoas.length} doa`;
+            });
+            
+            // Pencarian untuk doa Hadits
+            document.getElementById('hadits-search').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const filteredDoas = haditsDoas.filter(doa => 
+                    doa.title.toLowerCase().includes(searchTerm) || 
+                    doa.arabic.toLowerCase().includes(searchTerm) ||
+                    doa.translation.toLowerCase().includes(searchTerm)
+                );
+                displayDoas(filteredDoas, 'hadits-container');
+                document.getElementById('hadits-counter').textContent = `Ditemukan: ${filteredDoas.length} doa`;
+            });
+        }
+
+        // ========== KODE UNTUK DOA ABI ==========
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyFe6grGYBS1dfoJ3gij1zFriI-b7BmVvesaOGc1eXLBK3h3j-ZHOliCbrM8Lz8J2hJ/exec"; 
+        let dataDoaAbi = [];
+        
+        // Category names for notifications
+        const categoryNamesAbi = {
+            'abi_pribadi': 'Untukku (ABI)',
+            'abi_istri': 'Untuk Istri',
+            'abi_aisyah': 'Untuk Aisyah',
+            'abi_shofiyyah': 'Untuk Shofiyyah',
+            'abi_ibrohim': 'Untuk Ibrohim',
+            'abi_keluarga': 'Untuk Keluarga',
+            'abi_umum': 'Untuk Lainnya'
+        };
+
+        function toggleDoaAbi(kat, btn) {
+            const target = document.getElementById(`list-${kat}`);
+            const isVisible = target.style.display === 'block';
+            document.querySelectorAll('.abi-container').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.btn-doa-cat').forEach(el => el.classList.remove('active'));
+            if (!isVisible) { 
+                target.style.display = 'block'; 
+                btn.classList.add('active'); 
+                renderListAbi(kat); 
+            }
+        }
+
+        function renderListAbi(kat) {
+            const area = document.getElementById(`list-${kat}`);
+            const filtered = dataDoaAbi.filter(r => r[1] === kat);
+            
+            if (filtered.length === 0) {
+                area.innerHTML = `
+                    <div class="abi-empty-state">
+                        <i class="fas fa-pray"></i>
+                        <p>Belum ada doa di kategori ini.</p>
+                        <small class="text-muted">Tambahkan doa pertama dengan formulir di bawah</small>
+                    </div>
+                `;
+                return;
+            }
+            
+            area.innerHTML = "";
+            filtered.forEach((r, i) => {
+                area.innerHTML += `
+                    <div class="abi-item">
+                        <div class="abi-text">
+                            <span class="abi-number">${i+1}.</span> ${r[2]}
+                        </div>
+                        <button class="btn-delete" onclick="hapusDoaAbi('${r[0]}')" title="Hapus doa">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        async function muatDataAbi() {
+            try {
+                const res = await fetch(`${SCRIPT_URL}?action=read&module=doa`);
+                dataDoaAbi = await res.json();
+                
+                // Update all open categories
+                document.querySelectorAll('.abi-container[style*="display: block"]').forEach(container => {
+                    const kat = container.id.replace('list-', '');
+                    renderListAbi(kat);
+                });
+            } catch (error) {
+                console.error("Gagal memuat data doa Abi:", error);
+            }
+        }
+
+        function showNotificationAbi(message) {
+            const notification = document.getElementById('notification-abi');
+            const notificationText = document.getElementById('notification-text-abi');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Event listener untuk form doa Abi
+        document.getElementById('formDoaAbi').onsubmit = async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const submitText = document.getElementById('submit-text-abi');
+            const spinner = document.getElementById('loading-spinner-abi');
+            
+            submitText.style.display = 'none';
+            spinner.style.display = 'block';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(this);
+            const kategori = formData.get('kategori');
+            const isiDoa = formData.get('isiDoa');
+            
+            const dataToSend = new URLSearchParams();
+            dataToSend.append('action', 'insert');
+            dataToSend.append('module', 'doa');
+            dataToSend.append('kategori', kategori);
+            dataToSend.append('isiDoa', isiDoa);
+            
+            try {
+                await fetch(SCRIPT_URL, { 
+                    method: 'POST', 
+                    body: dataToSend,
+                    mode: 'no-cors'
+                });
+                
+                // Show success notification with category name
+                const categoryName = categoryNamesAbi[kategori] || kategori;
+                showNotificationAbi(`Doa untuk ${categoryName} tersimpan! ✨`);
+                
+                // Reset form
+                document.getElementById('formDoaAbi').reset();
+                
+                // Reload data
+                await muatDataAbi();
+                
+                // Auto-open the category where the new prayer was added
+                const categoryButton = document.querySelector(`.btn-doa-cat[onclick*="${kategori}"]`);
+                if (categoryButton) {
+                    const isVisible = document.getElementById(`list-${kategori}`).style.display === 'block';
+                    if (!isVisible) {
+                        toggleDoaAbi(kategori, categoryButton);
+                    }
+                }
+                
+            } catch (error) {
+                console.error("Error:", error);
+                showNotificationAbi("Gagal menyimpan doa. Coba lagi.");
+            } finally {
+                // Reset button state
+                submitText.style.display = 'block';
+                spinner.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        };
+
+        async function hapusDoaAbi(id) {
+            if(confirm("Apakah Anda yakin ingin menghapus doa ini?")) {
+                try {
+                    const p = new URLSearchParams(); 
+                    p.append('action', 'delete'); 
+                    p.append('id', id); 
+                    p.append('module', 'doa');
+                    
+                    await fetch(SCRIPT_URL, { method: 'POST', body: p, mode: 'no-cors' });
+                    showNotificationAbi("Doa berhasil dihapus");
+                    await muatDataAbi();
+                } catch (error) {
+                    console.error("Error:", error);
+                    showNotificationAbi("Gagal menghapus doa");
+                }
+            }
+        }
+
+        // Inisialisasi halaman
+        document.addEventListener('DOMContentLoaded', function() {
+            // Atur tanggal Hijriyah
+            document.getElementById('hijri-date').textContent = getHijriDate();
+            
+            // Tampilkan doa dari Al-Qur'an (default)
+            displayDoas(quranDoas, 'quran-container');
+            displayDoas(haditsDoas, 'hadits-container');
+            
+            // Update counter
+            updateCounter('quran');
+            updateCounter('hadits');
+            
+            // Setup pencarian
+            setupSearch();
+            
+            // Event listener untuk tab
+            document.getElementById('tab-quran').addEventListener('click', function() {
+                setActiveTab('quran');
+            });
+            
+            document.getElementById('tab-hadits').addEventListener('click', function() {
+                setActiveTab('hadits');
+            });
+            
+            document.getElementById('tab-custom').addEventListener('click', function() {
+                setActiveTab('custom');
+            });
+            
+            // Muat data doa Abi
+            muatDataAbi();
+        });
+    </script>
+</body>
+</html>
