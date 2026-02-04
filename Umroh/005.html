@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Panduan Praktis Umroh – Thawaf & Sa'i</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="theme-color" content="#006c6b">
+
+  <!-- Fonts -->
+  <link href="https://fonts.cdnfonts.com/css/arabic" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #006c6b;
+      --primary-dark: #004d4c;
+      --primary-soft: #e0f4f3;
+      --secondary: #c19a5b;
+      --bg: #f5f7fa;
+      --text: #222;
+      --text-light: #444;
+      --card-radius: 16px;
+      --shadow-soft: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #e6f5f4 0%, #f5f7fa 100%);
+      color: var(--text);
+      line-height: 1.7;
+      padding-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
+    /* Typography untuk mobile */
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    h3 { font-size: 1.2rem; }
+    p, li { font-size: 1rem; }
+
+    @media (min-width: 768px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.6rem; }
+      h3 { font-size: 1.3rem; }
+    }
+
+    .arabic {
+      font-family: 'Arabic', "Scheherazade", "Amiri", serif;
+      font-size: 1.4rem !important;
+      direction: rtl;
+      text-align: right;
+      line-height: 1.8;
+      margin: 12px 0;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 16px 15px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: white;
+      letter-spacing: 0.02em;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.9);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Container */
+    .container {
+      max-width: 100%;
+      margin: 0 auto 30px;
+      padding: 16px;
+    }
+
+    /* Layout Utama */
+    .top-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 16px 0 20px;
+    }
+
+    /* Card Styles */
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: var(--card-radius);
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(0,108,107,0.1);
+    }
+
+    /* Progress Tracking - Horizontal untuk mobile */
+    .progress-tracker {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 10px 0 15px;
+      margin-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .progress-tracker::-webkit-scrollbar {
+      display: none;
+    }
+
+    .progress-step {
+      flex: 0 0 auto;
+      width: 70px;
+      text-align: center;
+    }
+
+    .step-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      border: 3px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #777;
+      margin: 0 auto 8px;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    .progress-step.active .step-circle {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .progress-step.completed .step-circle {
+      background: #4CAF50;
+      border-color: #4CAF50;
+      color: white;
+    }
+
+    .step-label {
+      font-size: 0.75rem;
+      color: #666;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .progress-step.active .step-label {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Step Cards */
+    .step-card {
+      background: white;
+      border-radius: var(--card-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-soft);
+      border-left: 5px solid var(--primary);
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-card.active-step {
+      display: block;
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .step-badge {
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .step-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .step-body p {
+      margin-bottom: 15px;
+    }
+
+    /* Doa Box */
+    .dua-box {
+      background: #f8fdfc;
+      border-radius: 12px;
+      padding: 18px;
+      margin: 18px 0;
+      border: 2px solid var(--primary-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dua-box::before {
+      content: "❁";
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: rgba(0,108,107,0.1);
+    }
+
+    .latin {
+      font-size: 1.1rem !important;
+      color: var(--primary-dark);
+      line-height: 1.6;
+      margin: 12px 0;
+      font-style: italic;
+    }
+
+    .terjemah {
+      font-size: 1rem !important;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin: 12px 0;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(0,108,107,0.2);
+    }
+
+    /* Highlight */
+    .hilite {
+      background: linear-gradient(120deg, rgba(255,244,218,0.5) 0%, rgba(255,244,218,0.8) 100%);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      color: #8a6d3b;
+    }
+
+    /* Note Box */
+    .note-box {
+      background: #fff9e6;
+      border-left: 4px solid #ffc107;
+      padding: 14px;
+      margin: 16px 0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    /* Action Buttons - Fixed Bottom untuk mobile */
+    .action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      padding: 12px 16px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      z-index: 1000;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-height: 52px;
+    }
+
+    .action-btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-prev {
+      background: #f8f9fa;
+      color: var(--primary);
+      border: 2px solid var(--primary-soft);
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border: none;
+    }
+
+    .btn-top {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary-soft);
+      flex: 0 0 auto;
+      width: 52px;
+      padding: 0;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .quick-btn {
+      padding: 12px 18px;
+      background: white;
+      border: 2px solid var(--primary-soft);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex: 1;
+      min-width: 140px;
+      justify-content: center;
+    }
+
+    .quick-btn:active {
+      transform: scale(0.98);
+      background: var(--primary-soft);
+    }
+
+    /* Settings Toggle */
+    .settings-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 12px;
+      flex-wrap: wrap;
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px;
+      background: white;
+      border-radius: 25px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    }
+
+    .toggle-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+    }
+
+    /* Counter Display */
+    .counter-display {
+      position: fixed;
+      top: 100px;
+      right: 16px;
+      background: var(--primary);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,108,107,0.3);
+      z-index: 99;
+    }
+
+    .counter-step {
+      font-size: 1.5rem;
+    }
+
+    .counter-total {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      padding: 30px 20px 40px;
+      background: rgba(255,255,255,0.9);
+      margin-top: 40px;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    footer span {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 480px) {
+      .container {
+        padding: 12px;
+      }
+      
+      .card, .step-card {
+        padding: 18px 16px;
+      }
+      
+      .step-title {
+        font-size: 1.2rem;
+      }
+      
+      .action-btn {
+        padding: 12px;
+        font-size: 0.95rem;
+      }
+      
+      .counter-display {
+        width: 50px;
+        height: 50px;
+        top: 90px;
+        right: 12px;
+      }
+      
+      .counter-step {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        max-width: 800px;
+        padding: 24px;
+      }
+      
+      .top-layout {
+        flex-direction: row;
+      }
+      
+      .action-bar {
+        position: static;
+        background: transparent;
+        box-shadow: none;
+        padding: 20px 0;
+        margin-top: 30px;
+        justify-content: center;
+        gap: 20px;
+      }
+      
+      .action-btn {
+        max-width: 200px;
+      }
+      
+      .counter-display {
+        position: absolute;
+        right: 24px;
+        top: 140px;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f0f0f0;
+        --text-light: #ccc;
+        --bg: #1a1a1a;
+      }
+      
+      body {
+        background: linear-gradient(135deg, #1a2e2e 0%, #2d2d2d 100%);
+        color: var(--text);
+      }
+      
+      .card, .step-card {
+        background: rgba(30, 30, 30, 0.95);
+        border-color: rgba(255,255,255,0.1);
+      }
+      
+      .dua-box {
+        background: rgba(40, 40, 40, 0.8);
+        border-color: rgba(0,108,107,0.3);
+      }
+      
+      .note-box {
+        background: rgba(50, 45, 30, 0.8);
+      }
+      
+      .btn-prev {
+        background: rgba(40, 40, 40, 0.8);
+        border-color: rgba(0,108,107,0.3);
+      }
+      
+      .action-bar {
+        background: rgba(30, 30, 30, 0.98);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Counter Display -->
+<div class="counter-display">
+  <div class="counter-step" id="currentStep">1</div>
+  <div class="counter-total">/7</div>
+</div>
+
+<header>
+  <h1><i class="fas fa-kaaba"></i> Panduan Thawaf & Sa'i</h1>
+  <p>Panduan langkah demi langkah untuk ibadah umroh</p>
+</header>
+
+<div class="container">
+  
+  <!-- Progress Tracker -->
+  <div class="card">
+    <h3>Langkah-Langkah</h3>
+    <div class="progress-tracker" id="progressTracker">
+      <div class="progress-step active" data-step="1">
+        <div class="step-circle">1</div>
+        <div class="step-label">Masuk Masjid</div>
+      </div>
+      <div class="progress-step" data-step="2">
+        <div class="step-circle">2</div>
+        <div class="step-label">Thawaf 1-3</div>
+      </div>
+      <div class="progress-step" data-step="3">
+        <div class="step-circle">3</div>
+        <div class="step-label">Thawaf 4-7</div>
+      </div>
+      <div class="progress-step" data-step="4">
+        <div class="step-circle">4</div>
+        <div class="step-label">Shalat & Zamzam</div>
+      </div>
+      <div class="progress-step" data-step="5">
+        <div class="step-circle">5</div>
+        <div class="step-label">Shafa</div>
+      </div>
+      <div class="progress-step" data-step="6">
+        <div class="step-circle">6</div>
+        <div class="step-label">Sa'i</div>
+      </div>
+      <div class="progress-step" data-step="7">
+        <div class="step-circle">7</div>
+        <div class="step-label">Tahallul</div>
+      </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <button class="quick-btn" id="btnLatin">
+        <i class="fas fa-font"></i> Latin
+      </button>
+      <button class="quick-btn" id="btnTerjemah">
+        <i class="fas fa-language"></i> Terjemah
+      </button>
+      <button class="quick-btn" id="btnReset">
+        <i class="fas fa-redo"></i> Ulang
+      </button>
+    </div>
+  </div>
+
+  <!-- Step Content -->
+  <main>
+    <!-- Step 1 -->
+    <section class="step-card active-step" data-step="1">
+      <div class="step-header">
+        <h2 class="step-title">1. Masuk Masjidil Haram</h2>
+        <div class="step-badge">Talbiyah • Doa Masuk</div>
+      </div>
+      <div class="step-body">
+        <p><i class="fas fa-walking"></i> Saat menuju Masjidil Haram, terus membaca talbiyah hingga akan memulai thawaf.</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ
+            إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ لاَ شَرِيكَ لَكَ
+          </div>
+          <div class="latin">
+            Labbaika Allāhumma labbaik, labbaika lā syarīka laka labbaik,
+            innal-ḥamda wan-ni‘mata laka wal-mulk, lā syarīka lak.
+          </div>
+          <div class="terjemah">
+            Aku penuhi panggilan-Mu, ya Allah, aku penuhi panggilan-Mu. Tidak ada sekutu bagi-Mu,
+            aku penuhi panggilan-Mu. Sungguh segala puji, nikmat, dan kerajaan adalah milik-Mu, tiada sekutu bagi-Mu.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-door-open"></i> Masuk masjid dengan kaki kanan, pastikan dalam keadaan suci dan berwudhu.</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            أَعُوْذُ بِاللَّهِ الْعَظِيْمِ، وَبِوَجْهِهِ الْكَرِيْمِ، وَسُلْطَانِهِ الْقَدِيْمِ...
+          </div>
+          <div class="latin">
+            A‘ūdzu billāhil-‘aẓīm, wa biwajhihil-karīm, wa sulṭānihil-qadīm...
+          </div>
+          <div class="terjemah">
+            Aku berlindung kepada Allah Yang Maha Agung, dengan wajah-Nya Yang Mulia dan kekuasaan-Nya yang abadi...
+          </div>
+        </div>
+        
+        <div class="note-box">
+          <strong><i class="fas fa-lightbulb"></i> Catatan:</strong> Hindari berdesakan untuk mencium Hajar Aswad. Cukup menghadap dan mengisyaratkan tangan sambil mengucapkan "Bismillāhi Allāhu Akbar".
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step-card" data-step="2">
+      <div class="step-header">
+        <h2 class="step-title">2. Thawaf: Putaran 1-3</h2>
+        <div class="step-badge">Lari Kecil • Raml</div>
+      </div>
+      <div class="step-body">
+        <p><i class="fas fa-running"></i> Mulai thawaf dari garis sejajar Hajar Aswad, ucapkan "Bismillāhi Allāhu Akbar" setiap melewatinya.</p>
+        <p>Pada putaran 1-3, laki-laki dianjurkan lari kecil (raml) dengan menjaga adab.</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
+          </div>
+          <div class="latin">
+            Rabbanā ātinā fid-dunyā ḥasanah, wa fil-ākhirati ḥasanah, waqinā ‘adzāban-nār.
+          </div>
+          <div class="terjemah">
+            Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami dari siksa neraka.
+          </div>
+        </div>
+        
+        <div class="note-box">
+          <strong><i class="fas fa-exclamation-triangle"></i> Penting:</strong> Jangan melintas di dalam Hijr Ismail. Melewati Hijr berarti thawaf tidak sempurna.
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step-card" data-step="3">
+      <div class="step-header">
+        <h2 class="step-title">3. Thawaf: Putaran 4-7</h2>
+        <div class="step-badge">Jalan Biasa • Doa</div>
+      </div>
+      <div class="step-body">
+        <p><i class="fas fa-walking"></i> Pada putaran 4-7, berjalan dengan tenang. Jaga kekhusyukan dengan dzikir dan doa.</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
+          </div>
+          <div class="latin">
+            Rabbanā ātinā fid-dunyā ḥasanah, wa fil-ākhirati ḥasanah, waqinā ‘adzāban-nār.
+          </div>
+          <div class="terjemah">
+            Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami dari siksa neraka.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-check-circle"></i> Setelah lengkap tujuh putaran, thawaf selesai.</p>
+      </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step-card" data-step="4">
+      <div class="step-header">
+        <h2 class="step-title">4. Shalat & Minum Zamzam</h2>
+        <div class="step-badge">Maqam Ibrahim • Air Zamzam</div>
+      </div>
+      <div class="step-body">
+        <p><i class="fas fa-hands-praying"></i> Setelah thawaf, tutup kembali pundak dan shalat 2 rakaat di belakang Maqam Ibrahim.</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى
+          </div>
+          <div class="latin">
+            Wattakhidzū min maqāmi Ibrāhīma muṣallā.
+          </div>
+          <div class="terjemah">
+            Jadikanlah sebagian dari Maqam Ibrahim sebagai tempat shalat.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-glass-water"></i> Setelah shalat, minum air Zamzam sambil berdoa:</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا وَاسِعًا وَشِفَاءً مِنْ كُلِّ دَاءٍ
+          </div>
+          <div class="latin">
+            Allāhumma innī as’aluka ‘ilman nāfi‘ā, wa rizqan wāsi‘ā, wa syifā’an min kulli dā’.
+          </div>
+          <div class="terjemah">
+            Ya Allah, aku memohon kepada-Mu ilmu yang bermanfaat, rezeki yang luas, dan kesembuhan dari segala penyakit.
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- Step 5 -->
+    <section class="step-card" data-step="5">
+      <div class="step-header">
+        <h2 class="step-title">5. Shafa: Awal Sa'i</h2>
+        <div class="step-badge">Niat Sa'i • Doa</div>
+      </div>
+      <div class="step-body">
+        <p><i class="fas fa-mountain"></i> Saat mendekati Shafa, bacalah:</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ
+          </div>
+          <div class="latin">
+            Innaṣ-ṣafā wal-marwata min sya‘ā’irillāh.
+          </div>
+          <div class="terjemah">
+            Sesungguhnya Shafa dan Marwah adalah sebagian dari syiar-syiar Allah.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-person-praying"></i> Naik ke Shafa sambil membaca: "Abda'u bimā bada'allāhu bih"</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            الله أَكْبَرُ، الله أَكْبَرُ، الله أَكْبَرُ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ...
+          </div>
+          <div class="latin">
+            Allāhu Akbar, Allāhu Akbar, Allāhu Akbar, lā ilāha illallāhu waḥdahū lā syarīka lah...
+          </div>
+          <div class="terjemah">
+            Allah Maha Besar (3x). Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 6 -->
+    <section class="step-card" data-step="6">
+      <div class="step-header">
+        <h2 class="step-title">6. Sa'i Shafa-Marwa</h2>
+        <div class="step-badge">7 Kali • Doa di Perjalanan</div>
+      </div>
+      <div class="step-body">
+        <p><i class="fas fa-arrows-left-right"></i> Berjalan dari Shafa ke Marwa. Di antara lampu hijau, laki-laki disunnahkan berlari kecil.</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            رَبِّ اغْفِرْ وَارْحَمْ إِنَّك أَنْتَ الأَعَزُّ الأَكْرَمُّ
+          </div>
+          <div class="latin">
+            Rabbi ighfir warḥam, innaka anta al-a‘azzu al-akram.
+          </div>
+          <div class="terjemah">
+            Ya Tuhanku, ampunilah dan rahmatilah, sesungguhnya Engkau-lah Yang Maha Perkasa lagi Maha Mulia.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-flag-checkered"></i> Ulangi perjalanan 7 kali, dimulai dari Shafa dan berakhir di Marwa.</p>
+      </div>
+    </section>
+
+    <!-- Step 7 -->
+    <section class="step-card" data-step="7">
+      <div class="step-header">
+        <h2 class="step-title">7. Tahallul</h2>
+        <div class="step-badge">Selesai • Mencukur Rambut</div>
+      </div>
+      <div class="step-body">
+        <p><i class="fas fa-cut"></i> Setelah selesai sa'i, lakukan tahallul dengan mencukur rambut:</p>
+        <ul style="padding-left: 20px; margin: 15px 0;">
+          <li><strong>Laki-laki:</strong> Lebih utama mencukur habis, boleh juga memendekkan</li>
+          <li><strong>Wanita:</strong> Cukup potong sedikit ujung rambut (sekitar 1 ruas jari)</li>
+        </ul>
+        
+        <div class="note-box">
+          <strong><i class="fas fa-check-double"></i> Selamat!</strong> Dengan tahallul, larangan ihram selesai dan rangkaian umroh Anda sempurna, insya Allah.
+        </div>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+<!-- Action Bar (Fixed Bottom for Mobile) -->
+<div class="action-bar">
+  <button class="action-btn btn-prev" id="prevStep">
+    <i class="fas fa-arrow-left"></i> Sebelumnya
+  </button>
+  <button class="action-btn btn-top" id="scrollTop" title="Kembali ke atas">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  <button class="action-btn btn-next" id="nextStep">
+    Berikutnya <i class="fas fa-arrow-right"></i>
+  </button>
+</div>
+
+<footer>
+  <p><i class="fas fa-mosque"></i> Disusun sebagai panduan praktis umroh</p>
+  <p>Gunakan sambil terus belajar dari ustadz dan pembimbing yang terpercaya, insya <span>Allah</span>.</p>
+</footer>
+
+<script>
+  // DOM Elements
+  const stepCards = document.querySelectorAll('.step-card');
+  const progressSteps = document.querySelectorAll('.progress-step');
+  const prevBtn = document.getElementById('prevStep');
+  const nextBtn = document.getElementById('nextStep');
+  const scrollTopBtn = document.getElementById('scrollTop');
+  const currentStepDisplay = document.getElementById('currentStep');
+  const btnLatin = document.getElementById('btnLatin');
+  const btnTerjemah = document.getElementById('btnTerjemah');
+  const btnReset = document.getElementById('btnReset');
+  
+  let currentStep = 0;
+  let latinVisible = true;
+  let terjemahVisible = true;
+  
+  // Initialize
+  function init() {
+    updateDisplay();
+    updateProgressTracker();
+    setupEventListeners();
+    applyTextVisibility();
+  }
+  
+  // Update step display
+  function updateDisplay() {
+    stepCards.forEach((card, index) => {
+      card.classList.toggle('active-step', index === currentStep);
+    });
+    
+    currentStepDisplay.textContent = currentStep + 1;
+    
+    // Update button states
+    prevBtn.disabled = currentStep === 0;
+    nextBtn.disabled = currentStep === stepCards.length - 1;
+    
+    // Auto scroll to active step
+    stepCards[currentStep].scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'nearest'
+    });
+  }
+  
+  // Update progress tracker
+  function updateProgressTracker() {
+    progressSteps.forEach((step, index) => {
+      step.classList.remove('active', 'completed');
+      
+      if (index === currentStep) {
+        step.classList.add('active');
+      } else if (index < currentStep) {
+        step.classList.add('completed');
+      }
+    });
+  }
+  
+  // Apply text visibility settings
+  function applyTextVisibility() {
+    document.querySelectorAll('.latin').forEach(el => {
+      el.style.display = latinVisible ? 'block' : 'none';
+    });
+    
+    document.querySelectorAll('.terjemah').forEach(el => {
+      el.style.display = terjemahVisible ? 'block' : 'none';
+    });
+    
+    // Update button states
+    btnLatin.classList.toggle('active', latinVisible);
+    btnTerjemah.classList.toggle('active', terjemahVisible);
+  }
+  
+  // Event Listeners
+  function setupEventListeners() {
+    // Navigation buttons
+    prevBtn.addEventListener('click', () => {
+      if (currentStep > 0) {
+        currentStep--;
+        updateDisplay();
+        updateProgressTracker();
+      }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      if (currentStep < stepCards.length - 1) {
+        currentStep++;
+        updateDisplay();
+        updateProgressTracker();
+      }
+    });
+    
+    // Progress tracker clicks
+    progressSteps.forEach((step, index) => {
+      step.addEventListener('click', () => {
+        currentStep = index;
+        updateDisplay();
+        updateProgressTracker();
+      });
+    });
+    
+    // Scroll to top
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Text visibility toggles
+    btnLatin.addEventListener('click', () => {
+      latinVisible = !latinVisible;
+      applyTextVisibility();
+    });
+    
+    btnTerjemah.addEventListener('click', () => {
+      terjemahVisible = !terjemahVisible;
+      applyTextVisibility();
+    });
+    
+    // Reset to first step
+    btnReset.addEventListener('click', () => {
+      currentStep = 0;
+      updateDisplay();
+      updateProgressTracker();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' && currentStep > 0) {
+        currentStep--;
+        updateDisplay();
+        updateProgressTracker();
+      } else if (e.key === 'ArrowRight' && currentStep < stepCards.length - 1) {
+        currentStep++;
+        updateDisplay();
+        updateProgressTracker();
+      }
+    });
+    
+    // Swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+    
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0 && currentStep < stepCards.length - 1) {
+          // Swipe left - next
+          currentStep++;
+        } else if (diff < 0 && currentStep > 0) {
+          // Swipe right - previous
+          currentStep--;
+        }
+        updateDisplay();
+        updateProgressTracker();
+      }
+    }
+  }
+  
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', init);
+  
+  // Service Worker for offline use (optional)
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
