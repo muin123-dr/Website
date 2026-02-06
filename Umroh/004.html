@@ -594,6 +594,50 @@
             border-radius: 3px;
         }
         
+	        /* Back to Top Button */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2c5530;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none; /* Sembunyikan secara default */
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(44, 85, 48, 0.3);
+            transition: all 0.3s ease;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .back-to-top-btn.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top-btn:hover {
+            background-color: #3e7245;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(44, 85, 48, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .back-to-top-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
         /* Responsive styles */
         @media (max-width: 768px) {
             .doa-container {
@@ -816,7 +860,9 @@
                 </form>
             </div>
         </section>
-        
+        <button id="backToTop" class="back-to-top-btn">
+        <i class="fas fa-chevron-up"></i>
+    </button>
         <footer>
             <p>Semoga doa-doa kita selalu dikabulkan oleh Allah SWT. Aamiin.</p>
             <p>© 2023 Kumpulan Doa Lengkap - Nuansa Umroh</p>
@@ -1603,6 +1649,47 @@
             // Muat data doa Umi
             muatDataUmi();
         });
+	// Back to Top Functionality
+        function setupBackToTop() {
+            const backToTopBtn = document.getElementById('backToTop');
+            const footer = document.querySelector('footer');
+            
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                const footerPosition = footer.offsetTop;
+                
+                // Tampilkan tombol ketika:
+                // 1. Scroll lebih dari 300px dari atas, ATAU
+                // 2. Sudah mencapai/mendekati footer
+                const isNearFooter = scrollPosition + windowHeight >= footerPosition - 100;
+                
+                if (scrollPosition > 300 || isNearFooter) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            
+            // Klik event untuk kembali ke atas
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // Panggil fungsi setupBackToTop() setelah DOM selesai dimuat
+        // Tambahkan di akhir event listener DOMContentLoaded yang sudah ada
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... kode yang sudah ada ...
+            
+            // Setup back to top button
+            setupBackToTop();
+        });
+    
     </script>
 </body>
 </html>
