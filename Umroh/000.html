@@ -226,18 +226,19 @@
     }
 
     .menu-link {
-      color: var(--text-main);
+      color: #f8e8b6; /* Warna teks lebih terang dan kontras */
       text-decoration: none;
       display: block;
       font-size: 15px;
       font-weight: 500;
       padding: 12px 16px;
       border-radius: 14px;
-      background: rgba(242, 201, 76, 0.08);
-      border: 1px solid rgba(242, 201, 76, 0.15);
+      background: rgba(242, 201, 76, 0.15); /* Lebih kontras */
+      border: 1px solid rgba(242, 201, 76, 0.4); /* Border lebih terlihat */
       transition: all var(--transition-fast);
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow untuk depth */
     }
 
     .menu-link::before {
@@ -250,15 +251,33 @@
     }
 
     .menu-link:hover {
-      background: rgba(242, 201, 76, 0.15);
-      border-color: rgba(242, 201, 76, 0.4);
+      background: rgba(242, 201, 76, 0.25); /* Lebih terang saat hover */
+      border-color: rgba(242, 201, 76, 0.7);
       transform: translateX(6px);
       color: var(--white);
+      box-shadow: 0 6px 16px rgba(242, 201, 76, 0.2); /* Shadow dengan warna accent */
     }
 
     .menu-link:hover::before {
       opacity: 1;
       transform: translateX(0);
+    }
+
+    /* Efek cahaya untuk tombol */
+    .menu-link::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.1), 
+        transparent);
+      opacity: 0;
+      transition: opacity var(--transition-slow);
+    }
+
+    .menu-link:hover::after {
+      opacity: 1;
     }
 
     footer {
