@@ -32,6 +32,7 @@
 
     html, body {
       height: 100%;
+      overflow: hidden;
     }
 
     body {
@@ -43,6 +44,87 @@
       align-items: center;
       justify-content: center;
       padding: 16px;
+    }
+
+    /* Bintang Animasi */
+    .stars-container {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background-color: white;
+      animation: twinkle var(--duration, 3s) infinite var(--delay, 0s);
+    }
+
+    .star.small {
+      width: 1px;
+      height: 1px;
+      box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+    }
+
+    .star.medium {
+      width: 2px;
+      height: 2px;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+    }
+
+    .star.large {
+      width: 3px;
+      height: 3px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+    }
+
+    .star.yellow {
+      background-color: #f2c94c;
+      box-shadow: 0 0 8px rgba(242, 201, 76, 0.9);
+    }
+
+    .star.bright {
+      animation: twinkleBright 2s infinite;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 1);
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0) 100%);
+      border-radius: 50%;
+      opacity: 0;
+      transform: rotate(45deg);
+      transform-origin: 0 0;
+      animation: shootingStar 3s linear infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes twinkleBright {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      20% { opacity: 0.8; transform: scale(1.1); }
+      50% { opacity: 1; transform: scale(1.2); }
+      80% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    @keyframes shootingStar {
+      0% {
+        opacity: 0;
+        transform: translateX(0) translateY(0) rotate(45deg);
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(300px) translateY(300px) rotate(45deg);
+      }
     }
 
     .background-orbit {
@@ -424,6 +506,9 @@
   </style>
 </head>
 <body>
+  <!-- Container untuk bintang animasi -->
+  <div class="stars-container" id="starsContainer"></div>
+  
   <div class="stars"></div>
   <div class="background-orbit">
     <div class="orbit-circle"></div>
@@ -480,7 +565,83 @@
   </main>
 
   <script>
+    // Fungsi untuk membuat bintang animasi
+    function createStars() {
+      const container = document.getElementById('starsContainer');
+      const starCount = 120; // Jumlah bintang
+
+      // Membuat bintang statis
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        
+        // Pilih ukuran acak
+        const sizes = ['small', 'medium', 'large'];
+        const size = sizes[Math.floor(Math.random() * sizes.length)];
+        star.classList.add(size);
+        
+        // 30% kemungkinan menjadi bintang kuning
+        if (Math.random() < 0.3) {
+          star.classList.add('yellow');
+        }
+        
+        // 10% kemungkinan menjadi bintang terang
+        if (Math.random() < 0.1) {
+          star.classList.add('bright');
+        }
+        
+        // Posisi acak
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.top = `${Math.random() * 100}vh`;
+        
+        // Durasi animasi acak
+        star.style.setProperty('--duration', `${3 + Math.random() * 4}s`);
+        star.style.setProperty('--delay', `${Math.random() * 5}s`);
+        
+        container.appendChild(star);
+      }
+      
+      // Membuat bintang melintas secara periodik
+      setInterval(createShootingStar, 4000);
+      // Buat beberapa bintang melintas saat load
+      setTimeout(() => {
+        for (let i = 0; i < 3; i++) {
+          setTimeout(createShootingStar, i * 800);
+        }
+      }, 1000);
+    }
+    
+    // Fungsi untuk membuat bintang melintas
+    function createShootingStar() {
+      const container = document.getElementById('starsContainer');
+      const shootingStar = document.createElement('div');
+      shootingStar.classList.add('shooting-star');
+      
+      // Posisi awal acak
+      const startX = Math.random() * 50;
+      const startY = Math.random() * 50;
+      
+      shootingStar.style.left = `${startX}vw`;
+      shootingStar.style.top = `${startY}vh`;
+      
+      // Durasi acak
+      const duration = 2 + Math.random() * 1;
+      shootingStar.style.animationDuration = `${duration}s`;
+      
+      container.appendChild(shootingStar);
+      
+      // Hapus elemen setelah animasi selesai
+      setTimeout(() => {
+        if (shootingStar.parentNode) {
+          shootingStar.parentNode.removeChild(shootingStar);
+        }
+      }, duration * 1000);
+    }
+
     (function () {
+      // Inisialisasi bintang
+      createStars();
+      
       var button = document.getElementById("openButton");
       var pulseRing = button ? button.querySelector(".pulse-ring") : null;
 
