@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Umroh Ramadhan - dr. Muin 2026</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #020a27 0%, #071a4a 40%, #0f4c75 100%);
+      --accent: #f2c94c;
+      --accent-soft: rgba(242, 201, 76, 0.12);
+      --white: #ffffff;
+      --text-main: #f7f9fc;
+      --text-soft: #cfd8ea;
+      --button-radius: 999px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.35);
+      --transition-fast: 200ms ease-out;
+      --transition-slow: 450ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #13285b 0, #020718 55%, #01030a 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .background-orbit {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .orbit-circle {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      animation: orbit 32s linear infinite;
+    }
+
+    .orbit-circle:nth-child(1) {
+      width: 480px;
+      height: 480px;
+      top: -160px;
+      right: -60px;
+    }
+    .orbit-circle:nth-child(2) {
+      width: 640px;
+      height: 640px;
+      bottom: -260px;
+      left: -120px;
+      animation-duration: 42s;
+    }
+
+    @keyframes orbit {
+      from {
+        transform: rotate(0deg) translate3d(0, 0, 0);
+      }
+      to {
+        transform: rotate(360deg) translate3d(0, 0, 0);
+      }
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.35) 0, transparent 60%),
+        radial-gradient(1.5px 1.5px at 70% 10%, rgba(255,255,255,0.25) 0, transparent 60%),
+        radial-gradient(1.5px 1.5px at 80% 70%, rgba(255,255,255,0.3) 0, transparent 60%),
+        radial-gradient(1.2px 1.2px at 10% 80%, rgba(255,255,255,0.16) 0, transparent 60%);
+      opacity: 0.6;
+      z-index: -3;
+      pointer-events: none;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: radial-gradient(circle at top, rgba(242, 201, 76, 0.1), rgba(3, 9, 30, 0.96));
+      border-radius: 24px;
+      padding: 24px 20px 20px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      animation: cardFadeIn 900ms ease-out forwards;
+      transform: translate3d(0, 10px, 0);
+      opacity: 0;
+    }
+
+    @keyframes cardFadeIn {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 26px, 0) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(242, 201, 76, 0.28), transparent 70%);
+      top: -140px;
+      right: -120px;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      background: rgba(5, 57, 107, 0.7);
+      border: 1px solid rgba(242, 201, 76, 0.6);
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      white-space: nowrap;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(242, 201, 76, 0.9);
+      animation: pulse 1500ms ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    .header-hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .headline {
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    .moon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #f2c94c 45%, #c99a25 100%);
+      position: relative;
+      box-shadow: 0 0 24px rgba(242, 201, 76, 0.65);
+      overflow: hidden;
+      flex-shrink: 0;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .moon::before,
+    .moon::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.12);
+    }
+    .moon::before {
+      width: 14px;
+      height: 14px;
+      top: 16px;
+      left: 11px;
+    }
+    .moon::after {
+      width: 10px;
+      height: 10px;
+      bottom: 18px;
+      right: 16px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate3d(0, -6px, 0);
+      }
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .poem {
+      background: rgba(4, 25, 60, 0.8);
+      border-radius: 16px;
+      padding: 14px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poem::before {
+      content: "﷽";
+      position: absolute;
+      font-size: 40px;
+      top: -10px;
+      left: 8px;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .poem-line {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-main);
+      text-align: center;
+      transform: translate3d(0, 8px, 0);
+      opacity: 0;
+      animation: lineFade 900ms ease-out forwards;
+    }
+
+    .poem-line:nth-child(1) { animation-delay: 200ms; }
+    .poem-line:nth-child(2) { animation-delay: 450ms; }
+    .poem-line:nth-child(3) { animation-delay: 700ms; }
+    .poem-line:nth-child(4) { animation-delay: 950ms; }
+
+    @keyframes lineFade {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      font-size: 12px;
+      color: var(--text-soft);
+      flex-wrap: wrap;
+    }
+
+    .meta span strong {
+      color: var(--accent);
+    }
+
+    .divider {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    .cta-area {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .cta-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border-radius: var(--button-radius);
+      border: none;
+      background: radial-gradient(circle at 20% 0%, #fff7d1, #f2c94c 40%, #cfa530 100%);
+      color: #1b1f30;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .cta-button span.label {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-button span.pulse-ring {
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.65), transparent 70%);
+      opacity: 0;
+      transform: scale(0.2);
+      pointer-events: none;
+    }
+
+    .cta-button:focus-visible {
+      outline: 2px solid rgba(242, 201, 76, 0.9);
+      outline-offset: 3px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4);
+      filter: brightness(1.02);
+    }
+
+    .cta-button:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.32);
+      filter: brightness(0.98);
+    }
+
+    .cta-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.09);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .cta-note {
+      font-size: 11px;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    .cta-note strong {
+      color: var(--accent);
+    }
+
+    @keyframes pulseClick {
+      0% {
+        opacity: 0.7;
+        transform: scale(0.2);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.4);
+      }
+    }
+
+    @media (min-width: 640px) {
+      body {
+        padding: 24px;
+      }
+      .card {
+        padding: 26px 24px 22px;
+        border-radius: 26px;
+      }
+      .headline {
+        font-size: 24px;
+      }
+      .poem-line {
+        font-size: 16px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="background-orbit">
+    <div class="orbit-circle"></div>
+    <div class="orbit-circle"></div>
+  </div>
+
+  <main class="card" aria-label="Undangan Umroh Ramadhan dr. Muin 2026">
+    <div class="badge" aria-hidden="true">
+      <span class="badge-dot"></span>
+      <span>Umroh Ramadhan 2026</span>
+    </div>
+
+    <div class="header-hero">
+      <div>
+        <h1 class="headline">2 Sejoli di Tanah Suci</h1>
+        <p class="subtitle">Perjalanan hati mencari ridho Ilahi, <br>kini Umroh, semoga nanti Haji lagi.</p>
+      </div>
+      <div class="moon" aria-hidden="true"></div>
+    </div>
+
+    <section class="poem" aria-label="Puisi Umroh Ramadhan">
+      <p class="poem-line">Sejoli menapak jejak suci</p>
+      <p class="poem-line">Doa terjalin, cinta abadi  </p>
+      <p class="poem-line">Bersama di dua negeri </p>
+      <p class="poem-line">Dunia dan akhirat hakiki</p>
+    </section>
+
+    <div class="meta">
+      <span><strong>Umroh Ramadhan</strong> • 2026</span>
+      <span>Muin - IIn</span>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="cta-area">
+      <a
+        href="https://muin123-dr.github.io/Website/Umroh/000.html"
+        class="cta-button"
+        id="openButton"
+        role="button"
+        aria-label="Buka detail Umroh Ramadhan"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="pulse-ring" aria-hidden="true"></span>
+        <span class="label">Buka</span>
+        <span class="cta-icon" aria-hidden="true">➜</span>
+      </a>
+
+      <p class="cta-note">
+        Sentuh tombol <strong>Buka</strong> untuk melihat detail perjalanan Umroh Ramadhan Anda.
+      </p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var button = document.getElementById("openButton");
+      var pulseRing = button ? button.querySelector(".pulse-ring") : null;
+
+      if (button && pulseRing) {
+        button.addEventListener("click", function (event) {
+          var rect = button.getBoundingClientRect();
+          var x = event.clientX - rect.left;
+          var y = event.clientY - rect.top;
+
+          pulseRing.style.left = x + "px";
+          pulseRing.style.top = y + "px";
+          pulseRing.style.transformOrigin = x + "px " + y + "px";
+
+          pulseRing.style.animation = "none";
+          void pulseRing.offsetWidth;
+          pulseRing.style.animation = "pulseClick 500ms ease-out";
+        });
+
+        button.addEventListener("touchstart", function () {
+          pulseRing.style.animation = "none";
+          void pulseRing.offsetWidth;
+          pulseRing.style.animation = "pulseClick 550ms ease-out";
+        }, { passive: true });
+      }
+    })();
+  </script>
+</body>
+</html>

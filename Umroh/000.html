@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar Isi - Umroh Ramadhan 2026 | dr. Muin</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #020a27 0%, #071a4a 40%, #0f4c75 100%);
+      --accent: #f2c94c;
+      --accent-soft: rgba(242, 201, 76, 0.12);
+      --white: #ffffff;
+      --text-main: #f7f9fc;
+      --text-soft: #cfd8ea;
+      --card-bg: rgba(4, 25, 60, 0.8);
+      --button-radius: 999px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.35);
+      --transition-fast: 200ms ease-out;
+      --transition-slow: 450ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #13285b 0, #020718 55%, #01030a 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.35) 0, transparent 60%),
+        radial-gradient(1.5px 1.5px at 70% 10%, rgba(255,255,255,0.25) 0, transparent 60%),
+        radial-gradient(1.5px 1.5px at 80% 70%, rgba(255,255,255,0.3) 0, transparent 60%),
+        radial-gradient(1.2px 1.2px at 10% 80%, rgba(255,255,255,0.16) 0, transparent 60%);
+      opacity: 0.6;
+      z-index: -3;
+      pointer-events: none;
+    }
+
+    .background-orbit {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .orbit-circle {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      animation: orbit 32s linear infinite;
+    }
+
+    .orbit-circle:nth-child(1) {
+      width: 480px;
+      height: 480px;
+      top: -160px;
+      right: -60px;
+    }
+    .orbit-circle:nth-child(2) {
+      width: 640px;
+      height: 640px;
+      bottom: -260px;
+      left: -120px;
+      animation-duration: 42s;
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg) translate3d(0, 0, 0); }
+      to { transform: rotate(360deg) translate3d(0, 0, 0); }
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      padding: 20px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--button-radius);
+      background: rgba(5, 57, 107, 0.7);
+      border: 1px solid rgba(242, 201, 76, 0.6);
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(242, 201, 76, 0.9);
+      animation: pulse 1500ms ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    .header-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .header-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 520px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .menu-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 20px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 0%, var(--accent-soft) 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity var(--transition-slow);
+    }
+
+    .menu-card:hover::before {
+      opacity: 1;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.45);
+      border-color: rgba(242, 201, 76, 0.3);
+    }
+
+    .menu-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .menu-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(242, 201, 76, 0.2), rgba(207, 165, 48, 0.1));
+      border: 1px solid rgba(242, 201, 76, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .menu-icon::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      box-shadow: 0 0 8px rgba(242, 201, 76, 0.8);
+    }
+
+    .menu-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .menu-link {
+      color: var(--text-main);
+      text-decoration: none;
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(242, 201, 76, 0.08);
+      border: 1px solid rgba(242, 201, 76, 0.15);
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-link::before {
+      content: "➜";
+      position: absolute;
+      right: 16px;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: all var(--transition-fast);
+    }
+
+    .menu-link:hover {
+      background: rgba(242, 201, 76, 0.15);
+      border-color: rgba(242, 201, 76, 0.4);
+      transform: translateX(6px);
+      color: var(--white);
+    }
+
+    .menu-link:hover::before {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 28px 0 20px;
+      text-align: center;
+      opacity: 0.85;
+    }
+
+    .footer-divider {
+      height: 1px;
+      width: 100%;
+      max-width: 240px;
+      margin: 0 auto 16px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .footer-text strong {
+      color: var(--accent);
+    }
+
+    @media (min-width: 640px) {
+      body {
+        padding: 24px;
+      }
+      .header-title {
+        font-size: 24px;
+      }
+      .menu-card {
+        padding: 24px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="background-orbit">
+    <div class="orbit-circle"></div>
+    <div class="orbit-circle"></div>
+  </div>
+
+  <header>
+    <div class="badge">
+      <span class="badge-dot"></span>
+      <span>Daftar Isi</span>
+    </div>
+    <div>
+      <h1 class="header-title">Umroh Ramadhan 2026</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="menu-card" tabindex="0">
+      <div class="menu-header">
+        <div class="menu-icon">📦</div>
+        <div class="menu-title">Daftar Barang Bawaan</div>
+      </div>
+      <a 
+        href="https://muin123-dr.github.io/Website/Umroh/001.html" 
+        class="menu-link"
+        target="_blank" 
+        rel="noopener noreferrer"
+        aria-label="Buka Daftar Barang Bawaan"
+      >
+        Lihat daftar selengkapnya ➡️
+      </a>
+    </div>
+
+    <div class="menu-card" tabindex="0">
+      <div class="menu-header">
+        <div class="menu-icon">📅</div>
+        <div class="menu-title">Jadwal Harian</div>
+      </div>
+      <a 
+        href="https://muin123-dr.github.io/Website/Umroh/002.html" 
+        class="menu-link"
+        target="_blank" 
+        rel="noopener noreferrer"
+        aria-label="Buka Jadwal Harian"
+      >
+        Lihat daftar selengkapnya ➡️
+      </a>
+    </div>
+
+    <div class="menu-card" tabindex="0">
+      <div class="menu-header">
+        <div class="menu-icon">🤲</div>
+        <div class="menu-title">Doa-doa (Abi)</div>
+      </div>
+      <a 
+        href="https://muin123-dr.github.io/Website/Umroh/003.html" 
+        class="menu-link"
+        target="_blank" 
+        rel="noopener noreferrer"
+        aria-label="Buka Doa-doa Abi"
+      >
+        Lihat daftar selengkapnya ➡️
+      </a>
+    </div>
+
+    <div class="menu-card" tabindex="0">
+      <div class="menu-header">
+        <div class="menu-icon">🤲</div>
+        <div class="menu-title">Doa-doa (Umi)</div>
+      </div>
+      <a 
+        href="https://muin123-dr.github.io/Website/Umroh/004.html" 
+        class="menu-link"
+        target="_blank" 
+        rel="noopener noreferrer"
+        aria-label="Buka Doa-doa Umi"
+      >
+        Lihat daftar selengkapnya ➡️
+      </a>
+    </div>
+
+    <div class="menu-card" tabindex="0">
+      <div class="menu-header">
+        <div class="menu-icon">📖</div>
+        <div class="menu-title">Panduan Umroh</div>
+      </div>
+      <a 
+        href="https://muin123-dr.github.io/Website/Umroh/005.html" 
+        class="menu-link"
+        target="_blank" 
+        rel="noopener noreferrer"
+        aria-label="Buka Panduan Umroh"
+      >
+        Lihat daftar selengkapnya ➡️
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-divider"></div>
+    <p class="footer-text">
+      <strong>Umroh Ramadhan</strong><br />
+      dr. Muin - 2026
+    </p>
+  </footer>
+</body>
+</html>
