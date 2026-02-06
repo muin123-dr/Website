@@ -179,6 +179,7 @@
             max-height: 0;
             overflow: hidden;
             transition: all 0.4s ease;
+	    overflow-y: auto;
         }
         
         .doa-content.active {
@@ -199,6 +200,11 @@
             margin-bottom: 20px;
             border-right: 5px solid #d4a054;
             letter-spacing: 0.05rem;
+	    overflow-wrap: break-word;
+    	    word-break: keep-all;
+    	    hyphens: manual;
+    	    white-space: normal;
+    	    max-width: 100%;
         }
         
         .translation-btn {
@@ -244,6 +250,9 @@
         .translation p {
             line-height: 1.6;
             color: #444;
+	    text-align: justify;
+    	    word-wrap: break-word;
+    	    overflow-wrap: anywhere;
         }
         
         .reference {
@@ -613,9 +622,14 @@
             }
             
             .arabic-text {
-                font-size: 2.0rem;
-                line-height: 2.5;
-            }
+          	font-size: 2.0rem;
+        	line-height: 2.5;
+        	/* Perbaikan khusus untuk mobile */
+        	font-size: 1.8rem;
+        	line-height: 2.2;
+        	padding: 15px;
+        	overflow-wrap: anywhere;
+   	    }
             
             .umi-header-section {
                 padding: 20px 15px;
@@ -688,7 +702,7 @@
     
     <div class="container">
         <header>
-            <h1>KUMPULAN DO'A-DO'A</h1>
+            <h1>DO'A-DO'A</h1>
             <p class="header-subtitle">dari Al-Qur'an, Hadits, dan Doa Umi</p>
             <div class="hijri-date" id="hijri-date">Tanggal Hijriyah akan dimuat...</div>
         </header>
