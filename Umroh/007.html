@@ -23,6 +23,10 @@
             --danger: #dc3545;
             --warning: #ffc107;
             --info: #17a2b8;
+            --gold: #ffd700;
+            --text-light: #ffffff;
+            --text-yellow: #fff176;
+            --text-gold: #ffd54f;
         }
 
         body {
@@ -40,58 +44,171 @@
         .header {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 25px;
+            padding: 20px;
             margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
             border: 3px solid var(--accent);
         }
 
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .header p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
         .time-display {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
             margin-bottom: 20px;
         }
 
         .time-card {
             background: var(--primary);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 15px;
-            flex: 1;
-            min-width: 200px;
+            color: var(--text-light);
+            padding: 12px 15px;
+            border-radius: 12px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .time-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
         }
 
         .time-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            color: #ffeb3b;
+            font-size: 0.75rem;
+            margin-bottom: 5px;
+            color: var(--text-yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         .time-card p {
-            font-size: 1.8rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-light);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .time-card .location-text {
+            font-size: 0.85rem;
+            color: #e8f5e9;
+            font-weight: 500;
+            min-height: 1.2rem;
+        }
+
+        .time-card .date-text {
+            font-size: 0.9rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .time-card .day-text {
+            font-size: 0.8rem;
+            color: #bbdefb;
+            font-weight: 500;
+        }
+
+        /* Waktu saat ini - lebih menonjol */
+        .time-card.current-time {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: 2px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            }
+            to {
+                box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        .time-card.current-time h3 {
+            color: var(--text-gold);
+            font-size: 0.8rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .time-card.current-time p {
+            font-size: 1.4rem;
             font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
         #hijri-date {
             background: var(--accent);
         }
 
+        #hijri-date h3 {
+            color: #ffecb3;
+        }
+
+        #hijri-date p {
+            color: #fff9c4;
+            font-weight: 600;
+        }
+
+        .location-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .location-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 3px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .location-btn:hover {
+            background: #e68900;
+            transform: scale(1.05);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+        }
+
+        .location-btn:active {
+            transform: scale(0.95);
+        }
+
+        .location-btn i {
+            margin-right: 3px;
+        }
+
         .highlight-box {
             background: linear-gradient(to right, #ff9800, #ff5722);
             color: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 15px;
-            margin: 25px 0;
+            margin: 20px 0;
             text-align: center;
             animation: pulse 2s infinite;
             box-shadow: 0 8px 25px rgba(255, 152, 0, 0.3);
-            border: 3px solid white;
+            border: 2px solid white;
         }
 
         @keyframes pulse {
@@ -101,13 +218,17 @@
         }
 
         .highlight-box h2 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .highlight-box p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1rem;
+            opacity: 0.95;
+            color: #fffde7;
+            font-weight: 500;
         }
 
         .content {
@@ -125,7 +246,7 @@
         .ibadah-list {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             max-height: 600px;
             overflow-y: auto;
@@ -133,17 +254,17 @@
 
         .ibadah-list h2 {
             color: var(--primary);
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
             border-bottom: 3px solid var(--secondary);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
         .ibadah-item {
             display: flex;
             align-items: center;
-            padding: 18px;
-            margin-bottom: 15px;
+            padding: 15px;
+            margin-bottom: 12px;
             background: white;
             border-radius: 12px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
@@ -177,15 +298,16 @@
         .ibadah-number {
             background: var(--primary);
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            margin-right: 20px;
+            margin-right: 15px;
             flex-shrink: 0;
+            font-size: 0.9rem;
         }
 
         .ibadah-info {
@@ -194,14 +316,14 @@
 
         .ibadah-name {
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--dark);
             margin-bottom: 5px;
         }
 
         .ibadah-time {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -212,9 +334,9 @@
         }
 
         .checkmark {
-            width: 28px;
-            height: 28px;
-            border: 3px solid #ddd;
+            width: 26px;
+            height: 26px;
+            border: 2px solid #ddd;
             border-radius: 50%;
             cursor: pointer;
             flex-shrink: 0;
@@ -222,7 +344,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
-            margin-left: 15px;
+            margin-left: 10px;
         }
 
         .checkmark.checked {
@@ -245,28 +367,29 @@
         .next-ibadah {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 25px;
+            padding: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .next-ibadah h3 {
             color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
             border-bottom: 2px solid var(--secondary);
+            font-size: 1.2rem;
         }
 
         .next-item {
             background: white;
-            padding: 15px;
+            padding: 12px;
             border-radius: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
             border-left: 4px solid var(--info);
         }
 
         .next-time {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: bold;
             color: var(--accent);
             margin-bottom: 5px;
@@ -275,41 +398,43 @@
         .next-name {
             font-weight: bold;
             color: var(--dark);
+            font-size: 0.95rem;
         }
 
         .progress-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 25px;
+            padding: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .progress-container h3 {
             color: var(--primary);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
             border-bottom: 2px solid var(--secondary);
+            font-size: 1.2rem;
         }
 
         .progress-bar {
-            height: 25px;
+            height: 22px;
             background: #e0e0e0;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(to right, var(--primary), var(--accent));
-            border-radius: 12px;
+            border-radius: 10px;
             transition: width 0.5s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .progress-stats {
@@ -317,30 +442,31 @@
             justify-content: space-between;
             font-weight: bold;
             color: var(--dark);
+            font-size: 0.9rem;
         }
 
         .footer {
             text-align: center;
             color: white;
-            margin-top: 30px;
-            padding: 20px;
+            margin-top: 25px;
+            padding: 15px;
             opacity: 0.8;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         /* Scrollbar styling */
         .ibadah-list::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
 
         .ibadah-list::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
         .ibadah-list::-webkit-scrollbar-thumb {
             background: var(--primary);
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
         .ibadah-list::-webkit-scrollbar-thumb:hover {
@@ -353,16 +479,27 @@
             right: 20px;
             background: var(--success);
             color: white;
-            padding: 15px 25px;
+            padding: 12px 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transform: translateX(150%);
             transition: transform 0.5s ease;
             z-index: 1000;
+            font-size: 0.9rem;
         }
 
         .notification.show {
             transform: translateX(0);
+        }
+
+        .loading {
+            font-size: 0.8rem;
+            color: #e0f7fa;
+            font-style: italic;
+        }
+
+        .location-loading {
+            color: #bbdefb;
         }
     </style>
 </head>
@@ -375,17 +512,23 @@
             <div class="time-display">
                 <div class="time-card">
                     <h3><i class="fas fa-map-marker-alt"></i> Lokasi</h3>
-                    <p id="location">Jakarta, Indonesia</p>
+                    <div class="location-container">
+                        <p id="location" class="location-text">Jakarta, Indonesia</p>
+                        <button class="location-btn" id="get-location-btn">
+                            <i class="fas fa-location-crosshairs"></i> Dapatkan Lokasi
+                        </button>
+                    </div>
                 </div>
                 <div class="time-card">
-                    <h3><i class="fas fa-calendar-day"></i> Hari & Tanggal</h3>
-                    <p id="date">Sabtu, 7 Februari 2026</p>
+                    <h3><i class="fas fa-calendar-day"></i> Tanggal</h3>
+                    <p id="date" class="date-text">7 Feb 2026</p>
+                    <p id="day" class="day-text">Sabtu</p>
                 </div>
                 <div class="time-card" id="hijri-date">
                     <h3><i class="fas fa-moon"></i> Hijriyah</h3>
-                    <p id="hijri">20 Rajab 1447 H</p>
+                    <p id="hijri" class="date-text">Memuat...</p>
                 </div>
-                <div class="time-card">
+                <div class="time-card current-time">
                     <h3><i class="fas fa-clock"></i> Waktu Saat Ini</h3>
                     <p id="time">04:30:00</p>
                 </div>
@@ -427,6 +570,7 @@
 
         <div class="footer">
             <p>© 2024 Pengingat Ibadah Harian | Update real-time setiap detik | Semoga menjadi pengingat kebaikan</p>
+            <p style="margin-top: 5px; font-size: 0.75rem; color: #bbdefb;">Tanggal Hijriyah dari IslamicFinder.org</p>
         </div>
     </div>
 
@@ -555,13 +699,15 @@
             
             // Format waktu
             const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+            const dayOptions = { weekday: 'long' };
             
             // Update elemen waktu
             document.getElementById('time').textContent = now.toLocaleTimeString('id-ID', timeOptions);
             document.getElementById('date').textContent = now.toLocaleDateString('id-ID', dateOptions);
+            document.getElementById('day').textContent = now.toLocaleDateString('id-ID', dayOptions);
             
-            // Update tanggal Hijriyah (simulasi)
+            // Update tanggal Hijriyah
             updateHijriDate(now);
             
             // Tentukan periode waktu saat ini
@@ -623,18 +769,58 @@
             updateProgress();
         }
         
-        // Update tanggal Hijriyah (simulasi)
-        function updateHijriDate(gregorianDate) {
-            // Ini adalah konversi sederhana, untuk implementasi real gunakan library hijriyah
-            const hijriMonths = ['Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir', 'Jumadil Awal', 'Jumadil Akhir', 
-                                'Rajab', 'Sya\'ban', 'Ramadhan', 'Syawal', 'Dzulqa\'dah', 'Dzulhijjah'];
+        // Update tanggal Hijriyah menggunakan API dari IslamicFinder
+        async function updateHijriDate(gregorianDate) {
+            const hijriElement = document.getElementById('hijri');
             
-            // Contoh konversi sederhana (tidak akurat)
-            const hijriYear = 1447;
-            const hijriMonth = hijriMonths[6]; // Rajab
-            const hijriDay = 20 + Math.floor(gregorianDate.getDate() / 2);
+            // Cek apakah sudah ada data hijriah di localStorage untuk hari ini
+            const todayStr = gregorianDate.toDateString();
+            const storedHijri = JSON.parse(localStorage.getItem('hijriDate'));
             
-            document.getElementById('hijri').textContent = `${hijriDay} ${hijriMonth} ${hijriYear} H`;
+            if (storedHijri && storedHijri.date === todayStr) {
+                // Gunakan data yang sudah tersimpan
+                hijriElement.textContent = storedHijri.hijri;
+                return;
+            }
+            
+            try {
+                // Format tanggal untuk API (DD-MM-YYYY)
+                const day = gregorianDate.getDate().toString().padStart(2, '0');
+                const month = (gregorianDate.getMonth() + 1).toString().padStart(2, '0');
+                const year = gregorianDate.getFullYear();
+                const apiDate = `${day}-${month}-${year}`;
+                
+                // Gunakan IslamicFinder API (atau alternatif)
+                // IslamicFinder API memerlukan API key, jadi kita gunakan alternatif
+                const response = await fetch(`https://api.aladhan.com/v1/gToH?date=${apiDate}`);
+                const data = await response.json();
+                
+                if (data.code === 200 && data.data) {
+                    const hijri = data.data.hijri;
+                    const hijriDateStr = `${hijri.day} ${hijri.month.en} ${hijri.year} H`;
+                    
+                    // Simpan ke localStorage
+                    localStorage.setItem('hijriDate', JSON.stringify({
+                        date: todayStr,
+                        hijri: hijriDateStr
+                    }));
+                    
+                    hijriElement.textContent = hijriDateStr;
+                } else {
+                    throw new Error('Data hijriah tidak ditemukan');
+                }
+            } catch (error) {
+                console.error('Gagal mengambil data hijriah:', error);
+                // Fallback ke perhitungan sederhana
+                const hijriMonths = ['Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir', 'Jumadil Awal', 'Jumadil Akhir', 
+                                    'Rajab', 'Sya\'ban', 'Ramadhan', 'Syawal', 'Dzulqa\'dah', 'Dzulhijjah'];
+                
+                const hijriYear = 1447;
+                const hijriMonth = hijriMonths[6]; // Rajab
+                const hijriDay = 20 + Math.floor(gregorianDate.getDate() / 2);
+                
+                hijriElement.textContent = `${hijriDay} ${hijriMonth} ${hijriYear} H`;
+            }
         }
         
         // Update highlight box berdasarkan waktu
@@ -753,7 +939,7 @@
             nextElement.innerHTML = `
                 <div class="next-time">${nextIbadah.time}</div>
                 <div class="next-name">${nextIbadah.name}</div>
-                <div style="color: #666; font-size: 0.9rem;">${nextIbadah.period}</div>
+                <div style="color: #666; font-size: 0.85rem;">${nextIbadah.period}</div>
             `;
             
             container.appendChild(nextElement);
@@ -768,7 +954,7 @@
             nextNextElement.innerHTML = `
                 <div class="next-time">${nextNextIbadah.time}</div>
                 <div class="next-name">${nextNextIbadah.name}</div>
-                <div style="color: #666; font-size: 0.9rem;">${nextNextIbadah.period}</div>
+                <div style="color: #666; font-size: 0.85rem;">${nextNextIbadah.period}</div>
             `;
             
             container.appendChild(nextNextElement);
@@ -787,25 +973,88 @@
             document.getElementById('total').textContent = totalIbadah;
         }
         
+        // Dapatkan lokasi pengguna
+        function getLocation() {
+            const locationElement = document.getElementById('location');
+            const locationBtn = document.getElementById('get-location-btn');
+            
+            locationElement.innerHTML = '<span class="loading location-loading">Mendapatkan lokasi...</span>';
+            locationBtn.disabled = true;
+            locationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memuat...';
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async function(position) {
+                        try {
+                            // Gunakan OpenStreetMap Nominatim API untuk reverse geocoding
+                            const response = await fetch(
+                                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
+                            );
+                            const data = await response.json();
+                            
+                            if (data.address) {
+                                const city = data.address.city || data.address.town || data.address.village || data.address.county || '';
+                                const country = data.address.country || '';
+                                locationElement.textContent = `${city}, ${country}`;
+                                locationElement.className = 'location-text';
+                                
+                                // Simpan lokasi ke localStorage
+                                localStorage.setItem('userLocation', JSON.stringify({
+                                    city: city,
+                                    country: country,
+                                    lat: position.coords.latitude,
+                                    lon: position.coords.longitude
+                                }));
+                            } else {
+                                locationElement.textContent = "Lokasi ditemukan";
+                                locationElement.className = 'location-text';
+                            }
+                        } catch (error) {
+                            console.error("Error reverse geocoding:", error);
+                            locationElement.textContent = "Lokasi Anda";
+                            locationElement.className = 'location-text';
+                        }
+                        
+                        locationBtn.disabled = false;
+                        locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Dapatkan Lokasi';
+                        showNotification('Lokasi berhasil diperbarui!');
+                    },
+                    function(error) {
+                        console.log("Tidak bisa mendapatkan lokasi:", error);
+                        locationElement.textContent = "Lokasi tidak tersedia";
+                        locationElement.className = 'location-text';
+                        
+                        locationBtn.disabled = false;
+                        locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Coba Lagi';
+                        showNotification('Gagal mendapatkan lokasi. Periksa izin lokasi.');
+                    },
+                    { timeout: 10000 }
+                );
+            } else {
+                locationElement.textContent = "Geolocation tidak didukung";
+                locationElement.className = 'location-text';
+                locationBtn.disabled = true;
+                locationBtn.innerHTML = '<i class="fas fa-times-circle"></i> Tidak didukung';
+            }
+        }
+        
         // Inisialisasi
         document.addEventListener('DOMContentLoaded', function() {
             // Update waktu setiap detik
             updateTime();
             setInterval(updateTime, 1000);
             
-            // Coba dapatkan lokasi pengguna
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        // Untuk sederhananya, kita tetap gunakan Jakarta
-                        // Dalam implementasi real, Anda bisa gunakan reverse geocoding API
-                        document.getElementById('location').textContent = "Lokasi Anda";
-                    },
-                    function(error) {
-                        console.log("Tidak bisa mendapatkan lokasi:", error);
-                    }
-                );
+            // Event listener untuk tombol lokasi
+            document.getElementById('get-location-btn').addEventListener('click', getLocation);
+            
+            // Cek apakah ada lokasi yang disimpan di localStorage
+            const savedLocation = JSON.parse(localStorage.getItem('userLocation'));
+            if (savedLocation) {
+                document.getElementById('location').textContent = `${savedLocation.city}, ${savedLocation.country}`;
             }
+            
+            // Load tanggal hijriah
+            updateHijriDate(new Date());
         });
     </script>
 </body>
