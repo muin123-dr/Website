@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doa Harian Muslim - Panduan Hidup Sehari-hari</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #F5F5DC;
+            --accent: #D4AF37;
+            --text-dark: #1A237E;
+            --text-light: #333;
+            --white: #FFFFFF;
+            --light-bg: #F9F9F9;
+            --shadow: rgba(46, 125, 50, 0.1);
+            --shadow-dark: rgba(46, 125, 50, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background-color: var(--light-bg);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232E7D32' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            direction: ltr;
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            direction: rtl;
+            font-size: 1.5rem;
+            line-height: 2;
+            text-align: right;
+        }
+
+        .translation.hidden {
+            display: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px var(--shadow-dark);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: var(--accent);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Dropdown Navigation */
+        .dropdown-nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px var(--shadow);
+            padding: 20px 0;
+            position: sticky;
+            top: 106px;
+            z-index: 999;
+        }
+
+        .category-dropdown {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .dropdown-select {
+            width: 100%;
+            padding: 15px 20px;
+            padding-right: 50px;
+            border: 2px solid var(--primary-light);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-light);
+            background-color: var(--white);
+            cursor: pointer;
+            appearance: none;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .dropdown-arrow {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-left: 50px;
+            border: 2px solid var(--primary-light);
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Main Content */
+        main {
+            padding: 30px 0 60px;
+        }
+
+        .category-section {
+            margin-bottom: 40px;
+            display: none;
+        }
+
+        .category-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 15px;
+            color: var(--accent);
+        }
+
+        /* Prayer Cards */
+        .prayers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .prayer-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .prayer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow-dark);
+        }
+
+        .prayer-header {
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: var(--white);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .prayer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .prayer-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .prayer-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .prayer-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .prayer-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .arabic-container {
+            background-color: var(--secondary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-right: 5px solid var(--accent);
+        }
+
+        /* Translation Toggle Button */
+        .translation-toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .translation-toggle {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(46, 125, 50, 0.2);
+        }
+
+        .translation-toggle:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(46, 125, 50, 0.3);
+        }
+
+        .translation-toggle i {
+            margin-right: 8px;
+        }
+
+        .translation-toggle.hide-translation {
+            background-color: #9E9E9E;
+        }
+
+        .translation-toggle.hide-translation:hover {
+            background-color: #757575;
+        }
+
+        .translation {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.7;
+            flex-grow: 1;
+            transition: all 0.3s ease;
+        }
+
+        .reference {
+            background-color: #f0f7f0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+            margin-top: 15px;
+        }
+
+        /* Favorite Button */
+        .favorite-btn.favorited i {
+            color: #FFD700;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .app-info {
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .app-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .app-info p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            width: 100%;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px var(--shadow-dark);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .empty-state p {
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .prayers-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .tagline {
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .prayers-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .arabic-text {
+                font-size: 1.3rem;
+            }
+            
+            nav {
+                top: 100px;
+            }
+            
+            .dropdown-nav {
+                top: 100px;
+                padding: 15px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo i {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .prayer-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .prayer-actions {
+                margin-top: 10px;
+                align-self: flex-end;
+            }
+            
+            .translation-toggle span {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-pray"></i>
+                <h1>Doa Harian Muslim</h1>
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- Dropdown Navigation -->
+    <nav class="dropdown-nav">
+        <div class="container">
+            <div class="category-dropdown">
+                <select id="categorySelect" class="dropdown-select">
+                    <option value="" disabled selected>Pilih Kategori Doa</option>
+                    <!-- Categories will be populated by JavaScript -->
+                </select>
+                <div class="dropdown-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Cari doa berdasarkan kata kunci...">
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Category sections will be populated by JavaScript -->
+        
+        <!-- Empty State for Search Results -->
+        <div class="empty-state" id="emptyState">
+            <i class="fas fa-search"></i>
+            <h3>Doa tidak ditemukan</h3>
+            <p>Silakan coba kata kunci lain atau pilih kategori doa dari menu di atas.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="app-info">
+                <h3>🕋<i> - Doa Harian Muslim - </i>🕋</h3>
+                
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 - dr.Muin</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Data doa-doa harian (tanpa teks latin)
+        const prayersData = {
+            "aktivitas-harian": {
+                title: "Aktivitas Harian",
+                icon: "fas fa-home",
+                prayers: [
+                    {
+                        id: 1,
+                        title: "Doa Keluar Rumah",
+                        arabic: "بِسْمِ اللهِ تَوَكَّلْتُ عَلَى اللهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللهِ.",
+                        translation: "Dengan nama Allah, aku bertawakal kepada Allah, tidak ada daya dan kekuatan kecuali dengan pertolongan Allah.",
+                        reference: "HR. Abu Dawud No. 5095, At-Tirmidzi No. 3426. Dinyatakan hasan."
+                    },
+                    {
+                        id: 2,
+                        title: "Doa Masuk Rumah",
+                        arabic: "بِسْمِ اللهِ وَلَجْنَا، وَبِسْمِ اللهِ خَرَجْنَا، وَعَلَى رَبِّنَا تَوَكَّلْنَا.",
+                        translation: "Dengan nama Allah kami masuk, dengan nama Allah kami keluar, dan kepada Tuhan kami, kami berserah diri.",
+                        reference: "HR. Abu Dawud No. 5096."
+                    },
+                    {
+                        id: 3,
+                        title: "Doa Memakai Pakaian",
+                        arabic: "الحَمْدُ للهِ الَّذِي كَسَانِي هَذَا (الثَّوْبَ) وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ.",
+                        translation: "Segala puji bagi Allah yang telah memakaikan pakaian ini kepadaku dan memberikan rezeki kepadaku tanpa daya dan kekuatan dariku.",
+                        reference: "HR. Abu Dawud No. 4023, Ibnu Majah No. 3565."
+                    },
+                    {
+                        id: 4,
+                        title: "Doa Memakai Pakaian Baru",
+                        arabic: "اللَّهُمَّ لَكَ الحَمْدُ أَنْتَ كَسَوْتَنِيهِ، أَسْأَلُكَ مِنْ خَيْرِهِ وَخَيْرِ مَا صُنِعَ لَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّهِ وَشَرِّ مَا صُنِعَ لَهُ.",
+                        translation: "Ya Allah, bagi-Mu segala puji. Engkau-lah yang memakaikan pakaian ini kepadaku. Aku memohon kepada-Mu kebaikannya dan kebaikan tujuan dibuatnya pakaian ini. Dan aku berlindung kepada-Mu dari keburukannya dan keburukan tujuan dibuatnya pakaian ini.",
+                        reference: "HR. Abu Dawud No. 4020, At-Tirmidzi No. 1767."
+                    },
+                    {
+                        id: 5,
+                        title: "Doa Sebelum Makan",
+                        arabic: "بِسْمِ اللهِ.",
+                        translation: "Dengan nama Allah.",
+                        reference: "HR. Bukhari No. 5376, Muslim No. 2022."
+                    },
+                    {
+                        id: 6,
+                        title: "Doa Sesudah Makan",
+                        arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ.",
+                        translation: "Segala puji bagi Allah yang telah memberiku makanan ini dan memberikannya sebagai rezeki kepadaku tanpa daya dan kekuatan dariku.",
+                        reference: "HR. Abu Dawud No. 4023, Ibnu Majah No. 3285."
+                    },
+                    {
+                        id: 7,
+                        title: "Doa Sebelum Tidur",
+                        arabic: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.",
+                        translation: "Dengan nama-Mu, ya Allah, aku mati (tidur) dan aku hidup (bangun).",
+                        reference: "HR. Bukhari No. 6324."
+                    },
+                    {
+                        id: 8,
+                        title: "Doa Bangun Tidur",
+                        arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ.",
+                        translation: "Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami (tidur) dan kepada-Nya lah kami kembali.",
+                        reference: "HR. Bukhari No. 6312."
+                    },
+                    {
+                        id: 9,
+                        title: "Doa Saat Bersin",
+                        arabic: "الْحَمْدُ للهِ",
+                        translation: "Segala puji bagi Allah. (Dijawab): Semoga Allah merahmatimu. (Dibalas kembali): Semoga Allah memberimu petunjuk dan memperbaiki keadaanmu.",
+                        reference: "HR. Bukhari No. 6224."
+                    },
+                    {
+                        id: 10,
+                        title: "Doa Ketika Bercermin",
+                        arabic: "اللَّهُمَّ كَمَا حَسَّنْتَ خَلْقِي فَحَسِّنْ خُلُقِي.",
+                        translation: "Ya Allah, sebagaimana Engkau telah membaguskan rupa/kejadianku, maka baguskanlah akhlakku.",
+                        reference: "HR. Ibnu As-Sunni dalam 'Amal al-Yaum wa al-Lailah No. 66, dishahihkan Al-Albani."
+                    }
+                ]
+            },
+            "ibadah": {
+                title: "Ibadah",
+                icon: "fas fa-mosque",
+                prayers: [
+                    {
+                        id: 11,
+                        title: "Doa Masuk Masjid",
+                        arabic: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ.",
+                        translation: "Ya Allah, bukakanlah bagiku pintu-pintu rahmat-Mu.",
+                        reference: "HR. Muslim No. 713."
+                    },
+                    {
+                        id: 12,
+                        title: "Doa Keluar Masjid",
+                        arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ.",
+                        translation: "Ya Allah, sesungguhnya aku memohon keutamaan dari-Mu.",
+                        reference: "HR. Muslim No. 713."
+                    },
+                    {
+                        id: 13,
+                        title: "Doa Setelah Adzan",
+                        arabic: "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ.",
+                        translation: "Ya Allah, Tuhan pemilik panggilan yang sempurna ini dan shalat yang akan didirikan, berilah Muhammad wasilah (kedudukan tinggi) dan keutamaan, dan bangkitkanlah beliau di tempat yang terpuji yang telah Engkau janjikan.",
+                        reference: "HR. Bukhari No. 614."
+                    },
+                    {
+                        id: 14,
+                        title: "Doa Berbuka Puasa",
+                        arabic: "ذَهَبَ الظَّمَأُ ، وَابْتَلَّتِ الْعُرُوقُ ، وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللهُ.",
+                        translation: "Telah hilang rasa haus, telah basah urat-urat, dan telah tetap pahala, insya Allah.",
+                        reference: "HR. Abu Dawud No. 2357."
+                    }
+                ]
+            },
+            "perjalanan": {
+                title: "Perjalanan",
+                icon: "fas fa-car",
+                prayers: [
+                    {
+                        id: 15,
+                        title: "Doa Bepergian (Safar)",
+                        arabic: "اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى ، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ.",
+                        translation: "Ya Allah, kami memohon kepada-Mu dalam perjalanan kami ini kebaikan dan takwa, serta amal yang Engkau ridai. Ya Allah, mudahkanlah perjalanan kami ini dan dekatkanlah jaraknya bagi kami. Ya Allah, Engkaulah pendamping dalam perjalanan dan pelindung keluarga yang ditinggalkan. Ya Allah, aku berlindung kepada-Mu dari kesulitan perjalanan, pemandangan yang menyedihkan, dan nasib buruk pada harta dan keluarga.",
+                        reference: "HR. Muslim No. 1342, At-Tirmidzi No. 3444."
+                    },
+                    {
+                        id: 16,
+                        title: "Doa Naik Kendaraan",
+                        arabic: "بِسْمِ اللهِ ، الْحَمْدُ للهِ ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ، الْحَمْدُ للهِ ، الْحَمْدُ للهِ ، الْحَمْدُ للهِ ، اللهُ أَكْبَرُ ، اللهُ أَكْبَرُ ، اللهُ أَكْبَرُ ، سُبْحَانَكَ اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي ، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.",
+                        translation: "Dengan menyebut nama Allah, segala puji bagi Allah. Maha Suci Allah yang telah menundukkan kendaraan ini bagi kami padahal kami sebelumnya tidak mampu menguasainya, dan sesungguhnya kami akan kembali kepada Tuhan kami. Segala puji bagi Allah (3x). Allah Maha Besar (3x). Maha Suci Engkau ya Allah, sesungguhnya aku telah menzalimi diriku sendiri, maka ampunilah aku, karena sesungguhnya tidak ada yang mengampuni dosa-dosa kecuali Engkau.",
+                        reference: "HR. Abu Dawud No. 2602, At-Tirmidzi No. 3446."
+                    },
+                    {
+                        id: 17,
+                        title: "Doa Musafir kepada Orang yang Ditinggalkan",
+                        arabic: "أَسْتَوْدِعُكُمُ اللهَ الَّذِي لَا تَضِيعُ وَدَائِعُهُ.",
+                        translation: "Aku menitipkan kalian kepada Allah, yang tidak akan pernah menyia-nyiakan titipan-Nya.",
+                        reference: "HR. Ahmad No. 22734, dihasankan Al-Arna'uth."
+                    },
+                    {
+                        id: 18,
+                        title: "Doa Orang yang Mukim kepada Musafir",
+                        arabic: "أَسْتَوْدِعُ اللهَ دِينَكَ وَأَمَانَتَكَ ، وَخَوَاتِيمَ عَمَلِكَ. زَوَّدَكَ اللهُ التَّقْوَى، وَغَفَرَ ذَنْبَكَ، وَيَسَّرَ لَكَ الْخَيْرَ حَيْثُ مَا كُنْتَ.",
+                        translation: "Aku menitipkan kepada Allah agamamu, amanahmu, dan akhir amalmu. Semoga Allah membekalimu dengan takwa, mengampuni dosamu, dan memudahkan kebaikan bagimu di mana pun kamu berada.",
+                        reference: "HR. Abu Dawud No. 2600, At-Tirmidzi No. 3443."
+                    },
+                    {
+                        id: 19,
+                        title: "Doa Saat Singgah di Suatu Tempat",
+                        arabic: "أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.",
+                        translation: "Aku berlindung dengan kalimat-kalimat Allah yang sempurna dari kejahatan apa yang Dia ciptakan.",
+                        reference: "HR. Muslim No. 2708."
+                    }
+                ]
+            },
+            "kesulitan": {
+                title: "Kesulitan & Musibah",
+                icon: "fas fa-hands-praying",
+                prayers: [
+                    {
+                        id: 20,
+                        title: "Doa Saat Tertimpa Musibah",
+                        arabic: "إِنَّا للهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ اللَّهُمَّ أْجُرْنِي فِي مُصِيبَتِي وَاخْلِفْ لِي خَيْرًا مِنْهَا.",
+                        translation: "Sesungguhnya kami adalah milik Allah dan sesungguhnya kami hanya kepada-Nya akan kembali. Ya Allah, berilah aku pahala dalam musibahku ini dan berilah ganti kepadaku yang lebih baik darinya.",
+                        reference: "Bagian pertama dari QS. Al-Baqarah: 156. HR. Muslim No. 918 (untuk tambahan doanya)."
+                    },
+                    {
+                        id: 21,
+                        title: "Doa Penghilang Kegelisahan",
+                        arabic: "لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ.",
+                        translation: "Tidak ada Tuhan selain Engkau, Maha Suci Engkau, sesungguhnya aku adalah termasuk orang-orang yang zalim.",
+                        reference: "QS. Al-Anbiya' (21): 87."
+                    },
+                    {
+                        id: 22,
+                        title: "Doa Berlindung dari Keburukan",
+                        arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ وَالْبُخْلِ وَالْجُبْنِ ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ.",
+                        translation: "Ya Allah, aku berlindung kepada-Mu dari kegelisahan, kesedihan, kelemahan, kemalasan, sifat kikir, sifat penakut, lilitan utang, dan penguasaan orang lain.",
+                        reference: "HR. Bukhari No. 6363."
+                    },
+                    {
+                        id: 23,
+                        title: "Doa Melunasi Utang",
+                        arabic: "اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ.",
+                        translation: "Ya Allah, cukupkanlah aku dengan yang halal dari-Mu sehingga aku terhindar dari yang haram, dan kayakanlah aku dengan karunia-Mu sehingga aku tidak membutuhkan selain-Mu.",
+                        reference: "HR. At-Tirmidzi No. 3563, dihasankan Al-Albani."
+                    },
+                    {
+                        id: 24,
+                        title: "Doa Saat Mengalami Kesulitan",
+                        arabic: "اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلًا.",
+                        translation: "Ya Allah, tidak ada kemudahan kecuali apa yang Engkau jadikan mudah, dan Engkau menjadikan kesulitan itu mudah jika Engkau menghendaki.",
+                        reference: "HR. Ibnu Hibban No. 2427, dishahihkan Al-Albani."
+                    },
+                    {
+                        id: 25,
+                        title: "Doa Melihat Orang yang Tertimpa Musibah",
+                        arabic: "الْحَمْدُ للهِ الَّذِي عَافَانِي مِمَّا ابْتَلَاكَ بِهِ وَفَضَّلَنِي عَلَى كَثِيرٍ مِمَّنْ خَلَقَ تَفْضِيلًا.",
+                        translation: "Segala puji bagi Allah yang telah menyelamatkanku dari musibah yang menimpamu, dan yang telah melebihkanku di atas banyak makhluk yang telah diciptakan-Nya.",
+                        reference: "HR. At-Tirmidzi No. 3431, Ibnu Majah No. 3892."
+                    },
+                    {
+                        id: 26,
+                        title: "Doa Menjenguk Orang Sakit",
+                        arabic: "لَا بَأْسَ طَهُورٌ إِنْ شَاءَ اللهُ. أَسْأَلُ اللهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ. (٧x)",
+                        translation: "Tidak apa-apa, semoga sakitmu ini menjadi pembersih dosa, insya Allah. Aku memohon kepada Allah Yang Maha Agung, Tuhan Arsy yang Agung, agar menyembuhkanmu. (Dibaca 7 kali)",
+                        reference: "HR. Abu Dawud No. 3106, At-Tirmidzi No. 2083."
+                    },
+                    {
+                        id: 27,
+                        title: "Doa Orang Sakit yang Putus Harapan Hidup",
+                        arabic: "اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَأَلْحِقْنِي بِالرَّفِيقِ الْأَعْلَى.",
+                        translation: "Ya Allah, ampunilah aku, rahmatilah aku, dan pertemukanlah aku dengan Kekasih Yang Maha Tinggi (Allah).",
+                        reference: "HR. Bukhari No. 6315, Muslim No. 2444."
+                    },
+                    {
+                        id: 28,
+                        title: "Doa Menghadapi Musuh atau Penguasa",
+                        arabic: "حَسْبُنَا اللهُ وَنِعْمَ الْوَكِيلُ. اللَّهُمَّ إِنَّا نَجْعَلُكَ فِي نُحُورِهِمْ وَنَعُوذُ بِكَ مِنْ شُرُورِهِمْ. اللَّهُمَّ أَنْتَ عَضُدِي ، وَأَنْتَ نَصِيرِي ، بِكَ أَجُولُ وَبِكَ أَصُولُ وَبِكَ أُقَاتِلُ.",
+                        translation: "Cukuplah Allah bagi kami dan Dia adalah sebaik-baik pelindung. Ya Allah, sesungguhnya kami menjadikan Engkau di leher mereka (untuk membendung kekuatan mereka) dan kami berlindung kepada-Mu dari kejahatan mereka. Ya Allah, Engkau adalah kekuatanku dan penolongku, dengan-Mu aku bergerak, dengan-Mu aku menyerang, dan dengan-Mu aku berperang.",
+                        reference: "HR. Abu Dawud No. 2632, An-Nasa'i No. 8611."
+                    }
+                ]
+            },
+            "umum": {
+                title: "Aktivitas Umum",
+                icon: "fas fa-briefcase",
+                prayers: [
+                    {
+                        id: 29,
+                        title: "Doa Masuk Pasar",
+                        arabic: "لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ حَيٌّ لَا يَمُوتُ بِيَدِهِ الْخَيْرُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.",
+                        translation: "Tiada Tuhan selain Allah yang Maha Esa, tiada sekutu bagi-Nya. Bagi-Nya kerajaan dan bagi-Nya segala puji. Dia yang menghidupkan dan mematikan, dan Dia Maha Hidup tidak akan mati. Di tangan-Nyalah segala kebaikan dan Dia Maha Kuasa atas segala sesuatu.",
+                        reference: "HR. At-Tirmidzi No. 3428, Ibnu Majah No. 2235."
+                    },
+                    {
+                        id: 30,
+                        title: "Doa Saat Angin Kencang",
+                        arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا، وَخَيْرَ مَا فِيهَا، وَخَيْرَ مَا أُرْسِلَتْ بِهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهَا، وَشَرِّ مَا فِيهَا وَشَرِّ مَا أُرْسِلَتْ بِهِ.",
+                        translation: "Ya Allah, aku memohon kepada-Mu kebaikannya, kebaikan apa yang ada di dalamnya, dan kebaikan apa yang dikirim bersamanya. Dan aku berlindung kepada-Mu dari keburukannya, keburukan apa yang ada di dalamnya, dan keburukan apa yang dikirim bersamanya.",
+                        reference: "HR. Bukhari No. 10376, Muslim No. 899."
+                    },
+                    {
+                        id: 31,
+                        title: "Doa Turun Hujan",
+                        arabic: "اللَّهُمَّ صَيِّبًا نَافِعًا.",
+                        translation: "Ya Allah, jadikanlah hujan ini bermanfaat.",
+                        reference: "HR. Bukhari No. 1032."
+                    },
+                    {
+                        id: 32,
+                        title: "Amalan dan Doa Saat Berbuat Dosa",
+                        arabic: "مَا مِنْ عَبْدٍ يُذْنِبُ ذَنْبًا فَيَتَوَضَّأُ فَيُحْسِنُ الطُّهُورَ، ثُمَّ يَقُومُ فَيُصَلِّي رَكْعَتَيْنِ، ثُمَّ يَسْتَغْفِرُ اللهَ لِذَلِكَ الذَّنْبِ إِلَّا غُفِرَ لَهُ.",
+                        translation: "Tidaklah seorang hamba melakukan dosa, lalu dia berwudu dengan baik, kemudian berdiri untuk salat dua rakaat, lalu memohon ampunan kepada Allah atas dosa tersebut, kecuali dia akan diampuni.",
+                        reference: "HR. At-Tirmidzi No. 406, Ibnu Majah No. 1395."
+                    }
+                ]
+            },
+            "permohonan": {
+                title: "Permohonan Umum",
+                icon: "fas fa-hands",
+                prayers: [
+                    {
+                        id: 33,
+                        title: "Doa Memohon Ilmu yang Bermanfaat",
+                        arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا.",
+                        translation: "Ya Allah, sesungguhnya aku memohon kepada-Mu ilmu yang bermanfaat, rezeki yang baik, dan amal yang diterima.",
+                        reference: "HR. Ibnu Majah No. 925, Ahmad No. 22357."
+                    },
+                    {
+                        id: 34,
+                        title: "Doa Sapu Jagat",
+                        arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ.",
+                        translation: "Wahai Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami dari siksa api neraka.",
+                        reference: "QS. Al-Baqarah (2): 201. HR. Bukhari No. 6389, Muslim No. 2690."
+                    },
+                    {
+                        id: 35,
+                        title: "Doa Mohon Kemudahan",
+                        arabic: "اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلًا.",
+                        translation: "Ya Allah, tidak ada kemudahan kecuali apa yang Engkau jadikan mudah, dan Engkau menjadikan kesulitan itu mudah jika Engkau menghendaki.",
+                        reference: "HR. Ibnu Hibban No. 2427, dishahihkan Al-Albani."
+                    }
+                ]
+            }
+        };
+
+        // Favorites array
+        let favorites = JSON.parse(localStorage.getItem('prayerFavorites')) || [];
+        
+        // Translation visibility state (global - untuk semua doa)
+        let translationVisible = true;
+
+        // DOM Elements
+        const mainElement = document.querySelector('main');
+        const categorySelect = document.getElementById('categorySelect');
+        const searchInput = document.getElementById('searchInput');
+        const emptyState = document.getElementById('emptyState');
+        const backToTopBtn = document.getElementById('backToTop');
+
+        // Initialize the app
+        function initApp() {
+            renderCategoryOptions();
+            renderAllPrayerSections();
+            setActiveCategory('aktivitas-harian');
+            setupEventListeners();
+            updateFavoriteButtons();
+        }
+
+        // Render category options in dropdown
+        function renderCategoryOptions() {
+            const categories = Object.keys(prayersData);
+            
+            categories.forEach(categoryId => {
+                const category = prayersData[categoryId];
+                const option = document.createElement('option');
+                option.value = categoryId;
+                option.textContent = category.title;
+                categorySelect.appendChild(option);
+            });
+        }
+
+        // Render all prayer sections
+        function renderAllPrayerSections() {
+            const categories = Object.keys(prayersData);
+            
+            categories.forEach(categoryId => {
+                const category = prayersData[categoryId];
+                const section = document.createElement('section');
+                section.className = 'category-section';
+                section.id = `section-${categoryId}`;
+                
+                // Tambahkan tombol global untuk menyembunyikan/menampilkan terjemahan
+                let prayersHTML = `
+                    <div class="translation-toggle-container">
+                        <button class="translation-toggle" id="global-translation-toggle-${categoryId}">
+                            <i class="fas fa-eye-slash"></i> <span>Sembunyikan Terjemahan</span>
+                        </button>
+                    </div>
+                    <h2 class="section-title">
+                        <i class="${category.icon}"></i>${category.title}
+                    </h2>
+                    <div class="prayers-container" id="container-${categoryId}">
+                `;
+                
+                category.prayers.forEach(prayer => {
+                    const isFavorited = favorites.includes(prayer.id);
+                    prayersHTML += createPrayerCardHTML(prayer, isFavorited);
+                });
+                
+                prayersHTML += '</div>';
+                section.innerHTML = prayersHTML;
+                mainElement.insertBefore(section, emptyState);
+            });
+        }
+
+        // Create HTML for a prayer card
+        function createPrayerCardHTML(prayer, isFavorited) {
+            return `
+                <div class="prayer-card" data-id="${prayer.id}" data-title="${prayer.title.toLowerCase()}">
+                    <div class="prayer-header">
+                        <h3 class="prayer-title">${prayer.title}</h3>
+                        <div class="prayer-actions">
+                            <button class="prayer-btn favorite-btn ${isFavorited ? 'favorited' : ''}" data-id="${prayer.id}" title="${isFavorited ? 'Hapus dari favorit' : 'Simpan ke favorit'}">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="prayer-btn copy-btn" data-text="${prayer.arabic}" title="Salin teks Arab">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="prayer-content">
+                        <div class="arabic-container">
+                            <p class="arabic-text">${prayer.arabic}</p>
+                        </div>
+                        <div class="translation-toggle-container">
+                            <button class="translation-toggle" data-id="${prayer.id}">
+                                <i class="fas fa-eye-slash"></i> <span>Sembunyikan Terjemahan</span>
+                            </button>
+                        </div>
+                        <p class="translation">${prayer.translation}</p>
+                        <div class="reference">
+                            <strong>Rujukan:</strong> ${prayer.reference}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Set active category
+        function setActiveCategory(categoryId) {
+            // Update dropdown selection
+            categorySelect.value = categoryId;
+            
+            // Update category sections
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`section-${categoryId}`).classList.add('active');
+            
+            // Scroll to top of section
+            document.getElementById(`section-${categoryId}`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Hide empty state if it's visible
+            emptyState.style.display = 'none';
+        }
+
+        // Toggle translation visibility for a specific prayer card
+        function toggleTranslationForCard(button) {
+            const prayerCard = button.closest('.prayer-card');
+            const translationElement = prayerCard.querySelector('.translation');
+            const icon = button.querySelector('i');
+            const textSpan = button.querySelector('span');
+            
+            translationElement.classList.toggle('hidden');
+            
+            if (translationElement.classList.contains('hidden')) {
+                textSpan.textContent = 'Tampilkan Terjemahan';
+                icon.className = 'fas fa-eye';
+                button.classList.add('hide-translation');
+                button.setAttribute('title', 'Tampilkan terjemahan');
+            } else {
+                textSpan.textContent = 'Sembunyikan Terjemahan';
+                icon.className = 'fas fa-eye-slash';
+                button.classList.remove('hide-translation');
+                button.setAttribute('title', 'Sembunyikan terjemahan');
+            }
+        }
+
+        // Toggle all translations globally for a category
+        function toggleAllTranslations(categoryId) {
+            const globalToggleButton = document.getElementById(`global-translation-toggle-${categoryId}`);
+            const categoryContainer = document.getElementById(`container-${categoryId}`);
+            const allTranslationButtons = categoryContainer.querySelectorAll('.translation-toggle');
+            const allTranslationElements = categoryContainer.querySelectorAll('.translation');
+            
+            // Check if the first translation is currently visible
+            const firstTranslationHidden = allTranslationElements[0]?.classList.contains('hidden');
+            
+            if (firstTranslationHidden) {
+                // Show all translations
+                allTranslationElements.forEach(element => {
+                    element.classList.remove('hidden');
+                });
+                
+                allTranslationButtons.forEach(button => {
+                    const icon = button.querySelector('i');
+                    const textSpan = button.querySelector('span');
+                    textSpan.textContent = 'Sembunyikan Terjemahan';
+                    icon.className = 'fas fa-eye-slash';
+                    button.classList.remove('hide-translation');
+                    button.setAttribute('title', 'Sembunyikan terjemahan');
+                });
+                
+                // Update global toggle button
+                const globalIcon = globalToggleButton.querySelector('i');
+                const globalTextSpan = globalToggleButton.querySelector('span');
+                globalTextSpan.textContent = 'Sembunyikan Semua Terjemahan';
+                globalIcon.className = 'fas fa-eye-slash';
+                globalToggleButton.classList.remove('hide-translation');
+                globalToggleButton.setAttribute('title', 'Sembunyikan semua terjemahan');
+            } else {
+                // Hide all translations
+                allTranslationElements.forEach(element => {
+                    element.classList.add('hidden');
+                });
+                
+                allTranslationButtons.forEach(button => {
+                    const icon = button.querySelector('i');
+                    const textSpan = button.querySelector('span');
+                    textSpan.textContent = 'Tampilkan Terjemahan';
+                    icon.className = 'fas fa-eye';
+                    button.classList.add('hide-translation');
+                    button.setAttribute('title', 'Tampilkan terjemahan');
+                });
+                
+                // Update global toggle button
+                const globalIcon = globalToggleButton.querySelector('i');
+                const globalTextSpan = globalToggleButton.querySelector('span');
+                globalTextSpan.textContent = 'Tampilkan Semua Terjemahan';
+                globalIcon.className = 'fas fa-eye';
+                globalToggleButton.classList.add('hide-translation');
+                globalToggleButton.setAttribute('title', 'Tampilkan semua terjemahan');
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Category dropdown change
+            categorySelect.addEventListener('change', function() {
+                setActiveCategory(this.value);
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', handleSearch);
+            
+            // Back to top button
+            window.addEventListener('scroll', toggleBackToTopButton);
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Global translation toggle button
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[id^="global-translation-toggle-"]')) {
+                    const btn = e.target.closest('[id^="global-translation-toggle-"]');
+                    const categoryId = btn.id.replace('global-translation-toggle-', '');
+                    toggleAllTranslations(categoryId);
+                }
+            });
+            
+            // Delegate events for dynamic elements
+            document.addEventListener('click', function(e) {
+                // Favorite button
+                if (e.target.closest('.favorite-btn')) {
+                    const btn = e.target.closest('.favorite-btn');
+                    const prayerId = parseInt(btn.getAttribute('data-id'));
+                    toggleFavorite(prayerId, btn);
+                }
+                
+                // Copy button
+                if (e.target.closest('.copy-btn')) {
+                    const btn = e.target.closest('.copy-btn');
+                    const textToCopy = btn.getAttribute('data-text');
+                    copyToClipboard(textToCopy, btn);
+                }
+                
+                // Individual translation toggle button
+                if (e.target.closest('.translation-toggle') && !e.target.closest('[id^="global-translation-toggle-"]')) {
+                    const btn = e.target.closest('.translation-toggle');
+                    toggleTranslationForCard(btn);
+                }
+            });
+        }
+
+        // Handle search
+        function handleSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                // Show all prayers and hide empty state
+                document.querySelectorAll('.prayer-card').forEach(card => {
+                    card.style.display = 'flex';
+                });
+                document.querySelectorAll('.category-section').forEach(section => {
+                    section.style.display = 'block';
+                });
+                emptyState.style.display = 'none';
+                return;
+            }
+            
+            let foundAny = false;
+            
+            // Hide all category sections first
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show all prayers initially in each container
+            document.querySelectorAll('.prayer-card').forEach(card => {
+                card.style.display = 'flex';
+            });
+            
+            // Search in each category
+            Object.keys(prayersData).forEach(categoryId => {
+                const container = document.getElementById(`container-${categoryId}`);
+                const prayersInCategory = container.querySelectorAll('.prayer-card');
+                let categoryHasResults = false;
+                
+                prayersInCategory.forEach(card => {
+                    const title = card.getAttribute('data-title');
+                    const arabicText = card.querySelector('.arabic-text').textContent.toLowerCase();
+                    const translationText = card.querySelector('.translation').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || 
+                        arabicText.includes(searchTerm) || 
+                        translationText.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                        categoryHasResults = true;
+                        foundAny = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show category section if it has results
+                if (categoryHasResults) {
+                    document.getElementById(`section-${categoryId}`).style.display = 'block';
+                }
+            });
+            
+            // Show empty state if no results found
+            if (!foundAny) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
+
+        // Toggle favorite
+        function toggleFavorite(prayerId, button) {
+            const index = favorites.indexOf(prayerId);
+            
+            if (index === -1) {
+                // Add to favorites
+                favorites.push(prayerId);
+                button.classList.add('favorited');
+                button.setAttribute('title', 'Hapus dari favorit');
+                showNotification('Doa ditambahkan ke favorit');
+            } else {
+                // Remove from favorites
+                favorites.splice(index, 1);
+                button.classList.remove('favorited');
+                button.setAttribute('title', 'Simpan ke favorit');
+                showNotification('Doa dihapus dari favorit');
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('prayerFavorites', JSON.stringify(favorites));
+        }
+
+        // Update all favorite buttons based on current favorites
+        function updateFavoriteButtons() {
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                const prayerId = parseInt(btn.getAttribute('data-id'));
+                if (favorites.includes(prayerId)) {
+                    btn.classList.add('favorited');
+                    btn.setAttribute('title', 'Hapus dari favorit');
+                } else {
+                    btn.classList.remove('favorited');
+                    btn.setAttribute('title', 'Simpan ke favorit');
+                }
+            });
+        }
+
+        // Copy text to clipboard
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                button.style.color = '#4CAF50';
+                
+                showNotification('Teks Arab berhasil disalin');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.style.color = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showNotification('Gagal menyalin teks', true);
+            });
+        }
+
+        // Show notification
+        function showNotification(message, isError = false) {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${isError ? 'error' : 'success'}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background-color: ${isError ? '#f44336' : '#4CAF50'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 5px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                font-family: 'Poppins', sans-serif;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+            
+            // Add CSS for animation
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Toggle back to top button visibility
+        function toggleBackToTopButton() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

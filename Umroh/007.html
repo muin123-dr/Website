@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengingat Ibadah Harian</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c786c;
+            --secondary: #ff9800;
+            --accent: #004445;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a3a3a 0%, #2c786c 50%, #004445 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border: 3px solid var(--accent);
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .time-card {
+            background: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .time-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #ffeb3b;
+        }
+
+        .time-card p {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        #hijri-date {
+            background: var(--accent);
+        }
+
+        .highlight-box {
+            background: linear-gradient(to right, #ff9800, #ff5722);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+            animation: pulse 2s infinite;
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.3);
+            border: 3px solid white;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .highlight-box h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media (min-width: 992px) {
+            .content {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .ibadah-list {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .ibadah-list h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary);
+            font-size: 1.8rem;
+        }
+
+        .ibadah-item {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary);
+        }
+
+        .ibadah-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left-color: var(--secondary);
+        }
+
+        .ibadah-item.important {
+            background: linear-gradient(to right, #fff8e1, #ffecb3);
+            border-left-color: var(--warning);
+        }
+
+        .ibadah-item.urgent {
+            background: linear-gradient(to right, #ffebee, #ffcdd2);
+            border-left-color: var(--danger);
+            animation: urgent-pulse 1.5s infinite;
+        }
+
+        @keyframes urgent-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
+
+        .ibadah-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .ibadah-info {
+            flex: 1;
+        }
+
+        .ibadah-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .ibadah-time {
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ibadah-time i {
+            color: var(--primary);
+        }
+
+        .checkmark {
+            width: 28px;
+            height: 28px;
+            border: 3px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            margin-left: 15px;
+        }
+
+        .checkmark.checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .checkmark.checked::after {
+            content: "✓";
+            color: white;
+            font-weight: bold;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .next-ibadah {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .next-ibadah h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .next-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--info);
+        }
+
+        .next-time {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .next-name {
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .progress-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-container h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .progress-bar {
+            height: 25px;
+            background: #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Scrollbar styling */
+        .ibadah-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .ibadah-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .ibadah-list::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .ibadah-list::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-mosque"></i> Pengingat Ibadah Harian</h1>
+            <p>Berdasarkan waktu real-time dan jadwal ibadah harian</p>
+            
+            <div class="time-display">
+                <div class="time-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Lokasi</h3>
+                    <p id="location">Jakarta, Indonesia</p>
+                </div>
+                <div class="time-card">
+                    <h3><i class="fas fa-calendar-day"></i> Hari & Tanggal</h3>
+                    <p id="date">Sabtu, 7 Februari 2026</p>
+                </div>
+                <div class="time-card" id="hijri-date">
+                    <h3><i class="fas fa-moon"></i> Hijriyah</h3>
+                    <p id="hijri">20 Rajab 1447 H</p>
+                </div>
+                <div class="time-card">
+                    <h3><i class="fas fa-clock"></i> Waktu Saat Ini</h3>
+                    <p id="time">04:30:00</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="highlight-box" class="highlight-box" style="display: none;">
+            <h2 id="highlight-title">WAKTU UTAMA IBADAH</h2>
+            <p id="highlight-text">Saat ini adalah waktu utama untuk beberapa ibadah penting</p>
+        </div>
+
+        <div class="content">
+            <div class="ibadah-list">
+                <h2><i class="fas fa-tasks"></i> IBADAH YANG BISA ANDA LAKUKAN SAAT INI</h2>
+                <div id="ibadah-container">
+                    <!-- Ibadah akan dimuat disini secara dinamis -->
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="next-ibadah">
+                    <h3><i class="fas fa-calendar-check"></i> Ibadah Berikutnya</h3>
+                    <div id="next-ibadah-container">
+                        <!-- Ibadah berikutnya akan dimuat disini -->
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <h3><i class="fas fa-chart-line"></i> Progress Hari Ini</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill">0%</div>
+                    </div>
+                    <div class="progress-stats">
+                        <span id="completed">0</span> selesai dari <span id="total">0</span> ibadah
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 Pengingat Ibadah Harian | Update real-time setiap detik | Semoga menjadi pengingat kebaikan</p>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        Ibadah telah dicentang!
+    </div>
+
+    <script>
+        // Data ibadah berdasarkan waktu
+        const ibadahData = {
+            // Sebelum Subuh (00:00 - 04:30)
+            "beforeFajr": [
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum" },
+                { id: 2, name: "Dzikir & Istighfar", time: "24 jam sehari", important: true, category: "umum" },
+                { id: 28, name: "Sholat Tahajud", time: "Setelah tidur - sebelum Subuh", important: true, category: "malam", urgent: true },
+                { id: 29, name: "Sholat Witir", time: "Setelah Isya - sebelum Subuh", important: true, category: "malam", urgent: true },
+                { id: 32, name: "Doa sepertiga malam", time: "Sepertiga malam terakhir", important: true, category: "malam", urgent: true },
+                { id: 33, name: "Sholat Taubat", time: "Setelah menyesal dari dosa", important: false, category: "umum" },
+                { id: 68, name: "Doa sebelum tidur", time: "Sebelum tidur", important: false, category: "harian" }
+            ],
+            
+            // Subuh (04:30 - 06:00)
+            "fajr": [
+                { id: 1, name: "Baca Al-Qur'an", time: "Utama setelah Subuh", important: true, category: "umum", urgent: true },
+                { id: 11, name: "Sholat Qobliyah Subuh", time: "Sebelum Subuh", important: true, category: "rawatib", urgent: true },
+                { id: 12, name: "Sholat Subuh", time: "Setelah adzan Subuh", important: true, category: "wajib", urgent: true },
+                { id: 13, name: "Dzikir pagi", time: "Ba'da Subuh", important: true, category: "dzikir", urgent: true },
+                { id: 37, name: "Doa setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
+                { id: 65, name: "Tasbih, Tahmid, Takbir", time: "Ba'da sholat", important: false, category: "dzikir" }
+            ],
+            
+            // Pagi (06:00 - 10:30)
+            "morning": [
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum" },
+                { id: 14, name: "Sholat Isyraq", time: "±15 menit setelah matahari terbit", important: false, category: "sunnah" },
+                { id: 15, name: "Sholat Dhuha", time: "07.00 - sebelum Dzuhur", important: true, category: "sunnah" },
+                { id: 6, name: "Sedekah", time: "24 jam sehari", important: false, category: "umum" },
+                { id: 7, name: "Birrul walidain", time: "24 jam sehari", important: false, category: "umum" },
+                { id: 9, name: "Menuntut ilmu", time: "24 jam sehari", important: false, category: "umum" }
+            ],
+            
+            // Dzuhur (10:30 - 15:30)
+            "dhuhr": [
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum" },
+                { id: 16, name: "Sholat Qobliyah Dzuhur", time: "Sebelum Dzuhur", important: true, category: "rawatib", urgent: true },
+                { id: 17, name: "Sholat Dzuhur", time: "Setelah matahari tergelincir", important: true, category: "wajib", urgent: true },
+                { id: 18, name: "Sholat Ba'diyah Dzuhur", time: "Setelah Dzuhur", important: true, category: "rawatib" },
+                { id: 37, name: "Doa setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
+                { id: 35, name: "Doa antara adzan–iqamah", time: "Setelah adzan sebelum iqamah", important: false, category: "doa" }
+            ],
+            
+            // Ashar (15:30 - 18:00)
+            "asr": [
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum" },
+                { id: 19, name: "Sholat Ashar", time: "Setelah masuk Ashar", important: true, category: "wajib", urgent: true },
+                { id: 20, name: "Dzikir petang", time: "Ba'da Ashar", important: true, category: "dzikir", urgent: true },
+                { id: 37, name: "Doa setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
+                { id: 8, name: "Silaturahmi", time: "24 jam sehari", important: false, category: "umum" }
+            ],
+            
+            // Maghrib (18:00 - 19:30)
+            "maghrib": [
+                { id: 1, name: "Baca Al-Qur'an", time: "Utama setelah Maghrib", important: true, category: "umum", urgent: true },
+                { id: 21, name: "Sholat Qobliyah Maghrib", time: "Sebelum Maghrib (singkat)", important: false, category: "rawatib" },
+                { id: 22, name: "Sholat Maghrib", time: "Setelah adzan Maghrib", important: true, category: "wajib", urgent: true },
+                { id: 23, name: "Sholat Ba'diyah Maghrib", time: "Setelah Maghrib", important: true, category: "rawatib" },
+                { id: 24, name: "Sholat Awwabin", time: "Antara Maghrib - Isya", important: false, category: "sunnah" },
+                { id: 37, name: "Doa setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
+                { id: 40, name: "Doa ketika berbuka puasa", time: "Saat Maghrib (berbuka)", important: true, category: "doa", urgent: true }
+            ],
+            
+            // Isya (19:30 - 23:59)
+            "isha": [
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum" },
+                { id: 25, name: "Sholat Qobliyah Isya", time: "Sebelum Isya", important: false, category: "rawatib" },
+                { id: 26, name: "Sholat Isya", time: "Setelah adzan Isya", important: true, category: "wajib", urgent: true },
+                { id: 27, name: "Sholat Ba'diyah Isya", time: "Setelah Isya", important: true, category: "rawatib" },
+                { id: 29, name: "Sholat Witir", time: "Setelah Isya", important: true, category: "malam" },
+                { id: 37, name: "Doa setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
+                { id: 67, name: "Doa masuk rumah", time: "Saat masuk rumah", important: false, category: "doa" },
+                { id: 68, name: "Doa sebelum tidur", time: "Sebelum tidur", important: false, category: "doa" }
+            ]
+        };
+
+        // Ibadah yang selalu bisa dilakukan
+        const alwaysIbadah = [
+            { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum" },
+            { id: 2, name: "Dzikir & Istighfar", time: "24 jam sehari", important: true, category: "umum" },
+            { id: 4, name: "Sholawat Nabi", time: "24 jam sehari", important: true, category: "umum" },
+            { id: 5, name: "Doa", time: "24 jam sehari", important: false, category: "umum" },
+            { id: 6, name: "Sedekah", time: "24 jam sehari", important: false, category: "umum" },
+            { id: 7, name: "Birrul walidain", time: "24 jam sehari", important: false, category: "umum" },
+            { id: 8, name: "Silaturahmi", time: "24 jam sehari", important: false, category: "umum" },
+            { id: 9, name: "Menuntut ilmu", time: "24 jam sehari", important: false, category: "umum" },
+            { id: 10, name: "Amar ma'ruf nahi munkar", time: "24 jam sehari", important: false, category: "umum" }
+        ];
+
+        // Waktu ibadah berikutnya
+        const nextIbadahSchedule = [
+            { time: "04:30", name: "Sholat Subuh", period: "Subuh" },
+            { time: "07:00", name: "Sholat Dhuha", period: "Pagi" },
+            { time: "12:00", name: "Sholat Dzuhur", period: "Siang" },
+            { time: "15:30", name: "Sholat Ashar", period: "Sore" },
+            { time: "18:00", name: "Sholat Maghrib", period: "Petang" },
+            { time: "19:30", name: "Sholat Isya", period: "Malam" },
+            { time: "23:00", name: "Sholat Tahajud", period: "Malam" }
+        ];
+
+        // Waktu highlight khusus
+        const highlightTimes = [
+            { start: "03:00", end: "05:00", title: "SEPERTIGA MALAM TERAKHIR", text: "Waktu mustajab untuk doa, tahajud, dan istighfar" },
+            { start: "04:30", end: "06:00", title: "WAKTU SUBUH", text: "Waktu utama membaca Quran, dzikir pagi, dan sholat sunnah" },
+            { start: "12:00", end: "13:00", title: "WAKTU DZUHUR", text: "Sholat berjamaah dan doa antara adzan-iqamah" },
+            { start: "15:30", end: "17:00", title: "WAKTU ASHAR", text: "Dzikir petang dan menjaga sholat Ashar" },
+            { start: "18:00", end: "19:00", title: "WAKTU MAGHRIB", text: "Waktu mustajab doa dan utama membaca Quran" },
+            { start: "19:30", end: "20:30", title: "WAKTU ISYA", text: "Sholat berjamaah dan witir" },
+            { start: "07:00", end: "10:30", title: "WAKTU DHUHA", text: "Sholat Dhuha dan sedekah" }
+        ];
+
+        // Simpan ibadah yang sudah dicentang
+        let completedIbadah = JSON.parse(localStorage.getItem('completedIbadah')) || [];
+        
+        // Update waktu real-time
+        function updateTime() {
+            const now = new Date();
+            
+            // Format waktu
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            
+            // Update elemen waktu
+            document.getElementById('time').textContent = now.toLocaleTimeString('id-ID', timeOptions);
+            document.getElementById('date').textContent = now.toLocaleDateString('id-ID', dateOptions);
+            
+            // Update tanggal Hijriyah (simulasi)
+            updateHijriDate(now);
+            
+            // Tentukan periode waktu saat ini
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const currentTimeStr = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`;
+            
+            // Tentukan ibadah berdasarkan waktu
+            let currentIbadah = [];
+            let timePeriod = "";
+            
+            if (currentHour >= 0 && currentHour < 4.5) {
+                currentIbadah = [...ibadahData.beforeFajr];
+                timePeriod = "Sebelum Subuh";
+            } else if (currentHour >= 4.5 && currentHour < 6) {
+                currentIbadah = [...ibadahData.fajr];
+                timePeriod = "Subuh";
+            } else if (currentHour >= 6 && currentHour < 10.5) {
+                currentIbadah = [...ibadahData.morning];
+                timePeriod = "Pagi";
+            } else if (currentHour >= 10.5 && currentHour < 15.5) {
+                currentIbadah = [...ibadahData.dhuhr];
+                timePeriod = "Dzuhur";
+            } else if (currentHour >= 15.5 && currentHour < 18) {
+                currentIbadah = [...ibadahData.asr];
+                timePeriod = "Ashar";
+            } else if (currentHour >= 18 && currentHour < 19.5) {
+                currentIbadah = [...ibadahData.maghrib];
+                timePeriod = "Maghrib";
+            } else {
+                currentIbadah = [...ibadahData.isha];
+                timePeriod = "Isya";
+            }
+            
+            // Tambahkan ibadah yang selalu bisa dilakukan
+            currentIbadah = [...alwaysIbadah, ...currentIbadah];
+            
+            // Hapus duplikat berdasarkan id
+            const uniqueIbadah = [];
+            const seenIds = new Set();
+            
+            currentIbadah.forEach(ibadah => {
+                if (!seenIds.has(ibadah.id)) {
+                    seenIds.add(ibadah.id);
+                    uniqueIbadah.push(ibadah);
+                }
+            });
+            
+            // Update highlight box
+            updateHighlightBox(currentTimeStr);
+            
+            // Tampilkan ibadah
+            displayIbadah(uniqueIbadah);
+            
+            // Update ibadah berikutnya
+            updateNextIbadah(currentTimeStr);
+            
+            // Update progress
+            updateProgress();
+        }
+        
+        // Update tanggal Hijriyah (simulasi)
+        function updateHijriDate(gregorianDate) {
+            // Ini adalah konversi sederhana, untuk implementasi real gunakan library hijriyah
+            const hijriMonths = ['Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir', 'Jumadil Awal', 'Jumadil Akhir', 
+                                'Rajab', 'Sya\'ban', 'Ramadhan', 'Syawal', 'Dzulqa\'dah', 'Dzulhijjah'];
+            
+            // Contoh konversi sederhana (tidak akurat)
+            const hijriYear = 1447;
+            const hijriMonth = hijriMonths[6]; // Rajab
+            const hijriDay = 20 + Math.floor(gregorianDate.getDate() / 2);
+            
+            document.getElementById('hijri').textContent = `${hijriDay} ${hijriMonth} ${hijriYear} H`;
+        }
+        
+        // Update highlight box berdasarkan waktu
+        function updateHighlightBox(currentTime) {
+            const highlightBox = document.getElementById('highlight-box');
+            let showHighlight = false;
+            
+            for (const highlight of highlightTimes) {
+                if (currentTime >= highlight.start && currentTime <= highlight.end) {
+                    document.getElementById('highlight-title').textContent = highlight.title;
+                    document.getElementById('highlight-text').textContent = highlight.text;
+                    showHighlight = true;
+                    break;
+                }
+            }
+            
+            highlightBox.style.display = showHighlight ? 'block' : 'none';
+        }
+        
+        // Tampilkan daftar ibadah
+        function displayIbadah(ibadahList) {
+            const container = document.getElementById('ibadah-container');
+            container.innerHTML = '';
+            
+            ibadahList.forEach((ibadah, index) => {
+                const isChecked = completedIbadah.includes(ibadah.id);
+                const isImportant = ibadah.important || false;
+                const isUrgent = ibadah.urgent || false;
+                
+                let className = 'ibadah-item';
+                if (isImportant) className += ' important';
+                if (isUrgent) className += ' urgent';
+                
+                const ibadahElement = document.createElement('div');
+                ibadahElement.className = className;
+                ibadahElement.innerHTML = `
+                    <div class="ibadah-number">${index + 1}</div>
+                    <div class="ibadah-info">
+                        <div class="ibadah-name">${ibadah.name}</div>
+                        <div class="ibadah-time">
+                            <i class="far fa-clock"></i> ${ibadah.time}
+                        </div>
+                    </div>
+                    <div class="checkmark ${isChecked ? 'checked' : ''}" data-id="${ibadah.id}"></div>
+                `;
+                
+                container.appendChild(ibadahElement);
+            });
+            
+            // Tambahkan event listener untuk checkmark
+            document.querySelectorAll('.checkmark').forEach(checkmark => {
+                checkmark.addEventListener('click', function() {
+                    const ibadahId = parseInt(this.getAttribute('data-id'));
+                    toggleIbadah(ibadahId, this);
+                });
+            });
+        }
+        
+        // Toggle status ibadah (centang/tidak)
+        function toggleIbadah(ibadahId, element) {
+            const index = completedIbadah.indexOf(ibadahId);
+            
+            if (index === -1) {
+                // Centang ibadah
+                completedIbadah.push(ibadahId);
+                element.classList.add('checked');
+                
+                // Tampilkan notifikasi
+                showNotification('Ibadah telah dicentang!');
+            } else {
+                // Hapus centang
+                completedIbadah.splice(index, 1);
+                element.classList.remove('checked');
+            }
+            
+            // Simpan ke localStorage
+            localStorage.setItem('completedIbadah', JSON.stringify(completedIbadah));
+            
+            // Update progress
+            updateProgress();
+        }
+        
+        // Tampilkan notifikasi
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Update ibadah berikutnya
+        function updateNextIbadah(currentTime) {
+            const container = document.getElementById('next-ibadah-container');
+            container.innerHTML = '';
+            
+            // Cari ibadah berikutnya
+            let nextIbadah = null;
+            for (const ibadah of nextIbadahSchedule) {
+                if (ibadah.time > currentTime) {
+                    nextIbadah = ibadah;
+                    break;
+                }
+            }
+            
+            // Jika tidak ada, ambil ibadah pertama besok
+            if (!nextIbadah) {
+                nextIbadah = nextIbadahSchedule[0];
+            }
+            
+            // Tampilkan ibadah berikutnya
+            const nextElement = document.createElement('div');
+            nextElement.className = 'next-item';
+            nextElement.innerHTML = `
+                <div class="next-time">${nextIbadah.time}</div>
+                <div class="next-name">${nextIbadah.name}</div>
+                <div style="color: #666; font-size: 0.9rem;">${nextIbadah.period}</div>
+            `;
+            
+            container.appendChild(nextElement);
+            
+            // Tampilkan 2 ibadah berikutnya
+            const currentIndex = nextIbadahSchedule.indexOf(nextIbadah);
+            const nextIndex = (currentIndex + 1) % nextIbadahSchedule.length;
+            const nextNextIbadah = nextIbadahSchedule[nextIndex];
+            
+            const nextNextElement = document.createElement('div');
+            nextNextElement.className = 'next-item';
+            nextNextElement.innerHTML = `
+                <div class="next-time">${nextNextIbadah.time}</div>
+                <div class="next-name">${nextNextIbadah.name}</div>
+                <div style="color: #666; font-size: 0.9rem;">${nextNextIbadah.period}</div>
+            `;
+            
+            container.appendChild(nextNextElement);
+        }
+        
+        // Update progress bar
+        function updateProgress() {
+            const totalIbadah = document.querySelectorAll('.ibadah-item').length;
+            const completed = completedIbadah.length;
+            
+            const percentage = totalIbadah > 0 ? Math.round((completed / totalIbadah) * 100) : 0;
+            
+            document.getElementById('progress-fill').style.width = `${percentage}%`;
+            document.getElementById('progress-fill').textContent = `${percentage}%`;
+            document.getElementById('completed').textContent = completed;
+            document.getElementById('total').textContent = totalIbadah;
+        }
+        
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update waktu setiap detik
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // Coba dapatkan lokasi pengguna
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        // Untuk sederhananya, kita tetap gunakan Jakarta
+                        // Dalam implementasi real, Anda bisa gunakan reverse geocoding API
+                        document.getElementById('location').textContent = "Lokasi Anda";
+                    },
+                    function(error) {
+                        console.log("Tidak bisa mendapatkan lokasi:", error);
+                    }
+                );
+            }
+        });
+    </script>
+</body>
+</html>
