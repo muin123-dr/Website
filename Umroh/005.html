@@ -258,14 +258,6 @@
       color: rgba(0,108,107,0.1);
     }
 
-    .latin {
-      font-size: 1.1rem !important;
-      color: var(--primary-dark);
-      line-height: 1.6;
-      margin: 12px 0;
-      font-style: italic;
-    }
-
     .terjemah {
       font-size: 1rem !important;
       color: var(--text-light);
@@ -409,13 +401,13 @@
       accent-color: var(--primary);
     }
 
-    /* Counter Display */
+    /* Counter Display - DITURUNKAN dan Warna diubah */
     .counter-display {
       position: fixed;
-      top: 100px;
+      top: 140px; /* DITURUNKAN dari 100px */
       right: 16px;
       background: var(--primary);
-      color: white;
+      color: #FFD700; /* WARNA KUNING */
       width: 60px;
       height: 60px;
       border-radius: 50%;
@@ -435,6 +427,7 @@
     .counter-total {
       font-size: 0.8rem;
       opacity: 0.9;
+      color: #FFD700; /* WARNA KUNING */
     }
 
     /* Footer */
@@ -451,6 +444,33 @@
     footer span {
       color: var(--primary);
       font-weight: 600;
+    }
+
+    /* Image styles - DIPERKECIL untuk smartphone */
+    .step-image {
+      width: 100%;
+      max-width: 200px; /* Diperkecil dari 300px */
+      margin: 15px auto;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Congratulations message */
+    .congrats-box {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      border-left: 5px solid #4CAF50;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
     }
 
     /* Responsive Adjustments */
@@ -475,12 +495,25 @@
       .counter-display {
         width: 50px;
         height: 50px;
-        top: 90px;
+        top: 120px; /* Disesuaikan untuk smartphone kecil */
         right: 12px;
       }
       
       .counter-step {
         font-size: 1.3rem;
+      }
+      
+      .arabic {
+        font-size: 1.2rem !important;
+      }
+      
+      .step-image {
+        max-width: 180px; /* Lebih kecil di smartphone kecil */
+      }
+      
+      .quick-btn {
+        min-width: auto;
+        padding: 10px 12px;
       }
     }
 
@@ -511,7 +544,11 @@
       .counter-display {
         position: absolute;
         right: 24px;
-        top: 140px;
+        top: 160px; /* Disesuaikan untuk tablet */
+      }
+      
+      .step-image {
+        max-width: 250px; /* Sedikit lebih besar di tablet */
       }
     }
 
@@ -550,19 +587,31 @@
       .action-bar {
         background: rgba(30, 30, 30, 0.98);
       }
+      
+      .congrats-box {
+        background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+      }
+      
+      .counter-display {
+        color: #FFD700; /* Tetap kuning di dark mode */
+      }
+      
+      .counter-total {
+        color: #FFD700; /* Tetap kuning di dark mode */
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- Counter Display -->
+<!-- Counter Display - DITURUNKAN agar kelihatan -->
 <div class="counter-display">
   <div class="counter-step" id="currentStep">1</div>
-  <div class="counter-total">/7</div>
+  <div class="counter-total">/9</div>
 </div>
 
 <header>
-  <h1><i class="fas fa-kaaba"></i> Panduan Thawaf & Sa'i</h1>
+  <h1><i class="fas fa-kaaba"></i> Panduan Umroh</h1>
   <p>Panduan langkah demi langkah untuk ibadah umroh</p>
 </header>
 
@@ -574,45 +623,54 @@
     <div class="progress-tracker" id="progressTracker">
       <div class="progress-step active" data-step="1">
         <div class="step-circle">1</div>
-        <div class="step-label">Masuk Masjid</div>
+        <div class="step-label">Niat & Ihrom</div>
       </div>
       <div class="progress-step" data-step="2">
         <div class="step-circle">2</div>
-        <div class="step-label">Thawaf 1-3</div>
+        <div class="step-label">Masuk Masjid</div>
       </div>
       <div class="progress-step" data-step="3">
         <div class="step-circle">3</div>
-        <div class="step-label">Thawaf 4-7</div>
+        <div class="step-label">Thawaf 1-3</div>
       </div>
       <div class="progress-step" data-step="4">
         <div class="step-circle">4</div>
-        <div class="step-label">Shalat & Zamzam</div>
+        <div class="step-label">Thawaf 4-7</div>
       </div>
       <div class="progress-step" data-step="5">
         <div class="step-circle">5</div>
-        <div class="step-label">Shafa</div>
+        <div class="step-label">Shalat & Zamzam</div>
       </div>
       <div class="progress-step" data-step="6">
         <div class="step-circle">6</div>
-        <div class="step-label">Sa'i</div>
+        <div class="step-label">Shafa (Awal Sa'i)</div>
       </div>
       <div class="progress-step" data-step="7">
         <div class="step-circle">7</div>
+        <div class="step-label">Sa'i Shafa-Marwa</div>
+      </div>
+      <div class="progress-step" data-step="8">
+        <div class="step-circle">8</div>
+        <div class="step-label">Di Bukit Marwa</div>
+      </div>
+      <div class="progress-step" data-step="9">
+        <div class="step-circle">9</div>
         <div class="step-label">Tahallul</div>
       </div>
     </div>
     
-    <!-- Quick Actions -->
+    <!-- Quick Actions - DIUBAH menjadi lebih ringkas -->
     <div class="quick-actions">
-      <button class="quick-btn" id="btnLatin">
-        <i class="fas fa-font"></i> Latin
+      <button class="quick-btn" id="btnFontSizeUp">
+        <i class="fas fa-search-plus"></i> +
+      </button>
+      <button class="quick-btn" id="btnFontSizeDown">
+        <i class="fas fa-search-minus"></i> -
       </button>
       <button class="quick-btn" id="btnTerjemah">
-        <i class="fas fa-language"></i> Terjemah
+        <i class="fas fa-language"></i> Terjemahan
       </button>
-      <button class="quick-btn" id="btnReset">
-        <i class="fas fa-redo"></i> Ulang
-      </button>
+      <!-- Tombol Ulangi dihapus sesuai permintaan -->
     </div>
   </div>
 
@@ -621,43 +679,40 @@
     <!-- Step 1 -->
     <section class="step-card active-step" data-step="1">
       <div class="step-header">
-        <h2 class="step-title">1. Masuk Masjidil Haram</h2>
-        <div class="step-badge">Talbiyah • Doa Masuk</div>
+        <h2 class="step-title">1. Niat dan Ihrom</h2>
+        <div class="step-badge">Niat • Talbiah</div>
       </div>
       <div class="step-body">
-        <p><i class="fas fa-walking"></i> Saat menuju Masjidil Haram, terus membaca talbiyah hingga akan memulai thawaf.</p>
+        <p><i class="fas fa-tshirt"></i> <strong>Memakai Ihrom:</strong> Pakaian ihrom untuk laki-laki adalah dua helai kain putih yang tidak berjahit.</p>
+        
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/3.png" alt="Pakaian Ihrom" class="step-image">
+        
+        <p><i class="fas fa-heart"></i> <strong>Niat Umroh:</strong> Setelah memakai ihrom, dan sampai Miqot, berniat untuk umroh dengan mengucapkan:</p>
         
         <div class="dua-box">
           <div class="arabic">
-            لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ
-            إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ لاَ شَرِيكَ لَكَ
+            لَبَّيْكَ اللَّهُمَّ عُمْرَةً
           </div>
-          <div class="latin">
-            Labbaika Allāhumma labbaik, labbaika lā syarīka laka labbaik,
-            innal-ḥamda wan-ni‘mata laka wal-mulk, lā syarīka lak.
-          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
-            Aku penuhi panggilan-Mu, ya Allah, aku penuhi panggilan-Mu. Tidak ada sekutu bagi-Mu,
-            aku penuhi panggilan-Mu. Sungguh segala puji, nikmat, dan kerajaan adalah milik-Mu, tiada sekutu bagi-Mu.
+            Aku penuhi panggilan-Mu ya Allah untuk melaksanakan umroh.
           </div>
         </div>
         
-        <p><i class="fas fa-door-open"></i> Masuk masjid dengan kaki kanan, pastikan dalam keadaan suci dan berwudhu.</p>
+        <p><i class="fas fa-volume-up"></i> <strong>Melafalkan Talbiah:</strong> Setelah niat, segera membaca talbiah:</p>
         
         <div class="dua-box">
           <div class="arabic">
-            أَعُوْذُ بِاللَّهِ الْعَظِيْمِ، وَبِوَجْهِهِ الْكَرِيْمِ، وَسُلْطَانِهِ الْقَدِيْمِ...
+            لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لاَ شَرِيكَ لَكَ
           </div>
-          <div class="latin">
-            A‘ūdzu billāhil-‘aẓīm, wa biwajhihil-karīm, wa sulṭānihil-qadīm...
-          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
-            Aku berlindung kepada Allah Yang Maha Agung, dengan wajah-Nya Yang Mulia dan kekuasaan-Nya yang abadi...
+            Aku penuhi panggilan-Mu, ya Allah, aku penuhi panggilan-Mu. Tidak ada sekutu bagi-Mu, aku penuhi panggilan-Mu. Sungguh segala puji, nikmat, dan kerajaan adalah milik-Mu, tiada sekutu bagi-Mu.
           </div>
         </div>
         
         <div class="note-box">
-          <strong><i class="fas fa-lightbulb"></i> Catatan:</strong> Hindari berdesakan untuk mencium Hajar Aswad. Cukup menghadap dan mengisyaratkan tangan sambil mengucapkan "Bismillāhi Allāhu Akbar".
+          <strong><i class="fas fa-lightbulb"></i> Catatan:</strong> Talbiah dibaca terus menerus sampai tiba di Masjidil Haram.
         </div>
       </div>
     </section>
@@ -665,27 +720,58 @@
     <!-- Step 2 -->
     <section class="step-card" data-step="2">
       <div class="step-header">
-        <h2 class="step-title">2. Thawaf: Putaran 1-3</h2>
-        <div class="step-badge">Lari Kecil • Raml</div>
+        <h2 class="step-title">2. Masuk Masjidil Haram</h2>
+        <div class="step-badge">Doa Masuk • Idh-thiba'</div>
       </div>
       <div class="step-body">
-        <p><i class="fas fa-running"></i> Mulai thawaf dari garis sejajar Hajar Aswad, ucapkan "Bismillāhi Allāhu Akbar" setiap melewatinya.</p>
-        <p>Pada putaran 1-3, laki-laki dianjurkan lari kecil (raml) dengan menjaga adab.</p>
+        <p><i class="fas fa-walking"></i> Saat menuju Masjidil Haram, tetap membaca talbiah.</p>
+        
+        <p><i class="fas fa-door-open"></i> <strong>Masuk Masjid:</strong> Masuk masjid dengan kaki kanan, pastikan dalam keadaan suci dan berwudhu. Membaca doa masuk masjid:</p>
+        
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/4.png" alt="Masuk Masjidil Haram" class="step-image">
         
         <div class="dua-box">
           <div class="arabic">
-            رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
+            أَعُوْذُ بِاللَّهِ الْعَظِيْمِ، وَبِوَجْهِهِ الْكَرِيْمِ، وَسُلْطَانِهِ الْقَدِيْمِ، مِنَ الشَّيْطَانِ الرَّجِيْمِ، (بِسْمِ اللَّهِ، وَالصَّلاَةُ) (وَالسَّلاَمُ عَلَى رَسُوْلِ اللَّهِ) اَللَّهُمَّ افْتَحْ لِيْ أَبْوَابَ رَحْمَتِكَ
           </div>
-          <div class="latin">
-            Rabbanā ātinā fid-dunyā ḥasanah, wa fil-ākhirati ḥasanah, waqinā ‘adzāban-nār.
-          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
-            Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami dari siksa neraka.
+            Aku berlindung kepada Allah Yang Maha Agung, dengan wajah-Nya Yang Mulia dan kekuasaan-Nya yang abadi, dari setan yang terkutuk. (Dengan nama Allah, dan shalawat) (dan salam atas Rasulullah) Ya Allah, bukakanlah untukku pintu-pintu rahmat-Mu.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-kaaba"></i> <strong>Menuju Ka'bah:</strong> Segera menuju Ka'bah, mulai melakukan Idh-thiba' (membuka pundak kanan).</p>
+        
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/2.png" alt="Idh-thiba'" class="step-image">
+        
+        <p><i class="fas fa-eye"></i> <strong>Saat Melihat Ka'bah:</strong> Ketika melihat Ka'bah membaca:</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            اللَّهُمَّ زِدْ هَذَا البَيْتَ تَشْرِيفًا وَتَعْظِيمًا وَتَكْرِيمًا وَمَهَابَةً وَبِرًّا، وَزِدْ مِنْ شَرَفِهِ وَكَرَمِهِ مِمَّنْ حَجَّهُ أَوِ اعْتَمَرَهُ تَشْرِيفًا وَتَعظِيمًا
+          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
+          <div class="terjemah">
+            Ya Allah, tambahkanlah kemuliaan, keagungan, penghormatan, kewibawaan dan kebaikan kepada rumah ini (Ka'bah). Dan tambahkanlah kemuliaan dan kehormatan bagi orang yang menunaikan haji atau umroh kepadanya dengan kemuliaan dan keagungan.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-map-marker-alt"></i> <strong>Menuju Hajar Aswad:</strong> Menuju pojok hajar aswad. Tetap pertahankan peringatan: "Hindari desakan, hindari antrian mencium atau menyentuh hajar aswad."</p>
+        
+        <p><i class="fas fa-hands"></i> <strong>Menghadap Hajar Aswad:</strong> Menghadap ke hajar aswad, mengisyaratkan tangan (dengan melambaikan tangan) ke arah hajar aswad, dan mengucapkan:</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            بِسْمِ اللهِ، اللهُ أَكْبَرُ
+          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
+          <div class="terjemah">
+            Dengan nama Allah, Allah Maha Besar.
           </div>
         </div>
         
         <div class="note-box">
-          <strong><i class="fas fa-exclamation-triangle"></i> Penting:</strong> Jangan melintas di dalam Hijr Ismail. Melewati Hijr berarti thawaf tidak sempurna.
+          <strong><i class="fas fa-exclamation-triangle"></i> Catatan:</strong> Cukup dengan isyarat tangan tanpa mencium tangan.
         </div>
       </div>
     </section>
@@ -693,97 +779,113 @@
     <!-- Step 3 -->
     <section class="step-card" data-step="3">
       <div class="step-header">
-        <h2 class="step-title">3. Thawaf: Putaran 4-7</h2>
-        <div class="step-badge">Jalan Biasa • Doa</div>
+        <h2 class="step-title">3. Thawaf: Putaran 1-3</h2>
+        <div class="step-badge">Raml • Lari Kecil</div>
       </div>
       <div class="step-body">
-        <p><i class="fas fa-walking"></i> Pada putaran 4-7, berjalan dengan tenang. Jaga kekhusyukan dengan dzikir dan doa.</p>
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/7.png" alt="Thawaf" class="step-image">
+        
+        <p><i class="fas fa-running"></i> <strong>Mulai Putaran 1, 2 & 3:</strong> <span class="hilite">Laki-laki disunnahkan lari kecil (raml) pada putaran 1-3.</span></p>
+        
+        <p><i class="fas fa-book-quran"></i> <strong>Membaca Doa:</strong> Boleh membaca Al-Quran, dzikir, shalawat selama thawaf.</p>
+        
+        <div class="note-box">
+          <strong><i class="fas fa-exclamation-triangle"></i> Penting:</strong> Jangan melintas di Hijr (bangunan melengkung di sebelah Ka'bah).
+        </div>
+        
+        <p><i class="fas fa-pray"></i> <strong>Antara Rukun Yamani & Hajar Aswad:</strong> Membaca doa:</p>
         
         <div class="dua-box">
           <div class="arabic">
             رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
           </div>
-          <div class="latin">
-            Rabbanā ātinā fid-dunyā ḥasanah, wa fil-ākhirati ḥasanah, waqinā ‘adzāban-nār.
-          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami dari siksa neraka.
           </div>
         </div>
         
-        <p><i class="fas fa-check-circle"></i> Setelah lengkap tujuh putaran, thawaf selesai.</p>
+        <p><i class="fas fa-redo"></i> <strong>Pengulangan:</strong> Dibaca berulang-ulang sampai berdiri lurus dengan hajar aswad.</p>
       </div>
     </section>
 
     <!-- Step 4 -->
     <section class="step-card" data-step="4">
       <div class="step-header">
-        <h2 class="step-title">4. Shalat & Minum Zamzam</h2>
+        <h2 class="step-title">4. Thawaf: Putaran 4-7</h2>
+        <div class="step-badge">Jalan Biasa • Doa</div>
+      </div>
+      <div class="step-body">
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/7.png" alt="Thawaf Putaran 4-7" class="step-image">
+        
+        <p><i class="fas fa-walking"></i> <strong>Putaran 4, 5, 6 & 7:</strong> Berjalan biasa (tidak perlu lari kecil).</p>
+        
+        <p><i class="fas fa-book-quran"></i> <strong>Membaca Doa:</strong> Boleh membaca Al-Quran, dzikir, shalawat selama thawaf.</p>
+        
+        <div class="note-box">
+          <strong><i class="fas fa-exclamation-triangle"></i> Penting:</strong> Jangan melintas di Hijr (bangunan melengkung di sebelah Ka'bah).
+        </div>
+        
+        <p><i class="fas fa-pray"></i> <strong>Antara Rukun Yamani & Hajar Aswad:</strong> Membaca doa:</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
+          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
+          <div class="terjemah">
+            Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami dari siksa neraka.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-redo"></i> <strong>Pengulangan:</strong> Dibaca berulang-ulang sampai berdiri lurus dengan hajar aswad.</p>
+        
+        <div class="note-box">
+          <strong><i class="fas fa-check-circle"></i> Selesai:</strong> Setelah lengkap tujuh putaran, thawaf selesai.
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="step-card" data-step="5">
+      <div class="step-header">
+        <h2 class="step-title">5. Shalat & Minum Zamzam</h2>
         <div class="step-badge">Maqam Ibrahim • Air Zamzam</div>
       </div>
       <div class="step-body">
-        <p><i class="fas fa-hands-praying"></i> Setelah thawaf, tutup kembali pundak dan shalat 2 rakaat di belakang Maqam Ibrahim.</p>
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/3.png" alt="Minum Air Zamzam" class="step-image">
+        
+        <p><i class="fas fa-tshirt"></i> <strong>Kain Ihrom:</strong> Kembali menutup kedua pundak.</p>
+        
+        <p><i class="fas fa-hands-praying"></i> <strong>Menuju Maqam Ibrahim:</strong> Segera ambil posisi di belakang Maqam Ibrahim. Ketika berjalan menuju Maqam Ibrahim, dianjurkan membaca:</p>
         
         <div class="dua-box">
           <div class="arabic">
             وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى
           </div>
-          <div class="latin">
-            Wattakhidzū min maqāmi Ibrāhīma muṣallā.
-          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Jadikanlah sebagian dari Maqam Ibrahim sebagai tempat shalat.
           </div>
         </div>
         
-        <p><i class="fas fa-glass-water"></i> Setelah shalat, minum air Zamzam sambil berdoa:</p>
+        <p><i class="fas fa-mosque"></i> <strong>Shalat 2 Rakaat:</strong> Cari tempat yang nyaman untuk sholat. Sholat 2 rakaat:</p>
+        <ul style="padding-left: 20px; margin: 15px 0;">
+          <li><strong>Rakaat pertama:</strong> Membaca surat Al-Kafirun</li>
+          <li><strong>Rakaat kedua:</strong> Membaca surat Al-Ikhlas</li>
+        </ul>
+        
+        <p><i class="fas fa-praying-hands"></i> <strong>Berdoa:</strong> Setelah shalat, berdoa sesuai keinginan.</p>
+        
+        <p><i class="fas fa-glass-water"></i> <strong>Minum Air Zamzam:</strong> Menuju kran zam-zam, meminum air zam-zam. Ketika meminum sambil berdoa sesuai keinginan. Doa yang dibaca Ibnu Abbas:</p>
         
         <div class="dua-box">
           <div class="arabic">
             اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا وَاسِعًا وَشِفَاءً مِنْ كُلِّ دَاءٍ
           </div>
-          <div class="latin">
-            Allāhumma innī as’aluka ‘ilman nāfi‘ā, wa rizqan wāsi‘ā, wa syifā’an min kulli dā’.
-          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
-            Ya Allah, aku memohon kepada-Mu ilmu yang bermanfaat, rezeki yang luas, dan kesembuhan dari segala penyakit.
-          </div>
-        </div>
-      </div>
-    </section>
-
-     <!-- Step 5 -->
-    <section class="step-card" data-step="5">
-      <div class="step-header">
-        <h2 class="step-title">5. Shafa: Awal Sa'i</h2>
-        <div class="step-badge">Niat Sa'i • Doa</div>
-      </div>
-      <div class="step-body">
-        <p><i class="fas fa-mountain"></i> Saat mendekati Shafa, bacalah:</p>
-        
-        <div class="dua-box">
-          <div class="arabic">
-            إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ
-          </div>
-          <div class="latin">
-            Innaṣ-ṣafā wal-marwata min sya‘ā’irillāh.
-          </div>
-          <div class="terjemah">
-            Sesungguhnya Shafa dan Marwah adalah sebagian dari syiar-syiar Allah.
-          </div>
-        </div>
-        
-        <p><i class="fas fa-person-praying"></i> Naik ke Shafa sambil membaca: "Abda'u bimā bada'allāhu bih"</p>
-        
-        <div class="dua-box">
-          <div class="arabic">
-            الله أَكْبَرُ، الله أَكْبَرُ، الله أَكْبَرُ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ...
-          </div>
-          <div class="latin">
-            Allāhu Akbar, Allāhu Akbar, Allāhu Akbar, lā ilāha illallāhu waḥdahū lā syarīka lah...
-          </div>
-          <div class="terjemah">
-            Allah Maha Besar (3x). Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya...
+            Ya Allah, aku memohon kepada-Mu ilmu yang bermanfaat, rizki yang luas dan obat dari setiap penyakit.
           </div>
         </div>
       </div>
@@ -792,43 +894,130 @@
     <!-- Step 6 -->
     <section class="step-card" data-step="6">
       <div class="step-header">
-        <h2 class="step-title">6. Sa'i Shafa-Marwa</h2>
-        <div class="step-badge">7 Kali • Doa di Perjalanan</div>
+        <h2 class="step-title">6. Shafa: Awal Sa'i</h2>
+        <div class="step-badge">Niat Sa'i • Doa di Shafa</div>
       </div>
       <div class="step-body">
-        <p><i class="fas fa-arrows-left-right"></i> Berjalan dari Shafa ke Marwa. Di antara lampu hijau, laki-laki disunnahkan berlari kecil.</p>
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/8.png" alt="Bukit Shafa" class="step-image">
+        
+        <p><i class="fas fa-tshirt"></i> <strong>Pakaian:</strong> Kedua pundak tetap tertutup.</p>
+        
+        <p><i class="fas fa-mountain"></i> <strong>Menuju Bukit Shafa:</strong> Ketika mulai naik, baca kalimat berikut:</p>
         
         <div class="dua-box">
           <div class="arabic">
-            رَبِّ اغْفِرْ وَارْحَمْ إِنَّك أَنْتَ الأَعَزُّ الأَكْرَمُّ
+            إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ – أبْدَأُ بِمَا بَدَأَ اللهُ بِهِ
           </div>
-          <div class="latin">
-            Rabbi ighfir warḥam, innaka anta al-a‘azzu al-akram.
-          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
-            Ya Tuhanku, ampunilah dan rahmatilah, sesungguhnya Engkau-lah Yang Maha Perkasa lagi Maha Mulia.
+            Sesungguhnya Shafa dan Marwah adalah syiar Allah (QS. Al-Baqarah: 158) – Saya mulai dengan bukit yang Allah sebut pertama dalam ayat.
           </div>
         </div>
         
-        <p><i class="fas fa-flag-checkered"></i> Ulangi perjalanan 7 kali, dimulai dari Shafa dan berakhir di Marwa.</p>
+        <p><i class="fas fa-kaaba"></i> <strong>Sampai di Bukit Shafa:</strong> Setelah sampai di bukit Shafa:</p>
+        <ol style="padding-left: 20px; margin: 15px 0;">
+          <li>Menghadap Ka'bah</li>
+          <li>Membaca dzikir dan doa:</li>
+        </ol>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            الله أَكْبَرُ الله أَكْبَرُ الله أَكْبَرُ لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِيْ وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيءٍ قَدِيرٌ لا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ أَنْجَزَ وَعْدَهُ وَنَصَرَ عَبْدَهُ وَهَزَمَ الأَحْزَابَ وَحْدَهُ
+          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
+          <div class="terjemah">
+            Allah Maha Besar, Allah Maha Besar, Allah Maha Besar. Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya, milik-Nya kerajaan dan bagi-Nya segala puji. Dia yang menghidupkan dan mematikan, dan Dia Maha Kuasa atas segala sesuatu. Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya, Dia menepati janji-Nya, menolong hamba-Nya, dan mengalahkan golongan-golongan (musuh) sendirian.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-hands"></i> <strong>Angkat Tangan dan Berdoa:</strong> Angkat tangan dan berdo'a sesuai keinginan.</p>
+        
+        <p><i class="fas fa-redo"></i> <strong>Pengulangan:</strong> Dzikir dan do'a diulangi sebanyak 3x.</p>
       </div>
     </section>
 
     <!-- Step 7 -->
     <section class="step-card" data-step="7">
       <div class="step-header">
-        <h2 class="step-title">7. Tahallul</h2>
+        <h2 class="step-title">7. Sa'i Shafa-Marwa</h2>
+        <div class="step-badge">7 Kali • Doa di Perjalanan</div>
+      </div>
+      <div class="step-body">
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/8.png" alt="Sa'i Shafa-Marwa" class="step-image">
+        
+        <p><i class="fas fa-arrows-left-right"></i> <strong>Berjalan dari Shafa ke Marwa:</strong> Di antara lampu hijau, laki-laki disunnahkan berlari kecil.</p>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            رَبِّ اغْفِرْ وَارْحَمْ إِنَّك أَنْتَ الأَعَزُّ الأَكْرَمُّ
+          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
+          <div class="terjemah">
+            Ya Tuhanku, ampunilah dan rahmatilah, sesungguhnya Engkau-lah Yang Maha Perkasa lagi Maha Mulia.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-flag-checkered"></i> <strong>Pengulangan:</strong> Ulangi perjalanan 7 kali, dimulai dari Shafa dan berakhir di Marwa.</p>
+      </div>
+    </section>
+
+    <!-- Step 8 -->
+    <section class="step-card" data-step="8">
+      <div class="step-header">
+        <h2 class="step-title">8. Di Bukit Marwa</h2>
+        <div class="step-badge">Akhir Sa'i • Doa</div>
+      </div>
+      <div class="step-body">
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/8.png" alt="Bukit Marwa" class="step-image">
+        
+        <p><i class="fas fa-mountain"></i> <strong>Sampai di Bukit Marwa:</strong> Setelah sampai di bukit Marwah:</p>
+        <ol style="padding-left: 20px; margin: 15px 0;">
+          <li>Menghadap Ka'bah</li>
+          <li>Membaca dzikir dan doa:</li>
+        </ol>
+        
+        <div class="dua-box">
+          <div class="arabic">
+            الله أَكْبَرُ الله أَكْبَرُ الله أَكْبَرُ لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِيْ وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيءٍ قَدِيرٌ لا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ أَنْجَزَ وَعْدَهُ وَنَصَرَ عَبْدَهُ وَهَزَمَ الأَحْزَابَ وَحْدَهُ
+          </div>
+          <!-- Class latin dihapus sesuai permintaan -->
+          <div class="terjemah">
+            Allah Maha Besar, Allah Maha Besar, Allah Maha Besar. Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya, milik-Nya kerajaan dan bagi-Nya segala puji. Dia yang menghidupkan dan mematikan, dan Dia Maha Kuasa atas segala sesuatu. Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya, Dia menepati janji-Nya, menolong hamba-Nya, dan mengalahkan golongan-golongan (musuh) sendirian.
+          </div>
+        </div>
+        
+        <p><i class="fas fa-hands"></i> <strong>Angkat Tangan dan Berdoa:</strong> Angkat tangan dan berdo'a sesuai keinginan.</p>
+        
+        <p><i class="fas fa-redo"></i> <strong>Pengulangan:</strong> Dzikir dan do'a diulangi sebanyak 3x.</p>
+        
+        <div class="note-box">
+          <strong><i class="fas fa-check-circle"></i> Selesai Sa'i:</strong> Dengan ini selesailah rangkaian Sa'i.
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 9 -->
+    <section class="step-card" data-step="9">
+      <div class="step-header">
+        <h2 class="step-title">9. Tahallul</h2>
         <div class="step-badge">Selesai • Mencukur Rambut</div>
       </div>
       <div class="step-body">
-        <p><i class="fas fa-cut"></i> Setelah selesai sa'i, lakukan tahallul dengan mencukur rambut:</p>
+        <img src="https://muin123-dr.github.io/Website/Umroh/gbr/9.png" alt="Tahallul" class="step-image">
+        
+        <p><i class="fas fa-cut"></i> <strong>Mencukur Rambut:</strong> Setelah selesai sa'i, lakukan tahallul dengan mencukur rambut:</p>
         <ul style="padding-left: 20px; margin: 15px 0;">
           <li><strong>Laki-laki:</strong> Lebih utama mencukur habis, boleh juga memendekkan</li>
           <li><strong>Wanita:</strong> Cukup potong sedikit ujung rambut (sekitar 1 ruas jari)</li>
         </ul>
         
+        <div class="congrats-box">
+          <h3><i class="fas fa-check-circle"></i> Selamat Anda sudah selesai Umroh!</h3>
+          <p>Semoga Umrohnya MABRUR</p>
+        </div>
+        
         <div class="note-box">
-          <strong><i class="fas fa-check-double"></i> Selamat!</strong> Dengan tahallul, larangan ihram selesai dan rangkaian umroh Anda sempurna, insya Allah.
+          <strong><i class="fas fa-check-double"></i> Selesai:</strong> Dengan tahallul, larangan ihram selesai dan rangkaian umroh Anda sempurna, insya Allah.
         </div>
       </div>
     </section>
@@ -862,12 +1051,13 @@
   const nextBtn = document.getElementById('nextStep');
   const scrollTopBtn = document.getElementById('scrollTop');
   const currentStepDisplay = document.getElementById('currentStep');
-  const btnLatin = document.getElementById('btnLatin');
+  const btnFontSizeUp = document.getElementById('btnFontSizeUp');
+  const btnFontSizeDown = document.getElementById('btnFontSizeDown');
   const btnTerjemah = document.getElementById('btnTerjemah');
-  const btnReset = document.getElementById('btnReset');
+  // Tombol btnReset dihapus sesuai permintaan
   
   let currentStep = 0;
-  let latinVisible = true;
+  let fontSize = 16; // Base font size in pixels
   let terjemahVisible = true;
   
   // Initialize
@@ -912,17 +1102,18 @@
   
   // Apply text visibility settings
   function applyTextVisibility() {
-    document.querySelectorAll('.latin').forEach(el => {
-      el.style.display = latinVisible ? 'block' : 'none';
-    });
-    
     document.querySelectorAll('.terjemah').forEach(el => {
       el.style.display = terjemahVisible ? 'block' : 'none';
     });
+  }
+  
+  // Apply font size changes
+  function applyFontSize() {
+    document.documentElement.style.fontSize = fontSize + 'px';
     
     // Update button states
-    btnLatin.classList.toggle('active', latinVisible);
-    btnTerjemah.classList.toggle('active', terjemahVisible);
+    btnFontSizeUp.disabled = fontSize >= 22;
+    btnFontSizeDown.disabled = fontSize <= 12;
   }
   
   // Event Listeners
@@ -958,23 +1149,25 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
     
-    // Text visibility toggles
-    btnLatin.addEventListener('click', () => {
-      latinVisible = !latinVisible;
-      applyTextVisibility();
+    // Font size controls
+    btnFontSizeUp.addEventListener('click', () => {
+      if (fontSize < 22) {
+        fontSize += 1;
+        applyFontSize();
+      }
     });
     
+    btnFontSizeDown.addEventListener('click', () => {
+      if (fontSize > 12) {
+        fontSize -= 1;
+        applyFontSize();
+      }
+    });
+    
+    // Text visibility toggles
     btnTerjemah.addEventListener('click', () => {
       terjemahVisible = !terjemahVisible;
       applyTextVisibility();
-    });
-    
-    // Reset to first step
-    btnReset.addEventListener('click', () => {
-      currentStep = 0;
-      updateDisplay();
-      updateProgressTracker();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
     
     // Keyboard navigation
