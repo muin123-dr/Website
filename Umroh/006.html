@@ -158,6 +158,7 @@
         .search-box {
             position: relative;
             display: flex;
+            margin-bottom: 15px;
         }
 
         .search-box input {
@@ -185,6 +186,43 @@
             transform: translateY(-50%);
             color: var(--primary);
             font-size: 1.2rem;
+        }
+
+        /* Font Size Controls */
+        .font-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .font-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary-light);
+            border-radius: 50%;
+            background: var(--white);
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .font-btn:hover {
+            background: var(--primary-light);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        #font-size-indicator {
+            font-weight: 500;
+            color: var(--primary-dark);
+            min-width: 60px;
+            text-align: center;
         }
 
         /* Main Content */
@@ -309,13 +347,14 @@
             background-color: var(--primary-light);
             color: var(--white);
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 25px;
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
+            gap: 6px;
             transition: all 0.3s ease;
             box-shadow: 0 3px 8px rgba(46, 125, 50, 0.2);
         }
@@ -327,15 +366,7 @@
         }
 
         .translation-toggle i {
-            margin-right: 8px;
-        }
-
-        .translation-toggle.hide-translation {
-            background-color: #9E9E9E;
-        }
-
-        .translation-toggle.hide-translation:hover {
-            background-color: #757575;
+            font-size: 1rem;
         }
 
         .translation {
@@ -494,6 +525,16 @@
                 top: 100px;
                 padding: 15px 0;
             }
+
+            .font-controls {
+                gap: 10px;
+            }
+
+            .font-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -554,11 +595,16 @@
         </div>
     </nav>
 
-    <!-- Search Bar -->
+    <!-- Search Bar & Font Controls -->
     <div class="search-container">
         <div class="search-box">
             <i class="fas fa-search"></i>
             <input type="text" id="searchInput" placeholder="Cari doa berdasarkan kata kunci...">
+        </div>
+        <div class="font-controls">
+            <button class="font-btn" id="font-decrease" title="Perkecil huruf"><i class="fas fa-minus"></i></button>
+            <span id="font-size-indicator">100%</span>
+            <button class="font-btn" id="font-increase" title="Perbesar huruf"><i class="fas fa-plus"></i></button>
         </div>
     </div>
 
@@ -884,12 +930,20 @@
         // Translation visibility state (global - untuk semua doa)
         let translationVisible = true;
 
+        // Font size scaling factor (1 = 100%)
+        let fontSizeScale = parseFloat(localStorage.getItem('fontSizeScale')) || 1.0;
+        const arabicBaseSize = 1.5; // rem
+        const translationBaseSize = 1.0; // rem
+
         // DOM Elements
         const mainElement = document.querySelector('main');
         const categorySelect = document.getElementById('categorySelect');
         const searchInput = document.getElementById('searchInput');
         const emptyState = document.getElementById('emptyState');
         const backToTopBtn = document.getElementById('backToTop');
+        const fontDecreaseBtn = document.getElementById('font-decrease');
+        const fontIncreaseBtn = document.getElementById('font-increase');
+        const fontSizeIndicator = document.getElementById('font-size-indicator');
 
         // Initialize the app
         function initApp() {
@@ -898,6 +952,8 @@
             setActiveCategory('aktivitas-harian');
             setupEventListeners();
             updateFavoriteButtons();
+            applyFontSize();
+            updateFontIndicator();
         }
 
         // Render category options in dropdown
@@ -923,11 +979,11 @@
                 section.className = 'category-section';
                 section.id = `section-${categoryId}`;
                 
-                // Tambahkan tombol global untuk menyembunyikan/menampilkan terjemahan
+                // Global toggle button with shortened text "Terjemah"
                 let prayersHTML = `
                     <div class="translation-toggle-container">
-                        <button class="translation-toggle" id="global-translation-toggle-${categoryId}">
-                            <i class="fas fa-eye-slash"></i> <span>Sembunyikan Terjemahan</span>
+                        <button class="translation-toggle global-toggle" id="global-translation-toggle-${categoryId}">
+                            <i class="fas fa-eye"></i> <span>Terjemah</span>
                         </button>
                     </div>
                     <h2 class="section-title">
@@ -968,7 +1024,7 @@
                         </div>
                         <div class="translation-toggle-container">
                             <button class="translation-toggle" data-id="${prayer.id}">
-                                <i class="fas fa-eye-slash"></i> <span>Sembunyikan Terjemahan</span>
+                                <i class="fas fa-eye"></i> <span>Terjemah</span>
                             </button>
                         </div>
                         <p class="translation">${prayer.translation}</p>
@@ -1003,20 +1059,15 @@
             const prayerCard = button.closest('.prayer-card');
             const translationElement = prayerCard.querySelector('.translation');
             const icon = button.querySelector('i');
-            const textSpan = button.querySelector('span');
             
             translationElement.classList.toggle('hidden');
             
             if (translationElement.classList.contains('hidden')) {
-                textSpan.textContent = 'Tampilkan Terjemahan';
-                icon.className = 'fas fa-eye';
-                button.classList.add('hide-translation');
-                button.setAttribute('title', 'Tampilkan terjemahan');
-            } else {
-                textSpan.textContent = 'Sembunyikan Terjemahan';
+                // Terjemahan tersembunyi -> icon mata tertutup
                 icon.className = 'fas fa-eye-slash';
-                button.classList.remove('hide-translation');
-                button.setAttribute('title', 'Sembunyikan terjemahan');
+            } else {
+                // Terjemahan tampil -> icon mata terbuka
+                icon.className = 'fas fa-eye';
             }
         }
 
@@ -1027,7 +1078,7 @@
             const allTranslationButtons = categoryContainer.querySelectorAll('.translation-toggle');
             const allTranslationElements = categoryContainer.querySelectorAll('.translation');
             
-            // Check if the first translation is currently visible
+            // Check if the first translation is currently hidden
             const firstTranslationHidden = allTranslationElements[0]?.classList.contains('hidden');
             
             if (firstTranslationHidden) {
@@ -1038,20 +1089,12 @@
                 
                 allTranslationButtons.forEach(button => {
                     const icon = button.querySelector('i');
-                    const textSpan = button.querySelector('span');
-                    textSpan.textContent = 'Sembunyikan Terjemahan';
-                    icon.className = 'fas fa-eye-slash';
-                    button.classList.remove('hide-translation');
-                    button.setAttribute('title', 'Sembunyikan terjemahan');
+                    icon.className = 'fas fa-eye';
                 });
                 
                 // Update global toggle button
                 const globalIcon = globalToggleButton.querySelector('i');
-                const globalTextSpan = globalToggleButton.querySelector('span');
-                globalTextSpan.textContent = 'Sembunyikan Semua Terjemahan';
-                globalIcon.className = 'fas fa-eye-slash';
-                globalToggleButton.classList.remove('hide-translation');
-                globalToggleButton.setAttribute('title', 'Sembunyikan semua terjemahan');
+                globalIcon.className = 'fas fa-eye';
             } else {
                 // Hide all translations
                 allTranslationElements.forEach(element => {
@@ -1060,20 +1103,47 @@
                 
                 allTranslationButtons.forEach(button => {
                     const icon = button.querySelector('i');
-                    const textSpan = button.querySelector('span');
-                    textSpan.textContent = 'Tampilkan Terjemahan';
-                    icon.className = 'fas fa-eye';
-                    button.classList.add('hide-translation');
-                    button.setAttribute('title', 'Tampilkan terjemahan');
+                    icon.className = 'fas fa-eye-slash';
                 });
                 
                 // Update global toggle button
                 const globalIcon = globalToggleButton.querySelector('i');
-                const globalTextSpan = globalToggleButton.querySelector('span');
-                globalTextSpan.textContent = 'Tampilkan Semua Terjemahan';
-                globalIcon.className = 'fas fa-eye';
-                globalToggleButton.classList.add('hide-translation');
-                globalToggleButton.setAttribute('title', 'Tampilkan semua terjemahan');
+                globalIcon.className = 'fas fa-eye-slash';
+            }
+        }
+
+        // Apply font size scale to all Arabic and translation texts
+        function applyFontSize() {
+            const arabicElements = document.querySelectorAll('.arabic-text');
+            const translationElements = document.querySelectorAll('.translation');
+            
+            arabicElements.forEach(el => {
+                el.style.fontSize = (arabicBaseSize * fontSizeScale) + 'rem';
+            });
+            
+            translationElements.forEach(el => {
+                el.style.fontSize = (translationBaseSize * fontSizeScale) + 'rem';
+            });
+        }
+
+        // Update font size indicator
+        function updateFontIndicator() {
+            const percent = Math.round(fontSizeScale * 100);
+            fontSizeIndicator.textContent = percent + '%';
+        }
+
+        // Change font size
+        function changeFontSize(delta) {
+            let newScale = fontSizeScale + delta;
+            // Batasi antara 0.6 dan 2.0
+            if (newScale < 0.6) newScale = 0.6;
+            if (newScale > 2.0) newScale = 2.0;
+            
+            if (newScale !== fontSizeScale) {
+                fontSizeScale = newScale;
+                localStorage.setItem('fontSizeScale', fontSizeScale);
+                applyFontSize();
+                updateFontIndicator();
             }
         }
 
@@ -1092,6 +1162,10 @@
             backToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+            
+            // Font size buttons
+            fontDecreaseBtn.addEventListener('click', () => changeFontSize(-0.1));
+            fontIncreaseBtn.addEventListener('click', () => changeFontSize(0.1));
             
             // Global translation toggle button
             document.addEventListener('click', function(e) {
@@ -1118,7 +1192,7 @@
                     copyToClipboard(textToCopy, btn);
                 }
                 
-                // Individual translation toggle button
+                // Individual translation toggle button (not global)
                 if (e.target.closest('.translation-toggle') && !e.target.closest('[id^="global-translation-toggle-"]')) {
                     const btn = e.target.closest('.translation-toggle');
                     toggleTranslationForCard(btn);
