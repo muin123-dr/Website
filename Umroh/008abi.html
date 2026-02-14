@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* === Nuansa Islami & Dominan Hijau (sama seperti sebelumnya) === */
+        /* === Nuansa Islami & Dominan Hijau === */
         body {
             background: linear-gradient(145deg, #f0f9f0 0%, #e2f0d9 100%);
             padding: 15px;
@@ -163,11 +163,84 @@
             margin-top: 5px;
             color: #e0f2b0;
         }
+
+        /* Loader overlay */
+        #loader-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(2px);
+        }
+        .spinner-border {
+            width: 5rem; height: 5rem;
+            border-width: 0.5rem;
+        }
+
+        /* Notifikasi biasa (Data Tersimpan) */
+        #notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2e7d32;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 60px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            z-index: 10001;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid #ffd966;
+            display: none;
+            text-align: center;
+            white-space: nowrap;
+            animation: fadeInOut 2s ease-in-out;
+        }
+
+        /* Notifikasi Khatam (juara) */
+        #khatam-notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, #ffd966, #f7e05e);
+            color: #1b5e20;
+            padding: 30px 50px;
+            border-radius: 100px 20px 100px 20px;
+            box-shadow: 0 20px 40px rgba(255, 200, 0, 0.5);
+            z-index: 10002;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            border: 6px solid white;
+            display: none;
+            animation: zoomPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            line-height: 1.4;
+        }
+        #khatam-notification span {
+            display: block;
+            font-size: 1.8rem;
+            margin-top: 15px;
+            letter-spacing: 4px;
+        }
+        @keyframes zoomPop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+            80% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
     </style>
 </head>
 <body>
 
 <div id="loader-overlay"><div class="spinner-border text-success" style="width: 4rem; height: 4rem;"></div></div>
+
+<!-- Notifikasi Sementara -->
+<div id="notification"></div>
+<div id="khatam-notification"></div>
 
 <div class="container" style="max-width: 500px; position: relative;">
     <div style="position: absolute; top: -10px; left: -15px; font-size: 40px; opacity: 0.2; transform: rotate(-15deg);">☪️</div>
@@ -249,8 +322,6 @@
     let currentUserId = "001";
     let currentUserName = "Abi"; 
     let currentPage = 1;
-
-    // === FIX: Variabel global untuk menyimpan instance Chart ===
     let chartInstance = null;
 
     window.onload = async () => {
@@ -350,13 +421,11 @@
                 
                 if (latest.tanggal_jam) checkLaziness(latest.tanggal_jam);
                 
-                // === FIX: Hapus kondisi >1, chart akan digambar selama ada data (min 1 titik) ===
                 if (history.length > 0) {
                     renderChart(history);
                 }
             } else {
                 document.getElementById('resWaktu').innerText = 'Belum ada catatan';
-                // Jika tidak ada data, kosongkan chart
                 if (chartInstance) {
                     chartInstance.destroy();
                     chartInstance = null;
@@ -393,6 +462,26 @@
         }
     }
 
+    // Fungsi notifikasi biasa
+    function showNotification(msg, duration = 2000) {
+        const notif = document.getElementById('notification');
+        notif.textContent = msg;
+        notif.style.display = 'block';
+        setTimeout(() => {
+            notif.style.display = 'none';
+        }, duration);
+    }
+
+    // Fungsi notifikasi khatam (juara)
+    function showKhatamNotification() {
+        const notif = document.getElementById('khatam-notification');
+        notif.innerHTML = '🎉 Alhamdulillaah! 🎉<br> Kamu sudah Khatam! <span>🏆👑🌟</span>';
+        notif.style.display = 'block';
+        setTimeout(() => {
+            notif.style.display = 'none';
+        }, 4000);
+    }
+
     async function simpanData() {
         showLoader(true);
         const now = new Date();
@@ -417,25 +506,32 @@
 
         try {
             await fetch(`${WEB_APP_URL}?${params.toString()}`);
-            alert("✅ Data Berhasil Disimpan! Jazakallah Khair.");
-            location.reload();
+            
+            // Notifikasi sukses simpan
+            showNotification('✅ Data Tersimpan', 2000);
+            
+            // Cek apakah khatam (An-Nas ayat 6)
+            if (suratIndex === 113 && document.getElementById('ayat').value === '6') {
+                showKhatamNotification();
+            }
+            
+            // Perbarui data tanpa reload halaman
+            await loadDataFromSheet();
+            
         } catch (error) {
             alert("Error: " + error.message);
         }
         showLoader(false);
     }
 
-    // === FIX: renderChart dengan destroy instance sebelumnya ===
     function renderChart(history) {
         const ctx = document.getElementById('historyChart').getContext('2d');
         
-        // Hancurkan chart lama jika ada
         if (chartInstance) {
             chartInstance.destroy();
             chartInstance = null;
         }
 
-        // Siapkan labels & data
         const labels = history.map(item => {
             if (item.tanggal_jam) {
                 return item.tanggal_jam.split(" ")[1] || '';
@@ -446,7 +542,6 @@
             return item.halaman ? parseInt(item.halaman) : 0;
         });
 
-        // Buat chart baru
         chartInstance = new Chart(ctx, {
             type: 'line',
             data: {
@@ -467,7 +562,7 @@
                 maintainAspectRatio: false,
                 scales: { 
                     y: { 
-                        beginAtZero: true,  // Ubah ke true agar skala dari 0 lebih jelas
+                        beginAtZero: true,
                         grid: { color: '#ccdfcc' } 
                     } 
                 },
