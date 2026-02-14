@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengingat Ibadah Harian</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Pengingat Ibadah Harian + Jadwal Sholat</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -27,6 +27,9 @@
             --text-light: #ffffff;
             --text-yellow: #fff176;
             --text-gold: #ffd54f;
+            --prayer-bg: rgba(255, 255, 255, 0.9);
+            --prayer-card: #ffffff;
+            --prayer-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         body {
@@ -65,7 +68,7 @@
 
         .time-display {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 12px;
             margin-bottom: 20px;
         }
@@ -121,7 +124,6 @@
             font-weight: 500;
         }
 
-        /* Waktu saat ini - lebih menonjol */
         .time-card.current-time {
             background: linear-gradient(135deg, var(--primary), var(--accent));
             border: 2px solid var(--gold);
@@ -130,12 +132,8 @@
         }
 
         @keyframes glow {
-            from {
-                box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-            }
-            to {
-                box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
-            }
+            from { box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3); }
+            to { box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5); }
         }
 
         .time-card.current-time h3 {
@@ -401,6 +399,95 @@
             font-size: 0.95rem;
         }
 
+        /* ===== JADWAL SHOLAT CANTIK ===== */
+        .prayer-times {
+            background: var(--prayer-bg);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .prayer-times h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .prayer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .prayer-card {
+            background: var(--prayer-card);
+            border-radius: 16px;
+            padding: 14px 10px;
+            box-shadow: var(--prayer-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(44, 120, 108, 0.2);
+        }
+
+        .prayer-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary);
+        }
+
+        .prayer-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .prayer-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .prayer-time-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent);
+            background: #e0f2f1;
+            padding: 4px 10px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        /* Khusus untuk layar kecil */
+        @media (max-width: 400px) {
+            .prayer-grid {
+                gap: 8px;
+            }
+            .prayer-card {
+                padding: 10px 5px;
+            }
+            .prayer-time-value {
+                font-size: 1rem;
+            }
+        }
+
         .progress-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
@@ -454,7 +541,6 @@
             font-size: 0.85rem;
         }
 
-        /* Scrollbar styling */
         .ibadah-list::-webkit-scrollbar {
             width: 6px;
         }
@@ -507,7 +593,7 @@
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-mosque"></i> Pengingat Ibadah Harian</h1>
-            <p>Berdasarkan waktu real-time dan jadwal ibadah harian</p>
+            <p>Berdasarkan waktu real-time dan jadwal sholat lokasi Anda</p>
             
             <div class="time-display">
                 <div class="time-card">
@@ -556,6 +642,14 @@
                     </div>
                 </div>
 
+                <!-- JADWAL SHOLAT CANTIK (DITAMBAHKAN) -->
+                <div class="prayer-times" id="prayer-times-container">
+                    <h3><i class="fas fa-clock"></i> Jadwal Sholat Hari Ini</h3>
+                    <div class="prayer-grid" id="prayer-grid">
+                        <!-- akan diisi JavaScript -->
+                    </div>
+                </div>
+
                 <div class="progress-container">
                     <h3><i class="fas fa-chart-line"></i> Progress Hari Ini</h3>
                     <div class="progress-bar">
@@ -570,7 +664,7 @@
 
         <div class="footer">
             <p>© 2024 Pengingat Ibadah Harian | Update real-time setiap detik | Semoga menjadi pengingat kebaikan</p>
-            <p style="margin-top: 5px; font-size: 0.75rem; color: #bbdefb;">Tanggal Hijriyah dari IslamicFinder.org</p>
+            <p style="margin-top: 5px; font-size: 0.75rem; color: #bbdefb;">Data jadwal sholat: Aladhan API (Kemenag)</p>
         </div>
     </div>
 
@@ -579,20 +673,17 @@
     </div>
 
     <script>
-        // Data ibadah berdasarkan waktu
+        // ==================== DATA STATIS IBADAH ====================
         const ibadahData = {
-            // Sebelum Subuh (00:00 - 04:30)
             "beforeFajr": [
                 { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum" },
                 { id: 2, name: "Dzikir & Istighfar", time: "24 jam sehari", important: true, category: "umum" },
                 { id: 28, name: "Sholat Tahajud", time: "Setelah tidur - sebelum Subuh", important: true, category: "malam", urgent: true },
                 { id: 29, name: "Sholat Witir", time: "Setelah Isya - sebelum Subuh", important: true, category: "malam", urgent: true },
                 { id: 32, name: "Doa sepertiga malam", time: "Sepertiga malam terakhir", important: true, category: "malam", urgent: true },
-                { id: 33, name: "Sholat Taubat", time: "Setelah menyesal dari dosa", important: false, category: "umum" },
+                { id: 33, name: "Sahur", time: "Waktu sahur (sepertiga malam)", important: false, category: "harian" },
                 { id: 68, name: "Doa sebelum tidur", time: "Sebelum tidur", important: false, category: "harian" }
             ],
-            
-            // Subuh (04:30 - 06:00)
             "fajr": [
                 { id: 1, name: "Baca Al-Qur'an", time: "Utama setelah Subuh", important: true, category: "umum", urgent: true },
                 { id: 11, name: "Sholat Qobliyah Subuh", time: "Sebelum Subuh", important: true, category: "rawatib", urgent: true },
@@ -601,8 +692,6 @@
                 { id: 37, name: "Doa setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
                 { id: 65, name: "Tasbih, Tahmid, Takbir", time: "Ba'da sholat", important: false, category: "dzikir" }
             ],
-            
-            // Pagi (06:00 - 10:30)
             "morning": [
                 { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum" },
                 { id: 14, name: "Sholat Isyraq", time: "±15 menit setelah matahari terbit", important: false, category: "sunnah" },
@@ -611,8 +700,6 @@
                 { id: 7, name: "Birrul walidain", time: "24 jam sehari", important: false, category: "umum" },
                 { id: 9, name: "Menuntut ilmu", time: "24 jam sehari", important: false, category: "umum" }
             ],
-            
-            // Dzuhur (10:30 - 15:30)
             "dhuhr": [
                 { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum" },
                 { id: 16, name: "Sholat Qobliyah Dzuhur", time: "Sebelum Dzuhur", important: true, category: "rawatib", urgent: true },
@@ -621,8 +708,6 @@
                 { id: 37, name: "Doa setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
                 { id: 35, name: "Doa antara adzan–iqamah", time: "Setelah adzan sebelum iqamah", important: false, category: "doa" }
             ],
-            
-            // Ashar (15:30 - 18:00)
             "asr": [
                 { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum" },
                 { id: 19, name: "Sholat Ashar", time: "Setelah masuk Ashar", important: true, category: "wajib", urgent: true },
@@ -630,8 +715,6 @@
                 { id: 37, name: "Doa setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
                 { id: 8, name: "Silaturahmi", time: "24 jam sehari", important: false, category: "umum" }
             ],
-            
-            // Maghrib (18:00 - 19:30)
             "maghrib": [
                 { id: 1, name: "Baca Al-Qur'an", time: "Utama setelah Maghrib", important: true, category: "umum", urgent: true },
                 { id: 21, name: "Sholat Qobliyah Maghrib", time: "Sebelum Maghrib (singkat)", important: false, category: "rawatib" },
@@ -641,8 +724,6 @@
                 { id: 37, name: "Doa setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
                 { id: 40, name: "Doa ketika berbuka puasa", time: "Saat Maghrib (berbuka)", important: true, category: "doa", urgent: true }
             ],
-            
-            // Isya (19:30 - 23:59)
             "isha": [
                 { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum" },
                 { id: 25, name: "Sholat Qobliyah Isya", time: "Sebelum Isya", important: false, category: "rawatib" },
@@ -655,7 +736,6 @@
             ]
         };
 
-        // Ibadah yang selalu bisa dilakukan
         const alwaysIbadah = [
             { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum" },
             { id: 2, name: "Dzikir & Istighfar", time: "24 jam sehari", important: true, category: "umum" },
@@ -665,21 +745,20 @@
             { id: 7, name: "Birrul walidain", time: "24 jam sehari", important: false, category: "umum" },
             { id: 8, name: "Silaturahmi", time: "24 jam sehari", important: false, category: "umum" },
             { id: 9, name: "Menuntut ilmu", time: "24 jam sehari", important: false, category: "umum" },
-            { id: 10, name: "Amar ma'ruf nahi munkar", time: "24 jam sehari", important: false, category: "umum" }
+            { id: 10, name: "Amar ma'ruf nahi munkar", time: "24 jam sehari", important: false, category: "umum" },
+            { id: 100, name: "Mendengarkan kajian", time: "24 jam sehari", important: false, category: "umum" }
         ];
 
-        // Waktu ibadah berikutnya
-        const nextIbadahSchedule = [
+        // Jadwal statis (default)
+        const staticSchedule = [
             { time: "04:30", name: "Sholat Subuh", period: "Subuh" },
-            { time: "07:00", name: "Sholat Dhuha", period: "Pagi" },
+            { time: "06:12", name: "Syuruq", period: "Pagi" },
             { time: "12:00", name: "Sholat Dzuhur", period: "Siang" },
             { time: "15:30", name: "Sholat Ashar", period: "Sore" },
             { time: "18:00", name: "Sholat Maghrib", period: "Petang" },
-            { time: "19:30", name: "Sholat Isya", period: "Malam" },
-            { time: "23:00", name: "Sholat Tahajud", period: "Malam" }
+            { time: "19:30", name: "Sholat Isya", period: "Malam" }
         ];
 
-        // Waktu highlight khusus
         const highlightTimes = [
             { start: "03:00", end: "05:00", title: "SEPERTIGA MALAM TERAKHIR", text: "Waktu mustajab untuk doa, tahajud, dan istighfar" },
             { start: "04:30", end: "06:00", title: "WAKTU SUBUH", text: "Waktu utama membaca Quran, dzikir pagi, dan sholat sunnah" },
@@ -690,370 +769,392 @@
             { start: "07:00", end: "10:30", title: "WAKTU DHUHA", text: "Sholat Dhuha dan sedekah" }
         ];
 
-        // Simpan ibadah yang sudah dicentang
-        let completedIbadah = JSON.parse(localStorage.getItem('completedIbadah')) || [];
-        
-        // Update waktu real-time
+        // ==================== VARIABEL GLOBAL ====================
+        let completedIbadah = [];
+        let previousPeriod = '';
+        let dynamicPrayerSchedule = []; // untuk jadwal dari API
+
+        // ==================== FUNGSI UTAMA ====================
         function updateTime() {
             const now = new Date();
             
-            // Format waktu
             const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
             const dateOptions = { day: 'numeric', month: 'short', year: 'numeric' };
             const dayOptions = { weekday: 'long' };
             
-            // Update elemen waktu
             document.getElementById('time').textContent = now.toLocaleTimeString('id-ID', timeOptions);
             document.getElementById('date').textContent = now.toLocaleDateString('id-ID', dateOptions);
             document.getElementById('day').textContent = now.toLocaleDateString('id-ID', dayOptions);
             
-            // Update tanggal Hijriyah
             updateHijriDate(now);
             
-            // Tentukan periode waktu saat ini
             const currentHour = now.getHours();
             const currentMinute = now.getMinutes();
             const currentTimeStr = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`;
             
-            // Tentukan ibadah berdasarkan waktu
-            let currentIbadah = [];
-            let timePeriod = "";
-            
-            if (currentHour >= 0 && currentHour < 4.5) {
-                currentIbadah = [...ibadahData.beforeFajr];
-                timePeriod = "Sebelum Subuh";
-            } else if (currentHour >= 4.5 && currentHour < 6) {
-                currentIbadah = [...ibadahData.fajr];
-                timePeriod = "Subuh";
-            } else if (currentHour >= 6 && currentHour < 10.5) {
-                currentIbadah = [...ibadahData.morning];
-                timePeriod = "Pagi";
-            } else if (currentHour >= 10.5 && currentHour < 15.5) {
-                currentIbadah = [...ibadahData.dhuhr];
-                timePeriod = "Dzuhur";
-            } else if (currentHour >= 15.5 && currentHour < 18) {
-                currentIbadah = [...ibadahData.asr];
-                timePeriod = "Ashar";
-            } else if (currentHour >= 18 && currentHour < 19.5) {
-                currentIbadah = [...ibadahData.maghrib];
-                timePeriod = "Maghrib";
-            } else {
-                currentIbadah = [...ibadahData.isha];
-                timePeriod = "Isya";
+            // Tentukan periode
+            let periodeKey = '';
+            if (currentHour >= 0 && currentHour < 4.5) periodeKey = 'beforeFajr';
+            else if (currentHour >= 4.5 && currentHour < 6) periodeKey = 'fajr';
+            else if (currentHour >= 6 && currentHour < 10.5) periodeKey = 'morning';
+            else if (currentHour >= 10.5 && currentHour < 15.5) periodeKey = 'dhuhr';
+            else if (currentHour >= 15.5 && currentHour < 18) periodeKey = 'asr';
+            else if (currentHour >= 18 && currentHour < 19.5) periodeKey = 'maghrib';
+            else periodeKey = 'isha';
+
+            // Reset centang jika periode berganti
+            if (previousPeriod !== periodeKey) {
+                completedIbadah = [];
+                previousPeriod = periodeKey;
             }
-            
-            // Tambahkan ibadah yang selalu bisa dilakukan
-            currentIbadah = [...alwaysIbadah, ...currentIbadah];
-            
-            // Hapus duplikat berdasarkan id
+
+            const isFriday = now.getDay() === 5;
+
+            let periodeIbadah = ibadahData[periodeKey];
+
+            // Jika Jumat dan periode Dzuhur, ganti Sholat Dzuhur dengan Sholat Jum'ah
+            if (isFriday && periodeKey === 'dhuhr') {
+                periodeIbadah = periodeIbadah.map(item => {
+                    if (item.id === 17) return { ...item, name: "Sholat Jum'ah", time: "Waktu Jum'at" };
+                    return item;
+                });
+            }
+
+            let currentIbadah = [...alwaysIbadah, ...periodeIbadah];
+
+            // Tambah "Menelpon orang tua/keluarga" jika jam 05.00-21.00
+            if (currentHour >= 5 && currentHour < 21) {
+                currentIbadah.push({ id: 101, name: "Menelpon orang tua/keluarga", time: "05.00 - 21.00", important: false, category: "umum" });
+            }
+
+            // Tambah item khusus Jumat
+            if (isFriday) {
+                currentIbadah.push({ id: 102, name: "Perbanyak doa, dzikir, sholawat", time: "Sepanjang hari Jumat", important: true, category: "jumat" });
+                if (currentTimeStr >= "12:00" && currentTimeStr <= "13:00") {
+                    currentIbadah.push({ id: 103, name: "Waktu mustajab antara dua khotbah", time: "Saat khotbah Jumat", important: true, urgent: true, category: "jumat" });
+                }
+                if (currentTimeStr >= "15:30" && currentTimeStr <= "18:00") {
+                    currentIbadah.push({ id: 104, name: "Waktu mustajab setelah Ashar", time: "Ashar hingga Maghrib", important: true, urgent: true, category: "jumat" });
+                }
+            }
+
+            // Hapus duplikat
             const uniqueIbadah = [];
             const seenIds = new Set();
-            
-            currentIbadah.forEach(ibadah => {
-                if (!seenIds.has(ibadah.id)) {
-                    seenIds.add(ibadah.id);
-                    uniqueIbadah.push(ibadah);
+            currentIbadah.forEach(ib => {
+                if (!seenIds.has(ib.id)) {
+                    seenIds.add(ib.id);
+                    uniqueIbadah.push(ib);
                 }
             });
-            
-            // Update highlight box
-            updateHighlightBox(currentTimeStr);
-            
-            // Tampilkan ibadah
+
+            updateHighlightBox(currentTimeStr, isFriday);
             displayIbadah(uniqueIbadah);
-            
-            // Update ibadah berikutnya
-            updateNextIbadah(currentTimeStr);
-            
+
+            // Update ibadah berikutnya (pakai API jika ada)
+            if (dynamicPrayerSchedule.length > 0) {
+                updateNextIbadahFromAPI(currentTimeStr);
+            } else {
+                updateNextIbadahStatic(currentTimeStr);
+            }
+
             // Update progress
             updateProgress();
         }
-        
-        // Update tanggal Hijriyah menggunakan API dari IslamicFinder
-        async function updateHijriDate(gregorianDate) {
-            const hijriElement = document.getElementById('hijri');
-            
-            // Cek apakah sudah ada data hijriah di localStorage untuk hari ini
-            const todayStr = gregorianDate.toDateString();
-            const storedHijri = JSON.parse(localStorage.getItem('hijriDate'));
-            
-            if (storedHijri && storedHijri.date === todayStr) {
-                // Gunakan data yang sudah tersimpan
-                hijriElement.textContent = storedHijri.hijri;
-                return;
-            }
-            
-            try {
-                // Format tanggal untuk API (DD-MM-YYYY)
-                const day = gregorianDate.getDate().toString().padStart(2, '0');
-                const month = (gregorianDate.getMonth() + 1).toString().padStart(2, '0');
-                const year = gregorianDate.getFullYear();
-                const apiDate = `${day}-${month}-${year}`;
-                
-                // Gunakan IslamicFinder API (atau alternatif)
-                // IslamicFinder API memerlukan API key, jadi kita gunakan alternatif
-                const response = await fetch(`https://api.aladhan.com/v1/gToH?date=${apiDate}`);
-                const data = await response.json();
-                
-                if (data.code === 200 && data.data) {
-                    const hijri = data.data.hijri;
-                    const hijriDateStr = `${hijri.day} ${hijri.month.en} ${hijri.year} H`;
-                    
-                    // Simpan ke localStorage
-                    localStorage.setItem('hijriDate', JSON.stringify({
-                        date: todayStr,
-                        hijri: hijriDateStr
-                    }));
-                    
-                    hijriElement.textContent = hijriDateStr;
-                } else {
-                    throw new Error('Data hijriah tidak ditemukan');
-                }
-            } catch (error) {
-                console.error('Gagal mengambil data hijriah:', error);
-                // Fallback ke perhitungan sederhana
-                const hijriMonths = ['Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir', 'Jumadil Awal', 'Jumadil Akhir', 
-                                    'Rajab', 'Sya\'ban', 'Ramadhan', 'Syawal', 'Dzulqa\'dah', 'Dzulhijjah'];
-                
-                const hijriYear = 1447;
-                const hijriMonth = hijriMonths[6]; // Rajab
-                const hijriDay = 20 + Math.floor(gregorianDate.getDate() / 2);
-                
-                hijriElement.textContent = `${hijriDay} ${hijriMonth} ${hijriYear} H`;
-            }
-        }
-        
-        // Update highlight box berdasarkan waktu
-        function updateHighlightBox(currentTime) {
-            const highlightBox = document.getElementById('highlight-box');
-            let showHighlight = false;
-            
-            for (const highlight of highlightTimes) {
-                if (currentTime >= highlight.start && currentTime <= highlight.end) {
-                    document.getElementById('highlight-title').textContent = highlight.title;
-                    document.getElementById('highlight-text').textContent = highlight.text;
-                    showHighlight = true;
-                    break;
+
+        function updateHighlightBox(currentTime, isFriday) {
+            const box = document.getElementById('highlight-box');
+            let show = false;
+            if (isFriday) {
+                document.getElementById('highlight-title').textContent = "HARI JUMAT YANG MULIA";
+                document.getElementById('highlight-text').textContent = "Perbanyak doa, dzikir, sholawat. Waktu mustajab: antara dua khotbah & setelah Ashar.";
+                show = true;
+            } else {
+                for (const h of highlightTimes) {
+                    if (currentTime >= h.start && currentTime <= h.end) {
+                        document.getElementById('highlight-title').textContent = h.title;
+                        document.getElementById('highlight-text').textContent = h.text;
+                        show = true;
+                        break;
+                    }
                 }
             }
-            
-            highlightBox.style.display = showHighlight ? 'block' : 'none';
+            box.style.display = show ? 'block' : 'none';
         }
-        
-        // Tampilkan daftar ibadah
-        function displayIbadah(ibadahList) {
+
+        function displayIbadah(list) {
             const container = document.getElementById('ibadah-container');
             container.innerHTML = '';
-            
-            ibadahList.forEach((ibadah, index) => {
-                const isChecked = completedIbadah.includes(ibadah.id);
-                const isImportant = ibadah.important || false;
-                const isUrgent = ibadah.urgent || false;
-                
-                let className = 'ibadah-item';
-                if (isImportant) className += ' important';
-                if (isUrgent) className += ' urgent';
-                
-                const ibadahElement = document.createElement('div');
-                ibadahElement.className = className;
-                ibadahElement.innerHTML = `
-                    <div class="ibadah-number">${index + 1}</div>
+            list.forEach((ib, idx) => {
+                const checked = completedIbadah.includes(ib.id);
+                let cls = 'ibadah-item';
+                if (ib.important) cls += ' important';
+                if (ib.urgent) cls += ' urgent';
+                const el = document.createElement('div');
+                el.className = cls;
+                el.innerHTML = `
+                    <div class="ibadah-number">${idx+1}</div>
                     <div class="ibadah-info">
-                        <div class="ibadah-name">${ibadah.name}</div>
-                        <div class="ibadah-time">
-                            <i class="far fa-clock"></i> ${ibadah.time}
-                        </div>
+                        <div class="ibadah-name">${ib.name}</div>
+                        <div class="ibadah-time"><i class="far fa-clock"></i> ${ib.time}</div>
                     </div>
-                    <div class="checkmark ${isChecked ? 'checked' : ''}" data-id="${ibadah.id}"></div>
+                    <div class="checkmark ${checked ? 'checked' : ''}" data-id="${ib.id}"></div>
                 `;
-                
-                container.appendChild(ibadahElement);
+                container.appendChild(el);
             });
-            
-            // Tambahkan event listener untuk checkmark
-            document.querySelectorAll('.checkmark').forEach(checkmark => {
-                checkmark.addEventListener('click', function() {
-                    const ibadahId = parseInt(this.getAttribute('data-id'));
-                    toggleIbadah(ibadahId, this);
+            document.querySelectorAll('.checkmark').forEach(c => {
+                c.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    toggleIbadah(id, this);
                 });
             });
         }
-        
-        // Toggle status ibadah (centang/tidak)
-        function toggleIbadah(ibadahId, element) {
-            const index = completedIbadah.indexOf(ibadahId);
-            
-            if (index === -1) {
-                // Centang ibadah
-                completedIbadah.push(ibadahId);
-                element.classList.add('checked');
-                
-                // Tampilkan notifikasi
+
+        function toggleIbadah(id, el) {
+            const idx = completedIbadah.indexOf(id);
+            if (idx === -1) {
+                completedIbadah.push(id);
+                el.classList.add('checked');
                 showNotification('Ibadah telah dicentang!');
             } else {
-                // Hapus centang
-                completedIbadah.splice(index, 1);
-                element.classList.remove('checked');
+                completedIbadah.splice(idx, 1);
+                el.classList.remove('checked');
             }
-            
-            // Simpan ke localStorage
-            localStorage.setItem('completedIbadah', JSON.stringify(completedIbadah));
-            
-            // Update progress
             updateProgress();
         }
-        
-        // Tampilkan notifikasi
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+
+        function showNotification(msg) {
+            const notif = document.getElementById('notification');
+            notif.textContent = msg;
+            notif.classList.add('show');
+            setTimeout(() => notif.classList.remove('show'), 3000);
         }
-        
-        // Update ibadah berikutnya
-        function updateNextIbadah(currentTime) {
+
+        function updateNextIbadahStatic(currentTime) {
             const container = document.getElementById('next-ibadah-container');
             container.innerHTML = '';
-            
-            // Cari ibadah berikutnya
-            let nextIbadah = null;
-            for (const ibadah of nextIbadahSchedule) {
-                if (ibadah.time > currentTime) {
-                    nextIbadah = ibadah;
-                    break;
-                }
+            let next = null;
+            for (const ib of staticSchedule) {
+                if (ib.time > currentTime) { next = ib; break; }
             }
-            
-            // Jika tidak ada, ambil ibadah pertama besok
-            if (!nextIbadah) {
-                nextIbadah = nextIbadahSchedule[0];
-            }
-            
-            // Tampilkan ibadah berikutnya
-            const nextElement = document.createElement('div');
-            nextElement.className = 'next-item';
-            nextElement.innerHTML = `
-                <div class="next-time">${nextIbadah.time}</div>
-                <div class="next-name">${nextIbadah.name}</div>
-                <div style="color: #666; font-size: 0.85rem;">${nextIbadah.period}</div>
-            `;
-            
-            container.appendChild(nextElement);
-            
-            // Tampilkan 2 ibadah berikutnya
-            const currentIndex = nextIbadahSchedule.indexOf(nextIbadah);
-            const nextIndex = (currentIndex + 1) % nextIbadahSchedule.length;
-            const nextNextIbadah = nextIbadahSchedule[nextIndex];
-            
-            const nextNextElement = document.createElement('div');
-            nextNextElement.className = 'next-item';
-            nextNextElement.innerHTML = `
-                <div class="next-time">${nextNextIbadah.time}</div>
-                <div class="next-name">${nextNextIbadah.name}</div>
-                <div style="color: #666; font-size: 0.85rem;">${nextNextIbadah.period}</div>
-            `;
-            
-            container.appendChild(nextNextElement);
+            if (!next) next = staticSchedule[0];
+            const nextEl = document.createElement('div');
+            nextEl.className = 'next-item';
+            nextEl.innerHTML = `<div class="next-time">${next.time}</div><div class="next-name">${next.name}</div><div style="color: #666; font-size: 0.85rem;">${next.period}</div>`;
+            container.appendChild(nextEl);
+            const idx = staticSchedule.indexOf(next);
+            const next2 = staticSchedule[(idx + 1) % staticSchedule.length];
+            const next2El = document.createElement('div');
+            next2El.className = 'next-item';
+            next2El.innerHTML = `<div class="next-time">${next2.time}</div><div class="next-name">${next2.name}</div><div style="color: #666; font-size: 0.85rem;">${next2.period}</div>`;
+            container.appendChild(next2El);
         }
-        
-        // Update progress bar
+
+        function updateNextIbadahFromAPI(currentTime) {
+            if (!dynamicPrayerSchedule.length) return;
+            const container = document.getElementById('next-ibadah-container');
+            container.innerHTML = '';
+            let next = null;
+            for (const ib of dynamicPrayerSchedule) {
+                if (ib.time > currentTime) { next = ib; break; }
+            }
+            if (!next) next = dynamicPrayerSchedule[0];
+            const nextEl = document.createElement('div');
+            nextEl.className = 'next-item';
+            nextEl.innerHTML = `<div class="next-time">${next.time}</div><div class="next-name">${next.name}</div><div style="color: #666; font-size: 0.85rem;">${next.period}</div>`;
+            container.appendChild(nextEl);
+            const idx = dynamicPrayerSchedule.indexOf(next);
+            const next2 = dynamicPrayerSchedule[(idx + 1) % dynamicPrayerSchedule.length];
+            const next2El = document.createElement('div');
+            next2El.className = 'next-item';
+            next2El.innerHTML = `<div class="next-time">${next2.time}</div><div class="next-name">${next2.name}</div><div style="color: #666; font-size: 0.85rem;">${next2.period}</div>`;
+            container.appendChild(next2El);
+        }
+
         function updateProgress() {
-            const totalIbadah = document.querySelectorAll('.ibadah-item').length;
-            const completed = completedIbadah.length;
-            
-            const percentage = totalIbadah > 0 ? Math.round((completed / totalIbadah) * 100) : 0;
-            
-            document.getElementById('progress-fill').style.width = `${percentage}%`;
-            document.getElementById('progress-fill').textContent = `${percentage}%`;
-            document.getElementById('completed').textContent = completed;
-            document.getElementById('total').textContent = totalIbadah;
+            const total = document.querySelectorAll('.ibadah-item').length;
+            const done = completedIbadah.length;
+            const percent = total ? Math.round((done / total) * 100) : 0;
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('progress-fill').textContent = percent + '%';
+            document.getElementById('completed').textContent = done;
+            document.getElementById('total').textContent = total;
         }
-        
-        // Dapatkan lokasi pengguna
-        function getLocation() {
-            const locationElement = document.getElementById('location');
-            const locationBtn = document.getElementById('get-location-btn');
-            
-            locationElement.innerHTML = '<span class="loading location-loading">Mendapatkan lokasi...</span>';
-            locationBtn.disabled = true;
-            locationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memuat...';
-            
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    async function(position) {
-                        try {
-                            // Gunakan OpenStreetMap Nominatim API untuk reverse geocoding
-                            const response = await fetch(
-                                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`
-                            );
-                            const data = await response.json();
-                            
-                            if (data.address) {
-                                const city = data.address.city || data.address.town || data.address.village || data.address.county || '';
-                                const country = data.address.country || '';
-                                locationElement.textContent = `${city}, ${country}`;
-                                locationElement.className = 'location-text';
-                                
-                                // Simpan lokasi ke localStorage
-                                localStorage.setItem('userLocation', JSON.stringify({
-                                    city: city,
-                                    country: country,
-                                    lat: position.coords.latitude,
-                                    lon: position.coords.longitude
-                                }));
-                            } else {
-                                locationElement.textContent = "Lokasi ditemukan";
-                                locationElement.className = 'location-text';
-                            }
-                        } catch (error) {
-                            console.error("Error reverse geocoding:", error);
-                            locationElement.textContent = "Lokasi Anda";
-                            locationElement.className = 'location-text';
-                        }
-                        
-                        locationBtn.disabled = false;
-                        locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Dapatkan Lokasi';
-                        showNotification('Lokasi berhasil diperbarui!');
-                    },
-                    function(error) {
-                        console.log("Tidak bisa mendapatkan lokasi:", error);
-                        locationElement.textContent = "Lokasi tidak tersedia";
-                        locationElement.className = 'location-text';
-                        
-                        locationBtn.disabled = false;
-                        locationBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Coba Lagi';
-                        showNotification('Gagal mendapatkan lokasi. Periksa izin lokasi.');
-                    },
-                    { timeout: 10000 }
-                );
-            } else {
-                locationElement.textContent = "Geolocation tidak didukung";
-                locationElement.className = 'location-text';
-                locationBtn.disabled = true;
-                locationBtn.innerHTML = '<i class="fas fa-times-circle"></i> Tidak didukung';
+
+        // ==================== JADWAL SHOLAT (TAMPILAN CANTIK) ====================
+        function displayPrayerTimes() {
+            const grid = document.getElementById('prayer-grid');
+            grid.innerHTML = '';
+
+            // Tentukan sumber data: API jika ada, else statis
+            let source = dynamicPrayerSchedule.length ? dynamicPrayerSchedule : staticSchedule;
+
+            // Kita hanya ingin 5 waktu wajib: Subuh, Dzuhur, Ashar, Maghrib, Isya
+            const wajib = ['Subuh', 'Dzuhur', 'Ashar', 'Maghrib', 'Isya'];
+            const filtered = source.filter(item => {
+                return wajib.some(w => item.name.includes(w));
+            });
+
+            // Urutan: Subuh, Dzuhur, Ashar, Maghrib, Isya
+            const order = { 'Subuh': 1, 'Dzuhur': 2, 'Ashar': 3, 'Maghrib': 4, 'Isya': 5 };
+            filtered.sort((a, b) => {
+                const aName = a.name.replace('Sholat ', '');
+                const bName = b.name.replace('Sholat ', '');
+                return (order[aName] || 99) - (order[bName] || 99);
+            });
+
+            // Ikon masing-masing
+            const icons = {
+                'Subuh': 'fa-sun',
+                'Dzuhur': 'fa-sun',
+                'Ashar': 'fa-sun',
+                'Maghrib': 'fa-sun',
+                'Isya': 'fa-moon'
+            };
+
+            filtered.forEach(item => {
+                let nama = item.name.replace('Sholat ', '');
+                if (nama.includes('Jum')) nama = 'Jum\'at'; // jika Jumat
+                const icon = icons[nama] || 'fa-clock';
+                const card = document.createElement('div');
+                card.className = 'prayer-card';
+                card.innerHTML = `
+                    <div class="prayer-icon"><i class="fas ${icon}"></i></div>
+                    <div class="prayer-name">${nama}</div>
+                    <div class="prayer-time-value">${item.time}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // ==================== API JADWAL SHOLAT ====================
+        async function fetchPrayerTimes(lat, lon) {
+            const container = document.getElementById('next-ibadah-container');
+            container.innerHTML = '<p class="loading">Memuat jadwal sholat...</p>';
+            try {
+                const today = new Date();
+                const day = String(today.getDate()).padStart(2, '0');
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const year = today.getFullYear();
+                const dateStr = `${day}-${month}-${year}`;
+                const url = `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${lat}&longitude=${lon}&method=11`;
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data.code === 200 && data.data) {
+                    const t = data.data.timings;
+                    dynamicPrayerSchedule = [
+                        { time: t.Fajr, name: "Sholat Subuh", period: "Subuh" },
+                        { time: t.Sunrise, name: "Syuruq", period: "Pagi" },
+                        { time: t.Dhuhr, name: "Sholat Dzuhur", period: "Siang" },
+                        { time: t.Asr, name: "Sholat Ashar", period: "Sore" },
+                        { time: t.Maghrib, name: "Sholat Maghrib", period: "Petang" },
+                        { time: t.Isha, name: "Sholat Isya", period: "Malam" }
+                    ];
+                    // Tampilkan jadwal cantik
+                    displayPrayerTimes();
+                    const now = new Date();
+                    const currentTimeStr = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+                    updateNextIbadahFromAPI(currentTimeStr);
+                } else {
+                    throw new Error('Gagal ambil data');
+                }
+            } catch (err) {
+                console.error(err);
+                dynamicPrayerSchedule = [];
+                displayPrayerTimes(); // tampilkan statis
+                const now = new Date();
+                const currentTimeStr = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+                updateNextIbadahStatic(currentTimeStr);
             }
         }
-        
-        // Inisialisasi
+
+        // ==================== LOKASI ====================
+        async function getLocation() {
+            const locEl = document.getElementById('location');
+            const btn = document.getElementById('get-location-btn');
+            locEl.innerHTML = '<span class="loading location-loading">Mendapatkan lokasi...</span>';
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memuat...';
+
+            if (!navigator.geolocation) {
+                locEl.textContent = "Geolocation tidak didukung";
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Coba Lagi';
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                async (pos) => {
+                    try {
+                        const rev = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`);
+                        const data = await rev.json();
+                        let city = data.address?.city || data.address?.town || data.address?.village || data.address?.county || '';
+                        let country = data.address?.country || '';
+                        locEl.textContent = city ? `${city}, ${country}` : "Lokasi ditemukan";
+                        localStorage.setItem('userLocation', JSON.stringify({
+                            city, country,
+                            lat: pos.coords.latitude,
+                            lon: pos.coords.longitude
+                        }));
+                        await fetchPrayerTimes(pos.coords.latitude, pos.coords.longitude);
+                    } catch (e) {
+                        locEl.textContent = "Lokasi Anda";
+                    }
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Dapatkan Lokasi';
+                    showNotification('Lokasi berhasil diperbarui!');
+                },
+                (err) => {
+                    locEl.textContent = "Lokasi tidak tersedia";
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Coba Lagi';
+                    showNotification('Gagal mendapatkan lokasi.');
+                },
+                { timeout: 10000 }
+            );
+        }
+
+        // ==================== HIJRI ====================
+        async function updateHijriDate(greg) {
+            const el = document.getElementById('hijri');
+            const todayStr = greg.toDateString();
+            const stored = JSON.parse(localStorage.getItem('hijriDate'));
+            if (stored && stored.date === todayStr) {
+                el.textContent = stored.hijri;
+                return;
+            }
+            try {
+                const d = String(greg.getDate()).padStart(2,'0');
+                const m = String(greg.getMonth()+1).padStart(2,'0');
+                const y = greg.getFullYear();
+                const resp = await fetch(`https://api.aladhan.com/v1/gToH?date=${d}-${m}-${y}`);
+                const data = await resp.json();
+                if (data.code === 200) {
+                    const hij = data.data.hijri;
+                    const str = `${hij.day} ${hij.month.en} ${hij.year} H`;
+                    localStorage.setItem('hijriDate', JSON.stringify({ date: todayStr, hijri: str }));
+                    el.textContent = str;
+                } else throw new Error();
+            } catch {
+                const months = ['Muharram','Safar','Rabiul Awal','Rabiul Akhir','Jumadil Awal','Jumadil Akhir','Rajab','Sya\'ban','Ramadhan','Syawal','Dzulqa\'dah','Dzulhijjah'];
+                el.textContent = `20 ${months[6]} 1447 H`; // fallback
+            }
+        }
+
+        // ==================== INIT ====================
         document.addEventListener('DOMContentLoaded', function() {
-            // Update waktu setiap detik
             updateTime();
             setInterval(updateTime, 1000);
-            
-            // Event listener untuk tombol lokasi
             document.getElementById('get-location-btn').addEventListener('click', getLocation);
-            
-            // Cek apakah ada lokasi yang disimpan di localStorage
-            const savedLocation = JSON.parse(localStorage.getItem('userLocation'));
-            if (savedLocation) {
-                document.getElementById('location').textContent = `${savedLocation.city}, ${savedLocation.country}`;
+
+            const savedLoc = JSON.parse(localStorage.getItem('userLocation'));
+            if (savedLoc) {
+                document.getElementById('location').textContent = `${savedLoc.city}, ${savedLoc.country}`;
+                fetchPrayerTimes(savedLoc.lat, savedLoc.lon);
+            } else {
+                // Tampilkan jadwal statis
+                displayPrayerTimes();
             }
-            
-            // Load tanggal hijriah
             updateHijriDate(new Date());
         });
     </script>
