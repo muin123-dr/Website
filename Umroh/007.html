@@ -6,6 +6,7 @@
     <title>Pengingat Ibadah Harian + Jadwal Sholat</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* style tidak berubah, sama seperti sebelumnya */
         * {
             margin: 0;
             padding: 0;
@@ -642,7 +643,7 @@
                     </div>
                 </div>
 
-                <!-- JADWAL SHOLAT CANTIK (DITAMBAHKAN) -->
+                <!-- JADWAL SHOLAT CANTIK -->
                 <div class="prayer-times" id="prayer-times-container">
                     <h3><i class="fas fa-clock"></i> Jadwal Sholat Hari Ini</h3>
                     <div class="prayer-grid" id="prayer-grid">
@@ -673,80 +674,96 @@
     </div>
 
     <script>
-        // ==================== DATA STATIS IBADAH ====================
+        // ==================== DATA STATIS IBADAH DENGAN ORDER ====================
+        // Order conventions:
+        // 90  : Qobliyah (sebelum sholat wajib)
+        // 100 : Sholat wajib
+        // 110 : Dzikir setelah sholat wajib
+        // 120 : Sholat rawatib ba'diyah
+        // 130 : Sholat Tarawih (khusus Ramadhan)
+        // 140 : Sholat sunnah lainnya (witir, tahajud, dhuha, dll)
+        // 150 : Dzikir pagi/petang
+        // 160 : Doa-doa khusus (sahur, buka puasa, dll)
+        // 200 : Baca Al-Qur'an
+        // 210 : Dzikir umum
+        // 220 : Sholawat
+        // 300 : Ibadah umum lainnya (sedekah, silaturahmi, dll)
+        // 400 : Item tambahan dinamis (menelpon, dll)
+
         const ibadahData = {
             "beforeFajr": [
-                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum" },
-                { id: 2, name: "Dzikir & Istighfar", time: "24 jam sehari", important: true, category: "umum" },
-                { id: 28, name: "Sholat Tahajud", time: "Setelah tidur - sebelum Subuh", important: true, category: "malam", urgent: true },
-                { id: 29, name: "Sholat Witir", time: "Setelah Isya - sebelum Subuh", important: true, category: "malam", urgent: true },
-                { id: 32, name: "Doa sepertiga malam", time: "Sepertiga malam terakhir", important: true, category: "malam", urgent: true },
-                { id: 33, name: "Sahur", time: "Waktu sahur (sepertiga malam)", important: false, category: "harian" },
-                { id: 68, name: "Doa sebelum tidur", time: "Sebelum tidur", important: false, category: "harian" }
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum", order: 200 },
+                { id: 2, name: "Dzikir & Istighfar", time: "24 jam sehari", important: true, category: "umum", order: 210 },
+                { id: 28, name: "Sholat Tahajud", time: "Setelah tidur - sebelum Subuh", important: true, category: "malam", urgent: true, order: 140 },
+                { id: 29, name: "Sholat Witir", time: "Setelah Isya - sebelum Subuh", important: true, category: "malam", urgent: true, order: 140 },
+                { id: 32, name: "Doa sepertiga malam", time: "Sepertiga malam terakhir", important: true, category: "malam", urgent: true, order: 160 },
+                { id: 33, name: "Sahur", time: "Waktu sahur (sepertiga malam)", important: false, category: "harian", order: 160 },
+                { id: 68, name: "Doa sebelum tidur", time: "Sebelum tidur", important: false, category: "harian", order: 160 }
             ],
             "fajr": [
-                { id: 1, name: "Baca Al-Qur'an", time: "Utama setelah Subuh", important: true, category: "umum", urgent: true },
-                { id: 11, name: "Sholat Qobliyah Subuh", time: "Sebelum Subuh", important: true, category: "rawatib", urgent: true },
-                { id: 12, name: "Sholat Subuh", time: "Setelah adzan Subuh", important: true, category: "wajib", urgent: true },
-                { id: 13, name: "Dzikir pagi", time: "Ba'da Subuh", important: true, category: "dzikir", urgent: true },
-                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
-                { id: 65, name: "Tasbih, Tahmid, Takbir", time: "Ba'da sholat", important: false, category: "dzikir" }
+                { id: 1, name: "Baca Al-Qur'an", time: "Utama setelah Subuh", important: true, category: "umum", urgent: true, order: 200 },
+                { id: 11, name: "Sholat Qobliyah Subuh", time: "Sebelum Subuh", important: true, category: "rawatib", urgent: true, order: 90 },
+                { id: 12, name: "Sholat Subuh", time: "Setelah adzan Subuh", important: true, category: "wajib", urgent: true, order: 100 },
+                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa", order: 110 },
+                { id: 13, name: "Dzikir pagi", time: "Ba'da Subuh", important: true, category: "dzikir", urgent: true, order: 150 },
+                { id: 65, name: "Tasbih, Tahmid, Takbir", time: "Ba'da sholat", important: false, category: "dzikir", order: 210 }
             ],
             "morning": [
-                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum" },
-                { id: 14, name: "Sholat Isyraq", time: "±15 menit setelah matahari terbit", important: false, category: "sunnah" },
-                { id: 15, name: "Sholat Dhuha", time: "07.00 - sebelum Dzuhur", important: true, category: "sunnah" },
-                { id: 6, name: "Sedekah", time: "24 jam sehari", important: false, category: "umum" },
-                { id: 7, name: "Birrul walidain", time: "24 jam sehari", important: false, category: "umum" },
-                { id: 9, name: "Menuntut ilmu", time: "24 jam sehari", important: false, category: "umum" }
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum", order: 200 },
+                { id: 14, name: "Sholat Isyraq", time: "±15 menit setelah matahari terbit", important: false, category: "sunnah", order: 140 },
+                { id: 15, name: "Sholat Dhuha", time: "07.00 - sebelum Dzuhur", important: true, category: "sunnah", order: 140 },
+                { id: 6, name: "Sedekah", time: "24 jam sehari", important: false, category: "umum", order: 300 },
+                { id: 7, name: "Birrul walidain", time: "24 jam sehari", important: false, category: "umum", order: 300 },
+                { id: 9, name: "Menuntut ilmu", time: "24 jam sehari", important: false, category: "umum", order: 300 }
             ],
             "dhuhr": [
-                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum" },
-                { id: 16, name: "Sholat Qobliyah Dzuhur", time: "Sebelum Dzuhur", important: true, category: "rawatib", urgent: true },
-                { id: 17, name: "Sholat Dzuhur", time: "Setelah matahari tergelincir", important: true, category: "wajib", urgent: true },
-                { id: 18, name: "Sholat Ba'diyah Dzuhur", time: "Setelah Dzuhur", important: true, category: "rawatib" },
-                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
-                { id: 35, name: "Doa antara adzan–iqamah", time: "Setelah adzan sebelum iqamah", important: false, category: "doa" }
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum", order: 200 },
+                { id: 16, name: "Sholat Qobliyah Dzuhur", time: "Sebelum Dzuhur", important: true, category: "rawatib", urgent: true, order: 90 },
+                { id: 17, name: "Sholat Dzuhur", time: "Setelah matahari tergelincir", important: true, category: "wajib", urgent: true, order: 100 },
+                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa", order: 110 },
+                { id: 18, name: "Sholat Ba'diyah Dzuhur", time: "Setelah Dzuhur", important: true, category: "rawatib", order: 120 },
+                { id: 35, name: "Doa antara adzan–iqamah", time: "Setelah adzan sebelum iqamah", important: false, category: "doa", order: 160 }
             ],
             "asr": [
-                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum" },
-                { id: 19, name: "Sholat Ashar", time: "Setelah masuk Ashar", important: true, category: "wajib", urgent: true },
-                { id: 20, name: "Dzikir petang", time: "Ba'da Ashar", important: true, category: "dzikir", urgent: true },
-                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
-                { id: 8, name: "Silaturahmi", time: "24 jam sehari", important: false, category: "umum" }
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum", order: 200 },
+                { id: 19, name: "Sholat Ashar", time: "Setelah masuk Ashar", important: true, category: "wajib", urgent: true, order: 100 },
+                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa", order: 110 },
+                { id: 20, name: "Dzikir petang", time: "Ba'da Ashar", important: true, category: "dzikir", urgent: true, order: 150 },
+                { id: 8, name: "Silaturahmi", time: "24 jam sehari", important: false, category: "umum", order: 300 }
             ],
             "maghrib": [
-                { id: 1, name: "Baca Al-Qur'an", time: "Utama setelah Maghrib", important: true, category: "umum", urgent: true },
-                { id: 21, name: "Sholat Qobliyah Maghrib", time: "Sebelum Maghrib (singkat)", important: false, category: "rawatib" },
-                { id: 22, name: "Sholat Maghrib", time: "Setelah adzan Maghrib", important: true, category: "wajib", urgent: true },
-                { id: 23, name: "Sholat Ba'diyah Maghrib", time: "Setelah Maghrib", important: true, category: "rawatib" },
-                { id: 24, name: "Sholat Awwabin", time: "Antara Maghrib - Isya", important: false, category: "sunnah" },
-                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
-                { id: 40, name: "Doa ketika berbuka puasa", time: "Saat Maghrib (berbuka)", important: true, category: "doa", urgent: true }
+                { id: 1, name: "Baca Al-Qur'an", time: "Utama setelah Maghrib", important: true, category: "umum", urgent: true, order: 200 },
+                { id: 21, name: "Sholat Qobliyah Maghrib", time: "Sebelum Maghrib (singkat)", important: false, category: "rawatib", order: 90 },
+                { id: 22, name: "Sholat Maghrib", time: "Setelah adzan Maghrib", important: true, category: "wajib", urgent: true, order: 100 },
+                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa", order: 110 },
+                { id: 23, name: "Sholat Ba'diyah Maghrib", time: "Setelah Maghrib", important: true, category: "rawatib", order: 120 },
+                { id: 24, name: "Sholat Awwabin", time: "Antara Maghrib - Isya", important: false, category: "sunnah", order: 140 },
+                { id: 40, name: "Doa ketika berbuka puasa", time: "Saat Maghrib (berbuka)", important: true, category: "doa", urgent: true, order: 160 }
             ],
             "isha": [
-                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum" },
-                { id: 25, name: "Sholat Qobliyah Isya", time: "Sebelum Isya", important: false, category: "rawatib" },
-                { id: 26, name: "Sholat Isya", time: "Setelah adzan Isya", important: true, category: "wajib", urgent: true },
-                { id: 27, name: "Sholat Ba'diyah Isya", time: "Setelah Isya", important: true, category: "rawatib" },
-                { id: 29, name: "Sholat Witir", time: "Setelah Isya", important: true, category: "malam" },
-                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa" },
-                { id: 67, name: "Doa masuk rumah", time: "Saat masuk rumah", important: false, category: "doa" },
-                { id: 68, name: "Doa sebelum tidur", time: "Sebelum tidur", important: false, category: "doa" }
+                { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: false, category: "umum", order: 200 },
+                { id: 25, name: "Sholat Qobliyah Isya", time: "Sebelum Isya", important: false, category: "rawatib", order: 90 },
+                { id: 26, name: "Sholat Isya", time: "Setelah adzan Isya", important: true, category: "wajib", urgent: true, order: 100 },
+                { id: 37, name: "Dzikir setelah sholat wajib", time: "Ba'da salam", important: true, category: "doa", order: 110 },
+                { id: 27, name: "Sholat Ba'diyah Isya", time: "Setelah Isya", important: true, category: "rawatib", order: 120 },
+                // Witir akan ditambahkan, order 140
+                { id: 29, name: "Sholat Witir", time: "Setelah Isya", important: true, category: "malam", order: 140 },
+                { id: 67, name: "Doa masuk rumah", time: "Saat masuk rumah", important: false, category: "doa", order: 160 },
+                { id: 68, name: "Doa sebelum tidur", time: "Sebelum tidur", important: false, category: "doa", order: 160 }
             ]
         };
 
         const alwaysIbadah = [
-            { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum" },
-            { id: 2, name: "Dzikir & Istighfar", time: "24 jam sehari", important: true, category: "umum" },
-            { id: 4, name: "Sholawat Nabi", time: "24 jam sehari", important: true, category: "umum" },
-            { id: 5, name: "Doa", time: "24 jam sehari", important: false, category: "umum" },
-            { id: 6, name: "Sedekah", time: "24 jam sehari", important: false, category: "umum" },
-            { id: 7, name: "Birrul walidain", time: "24 jam sehari", important: false, category: "umum" },
-            { id: 8, name: "Silaturahmi", time: "24 jam sehari", important: false, category: "umum" },
-            { id: 9, name: "Menuntut ilmu", time: "24 jam sehari", important: false, category: "umum" },
-            { id: 10, name: "Amar ma'ruf nahi munkar", time: "24 jam sehari", important: false, category: "umum" },
-            { id: 100, name: "Mendengarkan kajian", time: "24 jam sehari", important: false, category: "umum" }
+            { id: 1, name: "Baca Al-Qur'an", time: "24 jam sehari", important: true, category: "umum", order: 200 },
+            { id: 2, name: "Dzikir & Istighfar", time: "24 jam sehari", important: true, category: "umum", order: 210 },
+            { id: 4, name: "Sholawat Nabi", time: "24 jam sehari", important: true, category: "umum", order: 220 },
+            { id: 5, name: "Doa", time: "24 jam sehari", important: false, category: "umum", order: 300 },
+            { id: 6, name: "Sedekah", time: "24 jam sehari", important: false, category: "umum", order: 300 },
+            { id: 7, name: "Birrul walidain", time: "24 jam sehari", important: false, category: "umum", order: 300 },
+            { id: 8, name: "Silaturahmi", time: "24 jam sehari", important: false, category: "umum", order: 300 },
+            { id: 9, name: "Menuntut ilmu", time: "24 jam sehari", important: false, category: "umum", order: 300 },
+            { id: 10, name: "Amar ma'ruf nahi munkar", time: "24 jam sehari", important: false, category: "umum", order: 300 },
+            { id: 100, name: "Mendengarkan kajian", time: "24 jam sehari", important: false, category: "umum", order: 300 }
         ];
 
         // Jadwal statis (default)
@@ -786,7 +803,7 @@
             document.getElementById('date').textContent = now.toLocaleDateString('id-ID', dateOptions);
             document.getElementById('day').textContent = now.toLocaleDateString('id-ID', dayOptions);
             
-            updateHijriDate(now);
+            // Hijriah sudah diupdate terpisah, kita baca dari localStorage
             
             const currentHour = now.getHours();
             const currentMinute = now.getMinutes();
@@ -824,21 +841,50 @@
 
             // Tambah "Menelpon orang tua/keluarga" jika jam 05.00-21.00
             if (currentHour >= 5 && currentHour < 21) {
-                currentIbadah.push({ id: 101, name: "Menelpon orang tua/keluarga", time: "05.00 - 21.00", important: false, category: "umum" });
+                currentIbadah.push({ id: 101, name: "Menelpon orang tua/keluarga", time: "05.00 - 21.00", important: false, category: "umum", order: 400 });
             }
 
             // Tambah item khusus Jumat
             if (isFriday) {
-                currentIbadah.push({ id: 102, name: "Perbanyak doa, dzikir, sholawat", time: "Sepanjang hari Jumat", important: true, category: "jumat" });
+                currentIbadah.push({ id: 102, name: "Perbanyak doa, dzikir, sholawat", time: "Sepanjang hari Jumat", important: true, category: "jumat", order: 150 });
                 if (currentTimeStr >= "12:00" && currentTimeStr <= "13:00") {
-                    currentIbadah.push({ id: 103, name: "Waktu mustajab antara dua khotbah", time: "Saat khotbah Jumat", important: true, urgent: true, category: "jumat" });
+                    currentIbadah.push({ id: 103, name: "Waktu mustajab antara dua khotbah", time: "Saat khotbah Jumat", important: true, urgent: true, category: "jumat", order: 160 });
                 }
                 if (currentTimeStr >= "15:30" && currentTimeStr <= "18:00") {
-                    currentIbadah.push({ id: 104, name: "Waktu mustajab setelah Ashar", time: "Ashar hingga Maghrib", important: true, urgent: true, category: "jumat" });
+                    currentIbadah.push({ id: 104, name: "Waktu mustajab setelah Ashar", time: "Ashar hingga Maghrib", important: true, urgent: true, category: "jumat", order: 160 });
                 }
             }
 
-            // Hapus duplikat
+            // ========== TAMBAHAN: SHOLAT TARAWIH JIKA BULAN RAMADHAN ==========
+            try {
+                const hijriStorage = localStorage.getItem('hijriDate');
+                if (hijriStorage) {
+                    const hijriObj = JSON.parse(hijriStorage);
+                    const hijriStr = hijriObj.hijri || '';
+                    // Cek berbagai kemungkinan ejaan Ramadhan
+                    if (hijriStr.includes('Ramadhan') || hijriStr.includes('Ramadan') || hijriStr.includes('Ramaḍān')) {
+                        // Hanya tampil pada waktu Isya
+                        if (periodeKey === 'isha') {
+                            // Hindari duplikat id 105
+                            if (!currentIbadah.some(ib => ib.id === 105)) {
+                                currentIbadah.push({
+                                    id: 105,
+                                    name: "Sholat Tarawih",
+                                    time: "Setelah Isya",
+                                    important: true,
+                                    category: "ramadhan",
+                                    order: 130 // setelah ba'diyah (120) dan sebelum witir (140)
+                                });
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Error parsing hijriDate untuk Tarawih', e);
+            }
+            // ==================== AKHIR TAMBAHAN ====================
+
+            // Hapus duplikat berdasarkan id
             const uniqueIbadah = [];
             const seenIds = new Set();
             currentIbadah.forEach(ib => {
@@ -847,6 +893,9 @@
                     uniqueIbadah.push(ib);
                 }
             });
+
+            // Urutkan berdasarkan order
+            uniqueIbadah.sort((a, b) => (a.order || 999) - (b.order || 999));
 
             updateHighlightBox(currentTimeStr, isFriday);
             displayIbadah(uniqueIbadah);
@@ -1121,6 +1170,8 @@
             const stored = JSON.parse(localStorage.getItem('hijriDate'));
             if (stored && stored.date === todayStr) {
                 el.textContent = stored.hijri;
+                // Panggil updateTime untuk memastikan Tarawih muncul jika Ramadhan
+                updateTime();
                 return;
             }
             try {
@@ -1134,10 +1185,13 @@
                     const str = `${hij.day} ${hij.month.en} ${hij.year} H`;
                     localStorage.setItem('hijriDate', JSON.stringify({ date: todayStr, hijri: str }));
                     el.textContent = str;
+                    // Panggil updateTime untuk segera menampilkan Tarawih jika Ramadhan
+                    updateTime();
                 } else throw new Error();
             } catch {
                 const months = ['Muharram','Safar','Rabiul Awal','Rabiul Akhir','Jumadil Awal','Jumadil Akhir','Rajab','Sya\'ban','Ramadhan','Syawal','Dzulqa\'dah','Dzulhijjah'];
                 el.textContent = `20 ${months[6]} 1447 H`; // fallback
+                updateTime();
             }
         }
 
