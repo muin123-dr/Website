@@ -98,14 +98,6 @@
       padding: 16px;
     }
 
-    /* Layout Utama */
-    .top-layout {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin: 16px 0 20px;
-    }
-
     /* Card Styles */
     .card {
       background: rgba(255, 255, 255, 0.95);
@@ -114,71 +106,6 @@
       padding: 20px;
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(0,108,107,0.1);
-    }
-
-    /* Progress Tracking - Horizontal untuk mobile */
-    .progress-tracker {
-      display: flex;
-      overflow-x: auto;
-      gap: 12px;
-      padding: 10px 0 15px;
-      margin-bottom: 10px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .progress-tracker::-webkit-scrollbar {
-      display: none;
-    }
-
-    .progress-step {
-      flex: 0 0 auto;
-      width: 70px;
-      text-align: center;
-    }
-
-    .step-circle {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #f0f0f0;
-      border: 3px solid #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: #777;
-      margin: 0 auto 8px;
-      transition: all 0.3s ease;
-      font-size: 1.1rem;
-    }
-
-    .progress-step.active .step-circle {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: white;
-      transform: scale(1.1);
-    }
-
-    .progress-step.completed .step-circle {
-      background: #4CAF50;
-      border-color: #4CAF50;
-      color: white;
-    }
-
-    .step-label {
-      font-size: 0.75rem;
-      color: #666;
-      line-height: 1.3;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .progress-step.active .step-label {
-      color: var(--primary);
-      font-weight: 600;
     }
 
     /* Step Cards */
@@ -401,55 +328,10 @@
       accent-color: var(--primary);
     }
 
-    /* Counter Display - DITURUNKAN dan Warna diubah */
-    .counter-display {
-      position: fixed;
-      top: 140px; /* DITURUNKAN dari 100px */
-      right: 16px;
-      background: var(--primary);
-      color: #FFD700; /* WARNA KUNING */
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,108,107,0.3);
-      z-index: 99;
-    }
-
-    .counter-step {
-      font-size: 1.5rem;
-    }
-
-    .counter-total {
-      font-size: 0.8rem;
-      opacity: 0.9;
-      color: #FFD700; /* WARNA KUNING */
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #666;
-      padding: 30px 20px 40px;
-      background: rgba(255,255,255,0.9);
-      margin-top: 40px;
-      border-top: 1px solid rgba(0,0,0,0.05);
-    }
-
-    footer span {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
     /* Image styles - DIPERKECIL untuk smartphone */
     .step-image {
       width: 100%;
-      max-width: 200px; /* Diperkecil dari 300px */
+      max-width: 200px;
       margin: 15px auto;
       display: block;
       border-radius: 10px;
@@ -492,23 +374,12 @@
         font-size: 0.95rem;
       }
       
-      .counter-display {
-        width: 50px;
-        height: 50px;
-        top: 120px; /* Disesuaikan untuk smartphone kecil */
-        right: 12px;
-      }
-      
-      .counter-step {
-        font-size: 1.3rem;
-      }
-      
       .arabic {
         font-size: 1.2rem !important;
       }
       
       .step-image {
-        max-width: 180px; /* Lebih kecil di smartphone kecil */
+        max-width: 180px;
       }
       
       .quick-btn {
@@ -521,10 +392,6 @@
       .container {
         max-width: 800px;
         padding: 24px;
-      }
-      
-      .top-layout {
-        flex-direction: row;
       }
       
       .action-bar {
@@ -541,14 +408,8 @@
         max-width: 200px;
       }
       
-      .counter-display {
-        position: absolute;
-        right: 24px;
-        top: 160px; /* Disesuaikan untuk tablet */
-      }
-      
       .step-image {
-        max-width: 250px; /* Sedikit lebih besar di tablet */
+        max-width: 250px;
       }
     }
 
@@ -591,24 +452,10 @@
       .congrats-box {
         background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
       }
-      
-      .counter-display {
-        color: #FFD700; /* Tetap kuning di dark mode */
-      }
-      
-      .counter-total {
-        color: #FFD700; /* Tetap kuning di dark mode */
-      }
     }
   </style>
 </head>
 <body>
-
-<!-- Counter Display - DITURUNKAN agar kelihatan -->
-<div class="counter-display">
-  <div class="counter-step" id="currentStep">1</div>
-  <div class="counter-total">/9</div>
-</div>
 
 <header>
   <h1><i class="fas fa-kaaba"></i> Panduan Umroh</h1>
@@ -617,49 +464,8 @@
 
 <div class="container">
   
-  <!-- Progress Tracker -->
+  <!-- Quick Actions Card (Progress tracker dihapus) -->
   <div class="card">
-    <h3>Langkah-Langkah</h3>
-    <div class="progress-tracker" id="progressTracker">
-      <div class="progress-step active" data-step="1">
-        <div class="step-circle">1</div>
-        <div class="step-label">Niat & Ihrom</div>
-      </div>
-      <div class="progress-step" data-step="2">
-        <div class="step-circle">2</div>
-        <div class="step-label">Masuk Masjid</div>
-      </div>
-      <div class="progress-step" data-step="3">
-        <div class="step-circle">3</div>
-        <div class="step-label">Thawaf 1-3</div>
-      </div>
-      <div class="progress-step" data-step="4">
-        <div class="step-circle">4</div>
-        <div class="step-label">Thawaf 4-7</div>
-      </div>
-      <div class="progress-step" data-step="5">
-        <div class="step-circle">5</div>
-        <div class="step-label">Shalat & Zamzam</div>
-      </div>
-      <div class="progress-step" data-step="6">
-        <div class="step-circle">6</div>
-        <div class="step-label">Shafa (Awal Sa'i)</div>
-      </div>
-      <div class="progress-step" data-step="7">
-        <div class="step-circle">7</div>
-        <div class="step-label">Sa'i Shafa-Marwa</div>
-      </div>
-      <div class="progress-step" data-step="8">
-        <div class="step-circle">8</div>
-        <div class="step-label">Di Bukit Marwa</div>
-      </div>
-      <div class="progress-step" data-step="9">
-        <div class="step-circle">9</div>
-        <div class="step-label">Tahallul</div>
-      </div>
-    </div>
-    
-    <!-- Quick Actions - DIUBAH menjadi lebih ringkas -->
     <div class="quick-actions">
       <button class="quick-btn" id="btnFontSizeUp">
         <i class="fas fa-search-plus"></i> +
@@ -670,7 +476,6 @@
       <button class="quick-btn" id="btnTerjemah">
         <i class="fas fa-language"></i> Terjemahan
       </button>
-      <!-- Tombol Ulangi dihapus sesuai permintaan -->
     </div>
   </div>
 
@@ -679,7 +484,7 @@
     <!-- Step 1 -->
     <section class="step-card active-step" data-step="1">
       <div class="step-header">
-        <h2 class="step-title">1. Niat dan Ihrom</h2>
+        <h2 class="step-title">Langkah 1: Niat dan Ihrom</h2>
         <div class="step-badge">Niat • Talbiah</div>
       </div>
       <div class="step-body">
@@ -693,7 +498,6 @@
           <div class="arabic">
             لَبَّيْكَ اللَّهُمَّ عُمْرَةً
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Aku penuhi panggilan-Mu ya Allah untuk melaksanakan umroh.
           </div>
@@ -705,7 +509,6 @@
           <div class="arabic">
             لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لاَ شَرِيكَ لَكَ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Aku penuhi panggilan-Mu, ya Allah, aku penuhi panggilan-Mu. Tidak ada sekutu bagi-Mu, aku penuhi panggilan-Mu. Sungguh segala puji, nikmat, dan kerajaan adalah milik-Mu, tiada sekutu bagi-Mu.
           </div>
@@ -720,7 +523,7 @@
     <!-- Step 2 -->
     <section class="step-card" data-step="2">
       <div class="step-header">
-        <h2 class="step-title">2. Masuk Masjidil Haram</h2>
+        <h2 class="step-title">Langkah 2: Masuk Masjidil Haram</h2>
         <div class="step-badge">Doa Masuk • Idh-thiba'</div>
       </div>
       <div class="step-body">
@@ -734,7 +537,6 @@
           <div class="arabic">
             أَعُوْذُ بِاللَّهِ الْعَظِيْمِ، وَبِوَجْهِهِ الْكَرِيْمِ، وَسُلْطَانِهِ الْقَدِيْمِ، مِنَ الشَّيْطَانِ الرَّجِيْمِ، (بِسْمِ اللَّهِ، وَالصَّلاَةُ) (وَالسَّلاَمُ عَلَى رَسُوْلِ اللَّهِ) اَللَّهُمَّ افْتَحْ لِيْ أَبْوَابَ رَحْمَتِكَ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Aku berlindung kepada Allah Yang Maha Agung, dengan wajah-Nya Yang Mulia dan kekuasaan-Nya yang abadi, dari setan yang terkutuk. (Dengan nama Allah, dan shalawat) (dan salam atas Rasulullah) Ya Allah, bukakanlah untukku pintu-pintu rahmat-Mu.
           </div>
@@ -750,7 +552,6 @@
           <div class="arabic">
             اللَّهُمَّ زِدْ هَذَا البَيْتَ تَشْرِيفًا وَتَعْظِيمًا وَتَكْرِيمًا وَمَهَابَةً وَبِرًّا، وَزِدْ مِنْ شَرَفِهِ وَكَرَمِهِ مِمَّنْ حَجَّهُ أَوِ اعْتَمَرَهُ تَشْرِيفًا وَتَعظِيمًا
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Ya Allah, tambahkanlah kemuliaan, keagungan, penghormatan, kewibawaan dan kebaikan kepada rumah ini (Ka'bah). Dan tambahkanlah kemuliaan dan kehormatan bagi orang yang menunaikan haji atau umroh kepadanya dengan kemuliaan dan keagungan.
           </div>
@@ -764,7 +565,6 @@
           <div class="arabic">
             بِسْمِ اللهِ، اللهُ أَكْبَرُ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Dengan nama Allah, Allah Maha Besar.
           </div>
@@ -779,7 +579,7 @@
     <!-- Step 3 -->
     <section class="step-card" data-step="3">
       <div class="step-header">
-        <h2 class="step-title">3. Thawaf: Putaran 1-3</h2>
+        <h2 class="step-title">Langkah 3: Thawaf Putaran 1-3</h2>
         <div class="step-badge">Raml • Lari Kecil</div>
       </div>
       <div class="step-body">
@@ -799,7 +599,6 @@
           <div class="arabic">
             رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami dari siksa neraka.
           </div>
@@ -812,7 +611,7 @@
     <!-- Step 4 -->
     <section class="step-card" data-step="4">
       <div class="step-header">
-        <h2 class="step-title">4. Thawaf: Putaran 4-7</h2>
+        <h2 class="step-title">Langkah 4: Thawaf Putaran 4-7</h2>
         <div class="step-badge">Jalan Biasa • Doa</div>
       </div>
       <div class="step-body">
@@ -832,7 +631,6 @@
           <div class="arabic">
             رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami dari siksa neraka.
           </div>
@@ -849,7 +647,7 @@
     <!-- Step 5 -->
     <section class="step-card" data-step="5">
       <div class="step-header">
-        <h2 class="step-title">5. Shalat & Minum Zamzam</h2>
+        <h2 class="step-title">Langkah 5: Shalat & Minum Zamzam</h2>
         <div class="step-badge">Maqam Ibrahim • Air Zamzam</div>
       </div>
       <div class="step-body">
@@ -863,7 +661,6 @@
           <div class="arabic">
             وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Jadikanlah sebagian dari Maqam Ibrahim sebagai tempat shalat.
           </div>
@@ -883,7 +680,6 @@
           <div class="arabic">
             اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا وَاسِعًا وَشِفَاءً مِنْ كُلِّ دَاءٍ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Ya Allah, aku memohon kepada-Mu ilmu yang bermanfaat, rizki yang luas dan obat dari setiap penyakit.
           </div>
@@ -894,7 +690,7 @@
     <!-- Step 6 -->
     <section class="step-card" data-step="6">
       <div class="step-header">
-        <h2 class="step-title">6. Shafa: Awal Sa'i</h2>
+        <h2 class="step-title">Langkah 6: Shafa (Awal Sa'i)</h2>
         <div class="step-badge">Niat Sa'i • Doa di Shafa</div>
       </div>
       <div class="step-body">
@@ -908,7 +704,6 @@
           <div class="arabic">
             إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ – أبْدَأُ بِمَا بَدَأَ اللهُ بِهِ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Sesungguhnya Shafa dan Marwah adalah syiar Allah (QS. Al-Baqarah: 158) – Saya mulai dengan bukit yang Allah sebut pertama dalam ayat.
           </div>
@@ -924,7 +719,6 @@
           <div class="arabic">
             الله أَكْبَرُ الله أَكْبَرُ الله أَكْبَرُ لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِيْ وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيءٍ قَدِيرٌ لا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ أَنْجَزَ وَعْدَهُ وَنَصَرَ عَبْدَهُ وَهَزَمَ الأَحْزَابَ وَحْدَهُ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Allah Maha Besar, Allah Maha Besar, Allah Maha Besar. Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya, milik-Nya kerajaan dan bagi-Nya segala puji. Dia yang menghidupkan dan mematikan, dan Dia Maha Kuasa atas segala sesuatu. Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya, Dia menepati janji-Nya, menolong hamba-Nya, dan mengalahkan golongan-golongan (musuh) sendirian.
           </div>
@@ -939,7 +733,7 @@
     <!-- Step 7 -->
     <section class="step-card" data-step="7">
       <div class="step-header">
-        <h2 class="step-title">7. Sa'i Shafa-Marwa</h2>
+        <h2 class="step-title">Langkah 7: Sa'i Shafa-Marwa</h2>
         <div class="step-badge">7 Kali • Doa di Perjalanan</div>
       </div>
       <div class="step-body">
@@ -951,7 +745,6 @@
           <div class="arabic">
             رَبِّ اغْفِرْ وَارْحَمْ إِنَّك أَنْتَ الأَعَزُّ الأَكْرَمُّ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Ya Tuhanku, ampunilah dan rahmatilah, sesungguhnya Engkau-lah Yang Maha Perkasa lagi Maha Mulia.
           </div>
@@ -964,7 +757,7 @@
     <!-- Step 8 -->
     <section class="step-card" data-step="8">
       <div class="step-header">
-        <h2 class="step-title">8. Di Bukit Marwa</h2>
+        <h2 class="step-title">Langkah 8: Di Bukit Marwa</h2>
         <div class="step-badge">Akhir Sa'i • Doa</div>
       </div>
       <div class="step-body">
@@ -980,7 +773,6 @@
           <div class="arabic">
             الله أَكْبَرُ الله أَكْبَرُ الله أَكْبَرُ لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِيْ وَيُمِيتُ وَهُوَ عَلَى كُلِّ شَيءٍ قَدِيرٌ لا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ أَنْجَزَ وَعْدَهُ وَنَصَرَ عَبْدَهُ وَهَزَمَ الأَحْزَابَ وَحْدَهُ
           </div>
-          <!-- Class latin dihapus sesuai permintaan -->
           <div class="terjemah">
             Allah Maha Besar, Allah Maha Besar, Allah Maha Besar. Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya, milik-Nya kerajaan dan bagi-Nya segala puji. Dia yang menghidupkan dan mematikan, dan Dia Maha Kuasa atas segala sesuatu. Tiada tuhan selain Allah semata, tiada sekutu bagi-Nya, Dia menepati janji-Nya, menolong hamba-Nya, dan mengalahkan golongan-golongan (musuh) sendirian.
           </div>
@@ -999,7 +791,7 @@
     <!-- Step 9 -->
     <section class="step-card" data-step="9">
       <div class="step-header">
-        <h2 class="step-title">9. Tahallul</h2>
+        <h2 class="step-title">Langkah 9: Tahallul</h2>
         <div class="step-badge">Selesai • Mencukur Rambut</div>
       </div>
       <div class="step-body">
@@ -1046,15 +838,12 @@
 <script>
   // DOM Elements
   const stepCards = document.querySelectorAll('.step-card');
-  const progressSteps = document.querySelectorAll('.progress-step');
   const prevBtn = document.getElementById('prevStep');
   const nextBtn = document.getElementById('nextStep');
   const scrollTopBtn = document.getElementById('scrollTop');
-  const currentStepDisplay = document.getElementById('currentStep');
   const btnFontSizeUp = document.getElementById('btnFontSizeUp');
   const btnFontSizeDown = document.getElementById('btnFontSizeDown');
   const btnTerjemah = document.getElementById('btnTerjemah');
-  // Tombol btnReset dihapus sesuai permintaan
   
   let currentStep = 0;
   let fontSize = 16; // Base font size in pixels
@@ -1063,7 +852,6 @@
   // Initialize
   function init() {
     updateDisplay();
-    updateProgressTracker();
     setupEventListeners();
     applyTextVisibility();
   }
@@ -1074,8 +862,6 @@
       card.classList.toggle('active-step', index === currentStep);
     });
     
-    currentStepDisplay.textContent = currentStep + 1;
-    
     // Update button states
     prevBtn.disabled = currentStep === 0;
     nextBtn.disabled = currentStep === stepCards.length - 1;
@@ -1084,19 +870,6 @@
     stepCards[currentStep].scrollIntoView({ 
       behavior: 'smooth', 
       block: 'nearest'
-    });
-  }
-  
-  // Update progress tracker
-  function updateProgressTracker() {
-    progressSteps.forEach((step, index) => {
-      step.classList.remove('active', 'completed');
-      
-      if (index === currentStep) {
-        step.classList.add('active');
-      } else if (index < currentStep) {
-        step.classList.add('completed');
-      }
     });
   }
   
@@ -1123,7 +896,6 @@
       if (currentStep > 0) {
         currentStep--;
         updateDisplay();
-        updateProgressTracker();
       }
     });
     
@@ -1131,17 +903,7 @@
       if (currentStep < stepCards.length - 1) {
         currentStep++;
         updateDisplay();
-        updateProgressTracker();
       }
-    });
-    
-    // Progress tracker clicks
-    progressSteps.forEach((step, index) => {
-      step.addEventListener('click', () => {
-        currentStep = index;
-        updateDisplay();
-        updateProgressTracker();
-      });
     });
     
     // Scroll to top
@@ -1170,48 +932,16 @@
       applyTextVisibility();
     });
     
-    // Keyboard navigation
+    // Keyboard navigation (optional, tidak mengganggu)
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft' && currentStep > 0) {
         currentStep--;
         updateDisplay();
-        updateProgressTracker();
       } else if (e.key === 'ArrowRight' && currentStep < stepCards.length - 1) {
         currentStep++;
         updateDisplay();
-        updateProgressTracker();
       }
     });
-    
-    // Swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    document.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-    
-    document.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-    
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = touchStartX - touchEndX;
-      
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0 && currentStep < stepCards.length - 1) {
-          // Swipe left - next
-          currentStep++;
-        } else if (diff < 0 && currentStep > 0) {
-          // Swipe right - previous
-          currentStep--;
-        }
-        updateDisplay();
-        updateProgressTracker();
-      }
-    }
   }
   
   // Initialize on load
