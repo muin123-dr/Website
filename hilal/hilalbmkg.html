@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Rukyatul Hilal & Penentuan 1 Muharram 1448 H</title>
+    <style>
+        /* ── Reset & Base ── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f4f8;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            padding: 1.5rem 1.5rem 2.5rem;
+        }
+
+        @media (min-width: 600px) {
+            body {
+                padding: 2rem;
+            }
+            .container {
+                padding: 2.5rem 3rem 3.5rem;
+                border-radius: 2.5rem;
+            }
+        }
+
+        /* ── Typography ── */
+        h1,
+        h2,
+        h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: #0f172a;
+        }
+        h2 {
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        h3 {
+            font-size: 1.1rem;
+            margin: 1.25rem 0 0.5rem;
+            color: #1e293b;
+        }
+        p {
+            margin: 0.75rem 0;
+        }
+        a {
+            color: #0b6e4f;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── Badge / Tag ── */
+        .badge {
+            display: inline-block;
+            background: #e6f7f0;
+            color: #0b6e4f;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* ── Header ── */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eef2f6;
+            margin-bottom: 1.5rem;
+        }
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0b6e4f;
+        }
+        .header-brand svg {
+            width: 32px;
+            height: 32px;
+        }
+        .header-time {
+            font-size: 0.8rem;
+            background: #f1f5f9;
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .header-time .tz {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(145deg, #f0fdf6, #e6f7f0);
+            border-radius: 1.5rem;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #d1e8df;
+        }
+        .hero h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+        }
+        .hero .sub {
+            font-size: 0.95rem;
+            color: #2d5a4a;
+            font-weight: 500;
+        }
+        .hero .meta {
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #3d6b5a;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+        }
+        .hero .meta span {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0.15rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* ── Quote / Dialogue ── */
+        .dialogue {
+            background: #f8fafc;
+            border-radius: 1.25rem;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #0b6e4f;
+        }
+        .dialogue .speaker {
+            font-weight: 700;
+            color: #0b6e4f;
+        }
+        .dialogue .speaker-b {
+            font-weight: 700;
+            color: #b45309;
+        }
+        .dialogue p {
+            margin: 0.5rem 0;
+        }
+        .dialogue .action-link {
+            display: inline-block;
+            background: #0b6e4f;
+            color: #fff;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.3rem 0;
+            transition: background 0.2s;
+        }
+        .dialogue .action-link:hover {
+            background: #095a40;
+            text-decoration: none;
+        }
+
+        /* ── Card Step ── */
+        .step-card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            margin: 1.25rem 0;
+            border: 1px solid #e9edf2;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: box-shadow 0.2s;
+        }
+        .step-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        }
+        .step-card .step-num {
+            display: inline-block;
+            background: #0b6e4f;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            margin-bottom: 0.5rem;
+        }
+        .step-card .title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* ── Gambar Asli ── */
+        .img-asli {
+            margin: 0.75rem 0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid #e9edf2;
+            background: #fafcff;
+            text-align: center;
+        }
+        .img-asli img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .img-asli .caption {
+            font-size: 0.7rem;
+            color: #64748b;
+            padding: 0.4rem 0.8rem;
+            background: #f8fafc;
+            border-top: 1px solid #e9edf2;
+            text-align: left;
+        }
+        .img-asli .caption .badge-img {
+            display: inline-block;
+            background: #0b6e4f;
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 700;
+            padding: 0.05rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+
+        /* ── Info Table ── */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin: 0.75rem 0;
+        }
+        .info-table th {
+            text-align: left;
+            background: #f1f5f9;
+            padding: 0.5rem 0.75rem;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 2px solid #d1d9e6;
+        }
+        .info-table td {
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid #e9edf2;
+        }
+        .info-table .highlight {
+            background: #fef3c7;
+            font-weight: 600;
+        }
+        .info-table .highlight td {
+            border-bottom-color: #f59e0b;
+        }
+        .btn-download {
+            display: inline-block;
+            background: #0b6e4f;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.15rem 0.9rem;
+            border-radius: 30px;
+            transition: background 0.2s;
+        }
+        .btn-download:hover {
+            background: #095a40;
+            text-decoration: none;
+        }
+
+        /* ── Result box ── */
+        .result-box {
+            background: #f0fdf6;
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #bbf7d0;
+        }
+        .result-box .big {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0b6e4f;
+        }
+        .result-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.75rem 0 0;
+        }
+        .result-box ul li {
+            padding: 0.3rem 0 0.3rem 1.8rem;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%230b6e4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>') left center no-repeat;
+            background-size: 1.1rem;
+        }
+
+        /* ── Calendar mini ── */
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.25rem;
+            max-width: 420px;
+            margin: 0.75rem 0;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+        .cal-grid .day {
+            background: #f8fafc;
+            padding: 0.4rem 0;
+            border-radius: 0.4rem;
+            font-weight: 500;
+        }
+        .cal-grid .day.highlight {
+            background: #0b6e4f;
+            color: #fff;
+            font-weight: 700;
+        }
+        .cal-grid .day.highlight-ashura {
+            background: #b45309;
+            color: #fff;
+            font-weight: 700;
+        }
+        .cal-grid .day.blank {
+            background: transparent;
+        }
+        .cal-grid .dow {
+            font-weight: 600;
+            color: #64748b;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            padding: 0.2rem 0;
+        }
+
+        /* ── Legend ── */
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.2rem;
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+        .legend-row .dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin-right: 0.3rem;
+            vertical-align: middle;
+        }
+        .legend-row .dot.green {
+            background: #22c55e;
+        }
+        .legend-row .dot.red {
+            background: #ef4444;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #eef2f6;
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+        }
+        .footer .dua {
+            font-size: 1.2rem;
+            color: #0b6e4f;
+            font-weight: 600;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem 1rem 1.8rem;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+            .hero {
+                padding: 1.25rem 1rem;
+            }
+            .step-card {
+                padding: 1rem;
+            }
+            .header-time {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .dialogue {
+                padding: 1rem 1.2rem;
+            }
+            .result-box .big {
+                font-size: 1.1rem;
+            }
+            .info-table {
+                font-size: 0.75rem;
+            }
+            .info-table th,
+            .info-table td {
+                padding: 0.35rem 0.5rem;
+            }
+        }
+
+        /* ── Utility ── */
+        .mt-1 {
+            margin-top: 0.5rem;
+        }
+        .mt-2 {
+            margin-top: 1rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .gap-1 {
+            gap: 0.5rem;
+        }
+        .fw-600 {
+            font-weight: 600;
+        }
+        .text-sm {
+            font-size: 0.85rem;
+        }
+        .text-xs {
+            font-size: 0.75rem;
+        }
+        .text-muted {
+            color: #64748b;
+        }
+        .border-bottom-light {
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <div class="header-brand">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    <path d="M2 17l10 5 10-5" />
+                    <path d="M2 12l10 5 10-5" />
+                </svg>
+                <span>BMKG · Hilal</span>
+            </div>
+            <div class="header-time">
+                <span>🕒</span>
+                <span><span class="tz">20:01:21</span> WIB</span>
+                <span><span class="tz">21:01:21</span> WITA</span>
+                <span><span class="tz">22:01:21</span> WIT</span>
+                <span style="font-weight:400;color:#94a3b8;">|</span>
+                <span>Senin, 22 Jun 2026</span>
+            </div>
+        </div>
+
+        <!-- ===== HERO ===== -->
+        <div class="hero">
+            <span class="badge">Rukyatul Hilal · Muharram 1448 H</span>
+            <h1>Mengamati Hilal untuk Menentukan Awal Muharram</h1>
+            <p class="sub">Bagaimana BMKG mengamati hilal setiap bulan, dan apa artinya bagi umat Islam di Indonesia.</p>
+            <div class="meta">
+                <span>📅 Observasi: 15 Juni 2026</span>
+                <span>📍 Seluruh Indonesia</span>
+                <span>🔭 Metode: Rukyatul Hilal</span>
+            </div>
+        </div>
+
+        <!-- ===== DIALOGUE ===== -->
+        <div class="dialogue">
+            <p><span class="speaker">A:</span> Rukyatul Hilal itu hanya dilakukan untuk menentukan awal Ramadhan, Idul Fitri dan Idul Adha saja.</p>
+            <p><span class="speaker-b">B:</span> Kamu <strong>SALAH</strong>! Itu <strong>SIDANG ISBATH</strong>. Kalau Rukyatul Hilal itu ada <strong>setiap bulan</strong> dilakukan oleh BMKG!</p>
+            <p><span class="speaker">A:</span> Akh masak iya!? Bisa dilihat dimana hasilnya?</p>
+            <p><span class="speaker-b">B:</span> Coba lihat disini 👇</p>
+            <p style="margin:0.3rem 0 0.6rem;">
+                <a href="#" class="action-link">https://hilal.bmkg.go.id/</a>
+            </p>
+            <p><span class="speaker">A:</span> Ooo… Cara bacanya bagaimana?</p>
+            <p><span class="speaker-b">B:</span> Klik link tersebut, akan muncul seperti ini!</p>
+        </div>
+
+        <!-- ===== STEP 1 ===== -->
+        <div class="step-card">
+            <span class="step-num">LANGKAH 1</span>
+            <div class="title">📍 Buka situs BMKG — tampilan awal</div>
+            <div class="img-asli">
+                <img src="https://muin123-dr.github.io/Website/hilal/001.jpeg" alt="Tampilan awal situs BMKG" loading="lazy" />
+                <div class="caption">
+                    <span class="badge-img">001.jpeg</span> Halaman utama Sistem Informasi Observasi Hilal Indonesia — menampilkan koordinat dan waktu pengamatan.
+                </div>
+            </div>
+            <p class="text-sm text-muted">Halaman ini menampilkan koordinat lokasi pengamatan dan waktu aktual. Data ini digunakan untuk komputasi posisi bulan.</p>
+        </div>
+
+        <!-- ===== STEP 2 ===== -->
+        <div class="step-card">
+            <span class="step-num">LANGKAH 2</span>
+            <div class="title">🌍 Peta Fraksi Iluminasi Bulan</div>
+            <div class="img-asli">
+                <img src="https://muin123-dr.github.io/Website/hilal/002.jpeg" alt="Peta fraksi iluminasi bulan" loading="lazy" />
+                <div class="caption">
+                    <span class="badge-img">002.jpeg</span> Peta fraksi iluminasi bulan saat matahari terbenam — Senin, 15 Juni 2026 M. Nilai 0.21–0.3 menunjukkan bulan masih sangat tipis.
+                </div>
+            </div>
+            <p class="text-sm text-muted">Peta ini menunjukkan seberapa terang bulan (fraksi iluminasi) di berbagai lokasi saat matahari terbenam pada 15 Juni 2026.</p>
+        </div>
+
+        <!-- ===== STEP 3 ===== -->
+        <div class="step-card">
+            <span class="step-num">LANGKAH 3</span>
+            <div class="title">🟢🔴 Peta Visibilitas Hilal — Apakah Terlihat?</div>
+            <div class="img-asli">
+                <img src="https://muin123-dr.github.io/Website/hilal/003.jpeg" alt="Peta visibilitas hilal" loading="lazy" />
+                <div class="caption">
+                    <span class="badge-img">003.jpeg</span> Peta umur bulan saat matahari terbenam — Senin, 15 Juni 2026. <strong>Semua wilayah berwarna MERAH</strong> artinya hilal <strong>tidak terlihat</strong> di seluruh Indonesia.
+                </div>
+            </div>
+
+            <div class="legend-row">
+                <span><span class="dot green"></span> Hilal Terlihat (0)</span>
+                <span><span class="dot red"></span> Hilal Belum Terlihat (15)</span>
+            </div>
+            <p class="text-sm text-muted">Hasil pengamatan menunjukkan bahwa di <strong>seluruh lokasi</strong> di Indonesia, hilal <strong>tidak terlihat</strong> (merah semua). Artinya, bulan masih terlalu rendah atau tipis untuk diamati.</p>
+        </div>
+
+        <!-- ===== STEP 4 ===== -->
+        <div class="step-card">
+            <span class="step-num">LANGKAH 4</span>
+            <div class="title">📋 Informasi Hilal — Tanggal Observasi</div>
+
+            <!-- Gambar 004 -->
+            <div class="img-asli">
+                <img src="https://muin123-dr.github.io/Website/hilal/004.jpeg" alt="Informasi Hilal halaman 1" loading="lazy" />
+                <div class="caption">
+                    <span class="badge-img">004.jpeg</span> Daftar informasi hilal yang tersedia di situs BMKG.
+                </div>
+            </div>
+
+            <!-- Gambar 005 (sama dengan 001) -->
+            <div class="img-asli">
+                <img src="https://muin123-dr.github.io/Website/hilal/005.jpeg" alt="Informasi Hilal halaman 2" loading="lazy" />
+                <div class="caption">
+                    <span class="badge-img">005.jpeg</span> Baris yang dilingkari merah: Observasi Muharram 1448 H pada <strong>15 Juni 2026</strong>.
+                </div>
+            </div>
+
+            <p class="text-sm text-muted">Dari daftar informasi, terlihat bahwa <strong>Rukyatul Hilal untuk Muharram 1448 H</strong> dilakukan pada <strong>Senin, 15 Juni 2026</strong>.</p>
+        </div>
+
+        <!-- ===== INTERPRETATION ===== -->
+        <div class="result-box">
+            <div class="big">📌 Interpretasi Hasil Observasi</div>
+            <p style="margin-top:0.5rem;">Berdasarkan data dari BMKG, berikut kesimpulan yang dapat diambil:</p>
+            <ul>
+                <li><strong>1.</strong> Pengamatan Rukyatul Hilal dilakukan pada <strong>Senin, 15 Juni 2026</strong>.</li>
+                <li><strong>2.</strong> Hasilnya: hilal <strong>tidak terlihat</strong> di seluruh lokasi pengamatan di Indonesia.</li>
+                <li><strong>3.</strong> Artinya, hari <strong>Selasa, 16 Juni 2026</strong> adalah <strong>tanggal 30</strong> (bukan 1 Muharram).</li>
+                <li><strong>4.</strong> Maka, <strong>1 Muharram 1448 H</strong> jatuh pada hari <strong>Rabu, 17 Juni 2026</strong>.</li>
+                <li><strong>5.</strong> Dengan demikian, puasa <strong>Tasu'a</strong> (9 Muharram) dan <strong>Asyura</strong> (10 Muharram) jatuh pada <strong>Kamis &amp; Jumat</strong> (<strong>25 &amp; 26 Juni 2026</strong>).</li>
+            </ul>
+        </div>
+
+        <!-- ===== CALENDAR ===== -->
+        <h2 style="margin-top:0.5rem;">📅 Kalender — Awal Muharram 1448 H</h2>
+        <div style="background:#f8fafc;border-radius:1.25rem;padding:1.25rem 1.5rem;margin:0.75rem 0 1.5rem;">
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;justify-content:space-between;align-items:center;">
+                <div>
+                    <span class="badge">Juni 2026</span>
+                    <span style="font-weight:600;margin-left:0.5rem;">Masehi</span>
+                </div>
+                <div style="font-size:0.8rem;color:#64748b;">
+                    <span style="background:#0b6e4f;color:#fff;padding:0.1rem 0.6rem;border-radius:12px;">1 Muharram</span>
+                    <span style="background:#b45309;color:#fff;padding:0.1rem 0.6rem;border-radius:12px;margin-left:0.3rem;">Tasu'a &amp; Asyura</span>
+                </div>
+            </div>
+
+            <div class="cal-grid" style="margin-top:0.75rem;max-width:100%;">
+                <div class="dow">Min</div>
+                <div class="dow">Sen</div>
+                <div class="dow">Sel</div>
+                <div class="dow">Rab</div>
+                <div class="dow">Kam</div>
+                <div class="dow">Jum</div>
+                <div class="dow">Sab</div>
+
+                <div class="day blank"></div>
+                <div class="day">1</div>
+                <div class="day">2</div>
+                <div class="day">3</div>
+                <div class="day">4</div>
+                <div class="day">5</div>
+                <div class="day">6</div>
+
+                <div class="day">7</div>
+                <div class="day">8</div>
+                <div class="day">9</div>
+                <div class="day">10</div>
+                <div class="day">11</div>
+                <div class="day">12</div>
+                <div class="day">13</div>
+
+                <div class="day">14</div>
+                <div class="day highlight" style="background:#f59e0b;color:#fff;">15 🔥</div>
+                <div class="day" style="background:#f1f5f9;">16</div>
+                <div class="day highlight">17 🟢</div>
+                <div class="day">18</div>
+                <div class="day">19</div>
+                <div class="day">20</div>
+
+                <div class="day">21</div>
+                <div class="day">22</div>
+                <div class="day">23</div>
+                <div class="day">24</div>
+                <div class="day highlight-ashura">25 ⭐</div>
+                <div class="day highlight-ashura">26 ⭐</div>
+                <div class="day">27</div>
+
+                <div class="day">28</div>
+                <div class="day">29</div>
+                <div class="day">30</div>
+                <div class="day blank"></div>
+                <div class="day blank"></div>
+                <div class="day blank"></div>
+                <div class="day blank"></div>
+            </div>
+
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem 1.2rem;font-size:0.75rem;color:#475569;margin-top:0.5rem;justify-content:center;">
+                <span>🔥 <strong>15 Jun</strong> — Observasi Hilal</span>
+                <span>🟢 <strong>17 Jun</strong> — 1 Muharram 1448 H</span>
+                <span>⭐ <strong>25–26 Jun</strong> — Puasa Tasu'a &amp; Asyura</span>
+            </div>
+        </div>
+
+        <!-- ===== CLOSING ===== -->
+        <div style="background:#fef9e7;border-radius:1.25rem;padding:1.25rem 1.5rem;margin:1.5rem 0;border:1px solid #fde68a;">
+            <p style="font-weight:600;color:#78350f;font-size:1rem;margin:0;">
+                🕌 Monggo yang berpendapat bahwa penentuan 1 Hijriah berdasarkan Rukyatul Hilal (bukan hisab) bisa dijadikan acuan.
+            </p>
+            <p style="margin:0.5rem 0 0;color:#78350f;">
+                <strong>Wallāhu a‘lam.</strong> <br />
+                <span style="font-size:0.9rem;">Baarokallāhu fīkum.</span>
+            </p>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <div class="dua">🌙 Rukyatul Hilal · BMKG</div>
+            <p style="margin:0.25rem 0;">
+                Sistem Informasi Observasi Hilal Indonesia<br />
+                <span class="text-xs">Data berdasarkan pengamatan hilal awal bulan Muharram 1448 H</span>
+            </p>
+            <p class="text-xs" style="margin-top:0.5rem;color:#94a3b8;">
+                Sumber: <a href="#" style="color:#0b6e4f;">hilal.bmkg.go.id</a> · 22 Juni 2026
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>
